@@ -1,0 +1,500 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "aserto/directory/reader/v2/reader.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Reader"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "type_url": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "protobufNullValue": {
+      "type": "string",
+      "enum": [
+        "NULL_VALUE"
+      ],
+      "default": "NULL_VALUE",
+      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\n The JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v2CheckPermissionResponse": {
+      "type": "object",
+      "properties": {
+        "check": {
+          "type": "boolean"
+        },
+        "trace": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v2CheckRelationResponse": {
+      "type": "object",
+      "properties": {
+        "check": {
+          "type": "boolean"
+        },
+        "trace": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v2GetGraphResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v2ObjectDependency"
+          }
+        }
+      }
+    },
+    "v2GetObjectManyResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v2Object"
+          }
+        }
+      }
+    },
+    "v2GetObjectResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v2Object"
+        }
+      }
+    },
+    "v2GetObjectTypeResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v2ObjectType"
+        }
+      }
+    },
+    "v2GetObjectTypesResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v2ObjectType"
+          }
+        },
+        "page": {
+          "$ref": "#/definitions/v2PaginationResponse"
+        }
+      }
+    },
+    "v2GetObjectsResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v2Object"
+          }
+        },
+        "page": {
+          "$ref": "#/definitions/v2PaginationResponse"
+        }
+      }
+    },
+    "v2GetPermissionResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v2Permission"
+        }
+      }
+    },
+    "v2GetPermissionsResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v2Permission"
+          }
+        },
+        "page": {
+          "$ref": "#/definitions/v2PaginationResponse"
+        }
+      }
+    },
+    "v2GetRelationResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v2Relation"
+          }
+        },
+        "objects": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/v2Object"
+          }
+        }
+      }
+    },
+    "v2GetRelationTypeResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v2RelationType"
+        }
+      }
+    },
+    "v2GetRelationTypesResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v2RelationType"
+          }
+        },
+        "page": {
+          "$ref": "#/definitions/v2PaginationResponse"
+        }
+      }
+    },
+    "v2GetRelationsResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v2Relation"
+          }
+        },
+        "page": {
+          "$ref": "#/definitions/v2PaginationResponse"
+        }
+      }
+    },
+    "v2Object": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "hash": {
+          "type": "string"
+        }
+      }
+    },
+    "v2ObjectDependency": {
+      "type": "object",
+      "properties": {
+        "object_type": {
+          "type": "string"
+        },
+        "object_key": {
+          "type": "string"
+        },
+        "relation": {
+          "type": "string"
+        },
+        "subject_type": {
+          "type": "string"
+        },
+        "subject_key": {
+          "type": "string"
+        },
+        "depth": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "is_cycle": {
+          "type": "boolean"
+        },
+        "path": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v2ObjectIdentifier": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        }
+      },
+      "title": "Object identifier"
+    },
+    "v2ObjectType": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "is_subject": {
+          "type": "boolean"
+        },
+        "ordinal": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "schema": {
+          "type": "object"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "hash": {
+          "type": "string"
+        }
+      }
+    },
+    "v2ObjectTypeIdentifier": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "title": "ObjectType identifier"
+    },
+    "v2PaginationRequest": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "token": {
+          "type": "string"
+        }
+      },
+      "title": "Pagination request"
+    },
+    "v2PaginationResponse": {
+      "type": "object",
+      "properties": {
+        "next_token": {
+          "type": "string"
+        },
+        "result_size": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Pagination response"
+    },
+    "v2Permission": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "hash": {
+          "type": "string"
+        }
+      }
+    },
+    "v2PermissionIdentifier": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "title": "Permission identifier"
+    },
+    "v2Relation": {
+      "type": "object",
+      "properties": {
+        "subject": {
+          "$ref": "#/definitions/v2ObjectIdentifier"
+        },
+        "relation": {
+          "type": "string"
+        },
+        "object": {
+          "$ref": "#/definitions/v2ObjectIdentifier"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "hash": {
+          "type": "string"
+        }
+      }
+    },
+    "v2RelationIdentifier": {
+      "type": "object",
+      "properties": {
+        "subject": {
+          "$ref": "#/definitions/v2ObjectIdentifier"
+        },
+        "relation": {
+          "$ref": "#/definitions/v2RelationTypeIdentifier"
+        },
+        "object": {
+          "$ref": "#/definitions/v2ObjectIdentifier"
+        }
+      },
+      "title": "Relation identifier"
+    },
+    "v2RelationType": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "object_type": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "ordinal": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "unions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "hash": {
+          "type": "string"
+        }
+      }
+    },
+    "v2RelationTypeIdentifier": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "object_type": {
+          "type": "string"
+        }
+      },
+      "title": "RelationType identifier"
+    }
+  }
+}

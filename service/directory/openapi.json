@@ -1,0 +1,580 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "definitions": {
+    "protobufAny": {
+      "properties": {
+        "type_url": {
+          "type": "string"
+        },
+        "value": {
+          "format": "byte",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "protobufNullValue": {
+      "default": "NULL_VALUE",
+      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\n The JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value.",
+      "enum": [
+        "NULL_VALUE"
+      ],
+      "type": "string"
+    },
+    "rpcStatus": {
+      "properties": {
+        "code": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "details": {
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          },
+          "type": "array"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v2CheckPermissionResponse": {
+      "properties": {
+        "check": {
+          "type": "boolean"
+        },
+        "trace": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v2CheckRelationResponse": {
+      "properties": {
+        "check": {
+          "type": "boolean"
+        },
+        "trace": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v2DeleteObjectResponse": {
+      "properties": {
+        "result": {
+          "properties": {}
+        }
+      },
+      "type": "object"
+    },
+    "v2DeleteObjectTypeResponse": {
+      "properties": {
+        "result": {
+          "properties": {}
+        }
+      },
+      "type": "object"
+    },
+    "v2DeletePermissionResponse": {
+      "properties": {
+        "result": {
+          "properties": {}
+        }
+      },
+      "type": "object"
+    },
+    "v2DeleteRelationResponse": {
+      "properties": {
+        "result": {
+          "properties": {}
+        }
+      },
+      "type": "object"
+    },
+    "v2DeleteRelationTypeResponse": {
+      "properties": {
+        "result": {
+          "properties": {}
+        }
+      },
+      "type": "object"
+    },
+    "v2GetGraphResponse": {
+      "properties": {
+        "results": {
+          "items": {
+            "$ref": "#/definitions/v2ObjectDependency"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v2GetObjectManyResponse": {
+      "properties": {
+        "results": {
+          "items": {
+            "$ref": "#/definitions/v2Object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v2GetObjectResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v2Object"
+        }
+      },
+      "type": "object"
+    },
+    "v2GetObjectTypeResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v2ObjectType"
+        }
+      },
+      "type": "object"
+    },
+    "v2GetObjectTypesResponse": {
+      "properties": {
+        "page": {
+          "$ref": "#/definitions/v2PaginationResponse"
+        },
+        "results": {
+          "items": {
+            "$ref": "#/definitions/v2ObjectType"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v2GetObjectsResponse": {
+      "properties": {
+        "page": {
+          "$ref": "#/definitions/v2PaginationResponse"
+        },
+        "results": {
+          "items": {
+            "$ref": "#/definitions/v2Object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v2GetPermissionResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v2Permission"
+        }
+      },
+      "type": "object"
+    },
+    "v2GetPermissionsResponse": {
+      "properties": {
+        "page": {
+          "$ref": "#/definitions/v2PaginationResponse"
+        },
+        "results": {
+          "items": {
+            "$ref": "#/definitions/v2Permission"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v2GetRelationResponse": {
+      "properties": {
+        "objects": {
+          "additionalProperties": {
+            "$ref": "#/definitions/v2Object"
+          },
+          "type": "object"
+        },
+        "results": {
+          "items": {
+            "$ref": "#/definitions/v2Relation"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v2GetRelationTypeResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v2RelationType"
+        }
+      },
+      "type": "object"
+    },
+    "v2GetRelationTypesResponse": {
+      "properties": {
+        "page": {
+          "$ref": "#/definitions/v2PaginationResponse"
+        },
+        "results": {
+          "items": {
+            "$ref": "#/definitions/v2RelationType"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v2GetRelationsResponse": {
+      "properties": {
+        "page": {
+          "$ref": "#/definitions/v2PaginationResponse"
+        },
+        "results": {
+          "items": {
+            "$ref": "#/definitions/v2Relation"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v2Object": {
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "hash": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object"
+        },
+        "type": {
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v2ObjectDependency": {
+      "properties": {
+        "depth": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "is_cycle": {
+          "type": "boolean"
+        },
+        "object_key": {
+          "type": "string"
+        },
+        "object_type": {
+          "type": "string"
+        },
+        "path": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "relation": {
+          "type": "string"
+        },
+        "subject_key": {
+          "type": "string"
+        },
+        "subject_type": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v2ObjectIdentifier": {
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "title": "Object identifier",
+      "type": "object"
+    },
+    "v2ObjectType": {
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "hash": {
+          "type": "string"
+        },
+        "is_subject": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "ordinal": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "schema": {
+          "type": "object"
+        },
+        "status": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v2ObjectTypeIdentifier": {
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "title": "ObjectType identifier",
+      "type": "object"
+    },
+    "v2PaginationRequest": {
+      "properties": {
+        "size": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "token": {
+          "type": "string"
+        }
+      },
+      "title": "Pagination request",
+      "type": "object"
+    },
+    "v2PaginationResponse": {
+      "properties": {
+        "next_token": {
+          "type": "string"
+        },
+        "result_size": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "title": "Pagination response",
+      "type": "object"
+    },
+    "v2Permission": {
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "hash": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v2PermissionIdentifier": {
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "title": "Permission identifier",
+      "type": "object"
+    },
+    "v2Relation": {
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "hash": {
+          "type": "string"
+        },
+        "object": {
+          "$ref": "#/definitions/v2ObjectIdentifier"
+        },
+        "relation": {
+          "type": "string"
+        },
+        "subject": {
+          "$ref": "#/definitions/v2ObjectIdentifier"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v2RelationIdentifier": {
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/v2ObjectIdentifier"
+        },
+        "relation": {
+          "$ref": "#/definitions/v2RelationTypeIdentifier"
+        },
+        "subject": {
+          "$ref": "#/definitions/v2ObjectIdentifier"
+        }
+      },
+      "title": "Relation identifier",
+      "type": "object"
+    },
+    "v2RelationType": {
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "hash": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "object_type": {
+          "type": "string"
+        },
+        "ordinal": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "permissions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "status": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "unions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v2RelationTypeIdentifier": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "object_type": {
+          "type": "string"
+        }
+      },
+      "title": "RelationType identifier",
+      "type": "object"
+    },
+    "v2SetObjectResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v2Object"
+        }
+      },
+      "type": "object"
+    },
+    "v2SetObjectTypeResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v2ObjectType"
+        }
+      },
+      "type": "object"
+    },
+    "v2SetPermissionResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v2Permission"
+        }
+      },
+      "type": "object"
+    },
+    "v2SetRelationResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v2Relation"
+        }
+      },
+      "type": "object"
+    },
+    "v2SetRelationTypeResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v2RelationType"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "info": {
+    "title": "aserto/directory/common/v2/common.proto",
+    "version": "version not set"
+  },
+  "paths": {},
+  "produces": [
+    "application/json"
+  ],
+  "swagger": "2.0",
+  "tags": [
+    {
+      "name": "Reader"
+    }
+  ]
+}

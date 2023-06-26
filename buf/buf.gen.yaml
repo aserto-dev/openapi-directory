@@ -1,0 +1,5 @@
+version: v1
+plugins:
+  - name: openapiv2
+    out: .
+    opt: logtostderr=true,json_names_for_fields=false #use proto names

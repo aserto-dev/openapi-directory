@@ -1,0 +1,247 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "aserto/directory/exporter/v2/exporter.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Exporter"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "type_url": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "protobufNullValue": {
+      "type": "string",
+      "enum": [
+        "NULL_VALUE"
+      ],
+      "default": "NULL_VALUE",
+      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\n The JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v2ExportResponse": {
+      "type": "object",
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/v2Object"
+        },
+        "object_type": {
+          "$ref": "#/definitions/v2ObjectType"
+        },
+        "relation": {
+          "$ref": "#/definitions/v2Relation"
+        },
+        "relation_type": {
+          "$ref": "#/definitions/v2RelationType"
+        },
+        "permission": {
+          "$ref": "#/definitions/v2Permission"
+        }
+      }
+    },
+    "v2Object": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "hash": {
+          "type": "string"
+        }
+      }
+    },
+    "v2ObjectIdentifier": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        }
+      },
+      "title": "Object identifier"
+    },
+    "v2ObjectType": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "is_subject": {
+          "type": "boolean"
+        },
+        "ordinal": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "schema": {
+          "type": "object"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "hash": {
+          "type": "string"
+        }
+      }
+    },
+    "v2Permission": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "hash": {
+          "type": "string"
+        }
+      }
+    },
+    "v2Relation": {
+      "type": "object",
+      "properties": {
+        "subject": {
+          "$ref": "#/definitions/v2ObjectIdentifier"
+        },
+        "relation": {
+          "type": "string"
+        },
+        "object": {
+          "$ref": "#/definitions/v2ObjectIdentifier"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "hash": {
+          "type": "string"
+        }
+      }
+    },
+    "v2RelationType": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "object_type": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "ordinal": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "unions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "hash": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

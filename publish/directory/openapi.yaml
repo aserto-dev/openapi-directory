@@ -1,0 +1,1792 @@
+extensionprops: {}
+openapi: 3.0.3
+components:
+  extensionprops: {}
+  schemas:
+    protobufAny:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          type_url:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+          value:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              format: byte
+    protobufNullValue:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: string
+        description: |-
+          `NullValue` is a singleton enumeration to represent the null value for the
+          `Value` type union.
+
+           The JSON representation for `NullValue` is JSON `null`.
+
+           - NULL_VALUE: Null value.
+        enum:
+          - NULL_VALUE
+        default: NULL_VALUE
+    rpcStatus:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          code:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: integer
+              format: int32
+          details:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: array
+              items:
+                ref: '#/components/schemas/protobufAny'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    type_url:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    value:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        format: byte
+          message:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+    v2CheckPermissionResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          check:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: boolean
+          trace:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: array
+              items:
+                ref: ""
+                value:
+                  extensionprops: {}
+                  type: string
+    v2CheckRelationResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          check:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: boolean
+          trace:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: array
+              items:
+                ref: ""
+                value:
+                  extensionprops: {}
+                  type: string
+    v2DeleteObjectResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          result:
+            ref: ""
+            value:
+              extensionprops: {}
+    v2DeleteObjectTypeResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          result:
+            ref: ""
+            value:
+              extensionprops: {}
+    v2DeletePermissionResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          result:
+            ref: ""
+            value:
+              extensionprops: {}
+    v2DeleteRelationResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          result:
+            ref: ""
+            value:
+              extensionprops: {}
+    v2DeleteRelationTypeResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          result:
+            ref: ""
+            value:
+              extensionprops: {}
+    v2GetGraphResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          results:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: array
+              items:
+                ref: '#/components/schemas/v2ObjectDependency'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    depth:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: integer
+                        format: int32
+                    is_cycle:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: boolean
+                    object_key:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    object_type:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    path:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: array
+                        items:
+                          ref: ""
+                          value:
+                            extensionprops: {}
+                            type: string
+                    relation:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    subject_key:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    subject_type:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+    v2GetObjectManyResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          results:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: array
+              items:
+                ref: '#/components/schemas/v2Object'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    created_at:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        format: date-time
+                    display_name:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    hash:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    key:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    properties:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: object
+                    type:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    updated_at:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        format: date-time
+    v2GetObjectResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          result:
+            ref: '#/components/schemas/v2Object'
+            value:
+              extensionprops: {}
+              type: object
+              properties:
+                created_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
+                display_name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                hash:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                key:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                properties:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: object
+                type:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                updated_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
+    v2GetObjectTypeResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          result:
+            ref: '#/components/schemas/v2ObjectType'
+            value:
+              extensionprops: {}
+              type: object
+              properties:
+                created_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
+                display_name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                hash:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                is_subject:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: boolean
+                name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                ordinal:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: integer
+                    format: int32
+                schema:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: object
+                status:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: integer
+                    format: int64
+                updated_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
+    v2GetObjectTypesResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          page:
+            ref: '#/components/schemas/v2PaginationResponse'
+            value:
+              extensionprops: {}
+              type: object
+              title: Pagination response
+              properties:
+                next_token:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                result_size:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: integer
+                    format: int32
+          results:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: array
+              items:
+                ref: '#/components/schemas/v2ObjectType'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    created_at:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        format: date-time
+                    display_name:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    hash:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    is_subject:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: boolean
+                    name:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    ordinal:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: integer
+                        format: int32
+                    schema:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: object
+                    status:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: integer
+                        format: int64
+                    updated_at:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        format: date-time
+    v2GetObjectsResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          page:
+            ref: '#/components/schemas/v2PaginationResponse'
+            value:
+              extensionprops: {}
+              type: object
+              title: Pagination response
+              properties:
+                next_token:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                result_size:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: integer
+                    format: int32
+          results:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: array
+              items:
+                ref: '#/components/schemas/v2Object'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    created_at:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        format: date-time
+                    display_name:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    hash:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    key:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    properties:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: object
+                    type:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    updated_at:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        format: date-time
+    v2GetPermissionResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          result:
+            ref: '#/components/schemas/v2Permission'
+            value:
+              extensionprops: {}
+              type: object
+              properties:
+                created_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
+                display_name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                hash:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                updated_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
+    v2GetPermissionsResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          page:
+            ref: '#/components/schemas/v2PaginationResponse'
+            value:
+              extensionprops: {}
+              type: object
+              title: Pagination response
+              properties:
+                next_token:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                result_size:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: integer
+                    format: int32
+          results:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: array
+              items:
+                ref: '#/components/schemas/v2Permission'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    created_at:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        format: date-time
+                    display_name:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    hash:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    name:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    updated_at:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        format: date-time
+    v2GetRelationResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          objects:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: object
+          results:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: array
+              items:
+                ref: '#/components/schemas/v2Relation'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    created_at:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        format: date-time
+                    hash:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    object:
+                      ref: '#/components/schemas/v2ObjectIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Object identifier
+                        properties:
+                          key:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          type:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                    relation:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    subject:
+                      ref: '#/components/schemas/v2ObjectIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Object identifier
+                        properties:
+                          key:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          type:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                    updated_at:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        format: date-time
+    v2GetRelationTypeResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          result:
+            ref: '#/components/schemas/v2RelationType'
+            value:
+              extensionprops: {}
+              type: object
+              properties:
+                created_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
+                display_name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                hash:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                object_type:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                ordinal:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: integer
+                    format: int32
+                permissions:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: array
+                    items:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                status:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: integer
+                    format: int64
+                unions:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: array
+                    items:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                updated_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
+    v2GetRelationTypesResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          page:
+            ref: '#/components/schemas/v2PaginationResponse'
+            value:
+              extensionprops: {}
+              type: object
+              title: Pagination response
+              properties:
+                next_token:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                result_size:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: integer
+                    format: int32
+          results:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: array
+              items:
+                ref: '#/components/schemas/v2RelationType'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    created_at:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        format: date-time
+                    display_name:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    hash:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    name:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    object_type:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    ordinal:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: integer
+                        format: int32
+                    permissions:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: array
+                        items:
+                          ref: ""
+                          value:
+                            extensionprops: {}
+                            type: string
+                    status:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: integer
+                        format: int64
+                    unions:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: array
+                        items:
+                          ref: ""
+                          value:
+                            extensionprops: {}
+                            type: string
+                    updated_at:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        format: date-time
+    v2GetRelationsResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          page:
+            ref: '#/components/schemas/v2PaginationResponse'
+            value:
+              extensionprops: {}
+              type: object
+              title: Pagination response
+              properties:
+                next_token:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                result_size:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: integer
+                    format: int32
+          results:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: array
+              items:
+                ref: '#/components/schemas/v2Relation'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    created_at:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        format: date-time
+                    hash:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    object:
+                      ref: '#/components/schemas/v2ObjectIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Object identifier
+                        properties:
+                          key:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          type:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                    relation:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    subject:
+                      ref: '#/components/schemas/v2ObjectIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Object identifier
+                        properties:
+                          key:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          type:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                    updated_at:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        format: date-time
+    v2Object:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          created_at:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              format: date-time
+          display_name:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+          hash:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+          key:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+          properties:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: object
+          type:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+          updated_at:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              format: date-time
+    v2ObjectDependency:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          depth:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: integer
+              format: int32
+          is_cycle:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: boolean
+          object_key:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+          object_type:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+          path:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: array
+              items:
+                ref: ""
+                value:
+                  extensionprops: {}
+                  type: string
+          relation:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+          subject_key:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+          subject_type:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+    v2ObjectIdentifier:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        title: Object identifier
+        properties:
+          key:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+          type:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+    v2ObjectType:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          created_at:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              format: date-time
+          display_name:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+          hash:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+          is_subject:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: boolean
+          name:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+          ordinal:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: integer
+              format: int32
+          schema:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: object
+          status:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: integer
+              format: int64
+          updated_at:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              format: date-time
+    v2ObjectTypeIdentifier:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        title: ObjectType identifier
+        properties:
+          name:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+    v2PaginationRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        title: Pagination request
+        properties:
+          size:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: integer
+              format: int32
+          token:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+    v2PaginationResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        title: Pagination response
+        properties:
+          next_token:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+          result_size:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: integer
+              format: int32
+    v2Permission:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          created_at:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              format: date-time
+          display_name:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+          hash:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+          name:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+          updated_at:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              format: date-time
+    v2PermissionIdentifier:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        title: Permission identifier
+        properties:
+          name:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+    v2Relation:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          created_at:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              format: date-time
+          hash:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+          object:
+            ref: '#/components/schemas/v2ObjectIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: Object identifier
+              properties:
+                key:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                type:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+          relation:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+          subject:
+            ref: '#/components/schemas/v2ObjectIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: Object identifier
+              properties:
+                key:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                type:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+          updated_at:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              format: date-time
+    v2RelationIdentifier:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        title: Relation identifier
+        properties:
+          object:
+            ref: '#/components/schemas/v2ObjectIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: Object identifier
+              properties:
+                key:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                type:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+          relation:
+            ref: '#/components/schemas/v2RelationTypeIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: RelationType identifier
+              properties:
+                name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                object_type:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+          subject:
+            ref: '#/components/schemas/v2ObjectIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: Object identifier
+              properties:
+                key:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                type:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+    v2RelationType:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          created_at:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              format: date-time
+          display_name:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+          hash:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+          name:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+          object_type:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+          ordinal:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: integer
+              format: int32
+          permissions:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: array
+              items:
+                ref: ""
+                value:
+                  extensionprops: {}
+                  type: string
+          status:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: integer
+              format: int64
+          unions:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: array
+              items:
+                ref: ""
+                value:
+                  extensionprops: {}
+                  type: string
+          updated_at:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              format: date-time
+    v2RelationTypeIdentifier:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        title: RelationType identifier
+        properties:
+          name:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+          object_type:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+    v2SetObjectResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          result:
+            ref: '#/components/schemas/v2Object'
+            value:
+              extensionprops: {}
+              type: object
+              properties:
+                created_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
+                display_name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                hash:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                key:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                properties:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: object
+                type:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                updated_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
+    v2SetObjectTypeResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          result:
+            ref: '#/components/schemas/v2ObjectType'
+            value:
+              extensionprops: {}
+              type: object
+              properties:
+                created_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
+                display_name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                hash:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                is_subject:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: boolean
+                name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                ordinal:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: integer
+                    format: int32
+                schema:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: object
+                status:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: integer
+                    format: int64
+                updated_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
+    v2SetPermissionResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          result:
+            ref: '#/components/schemas/v2Permission'
+            value:
+              extensionprops: {}
+              type: object
+              properties:
+                created_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
+                display_name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                hash:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                updated_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
+    v2SetRelationResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          result:
+            ref: '#/components/schemas/v2Relation'
+            value:
+              extensionprops: {}
+              type: object
+              properties:
+                created_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
+                hash:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                object:
+                  ref: '#/components/schemas/v2ObjectIdentifier'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    title: Object identifier
+                    properties:
+                      key:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+                      type:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+                relation:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                subject:
+                  ref: '#/components/schemas/v2ObjectIdentifier'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    title: Object identifier
+                    properties:
+                      key:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+                      type:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+                updated_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
+    v2SetRelationTypeResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          result:
+            ref: '#/components/schemas/v2RelationType'
+            value:
+              extensionprops: {}
+              type: object
+              properties:
+                created_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
+                display_name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                hash:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                object_type:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                ordinal:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: integer
+                    format: int32
+                permissions:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: array
+                    items:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                status:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: integer
+                    format: int64
+                unions:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: array
+                    items:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                updated_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
+info:
+  extensionprops: {}
+  title: Directory
+  description: Directory service
+  termsOfService: https://aserto.com/terms/
+  contact:
+    extensionprops: {}
+    name: API Support
+    url: https://aserto.com/support
+    email: support@aserto.com
+  license:
+    extensionprops: {}
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: v0.21.0
+paths: {}
+servers:
+  - extensionprops: {}
+    url: https://directory.prod.aserto.com
+    description: Aserto Directory service
+  - extensionprops: {}
+    url: https://localhost:{port}
+    description: Local directory service using Topaz
+    variables:
+      port:
+        extensionprops: {}
+        enum:
+          - "9393"
+        default: "9393"
+tags:
+  - extensionprops: {}
+    name: Reader
+externalDocs:
+  extensionprops: {}
+  description: API documentation
+  url: https://docs.aserto.com

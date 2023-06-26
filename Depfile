@@ -1,0 +1,25 @@
+---
+go:
+  protoc-gen-openapiv2:
+    importPath: "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2"
+    version: "v2.5.0"
+  svu:
+    importPath: "github.com/caarlos0/svu"
+    version: "latest"
+  buf:
+    importPath: "github.com/bufbuild/buf/cmd/buf"
+    version: "v1.17.0"
+  sver:
+    importPath: "github.com/aserto-dev/sver/cmd/sver"
+    version: "v1.3.11"
+bin:
+  vault:
+    url: "https://releases.hashicorp.com/vault/{{.Version}}/vault_{{.Version}}_{{.OS}}_{{.Arch}}.zip"
+    version: "1.8.12"
+    zipPaths:
+    - "./vault"
+    sha:
+      linux-amd64: "88c280945db62b118435ec1bf0086a719f6b6551cba052e5f8d1e25a80884bca"
+      linux-arm64: "e57e719e1eec9bce9057751e2583907210d3ac99c0a01897479506fbb2af828d"
+      darwin-amd64: "6ca2c461fea2cef22266a747dad043df91d333b3ca98579e2a44230889a82aea"
+      darwin-arm64: "50c3f973effa013711abb17edbefe5435f7bc74b80cefd834dde1fba97680243"

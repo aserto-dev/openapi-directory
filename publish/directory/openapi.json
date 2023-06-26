@@ -39,6 +39,23 @@
         },
         "type": "object"
       },
+      "v2CheckPermissionRequest": {
+        "properties": {
+          "object": {
+            "$ref": "#/components/schemas/v2ObjectIdentifier"
+          },
+          "permission": {
+            "$ref": "#/components/schemas/v2PermissionIdentifier"
+          },
+          "subject": {
+            "$ref": "#/components/schemas/v2ObjectIdentifier"
+          },
+          "trace": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
       "v2CheckPermissionResponse": {
         "properties": {
           "check": {
@@ -49,6 +66,23 @@
               "type": "string"
             },
             "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "v2CheckRelationRequest": {
+        "properties": {
+          "object": {
+            "$ref": "#/components/schemas/v2ObjectIdentifier"
+          },
+          "relation": {
+            "$ref": "#/components/schemas/v2RelationTypeIdentifier"
+          },
+          "subject": {
+            "$ref": "#/components/schemas/v2ObjectIdentifier"
+          },
+          "trace": {
+            "type": "boolean"
           }
         },
         "type": "object"
@@ -67,9 +101,25 @@
         },
         "type": "object"
       },
+      "v2DeleteObjectRequest": {
+        "properties": {
+          "param": {
+            "$ref": "#/components/schemas/v2ObjectIdentifier"
+          }
+        },
+        "type": "object"
+      },
       "v2DeleteObjectResponse": {
         "properties": {
           "result": {}
+        },
+        "type": "object"
+      },
+      "v2DeleteObjectTypeRequest": {
+        "properties": {
+          "param": {
+            "$ref": "#/components/schemas/v2ObjectTypeIdentifier"
+          }
         },
         "type": "object"
       },
@@ -79,9 +129,25 @@
         },
         "type": "object"
       },
+      "v2DeletePermissionRequest": {
+        "properties": {
+          "param": {
+            "$ref": "#/components/schemas/v2PermissionIdentifier"
+          }
+        },
+        "type": "object"
+      },
       "v2DeletePermissionResponse": {
         "properties": {
           "result": {}
+        },
+        "type": "object"
+      },
+      "v2DeleteRelationRequest": {
+        "properties": {
+          "param": {
+            "$ref": "#/components/schemas/v2RelationIdentifier"
+          }
         },
         "type": "object"
       },
@@ -91,9 +157,34 @@
         },
         "type": "object"
       },
+      "v2DeleteRelationTypeRequest": {
+        "properties": {
+          "param": {
+            "$ref": "#/components/schemas/v2RelationTypeIdentifier"
+          }
+        },
+        "type": "object"
+      },
       "v2DeleteRelationTypeResponse": {
         "properties": {
           "result": {}
+        },
+        "type": "object"
+      },
+      "v2GetGraphRequest": {
+        "properties": {
+          "anchor": {
+            "$ref": "#/components/schemas/v2ObjectIdentifier"
+          },
+          "object": {
+            "$ref": "#/components/schemas/v2ObjectIdentifier"
+          },
+          "relation": {
+            "$ref": "#/components/schemas/v2RelationTypeIdentifier"
+          },
+          "subject": {
+            "$ref": "#/components/schemas/v2ObjectIdentifier"
+          }
         },
         "type": "object"
       },
@@ -119,10 +210,41 @@
         },
         "type": "object"
       },
+      "v2GetObjectRequest": {
+        "properties": {
+          "param": {
+            "$ref": "#/components/schemas/v2ObjectIdentifier"
+          },
+          "with_relations": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
       "v2GetObjectResponse": {
         "properties": {
+          "incoming": {
+            "items": {
+              "$ref": "#/components/schemas/v2Relation"
+            },
+            "type": "array"
+          },
+          "outgoing": {
+            "items": {
+              "$ref": "#/components/schemas/v2Relation"
+            },
+            "type": "array"
+          },
           "result": {
             "$ref": "#/components/schemas/v2Object"
+          }
+        },
+        "type": "object"
+      },
+      "v2GetObjectTypeRequest": {
+        "properties": {
+          "param": {
+            "$ref": "#/components/schemas/v2ObjectTypeIdentifier"
           }
         },
         "type": "object"
@@ -131,6 +253,14 @@
         "properties": {
           "result": {
             "$ref": "#/components/schemas/v2ObjectType"
+          }
+        },
+        "type": "object"
+      },
+      "v2GetObjectTypesRequest": {
+        "properties": {
+          "page": {
+            "$ref": "#/components/schemas/v2PaginationRequest"
           }
         },
         "type": "object"
@@ -149,6 +279,17 @@
         },
         "type": "object"
       },
+      "v2GetObjectsRequest": {
+        "properties": {
+          "page": {
+            "$ref": "#/components/schemas/v2PaginationRequest"
+          },
+          "param": {
+            "$ref": "#/components/schemas/v2ObjectTypeIdentifier"
+          }
+        },
+        "type": "object"
+      },
       "v2GetObjectsResponse": {
         "properties": {
           "page": {
@@ -163,10 +304,26 @@
         },
         "type": "object"
       },
+      "v2GetPermissionRequest": {
+        "properties": {
+          "param": {
+            "$ref": "#/components/schemas/v2PermissionIdentifier"
+          }
+        },
+        "type": "object"
+      },
       "v2GetPermissionResponse": {
         "properties": {
           "result": {
             "$ref": "#/components/schemas/v2Permission"
+          }
+        },
+        "type": "object"
+      },
+      "v2GetPermissionsRequest": {
+        "properties": {
+          "page": {
+            "$ref": "#/components/schemas/v2PaginationRequest"
           }
         },
         "type": "object"
@@ -181,6 +338,17 @@
               "$ref": "#/components/schemas/v2Permission"
             },
             "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "v2GetRelationRequest": {
+        "properties": {
+          "param": {
+            "$ref": "#/components/schemas/v2RelationIdentifier"
+          },
+          "with_objects": {
+            "type": "boolean"
           }
         },
         "type": "object"
@@ -202,10 +370,29 @@
         },
         "type": "object"
       },
+      "v2GetRelationTypeRequest": {
+        "properties": {
+          "param": {
+            "$ref": "#/components/schemas/v2RelationTypeIdentifier"
+          }
+        },
+        "type": "object"
+      },
       "v2GetRelationTypeResponse": {
         "properties": {
           "result": {
             "$ref": "#/components/schemas/v2RelationType"
+          }
+        },
+        "type": "object"
+      },
+      "v2GetRelationTypesRequest": {
+        "properties": {
+          "page": {
+            "$ref": "#/components/schemas/v2PaginationRequest"
+          },
+          "param": {
+            "$ref": "#/components/schemas/v2ObjectTypeIdentifier"
           }
         },
         "type": "object"
@@ -220,6 +407,17 @@
               "$ref": "#/components/schemas/v2RelationType"
             },
             "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "v2GetRelationsRequest": {
+        "properties": {
+          "page": {
+            "$ref": "#/components/schemas/v2PaginationRequest"
+          },
+          "param": {
+            "$ref": "#/components/schemas/v2RelationIdentifier"
           }
         },
         "type": "object"
@@ -510,10 +708,26 @@
         "title": "RelationType identifier",
         "type": "object"
       },
+      "v2SetObjectRequest": {
+        "properties": {
+          "object": {
+            "$ref": "#/components/schemas/v2Object"
+          }
+        },
+        "type": "object"
+      },
       "v2SetObjectResponse": {
         "properties": {
           "result": {
             "$ref": "#/components/schemas/v2Object"
+          }
+        },
+        "type": "object"
+      },
+      "v2SetObjectTypeRequest": {
+        "properties": {
+          "object_type": {
+            "$ref": "#/components/schemas/v2ObjectType"
           }
         },
         "type": "object"
@@ -526,10 +740,26 @@
         },
         "type": "object"
       },
+      "v2SetPermissionRequest": {
+        "properties": {
+          "permission": {
+            "$ref": "#/components/schemas/v2Permission"
+          }
+        },
+        "type": "object"
+      },
       "v2SetPermissionResponse": {
         "properties": {
           "result": {
             "$ref": "#/components/schemas/v2Permission"
+          }
+        },
+        "type": "object"
+      },
+      "v2SetRelationRequest": {
+        "properties": {
+          "relation": {
+            "$ref": "#/components/schemas/v2Relation"
           }
         },
         "type": "object"
@@ -542,6 +772,14 @@
         },
         "type": "object"
       },
+      "v2SetRelationTypeRequest": {
+        "properties": {
+          "relation_type": {
+            "$ref": "#/components/schemas/v2RelationType"
+          }
+        },
+        "type": "object"
+      },
       "v2SetRelationTypeResponse": {
         "properties": {
           "result": {
@@ -549,6 +787,19 @@
           }
         },
         "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "DirectoryAPIKey": {
+        "in": "header",
+        "name": "authorization",
+        "type": "apiKey"
+      },
+      "TenantID": {
+        "description": "Aserto Tenant ID",
+        "in": "header",
+        "name": "aserto-tenant-id",
+        "type": "apiKey"
       }
     }
   },
@@ -569,10 +820,1124 @@
     },
     "termsOfService": "https://aserto.com/terms/",
     "title": "Directory",
-    "version": "v0.21.0"
+    "version": "0.0.0-20230626194458.0.ge180fb76-dirty"
   },
   "openapi": "3.0.3",
-  "paths": null,
+  "paths": {
+    "/api/v2/directory/check/permission": {
+      "post": {
+        "description": "Returns check permission outcome.",
+        "operationId": "directory.check.permission",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2CheckPermissionRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2CheckPermissionResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Check permission",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
+    "/api/v2/directory/check/relation": {
+      "post": {
+        "description": "Returns check relation outcome.",
+        "operationId": "directory.check.relation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2CheckRelationRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2CheckRelationResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Check relation",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
+    "/api/v2/directory/graph": {
+      "post": {
+        "description": "Returns object graph from anchor to subject or object.",
+        "operationId": "directory.graph",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2GetGraphRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2GetGraphResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Get graph",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
+    "/api/v2/directory/object": {
+      "delete": {
+        "description": "Delete permission.",
+        "operationId": "directory.permission.delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2DeleteObjectRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2DeleteObjectResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Delete permission",
+        "tags": [
+          "directory"
+        ]
+      },
+      "post": {
+        "description": "Returns object instance, optionally with relations.",
+        "operationId": "directory.object.get",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2GetObjectRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2GetObjectResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Get object instance",
+        "tags": [
+          "directory"
+        ]
+      },
+      "put": {
+        "description": "Set relation type.",
+        "operationId": "directory.relation_type.set",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2SetObjectRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2SetObjectResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Set relation type",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
+    "/api/v2/directory/object_type": {
+      "delete": {
+        "description": "Delete object type.",
+        "operationId": "directory.object_type.delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2DeleteObjectTypeRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2DeleteObjectTypeResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Delete object type",
+        "tags": [
+          "directory"
+        ]
+      },
+      "post": {
+        "description": "Returns object type by name.",
+        "operationId": "directory.object_type.get",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2GetObjectTypeRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2GetObjectTypeResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Get object type",
+        "tags": [
+          "directory"
+        ]
+      },
+      "put": {
+        "description": "Set object type.",
+        "operationId": "directory.object_type.set",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2SetObjectTypeRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2SetObjectTypeResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Set object type",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
+    "/api/v2/directory/object_types": {
+      "post": {
+        "description": "Returns object types.",
+        "operationId": "directory.object_types.get",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2GetObjectTypesRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2GetObjectTypesResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Get object types",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
+    "/api/v2/directory/objects": {
+      "post": {
+        "description": "Returns object instances.",
+        "operationId": "directory.objects.get",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2GetObjectsRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2GetObjectsResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Get object instances",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
+    "/api/v2/directory/permission": {
+      "delete": {
+        "description": "Delete permission.",
+        "operationId": "directory.permission.delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2DeletePermissionRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2DeletePermissionResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Delete permission",
+        "tags": [
+          "directory"
+        ]
+      },
+      "post": {
+        "description": "Returns permission by name.",
+        "operationId": "directory.permission.get",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2GetPermissionRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2GetPermissionResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Get permission",
+        "tags": [
+          "directory"
+        ]
+      },
+      "put": {
+        "description": "Set permission.",
+        "operationId": "directory.permission.set",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2SetPermissionRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2SetPermissionResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Set permission",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
+    "/api/v2/directory/permissions": {
+      "post": {
+        "description": "Returns permissions.",
+        "operationId": "directory.permissions.get",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2GetPermissionsRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2GetPermissionsResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Get permissions",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
+    "/api/v2/directory/relation": {
+      "delete": {
+        "description": "Delete relation.",
+        "operationId": "directory.relation.delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2DeleteRelationRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2DeleteRelationResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Delete relation",
+        "tags": [
+          "directory"
+        ]
+      },
+      "post": {
+        "description": "Returns relation instance, optionally with objects.",
+        "operationId": "directory.relation.get",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2GetRelationRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2GetRelationResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Get relation instance",
+        "tags": [
+          "directory"
+        ]
+      },
+      "put": {
+        "description": "Set relation.",
+        "operationId": "directory.relation.set",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2SetRelationRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2SetRelationResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Set relation",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
+    "/api/v2/directory/relation_type": {
+      "delete": {
+        "description": "Delete relation type.",
+        "operationId": "directory.relation_type.delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2DeleteRelationTypeRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2DeleteRelationTypeResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Delete relation type",
+        "tags": [
+          "directory"
+        ]
+      },
+      "post": {
+        "description": "Returns relation type by name.",
+        "operationId": "directory.object_type.get",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2GetRelationTypeRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2GetRelationTypeResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Get relation type",
+        "tags": [
+          "directory"
+        ]
+      },
+      "put": {
+        "description": "Set relation type.",
+        "operationId": "directory.relation_type.set",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2SetRelationTypeRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2SetRelationTypeResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Set relation type",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
+    "/api/v2/directory/relation_types": {
+      "post": {
+        "description": "Returns relation types, optionally by object_type.",
+        "operationId": "directory.relation_types.get",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2GetRelationTypesRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2GetRelationTypesResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Get relation types",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
+    "/api/v2/directory/relations": {
+      "post": {
+        "description": "Returns relation instances.",
+        "operationId": "directory.relations.get",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2GetRelationsRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2GetRelationsResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Get relation instances",
+        "tags": [
+          "directory"
+        ]
+      }
+    }
+  },
+  "security": [
+    {
+      "DirectoryAPIKey": [],
+      "TenantID": []
+    }
+  ],
   "servers": [
     {
       "description": "Aserto Directory service",

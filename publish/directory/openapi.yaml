@@ -74,6 +74,63 @@ components:
             value:
               extensionprops: {}
               type: string
+    v2CheckPermissionRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          object:
+            ref: '#/components/schemas/v2ObjectIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: Object identifier
+              properties:
+                key:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                type:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+          permission:
+            ref: '#/components/schemas/v2PermissionIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: Permission identifier
+              properties:
+                name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+          subject:
+            ref: '#/components/schemas/v2ObjectIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: Object identifier
+              properties:
+                key:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                type:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+          trace:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: boolean
     v2CheckPermissionResponse:
       ref: ""
       value:
@@ -95,6 +152,68 @@ components:
                 value:
                   extensionprops: {}
                   type: string
+    v2CheckRelationRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          object:
+            ref: '#/components/schemas/v2ObjectIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: Object identifier
+              properties:
+                key:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                type:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+          relation:
+            ref: '#/components/schemas/v2RelationTypeIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: RelationType identifier
+              properties:
+                name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                object_type:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+          subject:
+            ref: '#/components/schemas/v2ObjectIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: Object identifier
+              properties:
+                key:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                type:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+          trace:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: boolean
     v2CheckRelationResponse:
       ref: ""
       value:
@@ -116,6 +235,29 @@ components:
                 value:
                   extensionprops: {}
                   type: string
+    v2DeleteObjectRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          param:
+            ref: '#/components/schemas/v2ObjectIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: Object identifier
+              properties:
+                key:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                type:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
     v2DeleteObjectResponse:
       ref: ""
       value:
@@ -126,6 +268,24 @@ components:
             ref: ""
             value:
               extensionprops: {}
+    v2DeleteObjectTypeRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          param:
+            ref: '#/components/schemas/v2ObjectTypeIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: ObjectType identifier
+              properties:
+                name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
     v2DeleteObjectTypeResponse:
       ref: ""
       value:
@@ -136,6 +296,24 @@ components:
             ref: ""
             value:
               extensionprops: {}
+    v2DeletePermissionRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          param:
+            ref: '#/components/schemas/v2PermissionIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: Permission identifier
+              properties:
+                name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
     v2DeletePermissionResponse:
       ref: ""
       value:
@@ -146,6 +324,70 @@ components:
             ref: ""
             value:
               extensionprops: {}
+    v2DeleteRelationRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          param:
+            ref: '#/components/schemas/v2RelationIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: Relation identifier
+              properties:
+                object:
+                  ref: '#/components/schemas/v2ObjectIdentifier'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    title: Object identifier
+                    properties:
+                      key:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+                      type:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+                relation:
+                  ref: '#/components/schemas/v2RelationTypeIdentifier'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    title: RelationType identifier
+                    properties:
+                      name:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+                      object_type:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+                subject:
+                  ref: '#/components/schemas/v2ObjectIdentifier'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    title: Object identifier
+                    properties:
+                      key:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+                      type:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
     v2DeleteRelationResponse:
       ref: ""
       value:
@@ -156,6 +398,29 @@ components:
             ref: ""
             value:
               extensionprops: {}
+    v2DeleteRelationTypeRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          param:
+            ref: '#/components/schemas/v2RelationTypeIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: RelationType identifier
+              properties:
+                name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                object_type:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
     v2DeleteRelationTypeResponse:
       ref: ""
       value:
@@ -166,6 +431,80 @@ components:
             ref: ""
             value:
               extensionprops: {}
+    v2GetGraphRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          anchor:
+            ref: '#/components/schemas/v2ObjectIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: Object identifier
+              properties:
+                key:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                type:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+          object:
+            ref: '#/components/schemas/v2ObjectIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: Object identifier
+              properties:
+                key:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                type:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+          relation:
+            ref: '#/components/schemas/v2RelationTypeIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: RelationType identifier
+              properties:
+                name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                object_type:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+          subject:
+            ref: '#/components/schemas/v2ObjectIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: Object identifier
+              properties:
+                key:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                type:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
     v2GetGraphResponse:
       ref: ""
       value:
@@ -283,12 +622,174 @@ components:
                         extensionprops: {}
                         type: string
                         format: date-time
+    v2GetObjectRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          param:
+            ref: '#/components/schemas/v2ObjectIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: Object identifier
+              properties:
+                key:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                type:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+          with_relations:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: boolean
     v2GetObjectResponse:
       ref: ""
       value:
         extensionprops: {}
         type: object
         properties:
+          incoming:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: array
+              items:
+                ref: '#/components/schemas/v2Relation'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    created_at:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        format: date-time
+                    hash:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    object:
+                      ref: '#/components/schemas/v2ObjectIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Object identifier
+                        properties:
+                          key:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          type:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                    relation:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    subject:
+                      ref: '#/components/schemas/v2ObjectIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Object identifier
+                        properties:
+                          key:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          type:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                    updated_at:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        format: date-time
+          outgoing:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: array
+              items:
+                ref: '#/components/schemas/v2Relation'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    created_at:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        format: date-time
+                    hash:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    object:
+                      ref: '#/components/schemas/v2ObjectIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Object identifier
+                        properties:
+                          key:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          type:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                    relation:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                    subject:
+                      ref: '#/components/schemas/v2ObjectIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Object identifier
+                        properties:
+                          key:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          type:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                    updated_at:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        format: date-time
           result:
             ref: '#/components/schemas/v2Object'
             value:
@@ -332,6 +833,24 @@ components:
                     extensionprops: {}
                     type: string
                     format: date-time
+    v2GetObjectTypeRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          param:
+            ref: '#/components/schemas/v2ObjectTypeIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: ObjectType identifier
+              properties:
+                name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
     v2GetObjectTypeResponse:
       ref: ""
       value:
@@ -393,6 +912,30 @@ components:
                     extensionprops: {}
                     type: string
                     format: date-time
+    v2GetObjectTypesRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          page:
+            ref: '#/components/schemas/v2PaginationRequest'
+            value:
+              extensionprops: {}
+              type: object
+              title: Pagination request
+              properties:
+                size:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: integer
+                    format: int32
+                token:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
     v2GetObjectTypesResponse:
       ref: ""
       value:
@@ -477,6 +1020,42 @@ components:
                         extensionprops: {}
                         type: string
                         format: date-time
+    v2GetObjectsRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          page:
+            ref: '#/components/schemas/v2PaginationRequest'
+            value:
+              extensionprops: {}
+              type: object
+              title: Pagination request
+              properties:
+                size:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: integer
+                    format: int32
+                token:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+          param:
+            ref: '#/components/schemas/v2ObjectTypeIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: ObjectType identifier
+              properties:
+                name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
     v2GetObjectsResponse:
       ref: ""
       value:
@@ -549,6 +1128,24 @@ components:
                         extensionprops: {}
                         type: string
                         format: date-time
+    v2GetPermissionRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          param:
+            ref: '#/components/schemas/v2PermissionIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: Permission identifier
+              properties:
+                name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
     v2GetPermissionResponse:
       ref: ""
       value:
@@ -588,6 +1185,30 @@ components:
                     extensionprops: {}
                     type: string
                     format: date-time
+    v2GetPermissionsRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          page:
+            ref: '#/components/schemas/v2PaginationRequest'
+            value:
+              extensionprops: {}
+              type: object
+              title: Pagination request
+              properties:
+                size:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: integer
+                    format: int32
+                token:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
     v2GetPermissionsResponse:
       ref: ""
       value:
@@ -650,6 +1271,75 @@ components:
                         extensionprops: {}
                         type: string
                         format: date-time
+    v2GetRelationRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          param:
+            ref: '#/components/schemas/v2RelationIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: Relation identifier
+              properties:
+                object:
+                  ref: '#/components/schemas/v2ObjectIdentifier'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    title: Object identifier
+                    properties:
+                      key:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+                      type:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+                relation:
+                  ref: '#/components/schemas/v2RelationTypeIdentifier'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    title: RelationType identifier
+                    properties:
+                      name:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+                      object_type:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+                subject:
+                  ref: '#/components/schemas/v2ObjectIdentifier'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    title: Object identifier
+                    properties:
+                      key:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+                      type:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+          with_objects:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: boolean
     v2GetRelationResponse:
       ref: ""
       value:
@@ -728,6 +1418,29 @@ components:
                         extensionprops: {}
                         type: string
                         format: date-time
+    v2GetRelationTypeRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          param:
+            ref: '#/components/schemas/v2RelationTypeIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: RelationType identifier
+              properties:
+                name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                object_type:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
     v2GetRelationTypeResponse:
       ref: ""
       value:
@@ -804,6 +1517,42 @@ components:
                     extensionprops: {}
                     type: string
                     format: date-time
+    v2GetRelationTypesRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          page:
+            ref: '#/components/schemas/v2PaginationRequest'
+            value:
+              extensionprops: {}
+              type: object
+              title: Pagination request
+              properties:
+                size:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: integer
+                    format: int32
+                token:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+          param:
+            ref: '#/components/schemas/v2ObjectTypeIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: ObjectType identifier
+              properties:
+                name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
     v2GetRelationTypesResponse:
       ref: ""
       value:
@@ -903,6 +1652,88 @@ components:
                         extensionprops: {}
                         type: string
                         format: date-time
+    v2GetRelationsRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          page:
+            ref: '#/components/schemas/v2PaginationRequest'
+            value:
+              extensionprops: {}
+              type: object
+              title: Pagination request
+              properties:
+                size:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: integer
+                    format: int32
+                token:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+          param:
+            ref: '#/components/schemas/v2RelationIdentifier'
+            value:
+              extensionprops: {}
+              type: object
+              title: Relation identifier
+              properties:
+                object:
+                  ref: '#/components/schemas/v2ObjectIdentifier'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    title: Object identifier
+                    properties:
+                      key:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+                      type:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+                relation:
+                  ref: '#/components/schemas/v2RelationTypeIdentifier'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    title: RelationType identifier
+                    properties:
+                      name:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+                      object_type:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+                subject:
+                  ref: '#/components/schemas/v2ObjectIdentifier'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    title: Object identifier
+                    properties:
+                      key:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+                      type:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
     v2GetRelationsResponse:
       ref: ""
       value:
@@ -1461,6 +2292,55 @@ components:
             value:
               extensionprops: {}
               type: string
+    v2SetObjectRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          object:
+            ref: '#/components/schemas/v2Object'
+            value:
+              extensionprops: {}
+              type: object
+              properties:
+                created_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
+                display_name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                hash:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                key:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                properties:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: object
+                type:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                updated_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
     v2SetObjectResponse:
       ref: ""
       value:
@@ -1504,6 +2384,67 @@ components:
                   value:
                     extensionprops: {}
                     type: string
+                updated_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
+    v2SetObjectTypeRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          object_type:
+            ref: '#/components/schemas/v2ObjectType'
+            value:
+              extensionprops: {}
+              type: object
+              properties:
+                created_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
+                display_name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                hash:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                is_subject:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: boolean
+                name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                ordinal:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: integer
+                    format: int32
+                schema:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: object
+                status:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: integer
+                    format: int64
                 updated_at:
                   ref: ""
                   value:
@@ -1571,6 +2512,45 @@ components:
                     extensionprops: {}
                     type: string
                     format: date-time
+    v2SetPermissionRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          permission:
+            ref: '#/components/schemas/v2Permission'
+            value:
+              extensionprops: {}
+              type: object
+              properties:
+                created_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
+                display_name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                hash:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                updated_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
     v2SetPermissionResponse:
       ref: ""
       value:
@@ -1604,6 +2584,74 @@ components:
                   value:
                     extensionprops: {}
                     type: string
+                updated_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
+    v2SetRelationRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          relation:
+            ref: '#/components/schemas/v2Relation'
+            value:
+              extensionprops: {}
+              type: object
+              properties:
+                created_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
+                hash:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                object:
+                  ref: '#/components/schemas/v2ObjectIdentifier'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    title: Object identifier
+                    properties:
+                      key:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+                      type:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+                relation:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                subject:
+                  ref: '#/components/schemas/v2ObjectIdentifier'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    title: Object identifier
+                    properties:
+                      key:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+                      type:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
                 updated_at:
                   ref: ""
                   value:
@@ -1672,6 +2720,82 @@ components:
                         value:
                           extensionprops: {}
                           type: string
+                updated_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
+    v2SetRelationTypeRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          relation_type:
+            ref: '#/components/schemas/v2RelationType'
+            value:
+              extensionprops: {}
+              type: object
+              properties:
+                created_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    format: date-time
+                display_name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                hash:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                name:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                object_type:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                ordinal:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: integer
+                    format: int32
+                permissions:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: array
+                    items:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                status:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: integer
+                    format: int64
+                unions:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: array
+                    items:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
                 updated_at:
                   ref: ""
                   value:
@@ -1754,6 +2878,22 @@ components:
                     extensionprops: {}
                     type: string
                     format: date-time
+  securitySchemes:
+    DirectoryAPIKey:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: apiKey
+        name: authorization
+        in: header
+    TenantID:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: apiKey
+        description: Aserto Tenant ID
+        name: aserto-tenant-id
+        in: header
 info:
   extensionprops: {}
   title: Directory
@@ -1768,8 +2908,4022 @@ info:
     extensionprops: {}
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: v0.21.0
-paths: {}
+  version: 0.0.0-20230626194458.0.ge180fb76-dirty
+paths:
+  /api/v2/directory/check/permission:
+    extensionprops: {}
+    post:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Check permission
+      description: Returns check permission outcome.
+      operationId: directory.check.permission
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v2CheckPermissionRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    object:
+                      ref: '#/components/schemas/v2ObjectIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Object identifier
+                        properties:
+                          key:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          type:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                    permission:
+                      ref: '#/components/schemas/v2PermissionIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Permission identifier
+                        properties:
+                          name:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                    subject:
+                      ref: '#/components/schemas/v2ObjectIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Object identifier
+                        properties:
+                          key:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          type:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                    trace:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: boolean
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v2CheckPermissionResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      check:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: boolean
+                      trace:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v2/directory/check/relation:
+    extensionprops: {}
+    post:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Check relation
+      description: Returns check relation outcome.
+      operationId: directory.check.relation
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v2CheckRelationRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    object:
+                      ref: '#/components/schemas/v2ObjectIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Object identifier
+                        properties:
+                          key:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          type:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                    relation:
+                      ref: '#/components/schemas/v2RelationTypeIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: RelationType identifier
+                        properties:
+                          name:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          object_type:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                    subject:
+                      ref: '#/components/schemas/v2ObjectIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Object identifier
+                        properties:
+                          key:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          type:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                    trace:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: boolean
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v2CheckRelationResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      check:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: boolean
+                      trace:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v2/directory/graph:
+    extensionprops: {}
+    post:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Get graph
+      description: Returns object graph from anchor to subject or object.
+      operationId: directory.graph
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v2GetGraphRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    anchor:
+                      ref: '#/components/schemas/v2ObjectIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Object identifier
+                        properties:
+                          key:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          type:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                    object:
+                      ref: '#/components/schemas/v2ObjectIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Object identifier
+                        properties:
+                          key:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          type:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                    relation:
+                      ref: '#/components/schemas/v2RelationTypeIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: RelationType identifier
+                        properties:
+                          name:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          object_type:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                    subject:
+                      ref: '#/components/schemas/v2ObjectIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Object identifier
+                        properties:
+                          key:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          type:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v2GetGraphResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      results:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/v2ObjectDependency'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                depth:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: integer
+                                    format: int32
+                                is_cycle:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: boolean
+                                object_key:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                object_type:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                path:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: array
+                                    items:
+                                      ref: ""
+                                      value:
+                                        extensionprops: {}
+                                        type: string
+                                relation:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                subject_key:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                subject_type:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v2/directory/object:
+    extensionprops: {}
+    delete:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Delete permission
+      description: Delete permission.
+      operationId: directory.permission.delete
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v2DeleteObjectRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    param:
+                      ref: '#/components/schemas/v2ObjectIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Object identifier
+                        properties:
+                          key:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          type:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v2DeleteObjectResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      result:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+    post:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Get object instance
+      description: Returns object instance, optionally with relations.
+      operationId: directory.object.get
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v2GetObjectRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    param:
+                      ref: '#/components/schemas/v2ObjectIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Object identifier
+                        properties:
+                          key:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          type:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                    with_relations:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: boolean
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v2GetObjectResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      incoming:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/v2Relation'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                created_at:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: date-time
+                                hash:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                object:
+                                  ref: '#/components/schemas/v2ObjectIdentifier'
+                                  value:
+                                    extensionprops: {}
+                                    type: object
+                                    title: Object identifier
+                                    properties:
+                                      key:
+                                        ref: ""
+                                        value:
+                                          extensionprops: {}
+                                          type: string
+                                      type:
+                                        ref: ""
+                                        value:
+                                          extensionprops: {}
+                                          type: string
+                                relation:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                subject:
+                                  ref: '#/components/schemas/v2ObjectIdentifier'
+                                  value:
+                                    extensionprops: {}
+                                    type: object
+                                    title: Object identifier
+                                    properties:
+                                      key:
+                                        ref: ""
+                                        value:
+                                          extensionprops: {}
+                                          type: string
+                                      type:
+                                        ref: ""
+                                        value:
+                                          extensionprops: {}
+                                          type: string
+                                updated_at:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: date-time
+                      outgoing:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/v2Relation'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                created_at:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: date-time
+                                hash:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                object:
+                                  ref: '#/components/schemas/v2ObjectIdentifier'
+                                  value:
+                                    extensionprops: {}
+                                    type: object
+                                    title: Object identifier
+                                    properties:
+                                      key:
+                                        ref: ""
+                                        value:
+                                          extensionprops: {}
+                                          type: string
+                                      type:
+                                        ref: ""
+                                        value:
+                                          extensionprops: {}
+                                          type: string
+                                relation:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                subject:
+                                  ref: '#/components/schemas/v2ObjectIdentifier'
+                                  value:
+                                    extensionprops: {}
+                                    type: object
+                                    title: Object identifier
+                                    properties:
+                                      key:
+                                        ref: ""
+                                        value:
+                                          extensionprops: {}
+                                          type: string
+                                      type:
+                                        ref: ""
+                                        value:
+                                          extensionprops: {}
+                                          type: string
+                                updated_at:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: date-time
+                      result:
+                        ref: '#/components/schemas/v2Object'
+                        value:
+                          extensionprops: {}
+                          type: object
+                          properties:
+                            created_at:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                format: date-time
+                            display_name:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            hash:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            key:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            properties:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: object
+                            type:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            updated_at:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                format: date-time
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+    put:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Set relation type
+      description: Set relation type.
+      operationId: directory.relation_type.set
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v2SetObjectRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    object:
+                      ref: '#/components/schemas/v2Object'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        properties:
+                          created_at:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                              format: date-time
+                          display_name:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          hash:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          key:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          properties:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: object
+                          type:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          updated_at:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                              format: date-time
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v2SetObjectResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      result:
+                        ref: '#/components/schemas/v2Object'
+                        value:
+                          extensionprops: {}
+                          type: object
+                          properties:
+                            created_at:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                format: date-time
+                            display_name:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            hash:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            key:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            properties:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: object
+                            type:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            updated_at:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                format: date-time
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v2/directory/object_type:
+    extensionprops: {}
+    delete:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Delete object type
+      description: Delete object type.
+      operationId: directory.object_type.delete
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v2DeleteObjectTypeRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    param:
+                      ref: '#/components/schemas/v2ObjectTypeIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: ObjectType identifier
+                        properties:
+                          name:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v2DeleteObjectTypeResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      result:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+    post:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Get object type
+      description: Returns object type by name.
+      operationId: directory.object_type.get
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v2GetObjectTypeRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    param:
+                      ref: '#/components/schemas/v2ObjectTypeIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: ObjectType identifier
+                        properties:
+                          name:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v2GetObjectTypeResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      result:
+                        ref: '#/components/schemas/v2ObjectType'
+                        value:
+                          extensionprops: {}
+                          type: object
+                          properties:
+                            created_at:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                format: date-time
+                            display_name:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            hash:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            is_subject:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: boolean
+                            name:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            ordinal:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: integer
+                                format: int32
+                            schema:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: object
+                            status:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: integer
+                                format: int64
+                            updated_at:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                format: date-time
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+    put:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Set object type
+      description: Set object type.
+      operationId: directory.object_type.set
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v2SetObjectTypeRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    object_type:
+                      ref: '#/components/schemas/v2ObjectType'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        properties:
+                          created_at:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                              format: date-time
+                          display_name:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          hash:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          is_subject:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: boolean
+                          name:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          ordinal:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: integer
+                              format: int32
+                          schema:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: object
+                          status:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: integer
+                              format: int64
+                          updated_at:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                              format: date-time
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v2SetObjectTypeResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      result:
+                        ref: '#/components/schemas/v2ObjectType'
+                        value:
+                          extensionprops: {}
+                          type: object
+                          properties:
+                            created_at:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                format: date-time
+                            display_name:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            hash:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            is_subject:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: boolean
+                            name:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            ordinal:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: integer
+                                format: int32
+                            schema:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: object
+                            status:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: integer
+                                format: int64
+                            updated_at:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                format: date-time
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v2/directory/object_types:
+    extensionprops: {}
+    post:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Get object types
+      description: Returns object types.
+      operationId: directory.object_types.get
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v2GetObjectTypesRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    page:
+                      ref: '#/components/schemas/v2PaginationRequest'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Pagination request
+                        properties:
+                          size:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: integer
+                              format: int32
+                          token:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v2GetObjectTypesResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      page:
+                        ref: '#/components/schemas/v2PaginationResponse'
+                        value:
+                          extensionprops: {}
+                          type: object
+                          title: Pagination response
+                          properties:
+                            next_token:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            result_size:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: integer
+                                format: int32
+                      results:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/v2ObjectType'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                created_at:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: date-time
+                                display_name:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                hash:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                is_subject:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: boolean
+                                name:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                ordinal:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: integer
+                                    format: int32
+                                schema:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: object
+                                status:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: integer
+                                    format: int64
+                                updated_at:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: date-time
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v2/directory/objects:
+    extensionprops: {}
+    post:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Get object instances
+      description: Returns object instances.
+      operationId: directory.objects.get
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v2GetObjectsRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    page:
+                      ref: '#/components/schemas/v2PaginationRequest'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Pagination request
+                        properties:
+                          size:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: integer
+                              format: int32
+                          token:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                    param:
+                      ref: '#/components/schemas/v2ObjectTypeIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: ObjectType identifier
+                        properties:
+                          name:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v2GetObjectsResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      page:
+                        ref: '#/components/schemas/v2PaginationResponse'
+                        value:
+                          extensionprops: {}
+                          type: object
+                          title: Pagination response
+                          properties:
+                            next_token:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            result_size:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: integer
+                                format: int32
+                      results:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/v2Object'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                created_at:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: date-time
+                                display_name:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                hash:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                key:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                properties:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: object
+                                type:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                updated_at:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: date-time
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v2/directory/permission:
+    extensionprops: {}
+    delete:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Delete permission
+      description: Delete permission.
+      operationId: directory.permission.delete
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v2DeletePermissionRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    param:
+                      ref: '#/components/schemas/v2PermissionIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Permission identifier
+                        properties:
+                          name:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v2DeletePermissionResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      result:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+    post:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Get permission
+      description: Returns permission by name.
+      operationId: directory.permission.get
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v2GetPermissionRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    param:
+                      ref: '#/components/schemas/v2PermissionIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Permission identifier
+                        properties:
+                          name:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v2GetPermissionResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      result:
+                        ref: '#/components/schemas/v2Permission'
+                        value:
+                          extensionprops: {}
+                          type: object
+                          properties:
+                            created_at:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                format: date-time
+                            display_name:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            hash:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            name:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            updated_at:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                format: date-time
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+    put:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Set permission
+      description: Set permission.
+      operationId: directory.permission.set
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v2SetPermissionRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    permission:
+                      ref: '#/components/schemas/v2Permission'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        properties:
+                          created_at:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                              format: date-time
+                          display_name:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          hash:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          name:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          updated_at:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                              format: date-time
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v2SetPermissionResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      result:
+                        ref: '#/components/schemas/v2Permission'
+                        value:
+                          extensionprops: {}
+                          type: object
+                          properties:
+                            created_at:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                format: date-time
+                            display_name:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            hash:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            name:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            updated_at:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                format: date-time
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v2/directory/permissions:
+    extensionprops: {}
+    post:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Get permissions
+      description: Returns permissions.
+      operationId: directory.permissions.get
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v2GetPermissionsRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    page:
+                      ref: '#/components/schemas/v2PaginationRequest'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Pagination request
+                        properties:
+                          size:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: integer
+                              format: int32
+                          token:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v2GetPermissionsResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      page:
+                        ref: '#/components/schemas/v2PaginationResponse'
+                        value:
+                          extensionprops: {}
+                          type: object
+                          title: Pagination response
+                          properties:
+                            next_token:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            result_size:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: integer
+                                format: int32
+                      results:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/v2Permission'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                created_at:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: date-time
+                                display_name:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                hash:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                name:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                updated_at:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: date-time
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v2/directory/relation:
+    extensionprops: {}
+    delete:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Delete relation
+      description: Delete relation.
+      operationId: directory.relation.delete
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v2DeleteRelationRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    param:
+                      ref: '#/components/schemas/v2RelationIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Relation identifier
+                        properties:
+                          object:
+                            ref: '#/components/schemas/v2ObjectIdentifier'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              title: Object identifier
+                              properties:
+                                key:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                type:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                          relation:
+                            ref: '#/components/schemas/v2RelationTypeIdentifier'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              title: RelationType identifier
+                              properties:
+                                name:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                object_type:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                          subject:
+                            ref: '#/components/schemas/v2ObjectIdentifier'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              title: Object identifier
+                              properties:
+                                key:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                type:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v2DeleteRelationResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      result:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+    post:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Get relation instance
+      description: Returns relation instance, optionally with objects.
+      operationId: directory.relation.get
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v2GetRelationRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    param:
+                      ref: '#/components/schemas/v2RelationIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Relation identifier
+                        properties:
+                          object:
+                            ref: '#/components/schemas/v2ObjectIdentifier'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              title: Object identifier
+                              properties:
+                                key:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                type:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                          relation:
+                            ref: '#/components/schemas/v2RelationTypeIdentifier'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              title: RelationType identifier
+                              properties:
+                                name:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                object_type:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                          subject:
+                            ref: '#/components/schemas/v2ObjectIdentifier'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              title: Object identifier
+                              properties:
+                                key:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                type:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                    with_objects:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: boolean
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v2GetRelationResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      objects:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: object
+                      results:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/v2Relation'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                created_at:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: date-time
+                                hash:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                object:
+                                  ref: '#/components/schemas/v2ObjectIdentifier'
+                                  value:
+                                    extensionprops: {}
+                                    type: object
+                                    title: Object identifier
+                                    properties:
+                                      key:
+                                        ref: ""
+                                        value:
+                                          extensionprops: {}
+                                          type: string
+                                      type:
+                                        ref: ""
+                                        value:
+                                          extensionprops: {}
+                                          type: string
+                                relation:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                subject:
+                                  ref: '#/components/schemas/v2ObjectIdentifier'
+                                  value:
+                                    extensionprops: {}
+                                    type: object
+                                    title: Object identifier
+                                    properties:
+                                      key:
+                                        ref: ""
+                                        value:
+                                          extensionprops: {}
+                                          type: string
+                                      type:
+                                        ref: ""
+                                        value:
+                                          extensionprops: {}
+                                          type: string
+                                updated_at:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: date-time
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+    put:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Set relation
+      description: Set relation.
+      operationId: directory.relation.set
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v2SetRelationRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    relation:
+                      ref: '#/components/schemas/v2Relation'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        properties:
+                          created_at:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                              format: date-time
+                          hash:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          object:
+                            ref: '#/components/schemas/v2ObjectIdentifier'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              title: Object identifier
+                              properties:
+                                key:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                type:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                          relation:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          subject:
+                            ref: '#/components/schemas/v2ObjectIdentifier'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              title: Object identifier
+                              properties:
+                                key:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                type:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                          updated_at:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                              format: date-time
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v2SetRelationResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      result:
+                        ref: '#/components/schemas/v2Relation'
+                        value:
+                          extensionprops: {}
+                          type: object
+                          properties:
+                            created_at:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                format: date-time
+                            hash:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            object:
+                              ref: '#/components/schemas/v2ObjectIdentifier'
+                              value:
+                                extensionprops: {}
+                                type: object
+                                title: Object identifier
+                                properties:
+                                  key:
+                                    ref: ""
+                                    value:
+                                      extensionprops: {}
+                                      type: string
+                                  type:
+                                    ref: ""
+                                    value:
+                                      extensionprops: {}
+                                      type: string
+                            relation:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            subject:
+                              ref: '#/components/schemas/v2ObjectIdentifier'
+                              value:
+                                extensionprops: {}
+                                type: object
+                                title: Object identifier
+                                properties:
+                                  key:
+                                    ref: ""
+                                    value:
+                                      extensionprops: {}
+                                      type: string
+                                  type:
+                                    ref: ""
+                                    value:
+                                      extensionprops: {}
+                                      type: string
+                            updated_at:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                format: date-time
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v2/directory/relation_type:
+    extensionprops: {}
+    delete:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Delete relation type
+      description: Delete relation type.
+      operationId: directory.relation_type.delete
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v2DeleteRelationTypeRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    param:
+                      ref: '#/components/schemas/v2RelationTypeIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: RelationType identifier
+                        properties:
+                          name:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          object_type:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v2DeleteRelationTypeResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      result:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+    post:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Get relation type
+      description: Returns relation type by name.
+      operationId: directory.object_type.get
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v2GetRelationTypeRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    param:
+                      ref: '#/components/schemas/v2RelationTypeIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: RelationType identifier
+                        properties:
+                          name:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          object_type:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v2GetRelationTypeResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      result:
+                        ref: '#/components/schemas/v2RelationType'
+                        value:
+                          extensionprops: {}
+                          type: object
+                          properties:
+                            created_at:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                format: date-time
+                            display_name:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            hash:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            name:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            object_type:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            ordinal:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: integer
+                                format: int32
+                            permissions:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: array
+                                items:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                            status:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: integer
+                                format: int64
+                            unions:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: array
+                                items:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                            updated_at:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                format: date-time
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+    put:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Set relation type
+      description: Set relation type.
+      operationId: directory.relation_type.set
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v2SetRelationTypeRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    relation_type:
+                      ref: '#/components/schemas/v2RelationType'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        properties:
+                          created_at:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                              format: date-time
+                          display_name:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          hash:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          name:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          object_type:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                          ordinal:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: integer
+                              format: int32
+                          permissions:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: array
+                              items:
+                                ref: ""
+                                value:
+                                  extensionprops: {}
+                                  type: string
+                          status:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: integer
+                              format: int64
+                          unions:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: array
+                              items:
+                                ref: ""
+                                value:
+                                  extensionprops: {}
+                                  type: string
+                          updated_at:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                              format: date-time
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v2SetRelationTypeResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      result:
+                        ref: '#/components/schemas/v2RelationType'
+                        value:
+                          extensionprops: {}
+                          type: object
+                          properties:
+                            created_at:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                format: date-time
+                            display_name:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            hash:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            name:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            object_type:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            ordinal:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: integer
+                                format: int32
+                            permissions:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: array
+                                items:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                            status:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: integer
+                                format: int64
+                            unions:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: array
+                                items:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                            updated_at:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                format: date-time
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v2/directory/relation_types:
+    extensionprops: {}
+    post:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Get relation types
+      description: Returns relation types, optionally by object_type.
+      operationId: directory.relation_types.get
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v2GetRelationTypesRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    page:
+                      ref: '#/components/schemas/v2PaginationRequest'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Pagination request
+                        properties:
+                          size:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: integer
+                              format: int32
+                          token:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                    param:
+                      ref: '#/components/schemas/v2ObjectTypeIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: ObjectType identifier
+                        properties:
+                          name:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v2GetRelationTypesResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      page:
+                        ref: '#/components/schemas/v2PaginationResponse'
+                        value:
+                          extensionprops: {}
+                          type: object
+                          title: Pagination response
+                          properties:
+                            next_token:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            result_size:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: integer
+                                format: int32
+                      results:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/v2RelationType'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                created_at:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: date-time
+                                display_name:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                hash:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                name:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                object_type:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                ordinal:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: integer
+                                    format: int32
+                                permissions:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: array
+                                    items:
+                                      ref: ""
+                                      value:
+                                        extensionprops: {}
+                                        type: string
+                                status:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: integer
+                                    format: int64
+                                unions:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: array
+                                    items:
+                                      ref: ""
+                                      value:
+                                        extensionprops: {}
+                                        type: string
+                                updated_at:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: date-time
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v2/directory/relations:
+    extensionprops: {}
+    post:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Get relation instances
+      description: Returns relation instances.
+      operationId: directory.relations.get
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v2GetRelationsRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    page:
+                      ref: '#/components/schemas/v2PaginationRequest'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Pagination request
+                        properties:
+                          size:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: integer
+                              format: int32
+                          token:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                    param:
+                      ref: '#/components/schemas/v2RelationIdentifier'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        title: Relation identifier
+                        properties:
+                          object:
+                            ref: '#/components/schemas/v2ObjectIdentifier'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              title: Object identifier
+                              properties:
+                                key:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                type:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                          relation:
+                            ref: '#/components/schemas/v2RelationTypeIdentifier'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              title: RelationType identifier
+                              properties:
+                                name:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                object_type:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                          subject:
+                            ref: '#/components/schemas/v2ObjectIdentifier'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              title: Object identifier
+                              properties:
+                                key:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                type:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v2GetRelationsResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      page:
+                        ref: '#/components/schemas/v2PaginationResponse'
+                        value:
+                          extensionprops: {}
+                          type: object
+                          title: Pagination response
+                          properties:
+                            next_token:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                            result_size:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: integer
+                                format: int32
+                      results:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/v2Relation'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                created_at:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: date-time
+                                hash:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                object:
+                                  ref: '#/components/schemas/v2ObjectIdentifier'
+                                  value:
+                                    extensionprops: {}
+                                    type: object
+                                    title: Object identifier
+                                    properties:
+                                      key:
+                                        ref: ""
+                                        value:
+                                          extensionprops: {}
+                                          type: string
+                                      type:
+                                        ref: ""
+                                        value:
+                                          extensionprops: {}
+                                          type: string
+                                relation:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                subject:
+                                  ref: '#/components/schemas/v2ObjectIdentifier'
+                                  value:
+                                    extensionprops: {}
+                                    type: object
+                                    title: Object identifier
+                                    properties:
+                                      key:
+                                        ref: ""
+                                        value:
+                                          extensionprops: {}
+                                          type: string
+                                      type:
+                                        ref: ""
+                                        value:
+                                          extensionprops: {}
+                                          type: string
+                                updated_at:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: date-time
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+security:
+  - DirectoryAPIKey: []
+    TenantID: []
 servers:
   - extensionprops: {}
     url: https://directory.prod.aserto.com

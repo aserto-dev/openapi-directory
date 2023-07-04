@@ -4,12 +4,9 @@
   ],
   "definitions": {
     "protobufAny": {
+      "additionalProperties": {},
       "properties": {
-        "type_url": {
-          "type": "string"
-        },
-        "value": {
-          "format": "byte",
+        "@type": {
           "type": "string"
         }
       },
@@ -41,16 +38,22 @@
       },
       "type": "object"
     },
-    "v2CheckPermissionRequest": {
+    "v3CheckPermissionRequest": {
       "properties": {
-        "object": {
-          "$ref": "#/definitions/v2ObjectIdentifier"
+        "object_id": {
+          "type": "string"
+        },
+        "object_type": {
+          "type": "string"
         },
         "permission": {
-          "$ref": "#/definitions/v2PermissionIdentifier"
+          "type": "string"
         },
-        "subject": {
-          "$ref": "#/definitions/v2ObjectIdentifier"
+        "subject_id": {
+          "type": "string"
+        },
+        "subject_type": {
+          "type": "string"
         },
         "trace": {
           "type": "boolean"
@@ -58,7 +61,7 @@
       },
       "type": "object"
     },
-    "v2CheckPermissionResponse": {
+    "v3CheckPermissionResponse": {
       "properties": {
         "check": {
           "type": "boolean"
@@ -72,16 +75,22 @@
       },
       "type": "object"
     },
-    "v2CheckRelationRequest": {
+    "v3CheckRelationRequest": {
       "properties": {
-        "object": {
-          "$ref": "#/definitions/v2ObjectIdentifier"
+        "object_id": {
+          "type": "string"
+        },
+        "object_type": {
+          "type": "string"
         },
         "relation": {
-          "$ref": "#/definitions/v2RelationTypeIdentifier"
+          "type": "string"
         },
-        "subject": {
-          "$ref": "#/definitions/v2ObjectIdentifier"
+        "subject_id": {
+          "type": "string"
+        },
+        "subject_type": {
+          "type": "string"
         },
         "trace": {
           "type": "boolean"
@@ -89,7 +98,7 @@
       },
       "type": "object"
     },
-    "v2CheckRelationResponse": {
+    "v3CheckRelationResponse": {
       "properties": {
         "check": {
           "type": "boolean"
@@ -103,352 +112,293 @@
       },
       "type": "object"
     },
-    "v2DeleteObjectRequest": {
-      "properties": {
-        "param": {
-          "$ref": "#/definitions/v2ObjectIdentifier"
-        }
-      },
-      "type": "object"
-    },
-    "v2DeleteObjectResponse": {
+    "v3DeleteManifestResponse": {
       "properties": {
         "result": {
-          "properties": {}
+          "properties": {},
+          "type": "object"
         }
       },
       "type": "object"
     },
-    "v2DeleteObjectTypeRequest": {
-      "properties": {
-        "param": {
-          "$ref": "#/definitions/v2ObjectTypeIdentifier"
-        }
-      },
-      "type": "object"
-    },
-    "v2DeleteObjectTypeResponse": {
+    "v3DeleteObjectResponse": {
       "properties": {
         "result": {
-          "properties": {}
+          "properties": {},
+          "type": "object"
         }
       },
       "type": "object"
     },
-    "v2DeletePermissionRequest": {
-      "properties": {
-        "param": {
-          "$ref": "#/definitions/v2PermissionIdentifier"
-        }
-      },
-      "type": "object"
-    },
-    "v2DeletePermissionResponse": {
+    "v3DeleteRelationResponse": {
       "properties": {
         "result": {
-          "properties": {}
+          "properties": {},
+          "type": "object"
         }
       },
       "type": "object"
     },
-    "v2DeleteRelationRequest": {
+    "v3ExportResponse": {
       "properties": {
-        "param": {
-          "$ref": "#/definitions/v2RelationIdentifier"
-        }
-      },
-      "type": "object"
-    },
-    "v2DeleteRelationResponse": {
-      "properties": {
-        "result": {
-          "properties": {}
-        }
-      },
-      "type": "object"
-    },
-    "v2DeleteRelationTypeRequest": {
-      "properties": {
-        "param": {
-          "$ref": "#/definitions/v2RelationTypeIdentifier"
-        }
-      },
-      "type": "object"
-    },
-    "v2DeleteRelationTypeResponse": {
-      "properties": {
-        "result": {
-          "properties": {}
-        }
-      },
-      "type": "object"
-    },
-    "v2GetGraphRequest": {
-      "properties": {
-        "anchor": {
-          "$ref": "#/definitions/v2ObjectIdentifier"
-        },
         "object": {
-          "$ref": "#/definitions/v2ObjectIdentifier"
+          "$ref": "#/definitions/v3Object"
         },
         "relation": {
-          "$ref": "#/definitions/v2RelationTypeIdentifier"
-        },
-        "subject": {
-          "$ref": "#/definitions/v2ObjectIdentifier"
+          "$ref": "#/definitions/v3Relation"
         }
       },
       "type": "object"
     },
-    "v2GetGraphResponse": {
+    "v3GetGraphRequest": {
+      "properties": {
+        "anchor_id": {
+          "type": "string"
+        },
+        "anchor_type": {
+          "type": "string"
+        },
+        "object_id": {
+          "type": "string"
+        },
+        "object_type": {
+          "type": "string"
+        },
+        "relation": {
+          "type": "string"
+        },
+        "subject_id": {
+          "type": "string"
+        },
+        "subject_type": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v3GetGraphResponse": {
       "properties": {
         "results": {
           "items": {
-            "$ref": "#/definitions/v2ObjectDependency"
+            "$ref": "#/definitions/v3ObjectDependency"
           },
           "type": "array"
         }
       },
       "type": "object"
     },
-    "v2GetObjectManyResponse": {
+    "v3GetManifestResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v3Manifest"
+        }
+      },
+      "type": "object"
+    },
+    "v3GetObjectManyResponse": {
       "properties": {
         "results": {
           "items": {
-            "$ref": "#/definitions/v2Object"
+            "$ref": "#/definitions/v3Object"
           },
           "type": "array"
         }
       },
       "type": "object"
     },
-    "v2GetObjectRequest": {
-      "properties": {
-        "param": {
-          "$ref": "#/definitions/v2ObjectIdentifier"
-        },
-        "with_relations": {
-          "type": "boolean"
-        }
-      },
-      "type": "object"
-    },
-    "v2GetObjectResponse": {
+    "v3GetObjectResponse": {
       "properties": {
         "incoming": {
           "items": {
-            "$ref": "#/definitions/v2Relation"
+            "$ref": "#/definitions/v3Relation"
           },
           "type": "array"
         },
         "outgoing": {
           "items": {
-            "$ref": "#/definitions/v2Relation"
+            "$ref": "#/definitions/v3Relation"
           },
           "type": "array"
         },
         "result": {
-          "$ref": "#/definitions/v2Object"
+          "$ref": "#/definitions/v3Object"
         }
       },
       "type": "object"
     },
-    "v2GetObjectTypeRequest": {
-      "properties": {
-        "param": {
-          "$ref": "#/definitions/v2ObjectTypeIdentifier"
-        }
-      },
-      "type": "object"
-    },
-    "v2GetObjectTypeResponse": {
+    "v3GetObjectTypeResponse": {
       "properties": {
         "result": {
-          "$ref": "#/definitions/v2ObjectType"
+          "$ref": "#/definitions/v3ObjectType"
         }
       },
       "type": "object"
     },
-    "v2GetObjectTypesRequest": {
+    "v3GetObjectTypesResponse": {
       "properties": {
         "page": {
-          "$ref": "#/definitions/v2PaginationRequest"
-        }
-      },
-      "type": "object"
-    },
-    "v2GetObjectTypesResponse": {
-      "properties": {
-        "page": {
-          "$ref": "#/definitions/v2PaginationResponse"
+          "$ref": "#/definitions/v3PaginationResponse"
         },
         "results": {
           "items": {
-            "$ref": "#/definitions/v2ObjectType"
+            "$ref": "#/definitions/v3ObjectType"
           },
           "type": "array"
         }
       },
       "type": "object"
     },
-    "v2GetObjectsRequest": {
+    "v3GetObjectsResponse": {
       "properties": {
         "page": {
-          "$ref": "#/definitions/v2PaginationRequest"
-        },
-        "param": {
-          "$ref": "#/definitions/v2ObjectTypeIdentifier"
-        }
-      },
-      "type": "object"
-    },
-    "v2GetObjectsResponse": {
-      "properties": {
-        "page": {
-          "$ref": "#/definitions/v2PaginationResponse"
+          "$ref": "#/definitions/v3PaginationResponse"
         },
         "results": {
           "items": {
-            "$ref": "#/definitions/v2Object"
+            "$ref": "#/definitions/v3Object"
           },
           "type": "array"
         }
       },
       "type": "object"
     },
-    "v2GetPermissionRequest": {
-      "properties": {
-        "param": {
-          "$ref": "#/definitions/v2PermissionIdentifier"
-        }
-      },
-      "type": "object"
-    },
-    "v2GetPermissionResponse": {
+    "v3GetPermissionResponse": {
       "properties": {
         "result": {
-          "$ref": "#/definitions/v2Permission"
+          "$ref": "#/definitions/v3Permission"
         }
       },
       "type": "object"
     },
-    "v2GetPermissionsRequest": {
+    "v3GetPermissionsResponse": {
       "properties": {
         "page": {
-          "$ref": "#/definitions/v2PaginationRequest"
-        }
-      },
-      "type": "object"
-    },
-    "v2GetPermissionsResponse": {
-      "properties": {
-        "page": {
-          "$ref": "#/definitions/v2PaginationResponse"
+          "$ref": "#/definitions/v3PaginationResponse"
         },
         "results": {
           "items": {
-            "$ref": "#/definitions/v2Permission"
+            "$ref": "#/definitions/v3Permission"
           },
           "type": "array"
         }
       },
       "type": "object"
     },
-    "v2GetRelationRequest": {
-      "properties": {
-        "param": {
-          "$ref": "#/definitions/v2RelationIdentifier"
-        },
-        "with_objects": {
-          "type": "boolean"
-        }
-      },
-      "type": "object"
-    },
-    "v2GetRelationResponse": {
+    "v3GetRelationResponse": {
       "properties": {
         "objects": {
           "additionalProperties": {
-            "$ref": "#/definitions/v2Object"
+            "$ref": "#/definitions/v3Object"
           },
           "type": "object"
         },
         "results": {
           "items": {
-            "$ref": "#/definitions/v2Relation"
+            "$ref": "#/definitions/v3Relation"
           },
           "type": "array"
         }
       },
       "type": "object"
     },
-    "v2GetRelationTypeRequest": {
-      "properties": {
-        "param": {
-          "$ref": "#/definitions/v2RelationTypeIdentifier"
-        }
-      },
-      "type": "object"
-    },
-    "v2GetRelationTypeResponse": {
+    "v3GetRelationTypeResponse": {
       "properties": {
         "result": {
-          "$ref": "#/definitions/v2RelationType"
+          "$ref": "#/definitions/v3RelationType"
         }
       },
       "type": "object"
     },
-    "v2GetRelationTypesRequest": {
+    "v3GetRelationTypesResponse": {
       "properties": {
         "page": {
-          "$ref": "#/definitions/v2PaginationRequest"
-        },
-        "param": {
-          "$ref": "#/definitions/v2ObjectTypeIdentifier"
-        }
-      },
-      "type": "object"
-    },
-    "v2GetRelationTypesResponse": {
-      "properties": {
-        "page": {
-          "$ref": "#/definitions/v2PaginationResponse"
+          "$ref": "#/definitions/v3PaginationResponse"
         },
         "results": {
           "items": {
-            "$ref": "#/definitions/v2RelationType"
+            "$ref": "#/definitions/v3RelationType"
           },
           "type": "array"
         }
       },
       "type": "object"
     },
-    "v2GetRelationsRequest": {
+    "v3GetRelationsResponse": {
       "properties": {
         "page": {
-          "$ref": "#/definitions/v2PaginationRequest"
-        },
-        "param": {
-          "$ref": "#/definitions/v2RelationIdentifier"
-        }
-      },
-      "type": "object"
-    },
-    "v2GetRelationsResponse": {
-      "properties": {
-        "page": {
-          "$ref": "#/definitions/v2PaginationResponse"
+          "$ref": "#/definitions/v3PaginationResponse"
         },
         "results": {
           "items": {
-            "$ref": "#/definitions/v2Relation"
+            "$ref": "#/definitions/v3Relation"
           },
           "type": "array"
         }
       },
       "type": "object"
     },
-    "v2Object": {
+    "v3ImportCounter": {
+      "properties": {
+        "delete": {
+          "format": "uint64",
+          "type": "string"
+        },
+        "error": {
+          "format": "uint64",
+          "type": "string"
+        },
+        "recv": {
+          "format": "uint64",
+          "type": "string"
+        },
+        "set": {
+          "format": "uint64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v3ImportResponse": {
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/v3ImportCounter"
+        },
+        "relation": {
+          "$ref": "#/definitions/v3ImportCounter"
+        }
+      },
+      "type": "object"
+    },
+    "v3Manifest": {
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "data": {
+          "format": "byte",
+          "type": "string"
+        },
+        "etag": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "schema_version": {
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v3Object": {
       "properties": {
         "created_at": {
           "format": "date-time",
@@ -457,10 +407,10 @@
         "display_name": {
           "type": "string"
         },
-        "hash": {
+        "etag": {
           "type": "string"
         },
-        "key": {
+        "id": {
           "type": "string"
         },
         "properties": {
@@ -476,7 +426,7 @@
       },
       "type": "object"
     },
-    "v2ObjectDependency": {
+    "v3ObjectDependency": {
       "properties": {
         "depth": {
           "format": "int32",
@@ -485,7 +435,7 @@
         "is_cycle": {
           "type": "boolean"
         },
-        "object_key": {
+        "object_id": {
           "type": "string"
         },
         "object_type": {
@@ -500,7 +450,10 @@
         "relation": {
           "type": "string"
         },
-        "subject_key": {
+        "subject_id": {
+          "type": "string"
+        },
+        "subject_relation": {
           "type": "string"
         },
         "subject_type": {
@@ -509,19 +462,19 @@
       },
       "type": "object"
     },
-    "v2ObjectIdentifier": {
+    "v3ObjectIdentifier": {
       "properties": {
-        "key": {
+        "object_id": {
           "type": "string"
         },
-        "type": {
+        "object_type": {
           "type": "string"
         }
       },
       "title": "Object identifier",
       "type": "object"
     },
-    "v2ObjectType": {
+    "v3ObjectType": {
       "properties": {
         "created_at": {
           "format": "date-time",
@@ -530,7 +483,7 @@
         "display_name": {
           "type": "string"
         },
-        "hash": {
+        "etag": {
           "type": "string"
         },
         "is_subject": {
@@ -557,16 +510,16 @@
       },
       "type": "object"
     },
-    "v2ObjectTypeIdentifier": {
-      "properties": {
-        "name": {
-          "type": "string"
-        }
-      },
-      "title": "ObjectType identifier",
-      "type": "object"
+    "v3Opcode": {
+      "default": "OPCODE_UNKNOWN",
+      "enum": [
+        "OPCODE_UNKNOWN",
+        "OPCODE_SET",
+        "OPCODE_DELETE"
+      ],
+      "type": "string"
     },
-    "v2PaginationRequest": {
+    "v3PaginationRequest": {
       "properties": {
         "size": {
           "format": "int32",
@@ -579,20 +532,16 @@
       "title": "Pagination request",
       "type": "object"
     },
-    "v2PaginationResponse": {
+    "v3PaginationResponse": {
       "properties": {
         "next_token": {
           "type": "string"
-        },
-        "result_size": {
-          "format": "int32",
-          "type": "integer"
         }
       },
       "title": "Pagination response",
       "type": "object"
     },
-    "v2Permission": {
+    "v3Permission": {
       "properties": {
         "created_at": {
           "format": "date-time",
@@ -601,7 +550,7 @@
         "display_name": {
           "type": "string"
         },
-        "hash": {
+        "etag": {
           "type": "string"
         },
         "name": {
@@ -614,32 +563,32 @@
       },
       "type": "object"
     },
-    "v2PermissionIdentifier": {
-      "properties": {
-        "name": {
-          "type": "string"
-        }
-      },
-      "title": "Permission identifier",
-      "type": "object"
-    },
-    "v2Relation": {
+    "v3Relation": {
       "properties": {
         "created_at": {
           "format": "date-time",
           "type": "string"
         },
-        "hash": {
+        "etag": {
           "type": "string"
         },
-        "object": {
-          "$ref": "#/definitions/v2ObjectIdentifier"
+        "object_id": {
+          "type": "string"
+        },
+        "object_type": {
+          "type": "string"
         },
         "relation": {
           "type": "string"
         },
-        "subject": {
-          "$ref": "#/definitions/v2ObjectIdentifier"
+        "subject_id": {
+          "type": "string"
+        },
+        "subject_relation": {
+          "type": "string"
+        },
+        "subject_type": {
+          "type": "string"
         },
         "updated_at": {
           "format": "date-time",
@@ -648,22 +597,7 @@
       },
       "type": "object"
     },
-    "v2RelationIdentifier": {
-      "properties": {
-        "object": {
-          "$ref": "#/definitions/v2ObjectIdentifier"
-        },
-        "relation": {
-          "$ref": "#/definitions/v2RelationTypeIdentifier"
-        },
-        "subject": {
-          "$ref": "#/definitions/v2ObjectIdentifier"
-        }
-      },
-      "title": "Relation identifier",
-      "type": "object"
-    },
-    "v2RelationType": {
+    "v3RelationType": {
       "properties": {
         "created_at": {
           "format": "date-time",
@@ -672,7 +606,7 @@
         "display_name": {
           "type": "string"
         },
-        "hash": {
+        "etag": {
           "type": "string"
         },
         "name": {
@@ -708,115 +642,78 @@
       },
       "type": "object"
     },
-    "v2RelationTypeIdentifier": {
+    "v3SetManifestResponse": {
       "properties": {
-        "name": {
+        "result": {
+          "$ref": "#/definitions/v3Manifest"
+        }
+      },
+      "type": "object"
+    },
+    "v3SetObjectRequest": {
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/v3Object"
+        }
+      },
+      "type": "object"
+    },
+    "v3SetObjectResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v3Object"
+        }
+      },
+      "type": "object"
+    },
+    "v3SetRelationRequest": {
+      "properties": {
+        "relation": {
+          "$ref": "#/definitions/v3Relation"
+        }
+      },
+      "type": "object"
+    },
+    "v3SetRelationResponse": {
+      "properties": {
+        "object_id": {
           "type": "string"
         },
         "object_type": {
           "type": "string"
-        }
-      },
-      "title": "RelationType identifier",
-      "type": "object"
-    },
-    "v2SetObjectRequest": {
-      "properties": {
-        "object": {
-          "$ref": "#/definitions/v2Object"
-        }
-      },
-      "type": "object"
-    },
-    "v2SetObjectResponse": {
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/v2Object"
-        }
-      },
-      "type": "object"
-    },
-    "v2SetObjectTypeRequest": {
-      "properties": {
-        "object_type": {
-          "$ref": "#/definitions/v2ObjectType"
-        }
-      },
-      "type": "object"
-    },
-    "v2SetObjectTypeResponse": {
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/v2ObjectType"
-        }
-      },
-      "type": "object"
-    },
-    "v2SetPermissionRequest": {
-      "properties": {
-        "permission": {
-          "$ref": "#/definitions/v2Permission"
-        }
-      },
-      "type": "object"
-    },
-    "v2SetPermissionResponse": {
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/v2Permission"
-        }
-      },
-      "type": "object"
-    },
-    "v2SetRelationRequest": {
-      "properties": {
+        },
         "relation": {
-          "$ref": "#/definitions/v2Relation"
-        }
-      },
-      "type": "object"
-    },
-    "v2SetRelationResponse": {
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/v2Relation"
-        }
-      },
-      "type": "object"
-    },
-    "v2SetRelationTypeRequest": {
-      "properties": {
-        "relation_type": {
-          "$ref": "#/definitions/v2RelationType"
-        }
-      },
-      "type": "object"
-    },
-    "v2SetRelationTypeResponse": {
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/v2RelationType"
+          "type": "string"
+        },
+        "subject_id": {
+          "type": "string"
+        },
+        "subject_relation": {
+          "type": "string"
+        },
+        "subject_type": {
+          "type": "string"
         }
       },
       "type": "object"
     }
   },
   "info": {
-    "title": "aserto/directory/common/v2/common.proto",
+    "title": "aserto/directory/common/v3/common.proto",
     "version": "version not set"
   },
   "paths": {
-    "/api/v2/directory/check/permission": {
+    "/api/v3/directory/check/permission": {
       "post": {
         "description": "Returns check permission outcome.",
-        "operationId": "directory.check.permission",
+        "operationId": "directory.v3.check.permission",
         "parameters": [
           {
             "in": "body",
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v2CheckPermissionRequest"
+              "$ref": "#/definitions/v3CheckPermissionRequest"
             }
           }
         ],
@@ -824,7 +721,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v2CheckPermissionResponse"
+              "$ref": "#/definitions/v3CheckPermissionResponse"
             }
           },
           "default": {
@@ -846,17 +743,17 @@
         ]
       }
     },
-    "/api/v2/directory/check/relation": {
+    "/api/v3/directory/check/relation": {
       "post": {
         "description": "Returns check relation outcome.",
-        "operationId": "directory.check.relation",
+        "operationId": "directory.v3.check.relation",
         "parameters": [
           {
             "in": "body",
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v2CheckRelationRequest"
+              "$ref": "#/definitions/v3CheckRelationRequest"
             }
           }
         ],
@@ -864,7 +761,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v2CheckRelationResponse"
+              "$ref": "#/definitions/v3CheckRelationResponse"
             }
           },
           "default": {
@@ -886,17 +783,17 @@
         ]
       }
     },
-    "/api/v2/directory/graph": {
+    "/api/v3/directory/graph": {
       "post": {
         "description": "Returns object graph from anchor to subject or object.",
-        "operationId": "directory.graph",
+        "operationId": "directory.v3.graph",
         "parameters": [
           {
             "in": "body",
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v2GetGraphRequest"
+              "$ref": "#/definitions/v3GetGraphRequest"
             }
           }
         ],
@@ -904,7 +801,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v2GetGraphResponse"
+              "$ref": "#/definitions/v3GetGraphResponse"
             }
           },
           "default": {
@@ -926,17 +823,17 @@
         ]
       }
     },
-    "/api/v2/directory/object": {
-      "delete": {
-        "description": "Delete permission.",
-        "operationId": "directory.permission.delete",
+    "/api/v3/directory/object": {
+      "put": {
+        "description": "Set object.",
+        "operationId": "directory.v3.object.set",
         "parameters": [
           {
             "in": "body",
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v2DeleteObjectRequest"
+              "$ref": "#/definitions/v3SetObjectRequest"
             }
           }
         ],
@@ -944,7 +841,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v2DeleteObjectResponse"
+              "$ref": "#/definitions/v3SetObjectResponse"
             }
           },
           "default": {
@@ -960,29 +857,83 @@
             "TenantID": []
           }
         ],
-        "summary": "Delete permission",
+        "summary": "Set object",
         "tags": [
           "directory"
         ]
-      },
-      "post": {
-        "description": "Returns object instance, optionally with relations.",
-        "operationId": "directory.object.get",
+      }
+    },
+    "/api/v3/directory/object/{object_type}/{object_id}": {
+      "delete": {
+        "description": "Delete object.",
+        "operationId": "directory.v3.object.delete",
         "parameters": [
           {
-            "in": "body",
-            "name": "body",
+            "in": "path",
+            "name": "object_type",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2GetObjectRequest"
-            }
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "object_id",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v2GetObjectResponse"
+              "$ref": "#/definitions/v3DeleteObjectResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Delete object",
+        "tags": [
+          "directory"
+        ]
+      },
+      "get": {
+        "description": "Returns object instance, optionally with relations.",
+        "operationId": "directory.v3.object.get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "object_type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "object_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "with_relations",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3GetObjectResponse"
             }
           },
           "default": {
@@ -1002,221 +953,38 @@
         "tags": [
           "directory"
         ]
-      },
-      "put": {
-        "description": "Set relation type.",
-        "operationId": "directory.relation_type.set",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2SetObjectRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v2SetObjectResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "security": [
-          {
-            "DirectoryAPIKey": [],
-            "TenantID": []
-          }
-        ],
-        "summary": "Set relation type",
-        "tags": [
-          "directory"
-        ]
       }
     },
-    "/api/v2/directory/object_type": {
-      "delete": {
-        "description": "Delete object type.",
-        "operationId": "directory.object_type.delete",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2DeleteObjectTypeRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v2DeleteObjectTypeResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "security": [
-          {
-            "DirectoryAPIKey": [],
-            "TenantID": []
-          }
-        ],
-        "summary": "Delete object type",
-        "tags": [
-          "directory"
-        ]
-      },
-      "post": {
-        "description": "Returns object type by name.",
-        "operationId": "directory.object_type.get",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2GetObjectTypeRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v2GetObjectTypeResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "security": [
-          {
-            "DirectoryAPIKey": [],
-            "TenantID": []
-          }
-        ],
-        "summary": "Get object type",
-        "tags": [
-          "directory"
-        ]
-      },
-      "put": {
-        "description": "Set object type.",
-        "operationId": "directory.object_type.set",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2SetObjectTypeRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v2SetObjectTypeResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "security": [
-          {
-            "DirectoryAPIKey": [],
-            "TenantID": []
-          }
-        ],
-        "summary": "Set object type",
-        "tags": [
-          "directory"
-        ]
-      }
-    },
-    "/api/v2/directory/object_types": {
-      "post": {
-        "description": "Returns object types.",
-        "operationId": "directory.object_types.get",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2GetObjectTypesRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v2GetObjectTypesResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "security": [
-          {
-            "DirectoryAPIKey": [],
-            "TenantID": []
-          }
-        ],
-        "summary": "Get object types",
-        "tags": [
-          "directory"
-        ]
-      }
-    },
-    "/api/v2/directory/objects": {
-      "post": {
+    "/api/v3/directory/objects/{object_type}": {
+      "get": {
         "description": "Returns object instances.",
-        "operationId": "directory.objects.get",
+        "operationId": "directory.v3.objects.get",
         "parameters": [
           {
-            "in": "body",
-            "name": "body",
+            "in": "path",
+            "name": "object_type",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2GetObjectsRequest"
-            }
+            "type": "string"
+          },
+          {
+            "format": "int32",
+            "in": "query",
+            "name": "page.size",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "page.token",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v2GetObjectsResponse"
+              "$ref": "#/definitions/v3GetObjectsResponse"
             }
           },
           "default": {
@@ -1238,249 +1006,17 @@
         ]
       }
     },
-    "/api/v2/directory/permission": {
-      "delete": {
-        "description": "Delete permission.",
-        "operationId": "directory.permission.delete",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2DeletePermissionRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v2DeletePermissionResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "security": [
-          {
-            "DirectoryAPIKey": [],
-            "TenantID": []
-          }
-        ],
-        "summary": "Delete permission",
-        "tags": [
-          "directory"
-        ]
-      },
-      "post": {
-        "description": "Returns permission by name.",
-        "operationId": "directory.permission.get",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2GetPermissionRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v2GetPermissionResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "security": [
-          {
-            "DirectoryAPIKey": [],
-            "TenantID": []
-          }
-        ],
-        "summary": "Get permission",
-        "tags": [
-          "directory"
-        ]
-      },
-      "put": {
-        "description": "Set permission.",
-        "operationId": "directory.permission.set",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2SetPermissionRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v2SetPermissionResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "security": [
-          {
-            "DirectoryAPIKey": [],
-            "TenantID": []
-          }
-        ],
-        "summary": "Set permission",
-        "tags": [
-          "directory"
-        ]
-      }
-    },
-    "/api/v2/directory/permissions": {
-      "post": {
-        "description": "Returns permissions.",
-        "operationId": "directory.permissions.get",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2GetPermissionsRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v2GetPermissionsResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "security": [
-          {
-            "DirectoryAPIKey": [],
-            "TenantID": []
-          }
-        ],
-        "summary": "Get permissions",
-        "tags": [
-          "directory"
-        ]
-      }
-    },
-    "/api/v2/directory/relation": {
-      "delete": {
-        "description": "Delete relation.",
-        "operationId": "directory.relation.delete",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2DeleteRelationRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v2DeleteRelationResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "security": [
-          {
-            "DirectoryAPIKey": [],
-            "TenantID": []
-          }
-        ],
-        "summary": "Delete relation",
-        "tags": [
-          "directory"
-        ]
-      },
-      "post": {
-        "description": "Returns relation instance, optionally with objects.",
-        "operationId": "directory.relation.get",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2GetRelationRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v2GetRelationResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "security": [
-          {
-            "DirectoryAPIKey": [],
-            "TenantID": []
-          }
-        ],
-        "summary": "Get relation instance",
-        "tags": [
-          "directory"
-        ]
-      },
+    "/api/v3/directory/relation": {
       "put": {
         "description": "Set relation.",
-        "operationId": "directory.relation.set",
+        "operationId": "directory.v3.relation.set",
         "parameters": [
           {
             "in": "body",
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v2SetRelationRequest"
+              "$ref": "#/definitions/v3SetRelationRequest"
             }
           }
         ],
@@ -1488,7 +1024,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v2SetRelationResponse"
+              "$ref": "#/definitions/v3SetRelationResponse"
             }
           },
           "default": {
@@ -1510,25 +1046,53 @@
         ]
       }
     },
-    "/api/v2/directory/relation_type": {
+    "/api/v3/directory/relation/{object_type}/{object_id}/{relation}/{subject_type}/{subject_id}/{subject_relation}": {
       "delete": {
-        "description": "Delete relation type.",
-        "operationId": "directory.relation_type.delete",
+        "description": "Delete relation.",
+        "operationId": "directory.v3.relation.delete",
         "parameters": [
           {
-            "in": "body",
-            "name": "body",
+            "in": "path",
+            "name": "object_type",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2DeleteRelationTypeRequest"
-            }
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "object_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "relation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subject_type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subject_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subject_relation",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v2DeleteRelationTypeResponse"
+              "$ref": "#/definitions/v3DeleteRelationResponse"
             }
           },
           "default": {
@@ -1544,29 +1108,63 @@
             "TenantID": []
           }
         ],
-        "summary": "Delete relation type",
+        "summary": "Delete relation",
         "tags": [
           "directory"
         ]
       },
-      "post": {
-        "description": "Returns relation type by name.",
-        "operationId": "directory.object_type.get",
+      "get": {
+        "description": "Returns relation instance, optionally with objects.",
+        "operationId": "directory.v3.relation.get",
         "parameters": [
           {
-            "in": "body",
-            "name": "body",
+            "in": "path",
+            "name": "object_type",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2GetRelationTypeRequest"
-            }
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "object_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "relation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subject_type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subject_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subject_relation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "with_objects",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v2GetRelationTypeResponse"
+              "$ref": "#/definitions/v3GetRelationResponse"
             }
           },
           "default": {
@@ -1582,109 +1180,72 @@
             "TenantID": []
           }
         ],
-        "summary": "Get relation type",
-        "tags": [
-          "directory"
-        ]
-      },
-      "put": {
-        "description": "Set relation type.",
-        "operationId": "directory.relation_type.set",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2SetRelationTypeRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v2SetRelationTypeResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "security": [
-          {
-            "DirectoryAPIKey": [],
-            "TenantID": []
-          }
-        ],
-        "summary": "Set relation type",
+        "summary": "Get relation instance",
         "tags": [
           "directory"
         ]
       }
     },
-    "/api/v2/directory/relation_types": {
-      "post": {
-        "description": "Returns relation types, optionally by object_type.",
-        "operationId": "directory.relation_types.get",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2GetRelationTypesRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v2GetRelationTypesResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "security": [
-          {
-            "DirectoryAPIKey": [],
-            "TenantID": []
-          }
-        ],
-        "summary": "Get relation types",
-        "tags": [
-          "directory"
-        ]
-      }
-    },
-    "/api/v2/directory/relations": {
-      "post": {
+    "/api/v3/directory/relations/{object_type}/{object_id}/{relation}/{subject_type}/{subject_id}/{subject_relation}": {
+      "get": {
         "description": "Returns relation instances.",
-        "operationId": "directory.relations.get",
+        "operationId": "directory.v3.relations.get",
         "parameters": [
           {
-            "in": "body",
-            "name": "body",
+            "in": "path",
+            "name": "object_type",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/v2GetRelationsRequest"
-            }
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "object_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "relation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subject_type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subject_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subject_relation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "format": "int32",
+            "in": "query",
+            "name": "page.size",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "page.token",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v2GetRelationsResponse"
+              "$ref": "#/definitions/v3GetRelationsResponse"
             }
           },
           "default": {
@@ -1710,31 +1271,10 @@
   "produces": [
     "application/json"
   ],
-  "schemes": [
-    "https"
-  ],
-  "security": [
-    {
-      "DirectoryAPIKey": [],
-      "TenantID": []
-    }
-  ],
-  "securityDefinitions": {
-    "DirectoryAPIKey": {
-      "in": "header",
-      "name": "authorization",
-      "type": "apiKey"
-    },
-    "TenantID": {
-      "in": "header",
-      "name": "aserto-tenant-id",
-      "type": "apiKey"
-    }
-  },
   "swagger": "2.0",
   "tags": [
     {
-      "name": "Reader"
+      "name": "Exporter"
     }
   ]
 }

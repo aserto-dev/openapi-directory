@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "aserto/directory/common/v2/common.proto",
+    "title": "aserto/directory/schema/v3/identity.proto",
     "version": "version not set"
   },
   "consumes": [

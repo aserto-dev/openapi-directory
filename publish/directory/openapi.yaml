@@ -480,7 +480,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.0.0-20230626165808.0.g99854b7d-dirty
+  version: 0.0.0-20230704003032.0.g6e0df0e5-dirty
 paths:
   /api/v3/directory/check/permission:
     post:

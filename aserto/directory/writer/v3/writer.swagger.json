@@ -87,6 +87,12 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "with_relations",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [

@@ -480,7 +480,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.0.0-20230704005116.0.g57c9a77c-dirty
+  version: 0.0.0-20230705151224.0.ge0ac40f2
 paths:
   /api/v3/directory/check/permission:
     post:
@@ -616,6 +616,10 @@ paths:
           required: true
           schema:
             type: string
+        - name: with_relations
+          in: query
+          schema:
+            type: boolean
       responses:
         "200":
           description: A successful response.

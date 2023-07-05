@@ -879,6 +879,12 @@
             "name": "object_id",
             "required": true,
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "with_relations",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "responses": {

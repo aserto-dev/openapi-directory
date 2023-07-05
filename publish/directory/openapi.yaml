@@ -480,7 +480,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.0.0-20230704003032.0.g6e0df0e5-dirty
+  version: 0.0.0-20230704005116.0.g57c9a77c-dirty
 paths:
   /api/v3/directory/check/permission:
     post:
@@ -636,7 +636,7 @@ paths:
       tags:
         - directory
       summary: Get object instance
-      description: Returns object instance, optionally with relations.
+      description: Returns single object instance, optionally with relations.
       operationId: directory.v3.object.get
       parameters:
         - name: object_type
@@ -673,8 +673,8 @@ paths:
     get:
       tags:
         - directory
-      summary: Get object instances
-      description: Returns object instances.
+      summary: List object instances
+      description: Returns list of object instances.
       operationId: directory.v3.objects.get
       parameters:
         - name: object_type
@@ -794,7 +794,7 @@ paths:
       tags:
         - directory
       summary: Get relation instance
-      description: Returns relation instance, optionally with objects.
+      description: Returns single relation instance, optionally with objects.
       operationId: directory.v3.relation.get
       parameters:
         - name: object_type
@@ -847,13 +847,13 @@ paths:
       security:
         - DirectoryAPIKey: []
           TenantID: []
-  /api/v3/directory/relations/{object_type}/{object_id}/{relation}/{subject_type}/{subject_id}/{subject_relation}:
+  /api/v3/directory/relations/object/{object_type}/{object_id}/{relation}/{subject_type}/{subject_id}/{subject_relation}:
     get:
       tags:
         - directory
-      summary: Get relation instances
-      description: Returns relation instances.
-      operationId: directory.v3.relations.get
+      summary: List relations instances
+      description: Returns list of relation instances.
+      operationId: GetRelations
       parameters:
         - name: object_type
           in: path
@@ -881,6 +881,69 @@ paths:
           schema:
             type: string
         - name: subject_relation
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: page.size
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: page.token
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v3GetRelationsResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v3/directory/relations/subject/{subject_type}/{subject_id}/{subject_relation}/{object_type}/{object_id}/{relation}:
+    get:
+      tags:
+        - directory
+      summary: List relations instances
+      description: Returns list of relation instances.
+      operationId: GetRelations2
+      parameters:
+        - name: subject_type
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: subject_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: subject_relation
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: object_type
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: object_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: relation
           in: path
           required: true
           schema:

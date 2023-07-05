@@ -139,7 +139,7 @@
     "/api/v3/directory/object/{object_type}/{object_id}": {
       "get": {
         "summary": "Get object instance",
-        "description": "Returns object instance, optionally with relations.",
+        "description": "Returns single object instance, optionally with relations.",
         "operationId": "directory.v3.object.get",
         "responses": {
           "200": {
@@ -188,8 +188,8 @@
     },
     "/api/v3/directory/objects/{object_type}": {
       "get": {
-        "summary": "Get object instances",
-        "description": "Returns object instances.",
+        "summary": "List object instances",
+        "description": "Returns list of object instances.",
         "operationId": "directory.v3.objects.get",
         "responses": {
           "200": {
@@ -240,7 +240,7 @@
     "/api/v3/directory/relation/{object_type}/{object_id}/{relation}/{subject_type}/{subject_id}/{subject_relation}": {
       "get": {
         "summary": "Get relation instance",
-        "description": "Returns relation instance, optionally with objects.",
+        "description": "Returns single relation instance, optionally with objects.",
         "operationId": "directory.v3.relation.get",
         "responses": {
           "200": {
@@ -311,11 +311,11 @@
         ]
       }
     },
-    "/api/v3/directory/relations/{object_type}/{object_id}/{relation}/{subject_type}/{subject_id}/{subject_relation}": {
+    "/api/v3/directory/relations/object/{object_type}/{object_id}/{relation}/{subject_type}/{subject_id}/{subject_relation}": {
       "get": {
-        "summary": "Get relation instances",
-        "description": "Returns relation instances.",
-        "operationId": "directory.v3.relations.get",
+        "summary": "List relations instances",
+        "description": "Returns list of relation instances.",
+        "operationId": "GetRelations",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -363,6 +363,87 @@
           },
           {
             "name": "subject_relation",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page.size",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "page.token",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "directory"
+        ],
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ]
+      }
+    },
+    "/api/v3/directory/relations/subject/{subject_type}/{subject_id}/{subject_relation}/{object_type}/{object_id}/{relation}": {
+      "get": {
+        "summary": "List relations instances",
+        "description": "Returns list of relation instances.",
+        "operationId": "GetRelations2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3GetRelationsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "subject_type",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subject_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subject_relation",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "object_type",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "object_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "relation",
             "in": "path",
             "required": true,
             "type": "string"

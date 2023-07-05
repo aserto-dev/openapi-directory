@@ -711,7 +711,7 @@
     },
     "termsOfService": "https://aserto.com/terms/",
     "title": "Directory",
-    "version": "0.0.0-20230704003032.0.g6e0df0e5-dirty"
+    "version": "0.0.0-20230704005116.0.g57c9a77c-dirty"
   },
   "openapi": "3.0.3",
   "paths": {
@@ -967,7 +967,7 @@
         ]
       },
       "get": {
-        "description": "Returns object instance, optionally with relations.",
+        "description": "Returns single object instance, optionally with relations.",
         "operationId": "directory.v3.object.get",
         "parameters": [
           {
@@ -1030,7 +1030,7 @@
     },
     "/api/v3/directory/objects/{object_type}": {
       "get": {
-        "description": "Returns object instances.",
+        "description": "Returns list of object instances.",
         "operationId": "directory.v3.objects.get",
         "parameters": [
           {
@@ -1085,7 +1085,7 @@
             "TenantID": []
           }
         ],
-        "summary": "Get object instances",
+        "summary": "List object instances",
         "tags": [
           "directory"
         ]
@@ -1228,7 +1228,7 @@
         ]
       },
       "get": {
-        "description": "Returns relation instance, optionally with objects.",
+        "description": "Returns single relation instance, optionally with objects.",
         "operationId": "directory.v3.relation.get",
         "parameters": [
           {
@@ -1321,10 +1321,10 @@
         ]
       }
     },
-    "/api/v3/directory/relations/{object_type}/{object_id}/{relation}/{subject_type}/{subject_id}/{subject_relation}": {
+    "/api/v3/directory/relations/object/{object_type}/{object_id}/{relation}/{subject_type}/{subject_id}/{subject_relation}": {
       "get": {
-        "description": "Returns relation instances.",
-        "operationId": "directory.v3.relations.get",
+        "description": "Returns list of relation instances.",
+        "operationId": "GetRelations",
         "parameters": [
           {
             "in": "path",
@@ -1418,7 +1418,110 @@
             "TenantID": []
           }
         ],
-        "summary": "Get relation instances",
+        "summary": "List relations instances",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
+    "/api/v3/directory/relations/subject/{subject_type}/{subject_id}/{subject_relation}/{object_type}/{object_id}/{relation}": {
+      "get": {
+        "description": "Returns list of relation instances.",
+        "operationId": "GetRelations2",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subject_type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "subject_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "subject_relation",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "object_type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "object_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "relation",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "page.size",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "page.token",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v3GetRelationsResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "List relations instances",
         "tags": [
           "directory"
         ]

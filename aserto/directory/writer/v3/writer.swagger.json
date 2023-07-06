@@ -17,7 +17,7 @@
   ],
   "paths": {
     "/api/v3/directory/object": {
-      "put": {
+      "post": {
         "summary": "Set object",
         "description": "Set object.",
         "operationId": "directory.v3.object.set",
@@ -56,7 +56,7 @@
         ]
       }
     },
-    "/api/v3/directory/object/{object_type}/{object_id}": {
+    "/api/v3/directory/object/{object.type}/{object.id}": {
       "delete": {
         "summary": "Delete object",
         "description": "Delete object.",
@@ -77,15 +77,41 @@
         },
         "parameters": [
           {
-            "name": "object_type",
+            "name": "object.type",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
-            "name": "object_id",
+            "name": "object.id",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "object.display_name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "object.created_at",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "object.updated_at",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "object.etag",
+            "in": "query",
+            "required": false,
             "type": "string"
           },
           {
@@ -146,7 +172,7 @@
         ]
       }
     },
-    "/api/v3/directory/relation/{object_type}/{object_id}/{relation}/{subject_type}/{subject_id}/{subject_relation}": {
+    "/api/v3/directory/relation/{relation.object_type}/{relation.object_id}/{relation.relation}/{relation.subject_type}/{relation.subject_id}/{relation.subject_relation}": {
       "delete": {
         "summary": "Delete relation",
         "description": "Delete relation.",
@@ -167,39 +193,59 @@
         },
         "parameters": [
           {
-            "name": "object_type",
+            "name": "relation.object_type",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
-            "name": "object_id",
+            "name": "relation.object_id",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
-            "name": "relation",
+            "name": "relation.relation",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
-            "name": "subject_type",
+            "name": "relation.subject_type",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
-            "name": "subject_id",
+            "name": "relation.subject_id",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
-            "name": "subject_relation",
+            "name": "relation.subject_relation",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "relation.created_at",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "relation.updated_at",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "relation.etag",
+            "in": "query",
+            "required": false,
             "type": "string"
           }
         ],
@@ -358,23 +404,8 @@
     "v3SetRelationResponse": {
       "type": "object",
       "properties": {
-        "object_type": {
-          "type": "string"
-        },
-        "object_id": {
-          "type": "string"
-        },
-        "relation": {
-          "type": "string"
-        },
-        "subject_type": {
-          "type": "string"
-        },
-        "subject_id": {
-          "type": "string"
-        },
-        "subject_relation": {
-          "type": "string"
+        "result": {
+          "$ref": "#/definitions/v3Relation"
         }
       }
     }

@@ -249,75 +249,120 @@ components:
           $ref: '#/components/schemas/v3ImportCounter'
     v3Manifest:
       type: object
+      required:
+        - name
+        - version
+        - data
       properties:
         created_at:
           type: string
+          title: created at timestamp (UTC)
           format: date-time
+          readOnly: true
         data:
           type: string
+          title: manifest data
           format: byte
         etag:
           type: string
+          title: object instance etag
         name:
           type: string
-        schema_version:
-          type: string
+          title: manifest name (unique, lc-string)
         updated_at:
           type: string
+          title: last updated timestamp (UTC)
           format: date-time
+          readOnly: true
         version:
           type: string
+          title: manifest version (semver)
     v3Object:
       type: object
+      required:
+        - id
+        - type
       properties:
         created_at:
           type: string
+          title: created at timestamp (UTC)
           format: date-time
+          readOnly: true
         display_name:
           type: string
+          title: display name object
         etag:
           type: string
+          title: object instance etag
         id:
           type: string
+          title: external object identifier (cs-string)
         properties:
           type: object
+          title: property bag
         type:
           type: string
+          title: object type name
         updated_at:
           type: string
+          title: last updated timestamp (UTC)
           format: date-time
+          readOnly: true
     v3ObjectDependency:
       type: object
       properties:
         depth:
           type: integer
+          title: dependency depth
           format: int32
+          readOnly: true
         is_cycle:
           type: boolean
+          title: dependency cycle
+          readOnly: true
         object_id:
           type: string
+          title: object identifier
+          readOnly: true
         object_type:
           type: string
+          title: object type
+          readOnly: true
         path:
           type: array
+          title: dependency path
+          readOnly: true
           items:
             type: string
         relation:
           type: string
+          title: object relation name
+          readOnly: true
         subject_id:
           type: string
+          title: subject identifier
+          readOnly: true
         subject_relation:
           type: string
+          title: optional subject relation name
+          readOnly: true
         subject_type:
           type: string
+          title: subject type
+          readOnly: true
     v3ObjectIdentifier:
       type: object
       title: Object identifier
+      required:
+        - object_type
+        - object_id
       properties:
         object_id:
           type: string
+          title: object identifier (cs-string)
         object_type:
           type: string
+          title: object type (lc-string)
     v3ObjectType:
       type: object
       properties:
@@ -356,15 +401,19 @@ components:
       properties:
         size:
           type: integer
+          title: requested page size, valid value between 1-100 rows (default 100)
           format: int32
         token:
           type: string
+          title: pagination start token, default ""
     v3PaginationResponse:
       type: object
       title: Pagination response
       properties:
         next_token:
           type: string
+          title: next page token, when empty there are no more pages to fetch
+          readOnly: true
     v3Permission:
       type: object
       properties:
@@ -382,27 +431,44 @@ components:
           format: date-time
     v3Relation:
       type: object
+      required:
+        - object_type
+        - object_id
+        - relation
+        - subject_type
+        - subject_id
       properties:
         created_at:
           type: string
+          title: created at timestamp (UTC)
           format: date-time
+          readOnly: true
         etag:
           type: string
+          title: object instance etag
         object_id:
           type: string
+          title: object identifier
         object_type:
           type: string
+          title: object type
         relation:
           type: string
+          title: object relation name
         subject_id:
           type: string
+          title: subject identifier
         subject_relation:
           type: string
+          title: optional subject relation name
         subject_type:
           type: string
+          title: subject type
         updated_at:
           type: string
+          title: last updated timestamp (UTC)
           format: date-time
+          readOnly: true
     v3RelationType:
       type: object
       properties:
@@ -470,7 +536,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.0.0-20230705152626.0.ge2af53e9
+  version: 0.0.0-20230706090240.0.gc49466d5-dirty
 paths:
   /api/v3/directory/check/permission:
     post:
@@ -598,30 +664,36 @@ paths:
       parameters:
         - name: object.type
           in: path
+          description: object type name
           required: true
           schema:
             type: string
         - name: object.id
           in: path
+          description: external object identifier (cs-string)
           required: true
           schema:
             type: string
         - name: object.display_name
           in: query
+          description: display name object
           schema:
             type: string
         - name: object.created_at
           in: query
+          description: created at timestamp (UTC)
           schema:
             type: string
             format: date-time
         - name: object.updated_at
           in: query
+          description: last updated timestamp (UTC)
           schema:
             type: string
             format: date-time
         - name: object.etag
           in: query
+          description: object instance etag
           schema:
             type: string
         - name: with_relations
@@ -697,11 +769,13 @@ paths:
             type: string
         - name: page.size
           in: query
+          description: requested page size, valid value between 1-100 rows (default 100)
           schema:
             type: integer
             format: int32
         - name: page.token
           in: query
+          description: pagination start token, default ""
           schema:
             type: string
       responses:
@@ -817,46 +891,55 @@ paths:
       parameters:
         - name: relation.object_type
           in: path
+          description: object type
           required: true
           schema:
             type: string
         - name: relation.object_id
           in: path
+          description: object identifier
           required: true
           schema:
             type: string
         - name: relation.relation
           in: path
+          description: object relation name
           required: true
           schema:
             type: string
         - name: relation.subject_type
           in: path
+          description: subject type
           required: true
           schema:
             type: string
         - name: relation.subject_id
           in: path
+          description: subject identifier
           required: true
           schema:
             type: string
         - name: relation.subject_relation
           in: path
+          description: optional subject relation name
           required: true
           schema:
             type: string
         - name: relation.created_at
           in: query
+          description: created at timestamp (UTC)
           schema:
             type: string
             format: date-time
         - name: relation.updated_at
           in: query
+          description: last updated timestamp (UTC)
           schema:
             type: string
             format: date-time
         - name: relation.etag
           in: query
+          description: object instance etag
           schema:
             type: string
       responses:
@@ -915,11 +998,13 @@ paths:
             type: string
         - name: page.size
           in: query
+          description: requested page size, valid value between 1-100 rows (default 100)
           schema:
             type: integer
             format: int32
         - name: page.token
           in: query
+          description: pagination start token, default ""
           schema:
             type: string
       responses:
@@ -978,11 +1063,13 @@ paths:
             type: string
         - name: page.size
           in: query
+          description: requested page size, valid value between 1-100 rows (default 100)
           schema:
             type: integer
             format: int32
         - name: page.token
           in: query
+          description: pagination start token, default ""
           schema:
             type: string
       responses:

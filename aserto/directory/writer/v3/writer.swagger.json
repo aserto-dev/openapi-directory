@@ -78,24 +78,28 @@
         "parameters": [
           {
             "name": "object.type",
+            "description": "object type name",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "object.id",
+            "description": "external object identifier (cs-string)",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "object.display_name",
+            "description": "display name object",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "object.created_at",
+            "description": "created at timestamp (UTC)",
             "in": "query",
             "required": false,
             "type": "string",
@@ -103,6 +107,7 @@
           },
           {
             "name": "object.updated_at",
+            "description": "last updated timestamp (UTC)",
             "in": "query",
             "required": false,
             "type": "string",
@@ -110,6 +115,7 @@
           },
           {
             "name": "object.etag",
+            "description": "object instance etag",
             "in": "query",
             "required": false,
             "type": "string"
@@ -194,42 +200,49 @@
         "parameters": [
           {
             "name": "relation.object_type",
+            "description": "object type",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "relation.object_id",
+            "description": "object identifier",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "relation.relation",
+            "description": "object relation name",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "relation.subject_type",
+            "description": "subject type",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "relation.subject_id",
+            "description": "subject identifier",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "relation.subject_relation",
+            "description": "optional subject relation name",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "relation.created_at",
+            "description": "created at timestamp (UTC)",
             "in": "query",
             "required": false,
             "type": "string",
@@ -237,6 +250,7 @@
           },
           {
             "name": "relation.updated_at",
+            "description": "last updated timestamp (UTC)",
             "in": "query",
             "required": false,
             "type": "string",
@@ -244,6 +258,7 @@
           },
           {
             "name": "relation.etag",
+            "description": "object instance etag",
             "in": "query",
             "required": false,
             "type": "string"
@@ -319,63 +334,94 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "title": "external object identifier (cs-string)"
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "title": "object type name"
         },
         "display_name": {
-          "type": "string"
+          "type": "string",
+          "title": "display name object"
         },
         "properties": {
-          "type": "object"
+          "type": "object",
+          "title": "property bag"
         },
         "created_at": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "created at timestamp (UTC)",
+          "readOnly": true
         },
         "updated_at": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "last updated timestamp (UTC)",
+          "readOnly": true
         },
         "etag": {
-          "type": "string"
+          "type": "string",
+          "title": "object instance etag"
         }
-      }
+      },
+      "required": [
+        "id",
+        "type"
+      ]
     },
     "v3Relation": {
       "type": "object",
       "properties": {
         "object_type": {
-          "type": "string"
+          "type": "string",
+          "title": "object type"
         },
         "object_id": {
-          "type": "string"
+          "type": "string",
+          "title": "object identifier"
         },
         "relation": {
-          "type": "string"
+          "type": "string",
+          "title": "object relation name"
         },
         "subject_type": {
-          "type": "string"
+          "type": "string",
+          "title": "subject type"
         },
         "subject_id": {
-          "type": "string"
+          "type": "string",
+          "title": "subject identifier"
         },
         "subject_relation": {
-          "type": "string"
+          "type": "string",
+          "title": "optional subject relation name"
         },
         "created_at": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "created at timestamp (UTC)",
+          "readOnly": true
         },
         "updated_at": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "last updated timestamp (UTC)",
+          "readOnly": true
         },
         "etag": {
-          "type": "string"
+          "type": "string",
+          "title": "object instance etag"
         }
-      }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "relation",
+        "subject_type",
+        "subject_id"
+      ]
     },
     "v3SetObjectRequest": {
       "type": "object",

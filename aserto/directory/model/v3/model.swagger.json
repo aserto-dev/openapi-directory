@@ -65,30 +65,40 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "title": "manifest name (unique, lc-string)"
         },
         "version": {
-          "type": "string"
-        },
-        "schema_version": {
-          "type": "string"
+          "type": "string",
+          "title": "manifest version (semver)"
         },
         "data": {
           "type": "string",
-          "format": "byte"
+          "format": "byte",
+          "title": "manifest data"
         },
         "created_at": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "created at timestamp (UTC)",
+          "readOnly": true
         },
         "updated_at": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "last updated timestamp (UTC)",
+          "readOnly": true
         },
         "etag": {
-          "type": "string"
+          "type": "string",
+          "title": "object instance etag"
         }
-      }
+      },
+      "required": [
+        "name",
+        "version",
+        "data"
+      ]
     },
     "v3SetManifestResponse": {
       "type": "object",

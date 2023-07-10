@@ -272,28 +272,6 @@
       },
       "type": "object"
     },
-    "v3GetObjectTypeResponse": {
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/v3ObjectType"
-        }
-      },
-      "type": "object"
-    },
-    "v3GetObjectTypesResponse": {
-      "properties": {
-        "page": {
-          "$ref": "#/definitions/v3PaginationResponse"
-        },
-        "results": {
-          "items": {
-            "$ref": "#/definitions/v3ObjectType"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
     "v3GetObjectsResponse": {
       "properties": {
         "page": {
@@ -305,28 +283,6 @@
             "$ref": "#/definitions/v3Object"
           },
           "title": "array of object instances",
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "v3GetPermissionResponse": {
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/v3Permission"
-        }
-      },
-      "type": "object"
-    },
-    "v3GetPermissionsResponse": {
-      "properties": {
-        "page": {
-          "$ref": "#/definitions/v3PaginationResponse"
-        },
-        "results": {
-          "items": {
-            "$ref": "#/definitions/v3Permission"
-          },
           "type": "array"
         }
       },
@@ -346,28 +302,6 @@
             "$ref": "#/definitions/v3Relation"
           },
           "title": "array of relation instances",
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "v3GetRelationTypeResponse": {
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/v3RelationType"
-        }
-      },
-      "type": "object"
-    },
-    "v3GetRelationTypesResponse": {
-      "properties": {
-        "page": {
-          "$ref": "#/definitions/v3PaginationResponse"
-        },
-        "results": {
-          "items": {
-            "$ref": "#/definitions/v3RelationType"
-          },
           "type": "array"
         }
       },
@@ -612,51 +546,6 @@
       "title": "Object identifier",
       "type": "object"
     },
-    "v3ObjectType": {
-      "properties": {
-        "created_at": {
-          "format": "date-time",
-          "title": "created at timestamp (UTC)",
-          "type": "string"
-        },
-        "display_name": {
-          "title": "object type display name",
-          "type": "string"
-        },
-        "etag": {
-          "title": "object instance etag",
-          "type": "string"
-        },
-        "is_subject": {
-          "title": "object type is a subject (user|group) (default false)",
-          "type": "boolean"
-        },
-        "name": {
-          "title": "object type name (unique, lc-string)",
-          "type": "string"
-        },
-        "ordinal": {
-          "format": "int32",
-          "title": "sort ordinal (default 0)",
-          "type": "integer"
-        },
-        "schema": {
-          "title": "object type schema definition (JSON)",
-          "type": "object"
-        },
-        "status": {
-          "format": "int64",
-          "title": "status flag bitmap (default 0)",
-          "type": "integer"
-        },
-        "updated_at": {
-          "format": "date-time",
-          "title": "last updated timestamp (UTC)",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "v3Opcode": {
       "default": "OPCODE_UNKNOWN",
       "enum": [
@@ -690,33 +579,6 @@
         }
       },
       "title": "Pagination response",
-      "type": "object"
-    },
-    "v3Permission": {
-      "properties": {
-        "created_at": {
-          "format": "date-time",
-          "title": "created at timestamp (UTC)",
-          "type": "string"
-        },
-        "display_name": {
-          "title": "permission display name",
-          "type": "string"
-        },
-        "etag": {
-          "title": "object instance etag",
-          "type": "string"
-        },
-        "name": {
-          "title": "permission name (unique, cs-string)",
-          "type": "string"
-        },
-        "updated_at": {
-          "format": "date-time",
-          "title": "last updated timestamp (UTC)",
-          "type": "string"
-        }
-      },
       "type": "object"
     },
     "v3Relation": {
@@ -769,61 +631,6 @@
         "subject_type",
         "subject_id"
       ],
-      "type": "object"
-    },
-    "v3RelationType": {
-      "properties": {
-        "created_at": {
-          "format": "date-time",
-          "title": "created at timestamp (UTC)",
-          "type": "string"
-        },
-        "display_name": {
-          "title": "relation display name",
-          "type": "string"
-        },
-        "etag": {
-          "title": "object instance etag",
-          "type": "string"
-        },
-        "name": {
-          "title": "relation type name selector",
-          "type": "string"
-        },
-        "object_type": {
-          "title": "object type referenced by relation",
-          "type": "string"
-        },
-        "ordinal": {
-          "format": "int32",
-          "title": "sort ordinal (default 0)",
-          "type": "integer"
-        },
-        "permissions": {
-          "items": {
-            "type": "string"
-          },
-          "title": "permissions associated to relation type instance",
-          "type": "array"
-        },
-        "status": {
-          "format": "int64",
-          "title": "status bitmap (default 0)",
-          "type": "integer"
-        },
-        "unions": {
-          "items": {
-            "type": "string"
-          },
-          "title": "relations union-ed with relation type instance",
-          "type": "array"
-        },
-        "updated_at": {
-          "format": "date-time",
-          "title": "last updated timestamp (UTC)",
-          "type": "string"
-        }
-      },
       "type": "object"
     },
     "v3SetManifestResponse": {

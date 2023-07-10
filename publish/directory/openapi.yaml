@@ -194,20 +194,6 @@ components:
             $ref: '#/components/schemas/v3Relation'
         result:
           $ref: '#/components/schemas/v3Object'
-    v3GetObjectTypeResponse:
-      type: object
-      properties:
-        result:
-          $ref: '#/components/schemas/v3ObjectType'
-    v3GetObjectTypesResponse:
-      type: object
-      properties:
-        page:
-          $ref: '#/components/schemas/v3PaginationResponse'
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/v3ObjectType'
     v3GetObjectsResponse:
       type: object
       properties:
@@ -218,20 +204,6 @@ components:
           title: array of object instances
           items:
             $ref: '#/components/schemas/v3Object'
-    v3GetPermissionResponse:
-      type: object
-      properties:
-        result:
-          $ref: '#/components/schemas/v3Permission'
-    v3GetPermissionsResponse:
-      type: object
-      properties:
-        page:
-          $ref: '#/components/schemas/v3PaginationResponse'
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/v3Permission'
     v3GetRelationResponse:
       type: object
       properties:
@@ -247,20 +219,6 @@ components:
           title: array of relation instances
           items:
             $ref: '#/components/schemas/v3Relation'
-    v3GetRelationTypeResponse:
-      type: object
-      properties:
-        result:
-          $ref: '#/components/schemas/v3RelationType'
-    v3GetRelationTypesResponse:
-      type: object
-      properties:
-        page:
-          $ref: '#/components/schemas/v3PaginationResponse'
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/v3RelationType'
     v3GetRelationsRequest:
       type: object
       properties:
@@ -436,40 +394,6 @@ components:
         object_type:
           type: string
           title: object type (lc-string)
-    v3ObjectType:
-      type: object
-      properties:
-        created_at:
-          type: string
-          title: created at timestamp (UTC)
-          format: date-time
-        display_name:
-          type: string
-          title: object type display name
-        etag:
-          type: string
-          title: object instance etag
-        is_subject:
-          type: boolean
-          title: object type is a subject (user|group) (default false)
-        name:
-          type: string
-          title: object type name (unique, lc-string)
-        ordinal:
-          type: integer
-          title: sort ordinal (default 0)
-          format: int32
-        schema:
-          type: object
-          title: object type schema definition (JSON)
-        status:
-          type: integer
-          title: status flag bitmap (default 0)
-          format: int64
-        updated_at:
-          type: string
-          title: last updated timestamp (UTC)
-          format: date-time
     v3Opcode:
       type: string
       enum:
@@ -496,26 +420,6 @@ components:
           type: string
           title: next page token, when empty there are no more pages to fetch
           readOnly: true
-    v3Permission:
-      type: object
-      properties:
-        created_at:
-          type: string
-          title: created at timestamp (UTC)
-          format: date-time
-        display_name:
-          type: string
-          title: permission display name
-        etag:
-          type: string
-          title: object instance etag
-        name:
-          type: string
-          title: permission name (unique, cs-string)
-        updated_at:
-          type: string
-          title: last updated timestamp (UTC)
-          format: date-time
     v3Relation:
       type: object
       required:
@@ -556,47 +460,6 @@ components:
           title: last updated timestamp (UTC)
           format: date-time
           readOnly: true
-    v3RelationType:
-      type: object
-      properties:
-        created_at:
-          type: string
-          title: created at timestamp (UTC)
-          format: date-time
-        display_name:
-          type: string
-          title: relation display name
-        etag:
-          type: string
-          title: object instance etag
-        name:
-          type: string
-          title: relation type name selector
-        object_type:
-          type: string
-          title: object type referenced by relation
-        ordinal:
-          type: integer
-          title: sort ordinal (default 0)
-          format: int32
-        permissions:
-          type: array
-          title: permissions associated to relation type instance
-          items:
-            type: string
-        status:
-          type: integer
-          title: status bitmap (default 0)
-          format: int64
-        unions:
-          type: array
-          title: relations union-ed with relation type instance
-          items:
-            type: string
-        updated_at:
-          type: string
-          title: last updated timestamp (UTC)
-          format: date-time
     v3SetManifestResponse:
       type: object
       properties:
@@ -633,7 +496,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.0.0-20230710135245.0.g19e27667-dirty
+  version: 0.0.0-20230710140958.0.g5deea039-dirty
 paths:
   /api/v3/directory/check/permission:
     post:

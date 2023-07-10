@@ -593,28 +593,6 @@
         }
       }
     },
-    "v3GetObjectTypeResponse": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/v3ObjectType"
-        }
-      }
-    },
-    "v3GetObjectTypesResponse": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v3ObjectType"
-          }
-        },
-        "page": {
-          "$ref": "#/definitions/v3PaginationResponse"
-        }
-      }
-    },
     "v3GetObjectsResponse": {
       "type": "object",
       "properties": {
@@ -628,28 +606,6 @@
         "page": {
           "$ref": "#/definitions/v3PaginationResponse",
           "title": "pagination response"
-        }
-      }
-    },
-    "v3GetPermissionResponse": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/v3Permission"
-        }
-      }
-    },
-    "v3GetPermissionsResponse": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v3Permission"
-          }
-        },
-        "page": {
-          "$ref": "#/definitions/v3PaginationResponse"
         }
       }
     },
@@ -669,28 +625,6 @@
             "$ref": "#/definitions/v3Object"
           },
           "title": "map of materialized relation objects"
-        }
-      }
-    },
-    "v3GetRelationTypeResponse": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/v3RelationType"
-        }
-      }
-    },
-    "v3GetRelationTypesResponse": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v3RelationType"
-          }
-        },
-        "page": {
-          "$ref": "#/definitions/v3PaginationResponse"
         }
       }
     },
@@ -856,51 +790,6 @@
         "object_id"
       ]
     },
-    "v3ObjectType": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "title": "object type name (unique, lc-string)"
-        },
-        "display_name": {
-          "type": "string",
-          "title": "object type display name"
-        },
-        "is_subject": {
-          "type": "boolean",
-          "title": "object type is a subject (user|group) (default false)"
-        },
-        "ordinal": {
-          "type": "integer",
-          "format": "int32",
-          "title": "sort ordinal (default 0)"
-        },
-        "status": {
-          "type": "integer",
-          "format": "int64",
-          "title": "status flag bitmap (default 0)"
-        },
-        "schema": {
-          "type": "object",
-          "title": "object type schema definition (JSON)"
-        },
-        "created_at": {
-          "type": "string",
-          "format": "date-time",
-          "title": "created at timestamp (UTC)"
-        },
-        "updated_at": {
-          "type": "string",
-          "format": "date-time",
-          "title": "last updated timestamp (UTC)"
-        },
-        "etag": {
-          "type": "string",
-          "title": "object instance etag"
-        }
-      }
-    },
     "v3PaginationRequest": {
       "type": "object",
       "properties": {
@@ -926,33 +815,6 @@
         }
       },
       "title": "Pagination response"
-    },
-    "v3Permission": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "title": "permission name (unique, cs-string)"
-        },
-        "display_name": {
-          "type": "string",
-          "title": "permission display name"
-        },
-        "created_at": {
-          "type": "string",
-          "format": "date-time",
-          "title": "created at timestamp (UTC)"
-        },
-        "updated_at": {
-          "type": "string",
-          "format": "date-time",
-          "title": "last updated timestamp (UTC)"
-        },
-        "etag": {
-          "type": "string",
-          "title": "object instance etag"
-        }
-      }
     },
     "v3Relation": {
       "type": "object",
@@ -1005,61 +867,6 @@
         "subject_type",
         "subject_id"
       ]
-    },
-    "v3RelationType": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "title": "relation type name selector"
-        },
-        "object_type": {
-          "type": "string",
-          "title": "object type referenced by relation"
-        },
-        "display_name": {
-          "type": "string",
-          "title": "relation display name"
-        },
-        "ordinal": {
-          "type": "integer",
-          "format": "int32",
-          "title": "sort ordinal (default 0)"
-        },
-        "status": {
-          "type": "integer",
-          "format": "int64",
-          "title": "status bitmap (default 0)"
-        },
-        "unions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "title": "relations union-ed with relation type instance"
-        },
-        "permissions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "title": "permissions associated to relation type instance"
-        },
-        "created_at": {
-          "type": "string",
-          "format": "date-time",
-          "title": "created at timestamp (UTC)"
-        },
-        "updated_at": {
-          "type": "string",
-          "format": "date-time",
-          "title": "last updated timestamp (UTC)"
-        },
-        "etag": {
-          "type": "string",
-          "title": "object instance etag"
-        }
-      }
     }
   }
 }

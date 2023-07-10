@@ -56,7 +56,7 @@
         ]
       }
     },
-    "/api/v3/directory/object/{object.type}/{object.id}": {
+    "/api/v3/directory/object/{object_type}/{object_id}": {
       "delete": {
         "summary": "Delete object",
         "description": "Delete object.",
@@ -77,47 +77,17 @@
         },
         "parameters": [
           {
-            "name": "object.type",
-            "description": "object type name",
+            "name": "object_type",
+            "description": "object type",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
-            "name": "object.id",
-            "description": "external object identifier (cs-string)",
+            "name": "object_id",
+            "description": "object identifier",
             "in": "path",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "object.display_name",
-            "description": "display name object",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "object.created_at",
-            "description": "created at timestamp (UTC)",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "object.updated_at",
-            "description": "last updated timestamp (UTC)",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "object.etag",
-            "description": "object instance etag",
-            "in": "query",
-            "required": false,
             "type": "string"
           },
           {
@@ -140,45 +110,7 @@
       }
     },
     "/api/v3/directory/relation": {
-      "delete": {
-        "summary": "Delete relation",
-        "description": "Delete relation.",
-        "operationId": "directory.v3.relation.delete",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v3DeleteRelationResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v3DeleteRelationRequest"
-            }
-          }
-        ],
-        "tags": [
-          "directory"
-        ],
-        "security": [
-          {
-            "DirectoryAPIKey": [],
-            "TenantID": []
-          }
-        ]
-      },
-      "put": {
+      "post": {
         "summary": "Set relation",
         "description": "Set relation.",
         "operationId": "directory.v3.relation.set",
@@ -204,6 +136,80 @@
             "schema": {
               "$ref": "#/definitions/v3SetRelationRequest"
             }
+          }
+        ],
+        "tags": [
+          "directory"
+        ],
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ]
+      }
+    },
+    "/api/v3/directory/relation/{object_type}/{object_id}/{relation}/{subject_type}/{subject_id}/{subject_relation}": {
+      "delete": {
+        "summary": "Delete relation",
+        "description": "Delete relation.",
+        "operationId": "directory.v3.relation.delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3DeleteRelationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "object_type",
+            "description": "object type",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "object_id",
+            "description": "object identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "relation",
+            "description": "object relation name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subject_type",
+            "description": "subject type",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subject_id",
+            "description": "subject identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subject_relation",
+            "description": "optional subject relation name",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "tags": [
@@ -261,15 +267,6 @@
           "type": "object",
           "properties": {},
           "title": "empty result"
-        }
-      }
-    },
-    "v3DeleteRelationRequest": {
-      "type": "object",
-      "properties": {
-        "relation": {
-          "$ref": "#/definitions/v3Relation",
-          "title": "relation instance"
         }
       }
     },

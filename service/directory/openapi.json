@@ -152,15 +152,6 @@
       },
       "type": "object"
     },
-    "v3DeleteRelationRequest": {
-      "properties": {
-        "relation": {
-          "$ref": "#/definitions/v3Relation",
-          "title": "relation instance"
-        }
-      },
-      "type": "object"
-    },
     "v3DeleteRelationResponse": {
       "properties": {
         "result": {
@@ -1046,53 +1037,23 @@
         ]
       }
     },
-    "/api/v3/directory/object/{object.type}/{object.id}": {
+    "/api/v3/directory/object/{object_type}/{object_id}": {
       "delete": {
         "description": "Delete object.",
         "operationId": "directory.v3.object.delete",
         "parameters": [
           {
-            "description": "object type name",
+            "description": "object type",
             "in": "path",
-            "name": "object.type",
+            "name": "object_type",
             "required": true,
             "type": "string"
           },
           {
-            "description": "external object identifier (cs-string)",
+            "description": "object identifier",
             "in": "path",
-            "name": "object.id",
+            "name": "object_id",
             "required": true,
-            "type": "string"
-          },
-          {
-            "description": "display name object",
-            "in": "query",
-            "name": "object.display_name",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "created at timestamp (UTC)",
-            "format": "date-time",
-            "in": "query",
-            "name": "object.created_at",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "last updated timestamp (UTC)",
-            "format": "date-time",
-            "in": "query",
-            "name": "object.updated_at",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "object instance etag",
-            "in": "query",
-            "name": "object.etag",
-            "required": false,
             "type": "string"
           },
           {
@@ -1127,9 +1088,7 @@
         "tags": [
           "directory"
         ]
-      }
-    },
-    "/api/v3/directory/object/{object_type}/{object_id}": {
+      },
       "get": {
         "description": "Returns single object instance, optionally with relations.",
         "operationId": "directory.v3.object.get",
@@ -1237,45 +1196,7 @@
       }
     },
     "/api/v3/directory/relation": {
-      "delete": {
-        "description": "Delete relation.",
-        "operationId": "directory.v3.relation.delete",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v3DeleteRelationRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v3DeleteRelationResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "security": [
-          {
-            "DirectoryAPIKey": [],
-            "TenantID": []
-          }
-        ],
-        "summary": "Delete relation",
-        "tags": [
-          "directory"
-        ]
-      },
-      "put": {
+      "post": {
         "description": "Set relation.",
         "operationId": "directory.v3.relation.set",
         "parameters": [
@@ -1315,6 +1236,78 @@
       }
     },
     "/api/v3/directory/relation/{object_type}/{object_id}/{relation}/{subject_type}/{subject_id}/{subject_relation}": {
+      "delete": {
+        "description": "Delete relation.",
+        "operationId": "directory.v3.relation.delete",
+        "parameters": [
+          {
+            "description": "object type",
+            "in": "path",
+            "name": "object_type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "object identifier",
+            "in": "path",
+            "name": "object_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "object relation name",
+            "in": "path",
+            "name": "relation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "subject type",
+            "in": "path",
+            "name": "subject_type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "subject identifier",
+            "in": "path",
+            "name": "subject_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "optional subject relation name",
+            "in": "path",
+            "name": "subject_relation",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3DeleteRelationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Delete relation",
+        "tags": [
+          "directory"
+        ]
+      },
       "get": {
         "description": "Returns single relation instance, optionally with objects.",
         "operationId": "directory.v3.relation.get",

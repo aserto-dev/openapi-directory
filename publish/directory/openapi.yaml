@@ -115,11 +115,6 @@ components:
         result:
           type: object
           title: empty result
-    v3DeleteRelationRequest:
-      type: object
-      properties:
-        relation:
-          $ref: '#/components/schemas/v3Relation'
     v3DeleteRelationResponse:
       type: object
       properties:
@@ -638,7 +633,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.0.0-20230706173356.0.gb8351cad-dirty
+  version: 0.0.0-20230710135245.0.g19e27667-dirty
 paths:
   /api/v3/directory/check/permission:
     post:
@@ -756,7 +751,7 @@ paths:
       security:
         - DirectoryAPIKey: []
           TenantID: []
-  /api/v3/directory/object/{object.type}/{object.id}:
+  /api/v3/directory/object/{object_type}/{object_id}:
     delete:
       tags:
         - directory
@@ -764,38 +759,16 @@ paths:
       description: Delete object.
       operationId: directory.v3.object.delete
       parameters:
-        - name: object.type
+        - name: object_type
           in: path
-          description: object type name
+          description: object type
           required: true
           schema:
             type: string
-        - name: object.id
+        - name: object_id
           in: path
-          description: external object identifier (cs-string)
+          description: object identifier
           required: true
-          schema:
-            type: string
-        - name: object.display_name
-          in: query
-          description: display name object
-          schema:
-            type: string
-        - name: object.created_at
-          in: query
-          description: created at timestamp (UTC)
-          schema:
-            type: string
-            format: date-time
-        - name: object.updated_at
-          in: query
-          description: last updated timestamp (UTC)
-          schema:
-            type: string
-            format: date-time
-        - name: object.etag
-          in: query
-          description: object instance etag
           schema:
             type: string
         - name: with_relations
@@ -819,7 +792,6 @@ paths:
       security:
         - DirectoryAPIKey: []
           TenantID: []
-  /api/v3/directory/object/{object_type}/{object_id}:
     get:
       tags:
         - directory
@@ -902,35 +874,7 @@ paths:
         - DirectoryAPIKey: []
           TenantID: []
   /api/v3/directory/relation:
-    delete:
-      tags:
-        - directory
-      summary: Delete relation
-      description: Delete relation.
-      operationId: directory.v3.relation.delete
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/v3DeleteRelationRequest'
-      responses:
-        "200":
-          description: A successful response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/v3DeleteRelationResponse'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/rpcStatus'
-      security:
-        - DirectoryAPIKey: []
-          TenantID: []
-    put:
+    post:
       tags:
         - directory
       summary: Set relation
@@ -959,6 +903,65 @@ paths:
         - DirectoryAPIKey: []
           TenantID: []
   /api/v3/directory/relation/{object_type}/{object_id}/{relation}/{subject_type}/{subject_id}/{subject_relation}:
+    delete:
+      tags:
+        - directory
+      summary: Delete relation
+      description: Delete relation.
+      operationId: directory.v3.relation.delete
+      parameters:
+        - name: object_type
+          in: path
+          description: object type
+          required: true
+          schema:
+            type: string
+        - name: object_id
+          in: path
+          description: object identifier
+          required: true
+          schema:
+            type: string
+        - name: relation
+          in: path
+          description: object relation name
+          required: true
+          schema:
+            type: string
+        - name: subject_type
+          in: path
+          description: subject type
+          required: true
+          schema:
+            type: string
+        - name: subject_id
+          in: path
+          description: subject identifier
+          required: true
+          schema:
+            type: string
+        - name: subject_relation
+          in: path
+          description: optional subject relation name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v3DeleteRelationResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
     get:
       tags:
         - directory

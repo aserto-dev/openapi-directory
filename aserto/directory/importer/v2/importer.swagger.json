@@ -57,19 +57,23 @@
       "properties": {
         "recv": {
           "type": "string",
-          "format": "uint64"
+          "format": "uint64",
+          "title": "number of messages received"
         },
         "set": {
           "type": "string",
-          "format": "uint64"
+          "format": "uint64",
+          "title": "number of messages with OPCODE_SET"
         },
         "delete": {
           "type": "string",
-          "format": "uint64"
+          "format": "uint64",
+          "title": "number of messages with OPCODE_DELETE"
         },
         "error": {
           "type": "string",
-          "format": "uint64"
+          "format": "uint64",
+          "title": "number of messages resulting in error"
         }
       }
     },
@@ -77,19 +81,24 @@
       "type": "object",
       "properties": {
         "object_type": {
-          "$ref": "#/definitions/v2ImportCounter"
+          "$ref": "#/definitions/v2ImportCounter",
+          "title": "object_type import counter"
         },
         "permission": {
-          "$ref": "#/definitions/v2ImportCounter"
+          "$ref": "#/definitions/v2ImportCounter",
+          "title": "object_type import counter"
         },
         "relation_type": {
-          "$ref": "#/definitions/v2ImportCounter"
+          "$ref": "#/definitions/v2ImportCounter",
+          "title": "object_type import counter"
         },
         "object": {
-          "$ref": "#/definitions/v2ImportCounter"
+          "$ref": "#/definitions/v2ImportCounter",
+          "title": "object import counter"
         },
         "relation": {
-          "$ref": "#/definitions/v2ImportCounter"
+          "$ref": "#/definitions/v2ImportCounter",
+          "title": "object_type import counter"
         }
       }
     },
@@ -97,27 +106,34 @@
       "type": "object",
       "properties": {
         "key": {
-          "type": "string"
+          "type": "string",
+          "title": "external object key (cs-string)"
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "title": "object type name"
         },
         "display_name": {
-          "type": "string"
+          "type": "string",
+          "title": "display name object"
         },
         "properties": {
-          "type": "object"
+          "type": "object",
+          "title": "property bag"
         },
         "created_at": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "created at timestamp (UTC)"
         },
         "updated_at": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "last updated timestamp (UTC)"
         },
         "hash": {
-          "type": "string"
+          "type": "string",
+          "title": "object instance hash"
         }
       }
     },
@@ -125,10 +141,12 @@
       "type": "object",
       "properties": {
         "type": {
-          "type": "string"
+          "type": "string",
+          "title": "object type"
         },
         "key": {
-          "type": "string"
+          "type": "string",
+          "title": "external object key (cs-string)"
         }
       },
       "title": "Object identifier"
@@ -137,35 +155,44 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "title": "object type name (unique, lc-string)"
         },
         "display_name": {
-          "type": "string"
+          "type": "string",
+          "title": "object type display name"
         },
         "is_subject": {
-          "type": "boolean"
+          "type": "boolean",
+          "title": "object type is a subject (user|group) (default false)"
         },
         "ordinal": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "title": "sort ordinal (default 0)"
         },
         "status": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "status flag bitmap (default 0)"
         },
         "schema": {
-          "type": "object"
+          "type": "object",
+          "title": "object type schema definition (JSON)"
         },
         "created_at": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "created at timestamp (UTC)"
         },
         "updated_at": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "last updated timestamp (UTC)"
         },
         "hash": {
-          "type": "string"
+          "type": "string",
+          "title": "object instance hash"
         }
       }
     },
@@ -182,21 +209,26 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "title": "permission name (unique, cs-string)"
         },
         "display_name": {
-          "type": "string"
+          "type": "string",
+          "title": "permission display name"
         },
         "created_at": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "created at timestamp (UTC)"
         },
         "updated_at": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "last updated timestamp (UTC)"
         },
         "hash": {
-          "type": "string"
+          "type": "string",
+          "title": "object instance hash"
         }
       }
     },
@@ -204,24 +236,30 @@
       "type": "object",
       "properties": {
         "subject": {
-          "$ref": "#/definitions/v2ObjectIdentifier"
+          "$ref": "#/definitions/v2ObjectIdentifier",
+          "title": "subject identifier"
         },
         "relation": {
-          "type": "string"
+          "type": "string",
+          "title": "relation type name"
         },
         "object": {
-          "$ref": "#/definitions/v2ObjectIdentifier"
+          "$ref": "#/definitions/v2ObjectIdentifier",
+          "title": "object identifier"
         },
         "created_at": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "created at timestamp (UTC)"
         },
         "updated_at": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "last updated timestamp (UTC)"
         },
         "hash": {
-          "type": "string"
+          "type": "string",
+          "title": "object instance hash"
         }
       }
     },
@@ -229,44 +267,54 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "title": "relation type name selector"
         },
         "object_type": {
-          "type": "string"
+          "type": "string",
+          "title": "object type referenced by relation"
         },
         "display_name": {
-          "type": "string"
+          "type": "string",
+          "title": "relation display name"
         },
         "ordinal": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "title": "sort ordinal (default 0)"
         },
         "status": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "status bitmap (default 0)"
         },
         "unions": {
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "title": "relations union-ed with relation type instance"
         },
         "permissions": {
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "title": "permissions associated to relation type instance"
         },
         "created_at": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "created at timestamp (UTC)"
         },
         "updated_at": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "last updated timestamp (UTC)"
         },
         "hash": {
-          "type": "string"
+          "type": "string",
+          "title": "object instance hash"
         }
       }
     }

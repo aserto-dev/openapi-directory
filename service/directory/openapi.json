@@ -41,35 +41,50 @@
     "v3CheckPermissionRequest": {
       "properties": {
         "object_id": {
+          "title": "object identifier",
           "type": "string"
         },
         "object_type": {
+          "title": "object type",
           "type": "string"
         },
         "permission": {
+          "title": "permission name",
           "type": "string"
         },
         "subject_id": {
+          "title": "subject identifier",
           "type": "string"
         },
         "subject_type": {
+          "title": "subject type",
           "type": "string"
         },
         "trace": {
+          "title": "collect trace information",
           "type": "boolean"
         }
       },
+      "required": [
+        "object_type",
+        "object_id",
+        "permission",
+        "subject_type",
+        "subject_id"
+      ],
       "type": "object"
     },
     "v3CheckPermissionResponse": {
       "properties": {
         "check": {
+          "title": "check result",
           "type": "boolean"
         },
         "trace": {
           "items": {
             "type": "string"
           },
+          "title": "trace information",
           "type": "array"
         }
       },
@@ -78,45 +93,51 @@
     "v3CheckRelationRequest": {
       "properties": {
         "object_id": {
+          "title": "object identifier",
           "type": "string"
         },
         "object_type": {
+          "title": "object type",
           "type": "string"
         },
         "relation": {
+          "title": "relation name",
           "type": "string"
         },
         "subject_id": {
+          "title": "subject identifier",
           "type": "string"
         },
         "subject_type": {
+          "title": "subject type",
           "type": "string"
         },
         "trace": {
+          "title": "collect trace information",
           "type": "boolean"
         }
       },
+      "required": [
+        "object_type",
+        "object_id",
+        "relation",
+        "subject_type",
+        "subject_id"
+      ],
       "type": "object"
     },
     "v3CheckRelationResponse": {
       "properties": {
         "check": {
+          "title": "check result",
           "type": "boolean"
         },
         "trace": {
           "items": {
             "type": "string"
           },
+          "title": "trace information",
           "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "v3DeleteManifestResponse": {
-      "properties": {
-        "result": {
-          "properties": {},
-          "type": "object"
         }
       },
       "type": "object"
@@ -125,7 +146,17 @@
       "properties": {
         "result": {
           "properties": {},
+          "title": "empty result",
           "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "v3DeleteRelationRequest": {
+      "properties": {
+        "relation": {
+          "$ref": "#/definitions/v3Relation",
+          "title": "relation instance"
         }
       },
       "type": "object"
@@ -134,6 +165,7 @@
       "properties": {
         "result": {
           "properties": {},
+          "title": "empty result",
           "type": "object"
         }
       },
@@ -142,10 +174,12 @@
     "v3ExportResponse": {
       "properties": {
         "object": {
-          "$ref": "#/definitions/v3Object"
+          "$ref": "#/definitions/v3Object",
+          "title": "object instance (data)"
         },
         "relation": {
-          "$ref": "#/definitions/v3Relation"
+          "$ref": "#/definitions/v3Relation",
+          "title": "relation instance (data)"
         }
       },
       "type": "object"
@@ -153,27 +187,42 @@
     "v3GetGraphRequest": {
       "properties": {
         "anchor_id": {
+          "title": "anchor identifier",
           "type": "string"
         },
         "anchor_type": {
+          "title": "anchor type",
           "type": "string"
         },
         "object_id": {
+          "title": "object identifier",
           "type": "string"
         },
         "object_type": {
+          "title": "object type",
           "type": "string"
         },
         "relation": {
+          "title": "relation name",
           "type": "string"
         },
         "subject_id": {
+          "title": "subject identifier",
+          "type": "string"
+        },
+        "subject_relation": {
+          "title": "subject relation",
           "type": "string"
         },
         "subject_type": {
+          "title": "subject type",
           "type": "string"
         }
       },
+      "required": [
+        "anchor_type",
+        "anchor_id"
+      ],
       "type": "object"
     },
     "v3GetGraphResponse": {
@@ -182,6 +231,7 @@
           "items": {
             "$ref": "#/definitions/v3ObjectDependency"
           },
+          "title": "dependency graph",
           "type": "array"
         }
       },
@@ -190,7 +240,8 @@
     "v3GetManifestResponse": {
       "properties": {
         "result": {
-          "$ref": "#/definitions/v3Manifest"
+          "$ref": "#/definitions/v3Manifest",
+          "title": "manifest instance"
         }
       },
       "type": "object"
@@ -201,6 +252,7 @@
           "items": {
             "$ref": "#/definitions/v3Object"
           },
+          "title": "array of object instances",
           "type": "array"
         }
       },
@@ -212,16 +264,19 @@
           "items": {
             "$ref": "#/definitions/v3Relation"
           },
+          "title": "incoming object relations",
           "type": "array"
         },
         "outgoing": {
           "items": {
             "$ref": "#/definitions/v3Relation"
           },
+          "title": "outgoing object relations",
           "type": "array"
         },
         "result": {
-          "$ref": "#/definitions/v3Object"
+          "$ref": "#/definitions/v3Object",
+          "title": "object instance"
         }
       },
       "type": "object"
@@ -251,12 +306,14 @@
     "v3GetObjectsResponse": {
       "properties": {
         "page": {
-          "$ref": "#/definitions/v3PaginationResponse"
+          "$ref": "#/definitions/v3PaginationResponse",
+          "title": "pagination response"
         },
         "results": {
           "items": {
             "$ref": "#/definitions/v3Object"
           },
+          "title": "array of object instances",
           "type": "array"
         }
       },
@@ -290,12 +347,14 @@
           "additionalProperties": {
             "$ref": "#/definitions/v3Object"
           },
+          "title": "map of materialized relation objects",
           "type": "object"
         },
         "results": {
           "items": {
             "$ref": "#/definitions/v3Relation"
           },
+          "title": "array of relation instances",
           "type": "array"
         }
       },
@@ -323,15 +382,50 @@
       },
       "type": "object"
     },
+    "v3GetRelationsRequest": {
+      "properties": {
+        "object_id": {
+          "title": "object identifier",
+          "type": "string"
+        },
+        "object_type": {
+          "title": "object type",
+          "type": "string"
+        },
+        "page": {
+          "$ref": "#/definitions/v3PaginationRequest",
+          "title": "pagination request"
+        },
+        "relation": {
+          "title": "relation name",
+          "type": "string"
+        },
+        "subject_id": {
+          "title": "subject identifier",
+          "type": "string"
+        },
+        "subject_relation": {
+          "title": "optional subject relation name",
+          "type": "string"
+        },
+        "subject_type": {
+          "title": "subject type",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "v3GetRelationsResponse": {
       "properties": {
         "page": {
-          "$ref": "#/definitions/v3PaginationResponse"
+          "$ref": "#/definitions/v3PaginationResponse",
+          "title": "pagination response"
         },
         "results": {
           "items": {
             "$ref": "#/definitions/v3Relation"
           },
+          "title": "array of relation instances",
           "type": "array"
         }
       },
@@ -341,18 +435,22 @@
       "properties": {
         "delete": {
           "format": "uint64",
+          "title": "number of messages with OPCODE_DELETE",
           "type": "string"
         },
         "error": {
           "format": "uint64",
+          "title": "number of messages resulting in error",
           "type": "string"
         },
         "recv": {
           "format": "uint64",
+          "title": "number of messages received",
           "type": "string"
         },
         "set": {
           "format": "uint64",
+          "title": "number of messages with OPCODE_SET",
           "type": "string"
         }
       },
@@ -361,10 +459,12 @@
     "v3ImportResponse": {
       "properties": {
         "object": {
-          "$ref": "#/definitions/v3ImportCounter"
+          "$ref": "#/definitions/v3ImportCounter",
+          "title": "object import counter"
         },
         "relation": {
-          "$ref": "#/definitions/v3ImportCounter"
+          "$ref": "#/definitions/v3ImportCounter",
+          "title": "relation import counter"
         }
       },
       "type": "object"
@@ -525,33 +625,42 @@
       "properties": {
         "created_at": {
           "format": "date-time",
+          "title": "created at timestamp (UTC)",
           "type": "string"
         },
         "display_name": {
+          "title": "object type display name",
           "type": "string"
         },
         "etag": {
+          "title": "object instance etag",
           "type": "string"
         },
         "is_subject": {
+          "title": "object type is a subject (user|group) (default false)",
           "type": "boolean"
         },
         "name": {
+          "title": "object type name (unique, lc-string)",
           "type": "string"
         },
         "ordinal": {
           "format": "int32",
+          "title": "sort ordinal (default 0)",
           "type": "integer"
         },
         "schema": {
+          "title": "object type schema definition (JSON)",
           "type": "object"
         },
         "status": {
           "format": "int64",
+          "title": "status flag bitmap (default 0)",
           "type": "integer"
         },
         "updated_at": {
           "format": "date-time",
+          "title": "last updated timestamp (UTC)",
           "type": "string"
         }
       },
@@ -596,19 +705,24 @@
       "properties": {
         "created_at": {
           "format": "date-time",
+          "title": "created at timestamp (UTC)",
           "type": "string"
         },
         "display_name": {
+          "title": "permission display name",
           "type": "string"
         },
         "etag": {
+          "title": "object instance etag",
           "type": "string"
         },
         "name": {
+          "title": "permission name (unique, cs-string)",
           "type": "string"
         },
         "updated_at": {
           "format": "date-time",
+          "title": "last updated timestamp (UTC)",
           "type": "string"
         }
       },
@@ -670,42 +784,52 @@
       "properties": {
         "created_at": {
           "format": "date-time",
+          "title": "created at timestamp (UTC)",
           "type": "string"
         },
         "display_name": {
+          "title": "relation display name",
           "type": "string"
         },
         "etag": {
+          "title": "object instance etag",
           "type": "string"
         },
         "name": {
+          "title": "relation type name selector",
           "type": "string"
         },
         "object_type": {
+          "title": "object type referenced by relation",
           "type": "string"
         },
         "ordinal": {
           "format": "int32",
+          "title": "sort ordinal (default 0)",
           "type": "integer"
         },
         "permissions": {
           "items": {
             "type": "string"
           },
+          "title": "permissions associated to relation type instance",
           "type": "array"
         },
         "status": {
           "format": "int64",
+          "title": "status bitmap (default 0)",
           "type": "integer"
         },
         "unions": {
           "items": {
             "type": "string"
           },
+          "title": "relations union-ed with relation type instance",
           "type": "array"
         },
         "updated_at": {
           "format": "date-time",
+          "title": "last updated timestamp (UTC)",
           "type": "string"
         }
       },
@@ -714,7 +838,8 @@
     "v3SetManifestResponse": {
       "properties": {
         "result": {
-          "$ref": "#/definitions/v3Manifest"
+          "$ref": "#/definitions/v3Manifest",
+          "title": "manifest instance"
         }
       },
       "type": "object"
@@ -722,7 +847,8 @@
     "v3SetObjectRequest": {
       "properties": {
         "object": {
-          "$ref": "#/definitions/v3Object"
+          "$ref": "#/definitions/v3Object",
+          "title": "object instance"
         }
       },
       "type": "object"
@@ -730,7 +856,8 @@
     "v3SetObjectResponse": {
       "properties": {
         "result": {
-          "$ref": "#/definitions/v3Object"
+          "$ref": "#/definitions/v3Object",
+          "title": "object instance"
         }
       },
       "type": "object"
@@ -738,7 +865,8 @@
     "v3SetRelationRequest": {
       "properties": {
         "relation": {
-          "$ref": "#/definitions/v3Relation"
+          "$ref": "#/definitions/v3Relation",
+          "title": "relation instance"
         }
       },
       "type": "object"
@@ -746,7 +874,8 @@
     "v3SetRelationResponse": {
       "properties": {
         "result": {
-          "$ref": "#/definitions/v3Relation"
+          "$ref": "#/definitions/v3Relation",
+          "title": "relation instance"
         }
       },
       "type": "object"
@@ -967,6 +1096,7 @@
             "type": "string"
           },
           {
+            "description": "delete object relations, both object and subject relations.",
             "in": "query",
             "name": "with_relations",
             "required": false,
@@ -1005,18 +1135,21 @@
         "operationId": "directory.v3.object.get",
         "parameters": [
           {
+            "description": "object type name (lc-string)",
             "in": "path",
             "name": "object_type",
             "required": true,
             "type": "string"
           },
           {
+            "description": "object identifier (cs-string)",
             "in": "path",
             "name": "object_id",
             "required": true,
             "type": "string"
           },
           {
+            "description": "materialize the object relations objects",
             "in": "query",
             "name": "with_relations",
             "required": false,
@@ -1052,9 +1185,10 @@
     "/api/v3/directory/objects/{object_type}": {
       "get": {
         "description": "Returns list of object instances.",
-        "operationId": "directory.v3.objects.get",
+        "operationId": "directory.v3.objects.list",
         "parameters": [
           {
+            "description": "object type name (lc-string)",
             "in": "path",
             "name": "object_type",
             "required": true,
@@ -1103,6 +1237,44 @@
       }
     },
     "/api/v3/directory/relation": {
+      "delete": {
+        "description": "Delete relation.",
+        "operationId": "directory.v3.relation.delete",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v3DeleteRelationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3DeleteRelationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Delete relation",
+        "tags": [
+          "directory"
+        ]
+      },
       "put": {
         "description": "Set relation.",
         "operationId": "directory.v3.relation.set",
@@ -1148,42 +1320,49 @@
         "operationId": "directory.v3.relation.get",
         "parameters": [
           {
+            "description": "object type",
             "in": "path",
             "name": "object_type",
             "required": true,
             "type": "string"
           },
           {
+            "description": "object identifier",
             "in": "path",
             "name": "object_id",
             "required": true,
             "type": "string"
           },
           {
+            "description": "relation name",
             "in": "path",
             "name": "relation",
             "required": true,
             "type": "string"
           },
           {
+            "description": "subject type",
             "in": "path",
             "name": "subject_type",
             "required": true,
             "type": "string"
           },
           {
+            "description": "subject identifier",
             "in": "path",
             "name": "subject_id",
             "required": true,
             "type": "string"
           },
           {
+            "description": "optional subject relation name",
             "in": "path",
             "name": "subject_relation",
             "required": true,
             "type": "string"
           },
           {
+            "description": "materialize relation objects",
             "in": "query",
             "name": "with_objects",
             "required": false,
@@ -1216,241 +1395,18 @@
         ]
       }
     },
-    "/api/v3/directory/relation/{relation.object_type}/{relation.object_id}/{relation.relation}/{relation.subject_type}/{relation.subject_id}/{relation.subject_relation}": {
-      "delete": {
-        "description": "Delete relation.",
-        "operationId": "directory.v3.relation.delete",
-        "parameters": [
-          {
-            "description": "object type",
-            "in": "path",
-            "name": "relation.object_type",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "object identifier",
-            "in": "path",
-            "name": "relation.object_id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "object relation name",
-            "in": "path",
-            "name": "relation.relation",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "subject type",
-            "in": "path",
-            "name": "relation.subject_type",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "subject identifier",
-            "in": "path",
-            "name": "relation.subject_id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "optional subject relation name",
-            "in": "path",
-            "name": "relation.subject_relation",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "created at timestamp (UTC)",
-            "format": "date-time",
-            "in": "query",
-            "name": "relation.created_at",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "last updated timestamp (UTC)",
-            "format": "date-time",
-            "in": "query",
-            "name": "relation.updated_at",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "object instance etag",
-            "in": "query",
-            "name": "relation.etag",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v3DeleteRelationResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "security": [
-          {
-            "DirectoryAPIKey": [],
-            "TenantID": []
-          }
-        ],
-        "summary": "Delete relation",
-        "tags": [
-          "directory"
-        ]
-      }
-    },
-    "/api/v3/directory/relations/object/{object_type}/{object_id}/{relation}/{subject_type}/{subject_id}/{subject_relation}": {
-      "get": {
+    "/api/v3/directory/relations": {
+      "post": {
         "description": "Returns list of relation instances.",
-        "operationId": "GetRelations",
+        "operationId": "directory.v3.relations.list",
         "parameters": [
           {
-            "in": "path",
-            "name": "object_type",
+            "in": "body",
+            "name": "body",
             "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "object_id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "relation",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "subject_type",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "subject_id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "subject_relation",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "requested page size, valid value between 1-100 rows (default 100)",
-            "format": "int32",
-            "in": "query",
-            "name": "page.size",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "description": "pagination start token, default \"\"",
-            "in": "query",
-            "name": "page.token",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v3GetRelationsResponse"
+              "$ref": "#/definitions/v3GetRelationsRequest"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "security": [
-          {
-            "DirectoryAPIKey": [],
-            "TenantID": []
-          }
-        ],
-        "summary": "List relations instances",
-        "tags": [
-          "directory"
-        ]
-      }
-    },
-    "/api/v3/directory/relations/subject/{subject_type}/{subject_id}/{subject_relation}/{object_type}/{object_id}/{relation}": {
-      "get": {
-        "description": "Returns list of relation instances.",
-        "operationId": "GetRelations2",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "subject_type",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "subject_id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "subject_relation",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "object_type",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "object_id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "relation",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "requested page size, valid value between 1-100 rows (default 100)",
-            "format": "int32",
-            "in": "query",
-            "name": "page.size",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "description": "pagination start token, default \"\"",
-            "in": "query",
-            "name": "page.token",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {

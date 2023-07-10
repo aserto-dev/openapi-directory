@@ -56,13 +56,15 @@
       "type": "object",
       "properties": {
         "check": {
-          "type": "boolean"
+          "type": "boolean",
+          "title": "check result"
         },
         "trace": {
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "title": "trace information"
         }
       }
     },
@@ -70,13 +72,15 @@
       "type": "object",
       "properties": {
         "check": {
-          "type": "boolean"
+          "type": "boolean",
+          "title": "check result"
         },
         "trace": {
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "title": "trace information"
         }
       }
     },
@@ -87,7 +91,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/v2ObjectDependency"
-          }
+          },
+          "title": "dependency graph"
         }
       }
     },
@@ -98,7 +103,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/v2Object"
-          }
+          },
+          "title": "array of object instances"
         }
       }
     },
@@ -106,19 +112,22 @@
       "type": "object",
       "properties": {
         "result": {
-          "$ref": "#/definitions/v2Object"
+          "$ref": "#/definitions/v2Object",
+          "title": "object instance"
         },
         "incoming": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/v2Relation"
-          }
+          },
+          "title": "incoming object relations"
         },
         "outgoing": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/v2Relation"
-          }
+          },
+          "title": "outgoing object relations"
         }
       }
     },
@@ -126,7 +135,8 @@
       "type": "object",
       "properties": {
         "result": {
-          "$ref": "#/definitions/v2ObjectType"
+          "$ref": "#/definitions/v2ObjectType",
+          "title": "object type instance"
         }
       }
     },
@@ -137,10 +147,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/v2ObjectType"
-          }
+          },
+          "title": "array of object types"
         },
         "page": {
-          "$ref": "#/definitions/v2PaginationResponse"
+          "$ref": "#/definitions/v2PaginationResponse",
+          "title": "pagination response"
         }
       }
     },
@@ -151,10 +163,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/v2Object"
-          }
+          },
+          "title": "array of object instances"
         },
         "page": {
-          "$ref": "#/definitions/v2PaginationResponse"
+          "$ref": "#/definitions/v2PaginationResponse",
+          "title": "pagination response"
         }
       }
     },
@@ -162,7 +176,8 @@
       "type": "object",
       "properties": {
         "result": {
-          "$ref": "#/definitions/v2Permission"
+          "$ref": "#/definitions/v2Permission",
+          "title": "permission instance"
         }
       }
     },
@@ -173,10 +188,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/v2Permission"
-          }
+          },
+          "title": "array of permissions"
         },
         "page": {
-          "$ref": "#/definitions/v2PaginationResponse"
+          "$ref": "#/definitions/v2PaginationResponse",
+          "title": "pagination response"
         }
       }
     },
@@ -187,13 +204,15 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/v2Relation"
-          }
+          },
+          "title": "array of relation instances"
         },
         "objects": {
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/v2Object"
-          }
+          },
+          "title": "map of materialized relation objects"
         }
       }
     },
@@ -201,7 +220,8 @@
       "type": "object",
       "properties": {
         "result": {
-          "$ref": "#/definitions/v2RelationType"
+          "$ref": "#/definitions/v2RelationType",
+          "title": "relation type instance"
         }
       }
     },
@@ -212,10 +232,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/v2RelationType"
-          }
+          },
+          "title": "array of relation types"
         },
         "page": {
-          "$ref": "#/definitions/v2PaginationResponse"
+          "$ref": "#/definitions/v2PaginationResponse",
+          "title": "pagination response"
         }
       }
     },
@@ -226,10 +248,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/v2Relation"
-          }
+          },
+          "title": "array of relation instances"
         },
         "page": {
-          "$ref": "#/definitions/v2PaginationResponse"
+          "$ref": "#/definitions/v2PaginationResponse",
+          "title": "pagination response"
         }
       }
     },
@@ -237,27 +261,34 @@
       "type": "object",
       "properties": {
         "key": {
-          "type": "string"
+          "type": "string",
+          "title": "external object key (cs-string)"
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "title": "object type name"
         },
         "display_name": {
-          "type": "string"
+          "type": "string",
+          "title": "display name object"
         },
         "properties": {
-          "type": "object"
+          "type": "object",
+          "title": "property bag"
         },
         "created_at": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "created at timestamp (UTC)"
         },
         "updated_at": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "last updated timestamp (UTC)"
         },
         "hash": {
-          "type": "string"
+          "type": "string",
+          "title": "object instance hash"
         }
       }
     },
@@ -265,32 +296,40 @@
       "type": "object",
       "properties": {
         "object_type": {
-          "type": "string"
+          "type": "string",
+          "title": "object type name of source object"
         },
         "object_key": {
-          "type": "string"
+          "type": "string",
+          "title": "object search key of source object"
         },
         "relation": {
-          "type": "string"
+          "type": "string",
+          "title": "relation identifier"
         },
         "subject_type": {
-          "type": "string"
+          "type": "string",
+          "title": "object type id of target object"
         },
         "subject_key": {
-          "type": "string"
+          "type": "string",
+          "title": "object search key of target object"
         },
         "depth": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "title": "dependency depth"
         },
         "is_cycle": {
-          "type": "boolean"
+          "type": "boolean",
+          "title": "dependency cycle"
         },
         "path": {
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "title": "dependency path"
         }
       }
     },
@@ -298,10 +337,12 @@
       "type": "object",
       "properties": {
         "type": {
-          "type": "string"
+          "type": "string",
+          "title": "object type"
         },
         "key": {
-          "type": "string"
+          "type": "string",
+          "title": "external object key (cs-string)"
         }
       },
       "title": "Object identifier"
@@ -310,35 +351,44 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "title": "object type name (unique, lc-string)"
         },
         "display_name": {
-          "type": "string"
+          "type": "string",
+          "title": "object type display name"
         },
         "is_subject": {
-          "type": "boolean"
+          "type": "boolean",
+          "title": "object type is a subject (user|group) (default false)"
         },
         "ordinal": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "title": "sort ordinal (default 0)"
         },
         "status": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "status flag bitmap (default 0)"
         },
         "schema": {
-          "type": "object"
+          "type": "object",
+          "title": "object type schema definition (JSON)"
         },
         "created_at": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "created at timestamp (UTC)"
         },
         "updated_at": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "last updated timestamp (UTC)"
         },
         "hash": {
-          "type": "string"
+          "type": "string",
+          "title": "object instance hash"
         }
       }
     },
@@ -346,7 +396,8 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "title": "object type name (unique, lc-string)"
         }
       },
       "title": "ObjectType identifier"
@@ -356,10 +407,12 @@
       "properties": {
         "size": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "title": "requested page size, valid value between 1-100 rows (default 100)"
         },
         "token": {
-          "type": "string"
+          "type": "string",
+          "title": "pagination start token, default \"\""
         }
       },
       "title": "Pagination request"
@@ -368,11 +421,13 @@
       "type": "object",
       "properties": {
         "next_token": {
-          "type": "string"
+          "type": "string",
+          "title": "next page token, when empty there are no more pages to fetch"
         },
         "result_size": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "title": "result size of the page returned"
         }
       },
       "title": "Pagination response"
@@ -381,21 +436,26 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "title": "permission name (unique, cs-string)"
         },
         "display_name": {
-          "type": "string"
+          "type": "string",
+          "title": "permission display name"
         },
         "created_at": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "created at timestamp (UTC)"
         },
         "updated_at": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "last updated timestamp (UTC)"
         },
         "hash": {
-          "type": "string"
+          "type": "string",
+          "title": "object instance hash"
         }
       }
     },
@@ -403,7 +463,8 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "title": "permission name (unique, cs-string)"
         }
       },
       "title": "Permission identifier"
@@ -412,24 +473,30 @@
       "type": "object",
       "properties": {
         "subject": {
-          "$ref": "#/definitions/v2ObjectIdentifier"
+          "$ref": "#/definitions/v2ObjectIdentifier",
+          "title": "subject identifier"
         },
         "relation": {
-          "type": "string"
+          "type": "string",
+          "title": "relation type name"
         },
         "object": {
-          "$ref": "#/definitions/v2ObjectIdentifier"
+          "$ref": "#/definitions/v2ObjectIdentifier",
+          "title": "object identifier"
         },
         "created_at": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "created at timestamp (UTC)"
         },
         "updated_at": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "last updated timestamp (UTC)"
         },
         "hash": {
-          "type": "string"
+          "type": "string",
+          "title": "object instance hash"
         }
       }
     },
@@ -437,13 +504,16 @@
       "type": "object",
       "properties": {
         "subject": {
-          "$ref": "#/definitions/v2ObjectIdentifier"
+          "$ref": "#/definitions/v2ObjectIdentifier",
+          "title": "subject identifier"
         },
         "relation": {
-          "$ref": "#/definitions/v2RelationTypeIdentifier"
+          "$ref": "#/definitions/v2RelationTypeIdentifier",
+          "title": "relation identifier"
         },
         "object": {
-          "$ref": "#/definitions/v2ObjectIdentifier"
+          "$ref": "#/definitions/v2ObjectIdentifier",
+          "title": "object identifier"
         }
       },
       "title": "Relation identifier"
@@ -452,44 +522,54 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "title": "relation type name selector"
         },
         "object_type": {
-          "type": "string"
+          "type": "string",
+          "title": "object type referenced by relation"
         },
         "display_name": {
-          "type": "string"
+          "type": "string",
+          "title": "relation display name"
         },
         "ordinal": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "title": "sort ordinal (default 0)"
         },
         "status": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "status bitmap (default 0)"
         },
         "unions": {
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "title": "relations union-ed with relation type instance"
         },
         "permissions": {
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "title": "permissions associated to relation type instance"
         },
         "created_at": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "created at timestamp (UTC)"
         },
         "updated_at": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "title": "last updated timestamp (UTC)"
         },
         "hash": {
-          "type": "string"
+          "type": "string",
+          "title": "object instance hash"
         }
       }
     },
@@ -497,10 +577,12 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "title": "relation type name selector"
         },
         "object_type": {
-          "type": "string"
+          "type": "string",
+          "title": "object type referenced by relation"
         }
       },
       "title": "RelationType identifier"

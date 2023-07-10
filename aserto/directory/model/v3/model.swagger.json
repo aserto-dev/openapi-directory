@@ -44,20 +44,12 @@
         }
       }
     },
-    "v3DeleteManifestResponse": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "type": "object",
-          "properties": {}
-        }
-      }
-    },
     "v3GetManifestResponse": {
       "type": "object",
       "properties": {
         "result": {
-          "$ref": "#/definitions/v3Manifest"
+          "$ref": "#/definitions/v3Manifest",
+          "title": "manifest instance"
         }
       }
     },
@@ -104,7 +96,8 @@
       "type": "object",
       "properties": {
         "result": {
-          "$ref": "#/definitions/v3Manifest"
+          "$ref": "#/definitions/v3Manifest",
+          "title": "manifest instance"
         }
       }
     }

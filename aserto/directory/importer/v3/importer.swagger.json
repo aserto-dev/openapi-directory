@@ -57,19 +57,23 @@
       "properties": {
         "recv": {
           "type": "string",
-          "format": "uint64"
+          "format": "uint64",
+          "title": "number of messages received"
         },
         "set": {
           "type": "string",
-          "format": "uint64"
+          "format": "uint64",
+          "title": "number of messages with OPCODE_SET"
         },
         "delete": {
           "type": "string",
-          "format": "uint64"
+          "format": "uint64",
+          "title": "number of messages with OPCODE_DELETE"
         },
         "error": {
           "type": "string",
-          "format": "uint64"
+          "format": "uint64",
+          "title": "number of messages resulting in error"
         }
       }
     },
@@ -77,10 +81,12 @@
       "type": "object",
       "properties": {
         "object": {
-          "$ref": "#/definitions/v3ImportCounter"
+          "$ref": "#/definitions/v3ImportCounter",
+          "title": "object import counter"
         },
         "relation": {
-          "$ref": "#/definitions/v3ImportCounter"
+          "$ref": "#/definitions/v3ImportCounter",
+          "title": "relation import counter"
         }
       }
     },

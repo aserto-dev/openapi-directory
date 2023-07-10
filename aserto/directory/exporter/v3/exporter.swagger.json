@@ -56,10 +56,12 @@
       "type": "object",
       "properties": {
         "object": {
-          "$ref": "#/definitions/v3Object"
+          "$ref": "#/definitions/v3Object",
+          "title": "object instance (data)"
         },
         "relation": {
-          "$ref": "#/definitions/v3Relation"
+          "$ref": "#/definitions/v3Relation",
+          "title": "relation instance (data)"
         }
       }
     },

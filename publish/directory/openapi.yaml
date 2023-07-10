@@ -35,67 +35,97 @@ components:
           type: string
     v3CheckPermissionRequest:
       type: object
+      required:
+        - object_type
+        - object_id
+        - permission
+        - subject_type
+        - subject_id
       properties:
         object_id:
           type: string
+          title: object identifier
         object_type:
           type: string
+          title: object type
         permission:
           type: string
+          title: permission name
         subject_id:
           type: string
+          title: subject identifier
         subject_type:
           type: string
+          title: subject type
         trace:
           type: boolean
+          title: collect trace information
     v3CheckPermissionResponse:
       type: object
       properties:
         check:
           type: boolean
+          title: check result
         trace:
           type: array
+          title: trace information
           items:
             type: string
     v3CheckRelationRequest:
       type: object
+      required:
+        - object_type
+        - object_id
+        - relation
+        - subject_type
+        - subject_id
       properties:
         object_id:
           type: string
+          title: object identifier
         object_type:
           type: string
+          title: object type
         relation:
           type: string
+          title: relation name
         subject_id:
           type: string
+          title: subject identifier
         subject_type:
           type: string
+          title: subject type
         trace:
           type: boolean
+          title: collect trace information
     v3CheckRelationResponse:
       type: object
       properties:
         check:
           type: boolean
+          title: check result
         trace:
           type: array
+          title: trace information
           items:
             type: string
-    v3DeleteManifestResponse:
-      type: object
-      properties:
-        result:
-          type: object
     v3DeleteObjectResponse:
       type: object
       properties:
         result:
           type: object
+          title: empty result
+    v3DeleteRelationRequest:
+      type: object
+      properties:
+        relation:
+          $ref: '#/components/schemas/v3Relation'
     v3DeleteRelationResponse:
       type: object
       properties:
         result:
           type: object
+          title: empty result
     v3ExportResponse:
       type: object
       properties:
@@ -105,26 +135,40 @@ components:
           $ref: '#/components/schemas/v3Relation'
     v3GetGraphRequest:
       type: object
+      required:
+        - anchor_type
+        - anchor_id
       properties:
         anchor_id:
           type: string
+          title: anchor identifier
         anchor_type:
           type: string
+          title: anchor type
         object_id:
           type: string
+          title: object identifier
         object_type:
           type: string
+          title: object type
         relation:
           type: string
+          title: relation name
         subject_id:
           type: string
+          title: subject identifier
+        subject_relation:
+          type: string
+          title: subject relation
         subject_type:
           type: string
+          title: subject type
     v3GetGraphResponse:
       type: object
       properties:
         results:
           type: array
+          title: dependency graph
           items:
             $ref: '#/components/schemas/v3ObjectDependency'
     v3GetManifestResponse:
@@ -137,6 +181,7 @@ components:
       properties:
         results:
           type: array
+          title: array of object instances
           items:
             $ref: '#/components/schemas/v3Object'
     v3GetObjectResponse:
@@ -144,10 +189,12 @@ components:
       properties:
         incoming:
           type: array
+          title: incoming object relations
           items:
             $ref: '#/components/schemas/v3Relation'
         outgoing:
           type: array
+          title: outgoing object relations
           items:
             $ref: '#/components/schemas/v3Relation'
         result:
@@ -173,6 +220,7 @@ components:
           $ref: '#/components/schemas/v3PaginationResponse'
         results:
           type: array
+          title: array of object instances
           items:
             $ref: '#/components/schemas/v3Object'
     v3GetPermissionResponse:
@@ -194,12 +242,14 @@ components:
       properties:
         objects:
           type: object
+          title: map of materialized relation objects
           additionalProperties:
             has: null
             schema:
               $ref: '#/components/schemas/v3Object'
         results:
           type: array
+          title: array of relation instances
           items:
             $ref: '#/components/schemas/v3Relation'
     v3GetRelationTypeResponse:
@@ -216,6 +266,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/v3RelationType'
+    v3GetRelationsRequest:
+      type: object
+      properties:
+        object_id:
+          type: string
+          title: object identifier
+        object_type:
+          type: string
+          title: object type
+        page:
+          $ref: '#/components/schemas/v3PaginationRequest'
+        relation:
+          type: string
+          title: relation name
+        subject_id:
+          type: string
+          title: subject identifier
+        subject_relation:
+          type: string
+          title: optional subject relation name
+        subject_type:
+          type: string
+          title: subject type
     v3GetRelationsResponse:
       type: object
       properties:
@@ -223,6 +296,7 @@ components:
           $ref: '#/components/schemas/v3PaginationResponse'
         results:
           type: array
+          title: array of relation instances
           items:
             $ref: '#/components/schemas/v3Relation'
     v3ImportCounter:
@@ -230,15 +304,19 @@ components:
       properties:
         delete:
           type: string
+          title: number of messages with OPCODE_DELETE
           format: uint64
         error:
           type: string
+          title: number of messages resulting in error
           format: uint64
         recv:
           type: string
+          title: number of messages received
           format: uint64
         set:
           type: string
+          title: number of messages with OPCODE_SET
           format: uint64
     v3ImportResponse:
       type: object
@@ -368,25 +446,34 @@ components:
       properties:
         created_at:
           type: string
+          title: created at timestamp (UTC)
           format: date-time
         display_name:
           type: string
+          title: object type display name
         etag:
           type: string
+          title: object instance etag
         is_subject:
           type: boolean
+          title: object type is a subject (user|group) (default false)
         name:
           type: string
+          title: object type name (unique, lc-string)
         ordinal:
           type: integer
+          title: sort ordinal (default 0)
           format: int32
         schema:
           type: object
+          title: object type schema definition (JSON)
         status:
           type: integer
+          title: status flag bitmap (default 0)
           format: int64
         updated_at:
           type: string
+          title: last updated timestamp (UTC)
           format: date-time
     v3Opcode:
       type: string
@@ -419,15 +506,20 @@ components:
       properties:
         created_at:
           type: string
+          title: created at timestamp (UTC)
           format: date-time
         display_name:
           type: string
+          title: permission display name
         etag:
           type: string
+          title: object instance etag
         name:
           type: string
+          title: permission name (unique, cs-string)
         updated_at:
           type: string
+          title: last updated timestamp (UTC)
           format: date-time
     v3Relation:
       type: object
@@ -474,31 +566,41 @@ components:
       properties:
         created_at:
           type: string
+          title: created at timestamp (UTC)
           format: date-time
         display_name:
           type: string
+          title: relation display name
         etag:
           type: string
+          title: object instance etag
         name:
           type: string
+          title: relation type name selector
         object_type:
           type: string
+          title: object type referenced by relation
         ordinal:
           type: integer
+          title: sort ordinal (default 0)
           format: int32
         permissions:
           type: array
+          title: permissions associated to relation type instance
           items:
             type: string
         status:
           type: integer
+          title: status bitmap (default 0)
           format: int64
         unions:
           type: array
+          title: relations union-ed with relation type instance
           items:
             type: string
         updated_at:
           type: string
+          title: last updated timestamp (UTC)
           format: date-time
     v3SetManifestResponse:
       type: object
@@ -536,7 +638,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.0.0-20230706090240.0.gc49466d5-dirty
+  version: 0.0.0-20230706173356.0.gb8351cad-dirty
 paths:
   /api/v3/directory/check/permission:
     post:
@@ -698,6 +800,7 @@ paths:
             type: string
         - name: with_relations
           in: query
+          description: delete object relations, both object and subject relations.
           schema:
             type: boolean
       responses:
@@ -726,16 +829,19 @@ paths:
       parameters:
         - name: object_type
           in: path
+          description: object type name (lc-string)
           required: true
           schema:
             type: string
         - name: object_id
           in: path
+          description: object identifier (cs-string)
           required: true
           schema:
             type: string
         - name: with_relations
           in: query
+          description: materialize the object relations objects
           schema:
             type: boolean
       responses:
@@ -760,10 +866,11 @@ paths:
         - directory
       summary: List object instances
       description: Returns list of object instances.
-      operationId: directory.v3.objects.get
+      operationId: directory.v3.objects.list
       parameters:
         - name: object_type
           in: path
+          description: object type name (lc-string)
           required: true
           schema:
             type: string
@@ -795,6 +902,34 @@ paths:
         - DirectoryAPIKey: []
           TenantID: []
   /api/v3/directory/relation:
+    delete:
+      tags:
+        - directory
+      summary: Delete relation
+      description: Delete relation.
+      operationId: directory.v3.relation.delete
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v3DeleteRelationRequest'
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v3DeleteRelationResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
     put:
       tags:
         - directory
@@ -833,36 +968,43 @@ paths:
       parameters:
         - name: object_type
           in: path
+          description: object type
           required: true
           schema:
             type: string
         - name: object_id
           in: path
+          description: object identifier
           required: true
           schema:
             type: string
         - name: relation
           in: path
+          description: relation name
           required: true
           schema:
             type: string
         - name: subject_type
           in: path
+          description: subject type
           required: true
           schema:
             type: string
         - name: subject_id
           in: path
+          description: subject identifier
           required: true
           schema:
             type: string
         - name: subject_relation
           in: path
+          description: optional subject relation name
           required: true
           schema:
             type: string
         - name: with_objects
           in: query
+          description: materialize relation objects
           schema:
             type: boolean
       responses:
@@ -881,197 +1023,19 @@ paths:
       security:
         - DirectoryAPIKey: []
           TenantID: []
-  ? /api/v3/directory/relation/{relation.object_type}/{relation.object_id}/{relation.relation}/{relation.subject_type}/{relation.subject_id}/{relation.subject_relation}
-  : delete:
-      tags:
-        - directory
-      summary: Delete relation
-      description: Delete relation.
-      operationId: directory.v3.relation.delete
-      parameters:
-        - name: relation.object_type
-          in: path
-          description: object type
-          required: true
-          schema:
-            type: string
-        - name: relation.object_id
-          in: path
-          description: object identifier
-          required: true
-          schema:
-            type: string
-        - name: relation.relation
-          in: path
-          description: object relation name
-          required: true
-          schema:
-            type: string
-        - name: relation.subject_type
-          in: path
-          description: subject type
-          required: true
-          schema:
-            type: string
-        - name: relation.subject_id
-          in: path
-          description: subject identifier
-          required: true
-          schema:
-            type: string
-        - name: relation.subject_relation
-          in: path
-          description: optional subject relation name
-          required: true
-          schema:
-            type: string
-        - name: relation.created_at
-          in: query
-          description: created at timestamp (UTC)
-          schema:
-            type: string
-            format: date-time
-        - name: relation.updated_at
-          in: query
-          description: last updated timestamp (UTC)
-          schema:
-            type: string
-            format: date-time
-        - name: relation.etag
-          in: query
-          description: object instance etag
-          schema:
-            type: string
-      responses:
-        "200":
-          description: A successful response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/v3DeleteRelationResponse'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/rpcStatus'
-      security:
-        - DirectoryAPIKey: []
-          TenantID: []
-  /api/v3/directory/relations/object/{object_type}/{object_id}/{relation}/{subject_type}/{subject_id}/{subject_relation}:
-    get:
+  /api/v3/directory/relations:
+    post:
       tags:
         - directory
       summary: List relations instances
       description: Returns list of relation instances.
-      operationId: GetRelations
-      parameters:
-        - name: object_type
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: object_id
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: relation
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: subject_type
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: subject_id
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: subject_relation
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: page.size
-          in: query
-          description: requested page size, valid value between 1-100 rows (default 100)
-          schema:
-            type: integer
-            format: int32
-        - name: page.token
-          in: query
-          description: pagination start token, default ""
-          schema:
-            type: string
-      responses:
-        "200":
-          description: A successful response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/v3GetRelationsResponse'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/rpcStatus'
-      security:
-        - DirectoryAPIKey: []
-          TenantID: []
-  /api/v3/directory/relations/subject/{subject_type}/{subject_id}/{subject_relation}/{object_type}/{object_id}/{relation}:
-    get:
-      tags:
-        - directory
-      summary: List relations instances
-      description: Returns list of relation instances.
-      operationId: GetRelations2
-      parameters:
-        - name: subject_type
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: subject_id
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: subject_relation
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: object_type
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: object_id
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: relation
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: page.size
-          in: query
-          description: requested page size, valid value between 1-100 rows (default 100)
-          schema:
-            type: integer
-            format: int32
-        - name: page.token
-          in: query
-          description: pagination start token, default ""
-          schema:
-            type: string
+      operationId: directory.v3.relations.list
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v3GetRelationsRequest'
       responses:
         "200":
           description: A successful response.

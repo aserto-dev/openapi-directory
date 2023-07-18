@@ -308,88 +308,12 @@ components:
         extensionprops: {}
         type: object
         properties:
-          incoming:
+          relations:
             ref: ""
             value:
               extensionprops: {}
               type: array
-              title: incoming object relations of object instance (result.type == incoming.subject.type && result.key == incoming.subject.key)
-              items:
-                ref: '#/components/schemas/v2Relation'
-                value:
-                  extensionprops: {}
-                  type: object
-                  properties:
-                    created_at:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
-                        title: created at timestamp (UTC)
-                        format: date-time
-                    hash:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
-                        title: object instance hash
-                    object:
-                      ref: '#/components/schemas/v2ObjectIdentifier'
-                      value:
-                        extensionprops: {}
-                        type: object
-                        title: Object identifier
-                        properties:
-                          key:
-                            ref: ""
-                            value:
-                              extensionprops: {}
-                              type: string
-                              title: external object key (cs-string)
-                          type:
-                            ref: ""
-                            value:
-                              extensionprops: {}
-                              type: string
-                              title: object type
-                    relation:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
-                        title: relation type name
-                    subject:
-                      ref: '#/components/schemas/v2ObjectIdentifier'
-                      value:
-                        extensionprops: {}
-                        type: object
-                        title: Object identifier
-                        properties:
-                          key:
-                            ref: ""
-                            value:
-                              extensionprops: {}
-                              type: string
-                              title: external object key (cs-string)
-                          type:
-                            ref: ""
-                            value:
-                              extensionprops: {}
-                              type: string
-                              title: object type
-                    updated_at:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
-                        title: last updated timestamp (UTC)
-                        format: date-time
-          outgoing:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: array
-              title: outgoing object relations of object instance (result.type == outgoing.object.type && result.key == outgoing.object.key)
+              title: object relations
               items:
                 ref: '#/components/schemas/v2Relation'
                 value:
@@ -2136,7 +2060,7 @@ info:
     extensionprops: {}
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: v0.21.4
+  version: v0.21.5
 paths: {}
 servers:
   - extensionprops: {}

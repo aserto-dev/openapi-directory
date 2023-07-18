@@ -255,6 +255,7 @@
         "details": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/protobufAny"
           }
         }
@@ -380,7 +381,10 @@
           "$ref": "#/definitions/v3Object",
           "title": "object instance"
         }
-      }
+      },
+      "required": [
+        "object"
+      ]
     },
     "v3SetObjectResponse": {
       "type": "object",
@@ -398,7 +402,10 @@
           "$ref": "#/definitions/v3Relation",
           "title": "relation instance"
         }
-      }
+      },
+      "required": [
+        "relation"
+      ]
     },
     "v3SetRelationResponse": {
       "type": "object",

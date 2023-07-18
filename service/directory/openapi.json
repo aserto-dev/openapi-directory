@@ -28,7 +28,8 @@
         },
         "details": {
           "items": {
-            "$ref": "#/definitions/protobufAny"
+            "$ref": "#/definitions/protobufAny",
+            "type": "object"
           },
           "type": "array"
         },
@@ -142,6 +143,16 @@
       },
       "type": "object"
     },
+    "v3DeleteManifestResponse": {
+      "properties": {
+        "result": {
+          "properties": {},
+          "title": "empty result",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
     "v3DeleteObjectResponse": {
       "properties": {
         "result": {
@@ -220,7 +231,8 @@
       "properties": {
         "results": {
           "items": {
-            "$ref": "#/definitions/v3ObjectDependency"
+            "$ref": "#/definitions/v3ObjectDependency",
+            "type": "object"
           },
           "title": "dependency graph",
           "type": "array"
@@ -230,9 +242,14 @@
     },
     "v3GetManifestResponse": {
       "properties": {
-        "result": {
-          "$ref": "#/definitions/v3Manifest",
-          "title": "manifest instance"
+        "body": {
+          "format": "byte",
+          "title": "Manifest content",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/v3Metadata",
+          "title": "Manifest metadata"
         }
       },
       "type": "object"
@@ -241,7 +258,8 @@
       "properties": {
         "results": {
           "items": {
-            "$ref": "#/definitions/v3Object"
+            "$ref": "#/definitions/v3Object",
+            "type": "object"
           },
           "title": "array of object instances",
           "type": "array"
@@ -251,18 +269,16 @@
     },
     "v3GetObjectResponse": {
       "properties": {
-        "incoming": {
-          "items": {
-            "$ref": "#/definitions/v3Relation"
-          },
-          "title": "incoming object relations",
-          "type": "array"
+        "page": {
+          "$ref": "#/definitions/v3PaginationResponse",
+          "title": "pagination response"
         },
-        "outgoing": {
+        "relations": {
           "items": {
-            "$ref": "#/definitions/v3Relation"
+            "$ref": "#/definitions/v3Relation",
+            "type": "object"
           },
-          "title": "outgoing object relations",
+          "title": "object relations",
           "type": "array"
         },
         "result": {
@@ -276,11 +292,13 @@
       "properties": {
         "page": {
           "$ref": "#/definitions/v3PaginationResponse",
+          "readOnly": true,
           "title": "pagination response"
         },
         "results": {
           "items": {
-            "$ref": "#/definitions/v3Object"
+            "$ref": "#/definitions/v3Object",
+            "type": "object"
           },
           "title": "array of object instances",
           "type": "array"
@@ -294,15 +312,12 @@
           "additionalProperties": {
             "$ref": "#/definitions/v3Object"
           },
-          "title": "map of materialized relation objects",
+          "title": "map from \"\u003ctype\u003e:\u003ckey\u003e\" to materialized relation objects",
           "type": "object"
         },
-        "results": {
-          "items": {
-            "$ref": "#/definitions/v3Relation"
-          },
-          "title": "array of relation instances",
-          "type": "array"
+        "result": {
+          "$ref": "#/definitions/v3Relation",
+          "title": "relation instance"
         }
       },
       "type": "object"
@@ -336,19 +351,32 @@
         "subject_type": {
           "title": "subject type",
           "type": "string"
+        },
+        "with_objects": {
+          "title": "materialize relation objects",
+          "type": "boolean"
         }
       },
       "type": "object"
     },
     "v3GetRelationsResponse": {
       "properties": {
+        "objects": {
+          "additionalProperties": {
+            "$ref": "#/definitions/v3Object"
+          },
+          "title": "map from \"\u003ctype\u003e:\u003ckey\u003e\" to materialized relation objects",
+          "type": "object"
+        },
         "page": {
           "$ref": "#/definitions/v3PaginationResponse",
+          "readOnly": true,
           "title": "pagination response"
         },
         "results": {
           "items": {
-            "$ref": "#/definitions/v3Relation"
+            "$ref": "#/definitions/v3Relation",
+            "type": "object"
           },
           "title": "array of relation instances",
           "type": "array"
@@ -394,42 +422,37 @@
       },
       "type": "object"
     },
-    "v3Manifest": {
+    "v3ListManifestsResponse": {
       "properties": {
-        "created_at": {
-          "format": "date-time",
-          "readOnly": true,
-          "title": "created at timestamp (UTC)",
-          "type": "string"
+        "manifests": {
+          "items": {
+            "$ref": "#/definitions/v3Metadata",
+            "type": "object"
+          },
+          "title": "manifests metadata",
+          "type": "array"
         },
-        "data": {
-          "format": "byte",
-          "title": "manifest data",
-          "type": "string"
-        },
-        "etag": {
-          "title": "object instance etag",
-          "type": "string"
-        },
+        "next_page": {
+          "$ref": "#/definitions/v3PaginationResponse",
+          "title": "pagination response"
+        }
+      },
+      "type": "object"
+    },
+    "v3Metadata": {
+      "properties": {
         "name": {
           "title": "manifest name (unique, lc-string)",
           "type": "string"
         },
-        "updated_at": {
-          "format": "date-time",
-          "readOnly": true,
-          "title": "last updated timestamp (UTC)",
-          "type": "string"
-        },
         "version": {
-          "title": "manifest version (semver)",
+          "title": "manifest version (semver notation)",
           "type": "string"
         }
       },
       "required": [
         "name",
-        "version",
-        "data"
+        "version"
       ],
       "type": "object"
     },
@@ -636,8 +659,9 @@
     "v3SetManifestResponse": {
       "properties": {
         "result": {
-          "$ref": "#/definitions/v3Manifest",
-          "title": "manifest instance"
+          "properties": {},
+          "title": "empty result",
+          "type": "object"
         }
       },
       "type": "object"
@@ -649,6 +673,9 @@
           "title": "object instance"
         }
       },
+      "required": [
+        "object"
+      ],
       "type": "object"
     },
     "v3SetObjectResponse": {
@@ -667,6 +694,9 @@
           "title": "relation instance"
         }
       },
+      "required": [
+        "relation"
+      ],
       "type": "object"
     },
     "v3SetRelationResponse": {
@@ -915,11 +945,26 @@
             "type": "string"
           },
           {
-            "description": "materialize the object relations objects",
+            "description": "include object relations",
             "in": "query",
             "name": "with_relations",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "description": "requested page size, valid value between 1-100 rows (default 100)",
+            "format": "int32",
+            "in": "query",
+            "name": "page.size",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "pagination start token, default \"\"",
+            "in": "query",
+            "name": "page.token",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {

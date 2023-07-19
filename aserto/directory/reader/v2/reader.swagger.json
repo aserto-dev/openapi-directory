@@ -118,21 +118,13 @@
           "$ref": "#/definitions/v2Object",
           "title": "object instance"
         },
-        "incoming": {
+        "relations": {
           "type": "array",
           "items": {
             "type": "object",
             "$ref": "#/definitions/v2Relation"
           },
-          "title": "incoming object relations of object instance (result.type == incoming.subject.type \u0026\u0026 result.key == incoming.subject.key)"
-        },
-        "outgoing": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v2Relation"
-          },
-          "title": "outgoing object relations of object instance (result.type == outgoing.object.type \u0026\u0026 result.key == outgoing.object.key)"
+          "title": "object relations"
         }
       }
     },

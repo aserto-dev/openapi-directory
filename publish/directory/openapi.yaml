@@ -201,6 +201,21 @@ components:
             $ref: '#/components/schemas/v3Relation'
         result:
           $ref: '#/components/schemas/v3Object'
+    v3GetObjectTypeResponse:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/v3ObjectType'
+    v3GetObjectTypesResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/v3PaginationResponse'
+        results:
+          type: array
+          title: array of object types
+          items:
+            $ref: '#/components/schemas/v3ObjectType'
     v3GetObjectsResponse:
       type: object
       properties:
@@ -300,7 +315,7 @@ components:
           title: manifests metadata
           items:
             $ref: '#/components/schemas/v3Metadata'
-        next_page:
+        page:
           $ref: '#/components/schemas/v3PaginationResponse'
     v3Metadata:
       type: object
@@ -400,6 +415,20 @@ components:
         object_type:
           type: string
           title: object type (lc-string)
+    v3ObjectType:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: object type name (unique, lc-string)
+        relation_types:
+          type: object
+          additionalProperties:
+            has: null
+            schema:
+              $ref: '#/components/schemas/v3RelationType'
     v3Opcode:
       type: string
       enum:
@@ -466,6 +495,24 @@ components:
           title: last updated timestamp (UTC)
           format: date-time
           readOnly: true
+    v3RelationType:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          title: object type name (unique, lc-string)
+        permissions:
+          type: array
+          title: array of object type permissions
+          items:
+            type: string
+        unions:
+          type: array
+          title: array of other relations types included in this one
+          items:
+            type: string
     v3SetManifestResponse:
       type: object
       properties:
@@ -507,7 +554,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.21.5-20230718202606.12.g6c7f9ba2
+  version: 0.21.5-20230719084454.13.g416d5681-dirty
 paths:
   /api/v3/directory/check/permission:
     post:
@@ -587,6 +634,77 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/v3GetGraphResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v3/directory/manifest/{name}/{version}:
+    delete:
+      tags:
+        - directory
+      summary: Delete manifest
+      description: Delete manifest.
+      operationId: directory.v3.manifest.delete
+      parameters:
+        - name: name
+          in: path
+          description: manifest name (unique, lc-string)
+          required: true
+          schema:
+            type: string
+        - name: version
+          in: path
+          description: manifest version (semver notation)
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v3DeleteManifestResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v3/directory/manifests:
+    get:
+      tags:
+        - directory
+      summary: List manifests
+      description: Returns list of stored manifests.
+      operationId: directory.v3.manifests.list
+      parameters:
+        - name: page.size
+          in: query
+          description: requested page size, valid value between 1-100 rows (default 100)
+          schema:
+            type: integer
+            format: int32
+        - name: page.token
+          in: query
+          description: pagination start token, default ""
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v3ListManifestsResponse'
         default:
           description: An unexpected error response.
           content:
@@ -708,6 +826,71 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/v3GetObjectResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v3/directory/object_type/{name}:
+    get:
+      tags:
+        - directory
+      summary: Get object type
+      description: Returns single object type.
+      operationId: directory.v3.object_types.list
+      parameters:
+        - name: name
+          in: path
+          description: name of the object type to retrieve
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v3GetObjectTypeResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v3/directory/object_types:
+    get:
+      tags:
+        - directory
+      summary: List all object types
+      description: Returns list of object types.
+      operationId: directory.v3.object_types.list
+      parameters:
+        - name: page.size
+          in: query
+          description: requested page size, valid value between 1-100 rows (default 100)
+          schema:
+            type: integer
+            format: int32
+        - name: page.token
+          in: query
+          description: pagination start token, default ""
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v3GetObjectTypesResponse'
         default:
           description: An unexpected error response.
           content:

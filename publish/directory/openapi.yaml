@@ -554,7 +554,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.21.5-20230719084454.13.g416d5681-dirty
+  version: x.y.z
 paths:
   /api/v3/directory/check/permission:
     post:
@@ -670,6 +670,85 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/v3DeleteManifestResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+    get:
+      tags:
+        - directory
+      summary: Get manifest
+      description: Get manifest.
+      operationId: directory.v3.manifest.get
+      parameters:
+        - name: name
+          in: path
+          description: manifest name (unique, lc-string)
+          required: true
+          schema:
+            type: string
+        - name: version
+          in: path
+          description: manifest version (semver notation)
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/yaml:
+              schema:
+                type: string
+                format: binary
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+    post:
+      tags:
+        - directory
+      summary: Set manifest
+      description: Set manifest.
+      operationId: directory.v3.manifest.set
+      parameters:
+        - name: name
+          in: path
+          description: manifest name (unique, lc-string)
+          required: true
+          schema:
+            type: string
+        - name: version
+          in: path
+          description: manifest version (semver notation)
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Manifest YAML file
+        required: true
+        content:
+          application/yaml:
+            schema:
+              type: string
+              format: binary
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/yaml:
+              schema:
+                $ref: '#/components/schemas/v3SetManifestResponse'
         default:
           description: An unexpected error response.
           content:

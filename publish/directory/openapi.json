@@ -679,7 +679,7 @@
     },
     "termsOfService": "https://aserto.com/terms/",
     "title": "Directory",
-    "version": "0.0.0-20230710144003.0.g276c70de-dirty"
+    "version": "v0.21.5"
   },
   "openapi": "3.0.3",
   "paths": {

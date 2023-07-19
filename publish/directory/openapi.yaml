@@ -496,7 +496,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.0.0-20230710144003.0.g276c70de-dirty
+  version: v0.21.5
 paths:
   /api/v3/directory/check/permission:
     post:

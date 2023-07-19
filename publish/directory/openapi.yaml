@@ -109,6 +109,12 @@ components:
           title: trace information
           items:
             type: string
+    v3DeleteManifestResponse:
+      type: object
+      properties:
+        result:
+          type: object
+          title: empty result
     v3DeleteObjectResponse:
       type: object
       properties:
@@ -169,8 +175,12 @@ components:
     v3GetManifestResponse:
       type: object
       properties:
-        result:
-          $ref: '#/components/schemas/v3Manifest'
+        body:
+          type: string
+          title: Manifest content
+          format: byte
+        metadata:
+          $ref: '#/components/schemas/v3Metadata'
     v3GetObjectManyResponse:
       type: object
       properties:
@@ -182,14 +192,11 @@ components:
     v3GetObjectResponse:
       type: object
       properties:
-        incoming:
+        page:
+          $ref: '#/components/schemas/v3PaginationResponse'
+        relations:
           type: array
-          title: incoming object relations
-          items:
-            $ref: '#/components/schemas/v3Relation'
-        outgoing:
-          type: array
-          title: outgoing object relations
+          title: object relations
           items:
             $ref: '#/components/schemas/v3Relation'
         result:
@@ -209,16 +216,13 @@ components:
       properties:
         objects:
           type: object
-          title: map of materialized relation objects
+          title: map from "<type>:<key>" to materialized relation objects
           additionalProperties:
             has: null
             schema:
               $ref: '#/components/schemas/v3Object'
-        results:
-          type: array
-          title: array of relation instances
-          items:
-            $ref: '#/components/schemas/v3Relation'
+        result:
+          $ref: '#/components/schemas/v3Relation'
     v3GetRelationsRequest:
       type: object
       properties:
@@ -242,9 +246,19 @@ components:
         subject_type:
           type: string
           title: subject type
+        with_objects:
+          type: boolean
+          title: materialize relation objects
     v3GetRelationsResponse:
       type: object
       properties:
+        objects:
+          type: object
+          title: map from "<type>:<key>" to materialized relation objects
+          additionalProperties:
+            has: null
+            schema:
+              $ref: '#/components/schemas/v3Object'
         page:
           $ref: '#/components/schemas/v3PaginationResponse'
         results:
@@ -278,36 +292,28 @@ components:
           $ref: '#/components/schemas/v3ImportCounter'
         relation:
           $ref: '#/components/schemas/v3ImportCounter'
-    v3Manifest:
+    v3ListManifestsResponse:
+      type: object
+      properties:
+        manifests:
+          type: array
+          title: manifests metadata
+          items:
+            $ref: '#/components/schemas/v3Metadata'
+        next_page:
+          $ref: '#/components/schemas/v3PaginationResponse'
+    v3Metadata:
       type: object
       required:
         - name
         - version
-        - data
       properties:
-        created_at:
-          type: string
-          title: created at timestamp (UTC)
-          format: date-time
-          readOnly: true
-        data:
-          type: string
-          title: manifest data
-          format: byte
-        etag:
-          type: string
-          title: object instance etag
         name:
           type: string
           title: manifest name (unique, lc-string)
-        updated_at:
-          type: string
-          title: last updated timestamp (UTC)
-          format: date-time
-          readOnly: true
         version:
           type: string
-          title: manifest version (semver)
+          title: manifest version (semver notation)
     v3Object:
       type: object
       required:
@@ -464,9 +470,12 @@ components:
       type: object
       properties:
         result:
-          $ref: '#/components/schemas/v3Manifest'
+          type: object
+          title: empty result
     v3SetObjectRequest:
       type: object
+      required:
+        - object
       properties:
         object:
           $ref: '#/components/schemas/v3Object'
@@ -477,6 +486,8 @@ components:
           $ref: '#/components/schemas/v3Object'
     v3SetRelationRequest:
       type: object
+      required:
+        - relation
       properties:
         relation:
           $ref: '#/components/schemas/v3Relation'
@@ -496,7 +507,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: v0.21.5
+  version: 0.21.5-20230718202606.12.g6c7f9ba2
 paths:
   /api/v3/directory/check/permission:
     post:
@@ -676,9 +687,20 @@ paths:
             type: string
         - name: with_relations
           in: query
-          description: materialize the object relations objects
+          description: include object relations
           schema:
             type: boolean
+        - name: page.size
+          in: query
+          description: requested page size, valid value between 1-100 rows (default 100)
+          schema:
+            type: integer
+            format: int32
+        - name: page.token
+          in: query
+          description: pagination start token, default ""
+          schema:
+            type: string
       responses:
         "200":
           description: A successful response.

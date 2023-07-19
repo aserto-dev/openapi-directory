@@ -47,6 +47,7 @@
         "details": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/protobufAny"
           }
         }
@@ -90,6 +91,7 @@
         "results": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/v2ObjectDependency"
           },
           "title": "dependency graph"
@@ -102,6 +104,7 @@
         "results": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/v2Object"
           },
           "title": "array of object instances"
@@ -115,12 +118,21 @@
           "$ref": "#/definitions/v2Object",
           "title": "object instance"
         },
-        "relations": {
+        "incoming": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/v2Relation"
           },
-          "title": "object relations"
+          "title": "incoming object relations of object instance (result.type == incoming.subject.type \u0026\u0026 result.key == incoming.subject.key)"
+        },
+        "outgoing": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v2Relation"
+          },
+          "title": "outgoing object relations of object instance (result.type == outgoing.object.type \u0026\u0026 result.key == outgoing.object.key)"
         }
       }
     },
@@ -139,6 +151,7 @@
         "results": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/v2ObjectType"
           },
           "title": "array of object types"
@@ -155,6 +168,7 @@
         "results": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/v2Object"
           },
           "title": "array of object instances"
@@ -180,6 +194,7 @@
         "results": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/v2Permission"
           },
           "title": "array of permissions"
@@ -196,6 +211,7 @@
         "results": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/v2Relation"
           },
           "title": "array of relation instances"
@@ -224,6 +240,7 @@
         "results": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/v2RelationType"
           },
           "title": "array of relation types"
@@ -240,6 +257,7 @@
         "results": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/v2Relation"
           },
           "title": "array of relation instances"

@@ -172,10 +172,25 @@
           },
           {
             "name": "with_relations",
-            "description": "materialize the object relations objects",
+            "description": "include object relations",
             "in": "query",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "page.size",
+            "description": "requested page size, valid value between 1-100 rows (default 100)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "page.token",
+            "description": "pagination start token, default \"\"",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -396,6 +411,7 @@
         "details": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/protobufAny"
           }
         }
@@ -552,6 +568,7 @@
         "results": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/v3ObjectDependency"
           },
           "title": "dependency graph"
@@ -564,6 +581,7 @@
         "results": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/v3Object"
           },
           "title": "array of object instances"
@@ -577,19 +595,17 @@
           "$ref": "#/definitions/v3Object",
           "title": "object instance"
         },
-        "incoming": {
+        "relations": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/v3Relation"
           },
-          "title": "incoming object relations"
+          "title": "object relations"
         },
-        "outgoing": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v3Relation"
-          },
-          "title": "outgoing object relations"
+        "page": {
+          "$ref": "#/definitions/v3PaginationResponse",
+          "title": "pagination response"
         }
       }
     },
@@ -599,32 +615,31 @@
         "results": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/v3Object"
           },
           "title": "array of object instances"
         },
         "page": {
           "$ref": "#/definitions/v3PaginationResponse",
-          "title": "pagination response"
+          "title": "pagination response",
+          "readOnly": true
         }
       }
     },
     "v3GetRelationResponse": {
       "type": "object",
       "properties": {
-        "results": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v3Relation"
-          },
-          "title": "array of relation instances"
+        "result": {
+          "$ref": "#/definitions/v3Relation",
+          "title": "relation instance"
         },
         "objects": {
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/v3Object"
           },
-          "title": "map of materialized relation objects"
+          "title": "map from \"\u003ctype\u003e:\u003ckey\u003e\" to materialized relation objects"
         }
       }
     },
@@ -655,6 +670,10 @@
           "type": "string",
           "title": "optional subject relation name"
         },
+        "with_objects": {
+          "type": "boolean",
+          "title": "materialize relation objects"
+        },
         "page": {
           "$ref": "#/definitions/v3PaginationRequest",
           "title": "pagination request"
@@ -667,13 +686,22 @@
         "results": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/v3Relation"
           },
           "title": "array of relation instances"
         },
+        "objects": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/v3Object"
+          },
+          "title": "map from \"\u003ctype\u003e:\u003ckey\u003e\" to materialized relation objects"
+        },
         "page": {
           "$ref": "#/definitions/v3PaginationResponse",
-          "title": "pagination response"
+          "title": "pagination response",
+          "readOnly": true
         }
       }
     },

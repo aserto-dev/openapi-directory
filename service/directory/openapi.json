@@ -288,6 +288,33 @@
       },
       "type": "object"
     },
+    "v3GetObjectTypeResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v3ObjectType",
+          "title": "object type"
+        }
+      },
+      "type": "object"
+    },
+    "v3GetObjectTypesResponse": {
+      "properties": {
+        "page": {
+          "$ref": "#/definitions/v3PaginationResponse",
+          "readOnly": true,
+          "title": "pagination response"
+        },
+        "results": {
+          "items": {
+            "$ref": "#/definitions/v3ObjectType",
+            "type": "object"
+          },
+          "title": "array of object types",
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "v3GetObjectsResponse": {
       "properties": {
         "page": {
@@ -432,7 +459,7 @@
           "title": "manifests metadata",
           "type": "array"
         },
-        "next_page": {
+        "page": {
           "$ref": "#/definitions/v3PaginationResponse",
           "title": "pagination response"
         }
@@ -569,6 +596,24 @@
       "title": "Object identifier",
       "type": "object"
     },
+    "v3ObjectType": {
+      "properties": {
+        "name": {
+          "title": "object type name (unique, lc-string)",
+          "type": "string"
+        },
+        "relation_types": {
+          "additionalProperties": {
+            "$ref": "#/definitions/v3RelationType"
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    },
     "v3Opcode": {
       "default": "OPCODE_UNKNOWN",
       "enum": [
@@ -653,6 +698,32 @@
         "relation",
         "subject_type",
         "subject_id"
+      ],
+      "type": "object"
+    },
+    "v3RelationType": {
+      "properties": {
+        "name": {
+          "title": "object type name (unique, lc-string)",
+          "type": "string"
+        },
+        "permissions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "array of object type permissions",
+          "type": "array"
+        },
+        "unions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "array of other relations types included in this one",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name"
       ],
       "type": "object"
     },
@@ -834,6 +905,99 @@
         ]
       }
     },
+    "/api/v3/directory/manifest/{name}/{version}": {
+      "delete": {
+        "description": "Delete manifest.",
+        "operationId": "directory.v3.manifest.delete",
+        "parameters": [
+          {
+            "description": "manifest name (unique, lc-string)",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "manifest version (semver notation)",
+            "in": "path",
+            "name": "version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3DeleteManifestResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Delete manifest",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
+    "/api/v3/directory/manifests": {
+      "get": {
+        "description": "Returns list of stored manifests.",
+        "operationId": "directory.v3.manifests.list",
+        "parameters": [
+          {
+            "description": "requested page size, valid value between 1-100 rows (default 100)",
+            "format": "int32",
+            "in": "query",
+            "name": "page.size",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "pagination start token, default \"\"",
+            "in": "query",
+            "name": "page.token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3ListManifestsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "List manifests",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
     "/api/v3/directory/object": {
       "post": {
         "description": "Set object.",
@@ -988,6 +1152,92 @@
           }
         ],
         "summary": "Get object instance",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
+    "/api/v3/directory/object_type/{name}": {
+      "get": {
+        "description": "Returns single object type.",
+        "operationId": "directory.v3.object_types.list",
+        "parameters": [
+          {
+            "description": "name of the object type to retrieve",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3GetObjectTypeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Get object type",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
+    "/api/v3/directory/object_types": {
+      "get": {
+        "description": "Returns list of object types.",
+        "operationId": "directory.v3.object_types.list",
+        "parameters": [
+          {
+            "description": "requested page size, valid value between 1-100 rows (default 100)",
+            "format": "int32",
+            "in": "query",
+            "name": "page.size",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "pagination start token, default \"\"",
+            "in": "query",
+            "name": "page.token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3GetObjectTypesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "List all object types",
         "tags": [
           "directory"
         ]

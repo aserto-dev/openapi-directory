@@ -311,15 +311,11 @@ func loadOpenAPI[T any](path string, doc T) error {
 		return fmt.Errorf("unsupported file extension '%s' in [%s]", ext, path)
 	}
 
-	if err := decoder.Decode(&doc); err != nil {
-		return errors.Wrapf(err, "decode openapi v3 file [%s]", path)
-	}
-
-	return nil
+	return decoder.Decode(&doc)
 }
 
 func writeOpenAPI(spec *openapi3.T, path string) error {
-	f, err := os.Create(path)
+	f, err := createFileAndDir(path)
 	if err != nil {
 		return errors.Wrapf(err, "create openapi v3 file [%s]", path)
 	}
@@ -420,7 +416,7 @@ func stripPathsWithTag(paths openapi3.Paths, tag string) {
 	}
 }
 
-func createFile(path string) (*os.File, error) {
+func createFileAndDir(path string) (*os.File, error) {
 	fsutil.EnsureDir(filepath.Dir(path))
 	return os.Create(path)
 }

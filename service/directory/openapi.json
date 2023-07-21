@@ -4,9 +4,12 @@
   ],
   "definitions": {
     "protobufAny": {
-      "additionalProperties": {},
       "properties": {
-        "@type": {
+        "type_url": {
+          "type": "string"
+        },
+        "value": {
+          "format": "byte",
           "type": "string"
         }
       },
@@ -74,8 +77,7 @@
       "properties": {
         "result": {
           "properties": {},
-          "title": "empty result",
-          "type": "object"
+          "title": "empty result"
         }
       },
       "type": "object"
@@ -84,8 +86,7 @@
       "properties": {
         "result": {
           "properties": {},
-          "title": "empty result",
-          "type": "object"
+          "title": "empty result"
         }
       },
       "type": "object"
@@ -94,8 +95,7 @@
       "properties": {
         "result": {
           "properties": {},
-          "title": "empty result",
-          "type": "object"
+          "title": "empty result"
         }
       },
       "type": "object"
@@ -104,8 +104,7 @@
       "properties": {
         "result": {
           "properties": {},
-          "title": "empty result",
-          "type": "object"
+          "title": "empty result"
         }
       },
       "type": "object"
@@ -114,8 +113,7 @@
       "properties": {
         "result": {
           "properties": {},
-          "title": "empty result",
-          "type": "object"
+          "title": "empty result"
         }
       },
       "type": "object"
@@ -146,6 +144,10 @@
     },
     "v2GetObjectResponse": {
       "properties": {
+        "page": {
+          "$ref": "#/definitions/v2PaginationResponse",
+          "title": "pagination response"
+        },
         "relations": {
           "items": {
             "$ref": "#/definitions/v2Relation"

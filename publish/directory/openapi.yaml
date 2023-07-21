@@ -9,11 +9,17 @@ components:
         extensionprops: {}
         type: object
         properties:
-          '@type':
+          type_url:
             ref: ""
             value:
               extensionprops: {}
               type: string
+          value:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              format: byte
     protobufNullValue:
       ref: ""
       value:
@@ -52,11 +58,17 @@ components:
                   extensionprops: {}
                   type: object
                   properties:
-                    '@type':
+                    type_url:
                       ref: ""
                       value:
                         extensionprops: {}
                         type: string
+                    value:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        format: byte
           message:
             ref: ""
             value:
@@ -118,7 +130,6 @@ components:
             ref: ""
             value:
               extensionprops: {}
-              type: object
               title: empty result
     v2DeleteObjectTypeResponse:
       ref: ""
@@ -130,7 +141,6 @@ components:
             ref: ""
             value:
               extensionprops: {}
-              type: object
               title: empty result
     v2DeletePermissionResponse:
       ref: ""
@@ -142,7 +152,6 @@ components:
             ref: ""
             value:
               extensionprops: {}
-              type: object
               title: empty result
     v2DeleteRelationResponse:
       ref: ""
@@ -154,7 +163,6 @@ components:
             ref: ""
             value:
               extensionprops: {}
-              type: object
               title: empty result
     v2DeleteRelationTypeResponse:
       ref: ""
@@ -166,7 +174,6 @@ components:
             ref: ""
             value:
               extensionprops: {}
-              type: object
               title: empty result
     v2GetGraphResponse:
       ref: ""
@@ -308,6 +315,26 @@ components:
         extensionprops: {}
         type: object
         properties:
+          page:
+            ref: '#/components/schemas/v2PaginationResponse'
+            value:
+              extensionprops: {}
+              type: object
+              title: Pagination response
+              properties:
+                next_token:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    title: next page token, when empty there are no more pages to fetch
+                result_size:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: integer
+                    title: result size of the page returned
+                    format: int32
           relations:
             ref: ""
             value:
@@ -2060,7 +2087,7 @@ info:
     extensionprops: {}
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: v0.21.5
+  version: v0.21.6
 paths: {}
 servers:
   - extensionprops: {}

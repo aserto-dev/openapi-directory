@@ -2,9 +2,12 @@
   "components": {
     "schemas": {
       "protobufAny": {
-        "additionalProperties": {},
         "properties": {
-          "@type": {
+          "type_url": {
+            "type": "string"
+          },
+          "value": {
+            "format": "byte",
             "type": "string"
           }
         },
@@ -71,8 +74,7 @@
       "v2DeleteObjectResponse": {
         "properties": {
           "result": {
-            "title": "empty result",
-            "type": "object"
+            "title": "empty result"
           }
         },
         "type": "object"
@@ -80,8 +82,7 @@
       "v2DeleteObjectTypeResponse": {
         "properties": {
           "result": {
-            "title": "empty result",
-            "type": "object"
+            "title": "empty result"
           }
         },
         "type": "object"
@@ -89,8 +90,7 @@
       "v2DeletePermissionResponse": {
         "properties": {
           "result": {
-            "title": "empty result",
-            "type": "object"
+            "title": "empty result"
           }
         },
         "type": "object"
@@ -98,8 +98,7 @@
       "v2DeleteRelationResponse": {
         "properties": {
           "result": {
-            "title": "empty result",
-            "type": "object"
+            "title": "empty result"
           }
         },
         "type": "object"
@@ -107,8 +106,7 @@
       "v2DeleteRelationTypeResponse": {
         "properties": {
           "result": {
-            "title": "empty result",
-            "type": "object"
+            "title": "empty result"
           }
         },
         "type": "object"
@@ -139,6 +137,9 @@
       },
       "v2GetObjectResponse": {
         "properties": {
+          "page": {
+            "$ref": "#/components/schemas/v2PaginationResponse"
+          },
           "relations": {
             "items": {
               "$ref": "#/components/schemas/v2Relation"
@@ -654,7 +655,7 @@
     },
     "termsOfService": "https://aserto.com/terms/",
     "title": "Directory",
-    "version": "v0.21.5"
+    "version": "v0.21.6"
   },
   "openapi": "3.0.3",
   "paths": null,

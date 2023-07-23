@@ -204,7 +204,7 @@
         ]
       }
     },
-    "/api/v3/directory/objects/{object_type}": {
+    "/api/v3/directory/objects": {
       "get": {
         "summary": "List object instances",
         "description": "Returns list of object instances.",
@@ -227,8 +227,8 @@
           {
             "name": "object_type",
             "description": "object type name (lc-string)",
-            "in": "path",
-            "required": true,
+            "in": "query",
+            "required": false,
             "type": "string"
           },
           {

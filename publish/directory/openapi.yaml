@@ -1875,7 +1875,7 @@ info:
     extensionprops: {}
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.21.5-20230722212030.5.gbb379bf1
+  version: 0.21.5-20230722212201.6.gd53b6ba2-dirty
 paths:
   /api/v3/directory/check/permission:
     extensionprops: {}
@@ -2945,7 +2945,7 @@ paths:
       security:
         - DirectoryAPIKey: []
           TenantID: []
-  /api/v3/directory/objects/{object_type}:
+  /api/v3/directory/objects:
     extensionprops: {}
     get:
       extensionprops: {}
@@ -2959,9 +2959,8 @@ paths:
           value:
             extensionprops: {}
             name: object_type
-            in: path
+            in: query
             description: object type name (lc-string)
-            required: true
             schema:
               ref: ""
               value:

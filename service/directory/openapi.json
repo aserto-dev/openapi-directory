@@ -960,16 +960,16 @@
         ]
       }
     },
-    "/api/v3/directory/objects/{object_type}": {
+    "/api/v3/directory/objects": {
       "get": {
         "description": "Returns list of object instances.",
         "operationId": "directory.v3.objects.list",
         "parameters": [
           {
             "description": "object type name (lc-string)",
-            "in": "path",
+            "in": "query",
             "name": "object_type",
-            "required": true,
+            "required": false,
             "type": "string"
           },
           {

@@ -675,7 +675,7 @@
     },
     "termsOfService": "https://aserto.com/terms/",
     "title": "Directory",
-    "version": "0.21.5-20230722212030.5.gbb379bf1"
+    "version": "0.21.5-20230722212201.6.gd53b6ba2-dirty"
   },
   "openapi": "3.0.3",
   "paths": {
@@ -1022,16 +1022,15 @@
         ]
       }
     },
-    "/api/v3/directory/objects/{object_type}": {
+    "/api/v3/directory/objects": {
       "get": {
         "description": "Returns list of object instances.",
         "operationId": "directory.v3.objects.list",
         "parameters": [
           {
             "description": "object type name (lc-string)",
-            "in": "path",
+            "in": "query",
             "name": "object_type",
-            "required": true,
             "schema": {
               "type": "string"
             }

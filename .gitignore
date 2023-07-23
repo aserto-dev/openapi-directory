@@ -1,6 +1,7 @@
 .DS_Store
 .vscode/launch.json
 .ext/
+.dev/
 
 # https://github.com/golang/go/issues/53502
 # go.work.sum is machine specific and should not be checked in

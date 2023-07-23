@@ -2,4 +2,4 @@ version: v1
 plugins:
   - name: openapiv2
     out: .
-    opt: logtostderr=true,json_names_for_fields=false,allow_delete_body=true #use proto names
+    opt: logtostderr=true,json_names_for_fields=false,allow_delete_body=true,simple_operation_ids=true #use proto names

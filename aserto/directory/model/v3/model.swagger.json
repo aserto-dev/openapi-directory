@@ -1,0 +1,105 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "aserto/directory/model/v3/model.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Model"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v3GetManifestResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v3Manifest",
+          "title": "manifest instance"
+        }
+      }
+    },
+    "v3Manifest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "manifest name (unique, lc-string)"
+        },
+        "version": {
+          "type": "string",
+          "title": "manifest version (semver)"
+        },
+        "data": {
+          "type": "string",
+          "format": "byte",
+          "title": "manifest data"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "created at timestamp (UTC)",
+          "readOnly": true
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "last updated timestamp (UTC)",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "title": "object instance etag"
+        }
+      },
+      "required": [
+        "name",
+        "version",
+        "data"
+      ]
+    },
+    "v3SetManifestResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v3Manifest",
+          "title": "manifest instance"
+        }
+      }
+    }
+  }
+}

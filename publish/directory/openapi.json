@@ -675,7 +675,7 @@
     },
     "termsOfService": "https://aserto.com/terms/",
     "title": "Directory",
-    "version": "0.21.5-20230721161845.3.g78297144-dirty"
+    "version": "0.21.5-20230722212030.5.gbb379bf1"
   },
   "openapi": "3.0.3",
   "paths": {
@@ -1393,6 +1393,7 @@
         "port": {
           "default": "9393",
           "enum": [
+            "8383",
             "9393"
           ]
         }

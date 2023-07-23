@@ -1875,7 +1875,7 @@ info:
     extensionprops: {}
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.21.5-20230721161845.3.g78297144-dirty
+  version: 0.21.5-20230722212030.5.gbb379bf1
 paths:
   /api/v3/directory/check/permission:
     extensionprops: {}
@@ -3964,6 +3964,7 @@ servers:
       port:
         extensionprops: {}
         enum:
+          - "8383"
           - "9393"
         default: "9393"
 tags:

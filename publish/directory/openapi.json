@@ -140,6 +140,15 @@
         },
         "type": "object"
       },
+      "v3DeleteManifestResponse": {
+        "properties": {
+          "result": {
+            "title": "empty result",
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
       "v3DeleteObjectResponse": {
         "properties": {
           "result": {
@@ -224,8 +233,13 @@
       },
       "v3GetManifestResponse": {
         "properties": {
-          "result": {
-            "$ref": "#/components/schemas/v3Manifest"
+          "body": {
+            "format": "byte",
+            "title": "Manifest content",
+            "type": "string"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/v3Metadata"
           }
         },
         "type": "object"
@@ -322,12 +336,23 @@
           "subject_type": {
             "title": "subject type",
             "type": "string"
+          },
+          "with_objects": {
+            "title": "materialize relation objects",
+            "type": "boolean"
           }
         },
         "type": "object"
       },
       "v3GetRelationsResponse": {
         "properties": {
+          "objects": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/v3Object"
+            },
+            "title": "map of materialized relation objects",
+            "type": "object"
+          },
           "page": {
             "$ref": "#/components/schemas/v3PaginationResponse"
           },
@@ -377,17 +402,27 @@
         },
         "type": "object"
       },
-      "v3Manifest": {
+      "v3ListManifestsResponse": {
+        "properties": {
+          "manifests": {
+            "items": {
+              "$ref": "#/components/schemas/v3Metadata"
+            },
+            "title": "manifests metadata",
+            "type": "array"
+          },
+          "page": {
+            "$ref": "#/components/schemas/v3PaginationResponse"
+          }
+        },
+        "type": "object"
+      },
+      "v3Metadata": {
         "properties": {
           "created_at": {
             "format": "date-time",
             "readOnly": true,
             "title": "created at timestamp (UTC)",
-            "type": "string"
-          },
-          "data": {
-            "format": "byte",
-            "title": "manifest data",
             "type": "string"
           },
           "etag": {
@@ -405,14 +440,13 @@
             "type": "string"
           },
           "version": {
-            "title": "manifest version (semver)",
+            "title": "manifest version (semver notation)",
             "type": "string"
           }
         },
         "required": [
           "name",
-          "version",
-          "data"
+          "version"
         ],
         "type": "object"
       },
@@ -619,7 +653,8 @@
       "v3SetManifestResponse": {
         "properties": {
           "result": {
-            "$ref": "#/components/schemas/v3Manifest"
+            "title": "empty result",
+            "type": "object"
           }
         },
         "type": "object"
@@ -630,6 +665,9 @@
             "$ref": "#/components/schemas/v3Object"
           }
         },
+        "required": [
+          "object"
+        ],
         "type": "object"
       },
       "v3SetObjectResponse": {
@@ -646,6 +684,9 @@
             "$ref": "#/components/schemas/v3Relation"
           }
         },
+        "required": [
+          "relation"
+        ],
         "type": "object"
       },
       "v3SetRelationResponse": {
@@ -675,7 +716,7 @@
     },
     "termsOfService": "https://aserto.com/terms/",
     "title": "Directory",
-    "version": "0.21.5-20230722212201.6.gd53b6ba2-dirty"
+    "version": "x.y.z"
   },
   "openapi": "3.0.3",
   "paths": {
@@ -821,6 +862,246 @@
           }
         ],
         "summary": "Get graph",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
+    "/api/v3/directory/manifest/{name}/{version}": {
+      "delete": {
+        "description": "Delete manifest.",
+        "operationId": "directory.v3.manifest.delete",
+        "parameters": [
+          {
+            "description": "manifest name (unique, lc-string)",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "manifest version (semver notation)",
+            "in": "path",
+            "name": "version",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v3DeleteManifestResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Delete manifest",
+        "tags": [
+          "directory"
+        ]
+      },
+      "get": {
+        "description": "Get manifest.",
+        "operationId": "directory.v3.manifest.get",
+        "parameters": [
+          {
+            "description": "manifest name (unique, lc-string)",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "manifest version (semver notation)",
+            "in": "path",
+            "name": "version",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/yaml": {
+                "schema": {
+                  "format": "binary",
+                  "type": "string"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Get manifest",
+        "tags": [
+          "directory"
+        ]
+      },
+      "post": {
+        "description": "Set manifest.",
+        "operationId": "directory.v3.manifest.set",
+        "parameters": [
+          {
+            "description": "manifest name (unique, lc-string)",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "manifest version (semver notation)",
+            "in": "path",
+            "name": "version",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/yaml": {
+              "schema": {
+                "format": "binary",
+                "type": "string"
+              }
+            }
+          },
+          "description": "Manifest YAML file",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/v3SetManifestResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Set manifest",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
+    "/api/v3/directory/manifests": {
+      "get": {
+        "description": "Returns list of stored manifests.",
+        "operationId": "directory.v3.manifests.list",
+        "parameters": [
+          {
+            "description": "requested page size, valid value between 1-100 rows (default 100)",
+            "in": "query",
+            "name": "page.size",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "pagination start token, default \"\"",
+            "in": "query",
+            "name": "page.token",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v3ListManifestsResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "List manifests",
         "tags": [
           "directory"
         ]

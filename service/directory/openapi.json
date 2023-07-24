@@ -28,7 +28,8 @@
         },
         "details": {
           "items": {
-            "$ref": "#/definitions/protobufAny"
+            "$ref": "#/definitions/protobufAny",
+            "type": "object"
           },
           "type": "array"
         },
@@ -142,6 +143,16 @@
       },
       "type": "object"
     },
+    "v3DeleteManifestResponse": {
+      "properties": {
+        "result": {
+          "properties": {},
+          "title": "empty result",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
     "v3DeleteObjectResponse": {
       "properties": {
         "result": {
@@ -220,7 +231,8 @@
       "properties": {
         "results": {
           "items": {
-            "$ref": "#/definitions/v3ObjectDependency"
+            "$ref": "#/definitions/v3ObjectDependency",
+            "type": "object"
           },
           "title": "dependency graph",
           "type": "array"
@@ -230,9 +242,14 @@
     },
     "v3GetManifestResponse": {
       "properties": {
-        "result": {
-          "$ref": "#/definitions/v3Manifest",
-          "title": "manifest instance"
+        "body": {
+          "format": "byte",
+          "title": "Manifest content",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/v3Metadata",
+          "title": "Manifest metadata"
         }
       },
       "type": "object"
@@ -241,7 +258,8 @@
       "properties": {
         "results": {
           "items": {
-            "$ref": "#/definitions/v3Object"
+            "$ref": "#/definitions/v3Object",
+            "type": "object"
           },
           "title": "array of object instances",
           "type": "array"
@@ -253,11 +271,13 @@
       "properties": {
         "page": {
           "$ref": "#/definitions/v3PaginationResponse",
+          "readOnly": true,
           "title": "pagination response"
         },
         "relations": {
           "items": {
-            "$ref": "#/definitions/v3Relation"
+            "$ref": "#/definitions/v3Relation",
+            "type": "object"
           },
           "title": "object relations",
           "type": "array"
@@ -273,11 +293,13 @@
       "properties": {
         "page": {
           "$ref": "#/definitions/v3PaginationResponse",
+          "readOnly": true,
           "title": "pagination response"
         },
         "results": {
           "items": {
-            "$ref": "#/definitions/v3Object"
+            "$ref": "#/definitions/v3Object",
+            "type": "object"
           },
           "title": "array of object instances",
           "type": "array"
@@ -296,7 +318,8 @@
         },
         "results": {
           "items": {
-            "$ref": "#/definitions/v3Relation"
+            "$ref": "#/definitions/v3Relation",
+            "type": "object"
           },
           "title": "array of relation instances",
           "type": "array"
@@ -333,19 +356,32 @@
         "subject_type": {
           "title": "subject type",
           "type": "string"
+        },
+        "with_objects": {
+          "title": "materialize relation objects",
+          "type": "boolean"
         }
       },
       "type": "object"
     },
     "v3GetRelationsResponse": {
       "properties": {
+        "objects": {
+          "additionalProperties": {
+            "$ref": "#/definitions/v3Object"
+          },
+          "title": "map of materialized relation objects",
+          "type": "object"
+        },
         "page": {
           "$ref": "#/definitions/v3PaginationResponse",
+          "readOnly": true,
           "title": "pagination response"
         },
         "results": {
           "items": {
-            "$ref": "#/definitions/v3Relation"
+            "$ref": "#/definitions/v3Relation",
+            "type": "object"
           },
           "title": "array of relation instances",
           "type": "array"
@@ -391,17 +427,29 @@
       },
       "type": "object"
     },
-    "v3Manifest": {
+    "v3ListManifestsResponse": {
+      "properties": {
+        "manifests": {
+          "items": {
+            "$ref": "#/definitions/v3Metadata",
+            "type": "object"
+          },
+          "title": "manifests metadata",
+          "type": "array"
+        },
+        "page": {
+          "$ref": "#/definitions/v3PaginationResponse",
+          "title": "pagination response"
+        }
+      },
+      "type": "object"
+    },
+    "v3Metadata": {
       "properties": {
         "created_at": {
           "format": "date-time",
           "readOnly": true,
           "title": "created at timestamp (UTC)",
-          "type": "string"
-        },
-        "data": {
-          "format": "byte",
-          "title": "manifest data",
           "type": "string"
         },
         "etag": {
@@ -419,14 +467,13 @@
           "type": "string"
         },
         "version": {
-          "title": "manifest version (semver)",
+          "title": "manifest version (semver notation)",
           "type": "string"
         }
       },
       "required": [
         "name",
-        "version",
-        "data"
+        "version"
       ],
       "type": "object"
     },
@@ -633,8 +680,9 @@
     "v3SetManifestResponse": {
       "properties": {
         "result": {
-          "$ref": "#/definitions/v3Manifest",
-          "title": "manifest instance"
+          "properties": {},
+          "title": "empty result",
+          "type": "object"
         }
       },
       "type": "object"
@@ -646,6 +694,9 @@
           "title": "object instance"
         }
       },
+      "required": [
+        "object"
+      ],
       "type": "object"
     },
     "v3SetObjectResponse": {
@@ -664,6 +715,9 @@
           "title": "relation instance"
         }
       },
+      "required": [
+        "relation"
+      ],
       "type": "object"
     },
     "v3SetRelationResponse": {
@@ -796,6 +850,99 @@
           }
         ],
         "summary": "Get graph",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
+    "/api/v3/directory/manifest/{name}/{version}": {
+      "delete": {
+        "description": "Delete manifest.",
+        "operationId": "directory.v3.manifest.delete",
+        "parameters": [
+          {
+            "description": "manifest name (unique, lc-string)",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "manifest version (semver notation)",
+            "in": "path",
+            "name": "version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3DeleteManifestResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Delete manifest",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
+    "/api/v3/directory/manifests": {
+      "get": {
+        "description": "Returns list of stored manifests.",
+        "operationId": "directory.v3.manifests.list",
+        "parameters": [
+          {
+            "description": "requested page size, valid value between 1-100 rows (default 100)",
+            "format": "int32",
+            "in": "query",
+            "name": "page.size",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "pagination start token, default \"\"",
+            "in": "query",
+            "name": "page.token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3ListManifestsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "List manifests",
         "tags": [
           "directory"
         ]

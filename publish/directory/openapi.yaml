@@ -1113,6 +1113,7 @@ servers:
     variables:
       port:
         enum:
+          - "8383"
           - "9393"
         default: "9393"
 tags:

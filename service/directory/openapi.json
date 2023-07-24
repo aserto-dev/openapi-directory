@@ -271,6 +271,7 @@
       "properties": {
         "page": {
           "$ref": "#/definitions/v3PaginationResponse",
+          "readOnly": true,
           "title": "pagination response"
         },
         "relations": {
@@ -284,33 +285,6 @@
         "result": {
           "$ref": "#/definitions/v3Object",
           "title": "object instance"
-        }
-      },
-      "type": "object"
-    },
-    "v3GetObjectTypeResponse": {
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/v3ObjectType",
-          "title": "object type"
-        }
-      },
-      "type": "object"
-    },
-    "v3GetObjectTypesResponse": {
-      "properties": {
-        "page": {
-          "$ref": "#/definitions/v3PaginationResponse",
-          "readOnly": true,
-          "title": "pagination response"
-        },
-        "results": {
-          "items": {
-            "$ref": "#/definitions/v3ObjectType",
-            "type": "object"
-          },
-          "title": "array of object types",
-          "type": "array"
         }
       },
       "type": "object"
@@ -339,12 +313,16 @@
           "additionalProperties": {
             "$ref": "#/definitions/v3Object"
           },
-          "title": "map from \"\u003ctype\u003e:\u003ckey\u003e\" to materialized relation objects",
+          "title": "map of materialized relation objects",
           "type": "object"
         },
-        "result": {
-          "$ref": "#/definitions/v3Relation",
-          "title": "relation instance"
+        "results": {
+          "items": {
+            "$ref": "#/definitions/v3Relation",
+            "type": "object"
+          },
+          "title": "array of relation instances",
+          "type": "array"
         }
       },
       "type": "object"
@@ -392,7 +370,7 @@
           "additionalProperties": {
             "$ref": "#/definitions/v3Object"
           },
-          "title": "map from \"\u003ctype\u003e:\u003ckey\u003e\" to materialized relation objects",
+          "title": "map of materialized relation objects",
           "type": "object"
         },
         "page": {
@@ -468,8 +446,24 @@
     },
     "v3Metadata": {
       "properties": {
+        "created_at": {
+          "format": "date-time",
+          "readOnly": true,
+          "title": "created at timestamp (UTC)",
+          "type": "string"
+        },
+        "etag": {
+          "title": "object instance etag",
+          "type": "string"
+        },
         "name": {
           "title": "manifest name (unique, lc-string)",
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "readOnly": true,
+          "title": "last updated timestamp (UTC)",
           "type": "string"
         },
         "version": {
@@ -596,24 +590,6 @@
       "title": "Object identifier",
       "type": "object"
     },
-    "v3ObjectType": {
-      "properties": {
-        "name": {
-          "title": "object type name (unique, lc-string)",
-          "type": "string"
-        },
-        "relation_types": {
-          "additionalProperties": {
-            "$ref": "#/definitions/v3RelationType"
-          },
-          "type": "object"
-        }
-      },
-      "required": [
-        "name"
-      ],
-      "type": "object"
-    },
     "v3Opcode": {
       "default": "OPCODE_UNKNOWN",
       "enum": [
@@ -698,32 +674,6 @@
         "relation",
         "subject_type",
         "subject_id"
-      ],
-      "type": "object"
-    },
-    "v3RelationType": {
-      "properties": {
-        "name": {
-          "title": "object type name (unique, lc-string)",
-          "type": "string"
-        },
-        "permissions": {
-          "items": {
-            "type": "string"
-          },
-          "title": "array of object type permissions",
-          "type": "array"
-        },
-        "unions": {
-          "items": {
-            "type": "string"
-          },
-          "title": "array of other relations types included in this one",
-          "type": "array"
-        }
-      },
-      "required": [
-        "name"
       ],
       "type": "object"
     },
@@ -1109,7 +1059,7 @@
             "type": "string"
           },
           {
-            "description": "include object relations",
+            "description": "materialize the object relations objects",
             "in": "query",
             "name": "with_relations",
             "required": false,
@@ -1157,102 +1107,16 @@
         ]
       }
     },
-    "/api/v3/directory/object_type/{name}": {
-      "get": {
-        "description": "Returns single object type.",
-        "operationId": "directory.v3.object_types.list",
-        "parameters": [
-          {
-            "description": "name of the object type to retrieve",
-            "in": "path",
-            "name": "name",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v3GetObjectTypeResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "security": [
-          {
-            "DirectoryAPIKey": [],
-            "TenantID": []
-          }
-        ],
-        "summary": "Get object type",
-        "tags": [
-          "directory"
-        ]
-      }
-    },
-    "/api/v3/directory/object_types": {
-      "get": {
-        "description": "Returns list of object types.",
-        "operationId": "directory.v3.object_types.list",
-        "parameters": [
-          {
-            "description": "requested page size, valid value between 1-100 rows (default 100)",
-            "format": "int32",
-            "in": "query",
-            "name": "page.size",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "description": "pagination start token, default \"\"",
-            "in": "query",
-            "name": "page.token",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v3GetObjectTypesResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "security": [
-          {
-            "DirectoryAPIKey": [],
-            "TenantID": []
-          }
-        ],
-        "summary": "List all object types",
-        "tags": [
-          "directory"
-        ]
-      }
-    },
-    "/api/v3/directory/objects/{object_type}": {
+    "/api/v3/directory/objects": {
       "get": {
         "description": "Returns list of object instances.",
         "operationId": "directory.v3.objects.list",
         "parameters": [
           {
             "description": "object type name (lc-string)",
-            "in": "path",
+            "in": "query",
             "name": "object_type",
-            "required": true,
+            "required": false,
             "type": "string"
           },
           {

@@ -201,21 +201,6 @@ components:
             $ref: '#/components/schemas/v3Relation'
         result:
           $ref: '#/components/schemas/v3Object'
-    v3GetObjectTypeResponse:
-      type: object
-      properties:
-        result:
-          $ref: '#/components/schemas/v3ObjectType'
-    v3GetObjectTypesResponse:
-      type: object
-      properties:
-        page:
-          $ref: '#/components/schemas/v3PaginationResponse'
-        results:
-          type: array
-          title: array of object types
-          items:
-            $ref: '#/components/schemas/v3ObjectType'
     v3GetObjectsResponse:
       type: object
       properties:
@@ -231,13 +216,16 @@ components:
       properties:
         objects:
           type: object
-          title: map from "<type>:<key>" to materialized relation objects
+          title: map of materialized relation objects
           additionalProperties:
             has: null
             schema:
               $ref: '#/components/schemas/v3Object'
-        result:
-          $ref: '#/components/schemas/v3Relation'
+        results:
+          type: array
+          title: array of relation instances
+          items:
+            $ref: '#/components/schemas/v3Relation'
     v3GetRelationsRequest:
       type: object
       properties:
@@ -269,7 +257,7 @@ components:
       properties:
         objects:
           type: object
-          title: map from "<type>:<key>" to materialized relation objects
+          title: map of materialized relation objects
           additionalProperties:
             has: null
             schema:
@@ -323,9 +311,22 @@ components:
         - name
         - version
       properties:
+        created_at:
+          type: string
+          title: created at timestamp (UTC)
+          format: date-time
+          readOnly: true
+        etag:
+          type: string
+          title: object instance etag
         name:
           type: string
           title: manifest name (unique, lc-string)
+        updated_at:
+          type: string
+          title: last updated timestamp (UTC)
+          format: date-time
+          readOnly: true
         version:
           type: string
           title: manifest version (semver notation)
@@ -415,20 +416,6 @@ components:
         object_type:
           type: string
           title: object type (lc-string)
-    v3ObjectType:
-      type: object
-      required:
-        - name
-      properties:
-        name:
-          type: string
-          title: object type name (unique, lc-string)
-        relation_types:
-          type: object
-          additionalProperties:
-            has: null
-            schema:
-              $ref: '#/components/schemas/v3RelationType'
     v3Opcode:
       type: string
       enum:
@@ -495,24 +482,6 @@ components:
           title: last updated timestamp (UTC)
           format: date-time
           readOnly: true
-    v3RelationType:
-      type: object
-      required:
-        - name
-      properties:
-        name:
-          type: string
-          title: object type name (unique, lc-string)
-        permissions:
-          type: array
-          title: array of object type permissions
-          items:
-            type: string
-        unions:
-          type: array
-          title: array of other relations types included in this one
-          items:
-            type: string
     v3SetManifestResponse:
       type: object
       properties:
@@ -884,7 +853,7 @@ paths:
             type: string
         - name: with_relations
           in: query
-          description: include object relations
+          description: materialize the object relations objects
           schema:
             type: boolean
         - name: page.size
@@ -914,72 +883,7 @@ paths:
       security:
         - DirectoryAPIKey: []
           TenantID: []
-  /api/v3/directory/object_type/{name}:
-    get:
-      tags:
-        - directory
-      summary: Get object type
-      description: Returns single object type.
-      operationId: directory.v3.object_types.list
-      parameters:
-        - name: name
-          in: path
-          description: name of the object type to retrieve
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: A successful response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/v3GetObjectTypeResponse'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/rpcStatus'
-      security:
-        - DirectoryAPIKey: []
-          TenantID: []
-  /api/v3/directory/object_types:
-    get:
-      tags:
-        - directory
-      summary: List all object types
-      description: Returns list of object types.
-      operationId: directory.v3.object_types.list
-      parameters:
-        - name: page.size
-          in: query
-          description: requested page size, valid value between 1-100 rows (default 100)
-          schema:
-            type: integer
-            format: int32
-        - name: page.token
-          in: query
-          description: pagination start token, default ""
-          schema:
-            type: string
-      responses:
-        "200":
-          description: A successful response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/v3GetObjectTypesResponse'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/rpcStatus'
-      security:
-        - DirectoryAPIKey: []
-          TenantID: []
-  /api/v3/directory/objects/{object_type}:
+  /api/v3/directory/objects:
     get:
       tags:
         - directory
@@ -988,9 +892,8 @@ paths:
       operationId: directory.v3.objects.list
       parameters:
         - name: object_type
-          in: path
+          in: query
           description: object type name (lc-string)
-          required: true
           schema:
             type: string
         - name: page.size

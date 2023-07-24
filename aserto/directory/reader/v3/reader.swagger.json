@@ -172,7 +172,7 @@
           },
           {
             "name": "with_relations",
-            "description": "include object relations",
+            "description": "materialize the object relations objects",
             "in": "query",
             "required": false,
             "type": "boolean"
@@ -204,7 +204,7 @@
         ]
       }
     },
-    "/api/v3/directory/objects/{object_type}": {
+    "/api/v3/directory/objects": {
       "get": {
         "summary": "List object instances",
         "description": "Returns list of object instances.",
@@ -227,8 +227,8 @@
           {
             "name": "object_type",
             "description": "object type name (lc-string)",
-            "in": "path",
-            "required": true,
+            "in": "query",
+            "required": false,
             "type": "string"
           },
           {
@@ -605,7 +605,8 @@
         },
         "page": {
           "$ref": "#/definitions/v3PaginationResponse",
-          "title": "pagination response"
+          "title": "pagination response",
+          "readOnly": true
         }
       }
     },
@@ -630,16 +631,20 @@
     "v3GetRelationResponse": {
       "type": "object",
       "properties": {
-        "result": {
-          "$ref": "#/definitions/v3Relation",
-          "title": "relation instance"
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v3Relation"
+          },
+          "title": "array of relation instances"
         },
         "objects": {
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/v3Object"
           },
-          "title": "map from \"\u003ctype\u003e:\u003ckey\u003e\" to materialized relation objects"
+          "title": "map of materialized relation objects"
         }
       }
     },
@@ -696,7 +701,7 @@
           "additionalProperties": {
             "$ref": "#/definitions/v3Object"
           },
-          "title": "map from \"\u003ctype\u003e:\u003ckey\u003e\" to materialized relation objects"
+          "title": "map of materialized relation objects"
         },
         "page": {
           "$ref": "#/definitions/v3PaginationResponse",

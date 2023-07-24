@@ -125,6 +125,10 @@
             "$ref": "#/definitions/v2Relation"
           },
           "title": "object relations"
+        },
+        "page": {
+          "$ref": "#/definitions/v2PaginationResponse",
+          "title": "pagination response"
         }
       }
     },

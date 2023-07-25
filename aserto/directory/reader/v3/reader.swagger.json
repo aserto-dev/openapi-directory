@@ -96,8 +96,8 @@
         ]
       }
     },
-    "/api/v3/directory/graph": {
-      "post": {
+    "/api/v3/directory/graph/{anchor_type}/{anchor_id}": {
+      "get": {
         "summary": "Get graph",
         "description": "Returns object graph from anchor to subject or object.",
         "operationId": "directory.v3.graph",
@@ -117,12 +117,60 @@
         },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "name": "anchor_type",
+            "description": "anchor type",
+            "in": "path",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/v3GetGraphRequest"
-            }
+            "type": "string"
+          },
+          {
+            "name": "anchor_id",
+            "description": "anchor identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "object_type",
+            "description": "object type",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "object_id",
+            "description": "object identifier",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "relation",
+            "description": "relation name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "subject_type",
+            "description": "subject type",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "subject_id",
+            "description": "subject identifier",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "subject_relation",
+            "description": "subject relation",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -258,7 +306,7 @@
         ]
       }
     },
-    "/api/v3/directory/relation/{object_type}/{object_id}/{relation}/{subject_type}/{subject_id}/{subject_relation}": {
+    "/api/v3/directory/relation": {
       "get": {
         "summary": "Get relation instance",
         "description": "Returns single relation instance, optionally with objects.",
@@ -281,43 +329,43 @@
           {
             "name": "object_type",
             "description": "object type",
-            "in": "path",
+            "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "object_id",
             "description": "object identifier",
-            "in": "path",
+            "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "relation",
             "description": "relation name",
-            "in": "path",
+            "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "subject_type",
             "description": "subject type",
-            "in": "path",
+            "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "subject_id",
             "description": "subject identifier",
-            "in": "path",
+            "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "subject_relation",
             "description": "optional subject relation name",
-            "in": "path",
-            "required": true,
+            "in": "query",
+            "required": false,
             "type": "string"
           },
           {
@@ -340,7 +388,7 @@
       }
     },
     "/api/v3/directory/relations": {
-      "post": {
+      "get": {
         "summary": "List relations instances",
         "description": "Returns list of relation instances.",
         "operationId": "directory.v3.relations.list",
@@ -360,12 +408,68 @@
         },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v3GetRelationsRequest"
-            }
+            "name": "object_type",
+            "description": "object type",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "object_id",
+            "description": "object identifier",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "relation",
+            "description": "relation name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "subject_type",
+            "description": "subject type",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "subject_id",
+            "description": "subject identifier",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "subject_relation",
+            "description": "optional subject relation name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "with_objects",
+            "description": "materialize relation objects",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "page.size",
+            "description": "requested page size, valid value between 1-100 rows (default 100)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "page.token",
+            "description": "pagination start token, default \"\"",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -411,7 +515,6 @@
         "details": {
           "type": "array",
           "items": {
-            "type": "object",
             "$ref": "#/definitions/protobufAny"
           }
         }
@@ -521,54 +624,12 @@
         }
       }
     },
-    "v3GetGraphRequest": {
-      "type": "object",
-      "properties": {
-        "anchor_type": {
-          "type": "string",
-          "title": "anchor type"
-        },
-        "anchor_id": {
-          "type": "string",
-          "title": "anchor identifier"
-        },
-        "object_type": {
-          "type": "string",
-          "title": "object type"
-        },
-        "object_id": {
-          "type": "string",
-          "title": "object identifier"
-        },
-        "relation": {
-          "type": "string",
-          "title": "relation name"
-        },
-        "subject_type": {
-          "type": "string",
-          "title": "subject type"
-        },
-        "subject_id": {
-          "type": "string",
-          "title": "subject identifier"
-        },
-        "subject_relation": {
-          "type": "string",
-          "title": "subject relation"
-        }
-      },
-      "required": [
-        "anchor_type",
-        "anchor_id"
-      ]
-    },
     "v3GetGraphResponse": {
       "type": "object",
       "properties": {
         "results": {
           "type": "array",
           "items": {
-            "type": "object",
             "$ref": "#/definitions/v3ObjectDependency"
           },
           "title": "dependency graph"
@@ -581,7 +642,6 @@
         "results": {
           "type": "array",
           "items": {
-            "type": "object",
             "$ref": "#/definitions/v3Object"
           },
           "title": "array of object instances"
@@ -598,15 +658,13 @@
         "relations": {
           "type": "array",
           "items": {
-            "type": "object",
             "$ref": "#/definitions/v3Relation"
           },
           "title": "object relations"
         },
         "page": {
           "$ref": "#/definitions/v3PaginationResponse",
-          "title": "pagination response",
-          "readOnly": true
+          "title": "pagination response"
         }
       }
     },
@@ -616,28 +674,22 @@
         "results": {
           "type": "array",
           "items": {
-            "type": "object",
             "$ref": "#/definitions/v3Object"
           },
           "title": "array of object instances"
         },
         "page": {
           "$ref": "#/definitions/v3PaginationResponse",
-          "title": "pagination response",
-          "readOnly": true
+          "title": "pagination response"
         }
       }
     },
     "v3GetRelationResponse": {
       "type": "object",
       "properties": {
-        "results": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v3Relation"
-          },
-          "title": "array of relation instances"
+        "result": {
+          "$ref": "#/definitions/v3Relation",
+          "title": "relation instance"
         },
         "objects": {
           "type": "object",
@@ -645,43 +697,6 @@
             "$ref": "#/definitions/v3Object"
           },
           "title": "map of materialized relation objects"
-        }
-      }
-    },
-    "v3GetRelationsRequest": {
-      "type": "object",
-      "properties": {
-        "object_type": {
-          "type": "string",
-          "title": "object type"
-        },
-        "object_id": {
-          "type": "string",
-          "title": "object identifier"
-        },
-        "relation": {
-          "type": "string",
-          "title": "relation name"
-        },
-        "subject_type": {
-          "type": "string",
-          "title": "subject type"
-        },
-        "subject_id": {
-          "type": "string",
-          "title": "subject identifier"
-        },
-        "subject_relation": {
-          "type": "string",
-          "title": "optional subject relation name"
-        },
-        "with_objects": {
-          "type": "boolean",
-          "title": "materialize relation objects"
-        },
-        "page": {
-          "$ref": "#/definitions/v3PaginationRequest",
-          "title": "pagination request"
         }
       }
     },
@@ -691,7 +706,6 @@
         "results": {
           "type": "array",
           "items": {
-            "type": "object",
             "$ref": "#/definitions/v3Relation"
           },
           "title": "array of relation instances"
@@ -705,8 +719,7 @@
         },
         "page": {
           "$ref": "#/definitions/v3PaginationResponse",
-          "title": "pagination response",
-          "readOnly": true
+          "title": "pagination response"
         }
       }
     },

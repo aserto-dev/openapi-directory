@@ -133,7 +133,6 @@
         "details": {
           "type": "array",
           "items": {
-            "type": "object",
             "$ref": "#/definitions/protobufAny"
           }
         }
@@ -169,7 +168,6 @@
         "manifests": {
           "type": "array",
           "items": {
-            "type": "object",
             "$ref": "#/definitions/v3Metadata"
           },
           "title": "manifests metadata"

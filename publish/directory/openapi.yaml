@@ -134,36 +134,6 @@ components:
           $ref: '#/components/schemas/v3Object'
         relation:
           $ref: '#/components/schemas/v3Relation'
-    v3GetGraphRequest:
-      type: object
-      required:
-        - anchor_type
-        - anchor_id
-      properties:
-        anchor_id:
-          type: string
-          title: anchor identifier
-        anchor_type:
-          type: string
-          title: anchor type
-        object_id:
-          type: string
-          title: object identifier
-        object_type:
-          type: string
-          title: object type
-        relation:
-          type: string
-          title: relation name
-        subject_id:
-          type: string
-          title: subject identifier
-        subject_relation:
-          type: string
-          title: subject relation
-        subject_type:
-          type: string
-          title: subject type
     v3GetGraphResponse:
       type: object
       properties:
@@ -221,37 +191,8 @@ components:
             has: null
             schema:
               $ref: '#/components/schemas/v3Object'
-        results:
-          type: array
-          title: array of relation instances
-          items:
-            $ref: '#/components/schemas/v3Relation'
-    v3GetRelationsRequest:
-      type: object
-      properties:
-        object_id:
-          type: string
-          title: object identifier
-        object_type:
-          type: string
-          title: object type
-        page:
-          $ref: '#/components/schemas/v3PaginationRequest'
-        relation:
-          type: string
-          title: relation name
-        subject_id:
-          type: string
-          title: subject identifier
-        subject_relation:
-          type: string
-          title: optional subject relation name
-        subject_type:
-          type: string
-          title: subject type
-        with_objects:
-          type: boolean
-          title: materialize relation objects
+        result:
+          $ref: '#/components/schemas/v3Relation'
     v3GetRelationsResponse:
       type: object
       properties:
@@ -490,8 +431,6 @@ components:
           title: empty result
     v3SetObjectRequest:
       type: object
-      required:
-        - object
       properties:
         object:
           $ref: '#/components/schemas/v3Object'
@@ -502,8 +441,6 @@ components:
           $ref: '#/components/schemas/v3Object'
     v3SetRelationRequest:
       type: object
-      required:
-        - relation
       properties:
         relation:
           $ref: '#/components/schemas/v3Relation'
@@ -583,19 +520,56 @@ paths:
       security:
         - DirectoryAPIKey: []
           TenantID: []
-  /api/v3/directory/graph:
-    post:
+  /api/v3/directory/graph/{anchor_type}/{anchor_id}:
+    get:
       tags:
         - directory
       summary: Get graph
       description: Returns object graph from anchor to subject or object.
       operationId: directory.v3.graph
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/v3GetGraphRequest'
+      parameters:
+        - name: anchor_type
+          in: path
+          description: anchor type
+          required: true
+          schema:
+            type: string
+        - name: anchor_id
+          in: path
+          description: anchor identifier
+          required: true
+          schema:
+            type: string
+        - name: object_type
+          in: query
+          description: object type
+          schema:
+            type: string
+        - name: object_id
+          in: query
+          description: object identifier
+          schema:
+            type: string
+        - name: relation
+          in: query
+          description: relation name
+          schema:
+            type: string
+        - name: subject_type
+          in: query
+          description: subject type
+          schema:
+            type: string
+        - name: subject_id
+          in: query
+          description: subject identifier
+          schema:
+            type: string
+        - name: subject_relation
+          in: query
+          description: subject relation
+          schema:
+            type: string
       responses:
         "200":
           description: A successful response.
@@ -924,6 +898,127 @@ paths:
         - DirectoryAPIKey: []
           TenantID: []
   /api/v3/directory/relation:
+    delete:
+      tags:
+        - directory
+      summary: Delete relation
+      description: Delete relation.
+      operationId: directory.v3.relation.delete
+      parameters:
+        - name: object_type
+          in: query
+          description: object type
+          required: true
+          schema:
+            type: string
+        - name: object_id
+          in: query
+          description: object identifier
+          required: true
+          schema:
+            type: string
+        - name: relation
+          in: query
+          description: object relation name
+          required: true
+          schema:
+            type: string
+        - name: subject_type
+          in: query
+          description: subject type
+          required: true
+          schema:
+            type: string
+        - name: subject_id
+          in: query
+          description: subject identifier
+          required: true
+          schema:
+            type: string
+        - name: subject_relation
+          in: query
+          description: optional subject relation name
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v3DeleteRelationResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+    get:
+      tags:
+        - directory
+      summary: Get relation instance
+      description: Returns single relation instance, optionally with objects.
+      operationId: directory.v3.relation.get
+      parameters:
+        - name: object_type
+          in: query
+          description: object type
+          required: true
+          schema:
+            type: string
+        - name: object_id
+          in: query
+          description: object identifier
+          required: true
+          schema:
+            type: string
+        - name: relation
+          in: query
+          description: relation name
+          required: true
+          schema:
+            type: string
+        - name: subject_type
+          in: query
+          description: subject type
+          required: true
+          schema:
+            type: string
+        - name: subject_id
+          in: query
+          description: subject identifier
+          required: true
+          schema:
+            type: string
+        - name: subject_relation
+          in: query
+          description: optional subject relation name
+          schema:
+            type: string
+        - name: with_objects
+          in: query
+          description: materialize relation objects
+          schema:
+            type: boolean
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v3GetRelationResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
     post:
       tags:
         - directory
@@ -952,107 +1047,42 @@ paths:
       security:
         - DirectoryAPIKey: []
           TenantID: []
-  /api/v3/directory/relation/{object_type}/{object_id}/{relation}/{subject_type}/{subject_id}/{subject_relation}:
-    delete:
-      tags:
-        - directory
-      summary: Delete relation
-      description: Delete relation.
-      operationId: directory.v3.relation.delete
-      parameters:
-        - name: object_type
-          in: path
-          description: object type
-          required: true
-          schema:
-            type: string
-        - name: object_id
-          in: path
-          description: object identifier
-          required: true
-          schema:
-            type: string
-        - name: relation
-          in: path
-          description: object relation name
-          required: true
-          schema:
-            type: string
-        - name: subject_type
-          in: path
-          description: subject type
-          required: true
-          schema:
-            type: string
-        - name: subject_id
-          in: path
-          description: subject identifier
-          required: true
-          schema:
-            type: string
-        - name: subject_relation
-          in: path
-          description: optional subject relation name
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: A successful response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/v3DeleteRelationResponse'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/rpcStatus'
-      security:
-        - DirectoryAPIKey: []
-          TenantID: []
+  /api/v3/directory/relations:
     get:
       tags:
         - directory
-      summary: Get relation instance
-      description: Returns single relation instance, optionally with objects.
-      operationId: directory.v3.relation.get
+      summary: List relations instances
+      description: Returns list of relation instances.
+      operationId: directory.v3.relations.list
       parameters:
         - name: object_type
-          in: path
+          in: query
           description: object type
-          required: true
           schema:
             type: string
         - name: object_id
-          in: path
+          in: query
           description: object identifier
-          required: true
           schema:
             type: string
         - name: relation
-          in: path
+          in: query
           description: relation name
-          required: true
           schema:
             type: string
         - name: subject_type
-          in: path
+          in: query
           description: subject type
-          required: true
           schema:
             type: string
         - name: subject_id
-          in: path
+          in: query
           description: subject identifier
-          required: true
           schema:
             type: string
         - name: subject_relation
-          in: path
+          in: query
           description: optional subject relation name
-          required: true
           schema:
             type: string
         - name: with_objects
@@ -1060,35 +1090,17 @@ paths:
           description: materialize relation objects
           schema:
             type: boolean
-      responses:
-        "200":
-          description: A successful response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/v3GetRelationResponse'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/rpcStatus'
-      security:
-        - DirectoryAPIKey: []
-          TenantID: []
-  /api/v3/directory/relations:
-    post:
-      tags:
-        - directory
-      summary: List relations instances
-      description: Returns list of relation instances.
-      operationId: directory.v3.relations.list
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/v3GetRelationsRequest'
+        - name: page.size
+          in: query
+          description: requested page size, valid value between 1-100 rows (default 100)
+          schema:
+            type: integer
+            format: int32
+        - name: page.token
+          in: query
+          description: pagination start token, default ""
+          schema:
+            type: string
       responses:
         "200":
           description: A successful response.

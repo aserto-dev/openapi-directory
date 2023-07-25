@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/api/v3/directory/manifest/{name}/{version}": {
+    "/api/v3/directory/manifest": {
       "delete": {
         "summary": "Delete manifest",
         "description": "Delete manifest.",
@@ -37,18 +37,12 @@
         },
         "parameters": [
           {
-            "name": "name",
-            "description": "manifest name (unique, lc-string)",
-            "in": "path",
+            "name": "body",
+            "in": "body",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "version",
-            "description": "manifest version (semver notation)",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "schema": {
+              "$ref": "#/definitions/v3DeleteManifestRequest"
+            }
           }
         ],
         "tags": [
@@ -138,6 +132,23 @@
           }
         }
       }
+    },
+    "v3DeleteManifestRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "manifest name (unique, lc-string)"
+        },
+        "version": {
+          "type": "string",
+          "title": "manifest version (semver notation)"
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ]
     },
     "v3DeleteManifestResponse": {
       "type": "object",

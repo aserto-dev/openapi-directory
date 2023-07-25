@@ -17,6 +17,44 @@
   ],
   "paths": {
     "/api/v3/directory/object": {
+      "delete": {
+        "summary": "Delete object",
+        "description": "Delete object.",
+        "operationId": "directory.v3.object.delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3DeleteObjectResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v3DeleteObjectRequest"
+            }
+          }
+        ],
+        "tags": [
+          "directory"
+        ],
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ]
+      },
       "post": {
         "summary": "Set object",
         "description": "Set object.",
@@ -56,16 +94,16 @@
         ]
       }
     },
-    "/api/v3/directory/object/{object_type}/{object_id}": {
+    "/api/v3/directory/relation": {
       "delete": {
-        "summary": "Delete object",
-        "description": "Delete object.",
-        "operationId": "directory.v3.object.delete",
+        "summary": "Delete relation",
+        "description": "Delete relation.",
+        "operationId": "directory.v3.relation.delete",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v3DeleteObjectResponse"
+              "$ref": "#/definitions/v3DeleteRelationResponse"
             }
           },
           "default": {
@@ -77,25 +115,12 @@
         },
         "parameters": [
           {
-            "name": "object_type",
-            "description": "object type",
-            "in": "path",
+            "name": "body",
+            "in": "body",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "object_id",
-            "description": "object identifier",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "with_relations",
-            "description": "delete object relations, both object and subject relations.",
-            "in": "query",
-            "required": false,
-            "type": "boolean"
+            "schema": {
+              "$ref": "#/definitions/v3DeleteRelationRequest"
+            }
           }
         ],
         "tags": [
@@ -107,9 +132,7 @@
             "TenantID": []
           }
         ]
-      }
-    },
-    "/api/v3/directory/relation": {
+      },
       "post": {
         "summary": "Set relation",
         "description": "Set relation.",
@@ -136,80 +159,6 @@
             "schema": {
               "$ref": "#/definitions/v3SetRelationRequest"
             }
-          }
-        ],
-        "tags": [
-          "directory"
-        ],
-        "security": [
-          {
-            "DirectoryAPIKey": [],
-            "TenantID": []
-          }
-        ]
-      }
-    },
-    "/api/v3/directory/relation/{object_type}/{object_id}/{relation}/{subject_type}/{subject_id}/{subject_relation}": {
-      "delete": {
-        "summary": "Delete relation",
-        "description": "Delete relation.",
-        "operationId": "directory.v3.relation.delete",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v3DeleteRelationResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "object_type",
-            "description": "object type",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "object_id",
-            "description": "object identifier",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "relation",
-            "description": "object relation name",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "subject_type",
-            "description": "subject type",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "subject_id",
-            "description": "subject identifier",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "subject_relation",
-            "description": "optional subject relation name",
-            "in": "path",
-            "required": true,
-            "type": "string"
           }
         ],
         "tags": [
@@ -261,6 +210,27 @@
         }
       }
     },
+    "v3DeleteObjectRequest": {
+      "type": "object",
+      "properties": {
+        "object_type": {
+          "type": "string",
+          "title": "object type"
+        },
+        "object_id": {
+          "type": "string",
+          "title": "object identifier"
+        },
+        "with_relations": {
+          "type": "boolean",
+          "description": "delete object relations, both object and subject relations."
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id"
+      ]
+    },
     "v3DeleteObjectResponse": {
       "type": "object",
       "properties": {
@@ -270,6 +240,42 @@
           "title": "empty result"
         }
       }
+    },
+    "v3DeleteRelationRequest": {
+      "type": "object",
+      "properties": {
+        "object_type": {
+          "type": "string",
+          "title": "object type"
+        },
+        "object_id": {
+          "type": "string",
+          "title": "object identifier"
+        },
+        "relation": {
+          "type": "string",
+          "title": "object relation name"
+        },
+        "subject_type": {
+          "type": "string",
+          "title": "subject type"
+        },
+        "subject_id": {
+          "type": "string",
+          "title": "subject identifier"
+        },
+        "subject_relation": {
+          "type": "string",
+          "title": "optional subject relation name"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "relation",
+        "subject_type",
+        "subject_id"
+      ]
     },
     "v3DeleteRelationResponse": {
       "type": "object",

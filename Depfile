@@ -35,8 +35,8 @@ go:
     version: "latest"
   protoc-gen-grpc-gateway:
     importPath: "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway"
-    version: "v2.16.0"
+    version: "v2.16.1"
   protoc-gen-openapiv2:
     importPath: "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2"
-    version: "v2.16.0"
+    version: "v2.16.1"
 

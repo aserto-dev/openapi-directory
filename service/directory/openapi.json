@@ -28,7 +28,8 @@
         },
         "details": {
           "items": {
-            "$ref": "#/definitions/protobufAny"
+            "$ref": "#/definitions/protobufAny",
+            "type": "object"
           },
           "type": "array"
         },
@@ -189,7 +190,8 @@
       "properties": {
         "results": {
           "items": {
-            "$ref": "#/definitions/v3ObjectDependency"
+            "$ref": "#/definitions/v3ObjectDependency",
+            "type": "object"
           },
           "title": "dependency graph",
           "type": "array"
@@ -215,7 +217,8 @@
       "properties": {
         "results": {
           "items": {
-            "$ref": "#/definitions/v3Object"
+            "$ref": "#/definitions/v3Object",
+            "type": "object"
           },
           "title": "array of object instances",
           "type": "array"
@@ -227,11 +230,13 @@
       "properties": {
         "page": {
           "$ref": "#/definitions/v3PaginationResponse",
+          "readOnly": true,
           "title": "pagination response"
         },
         "relations": {
           "items": {
-            "$ref": "#/definitions/v3Relation"
+            "$ref": "#/definitions/v3Relation",
+            "type": "object"
           },
           "title": "object relations",
           "type": "array"
@@ -247,11 +252,13 @@
       "properties": {
         "page": {
           "$ref": "#/definitions/v3PaginationResponse",
+          "readOnly": true,
           "title": "pagination response"
         },
         "results": {
           "items": {
-            "$ref": "#/definitions/v3Object"
+            "$ref": "#/definitions/v3Object",
+            "type": "object"
           },
           "title": "array of object instances",
           "type": "array"
@@ -286,11 +293,13 @@
         },
         "page": {
           "$ref": "#/definitions/v3PaginationResponse",
+          "readOnly": true,
           "title": "pagination response"
         },
         "results": {
           "items": {
-            "$ref": "#/definitions/v3Relation"
+            "$ref": "#/definitions/v3Relation",
+            "type": "object"
           },
           "title": "array of relation instances",
           "type": "array"
@@ -340,7 +349,8 @@
       "properties": {
         "manifests": {
           "items": {
-            "$ref": "#/definitions/v3Metadata"
+            "$ref": "#/definitions/v3Metadata",
+            "type": "object"
           },
           "title": "manifests metadata",
           "type": "array"
@@ -602,6 +612,9 @@
           "title": "object instance"
         }
       },
+      "required": [
+        "object"
+      ],
       "type": "object"
     },
     "v3SetObjectResponse": {
@@ -620,6 +633,9 @@
           "title": "relation instance"
         }
       },
+      "required": [
+        "relation"
+      ],
       "type": "object"
     },
     "v3SetRelationResponse": {

@@ -431,6 +431,8 @@ components:
           title: empty result
     v3SetObjectRequest:
       type: object
+      required:
+        - object
       properties:
         object:
           $ref: '#/components/schemas/v3Object'
@@ -441,6 +443,8 @@ components:
           $ref: '#/components/schemas/v3Object'
     v3SetRelationRequest:
       type: object
+      required:
+        - relation
       properties:
         relation:
           $ref: '#/components/schemas/v3Relation'

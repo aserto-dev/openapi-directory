@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "paths": {
-    "/api/v3/directory/manifest/{name}/{version}": {
+    "/api/v3/directory/manifest/{name}": {
       "get": {
         "tags": [
           "directory"
@@ -21,9 +21,9 @@
           },
           {
             "name": "version",
-            "in": "path",
-            "description": "manifest version (semver notation)",
-            "required": true,
+            "in": "query",
+            "description": "manifest version (semver notation), default to latest",
+            "required": false,
             "schema": {
               "type": "string"
             }
@@ -37,6 +37,28 @@
                 "schema": {
                   "type": "string",
                   "format": "binary"
+                }
+              }
+            },
+            "headers": {
+              "Aserto-Created-At": {
+                "description": "manifest creation time",
+                "schema": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              },
+              "Aserto-Updated-At": {
+                "description": "Last modified date",
+                "schema": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              },
+              "ETag": {
+                "description": "ETag",
+                "schema": {
+                  "type": "string"
                 }
               }
             }

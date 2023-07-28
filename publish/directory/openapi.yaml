@@ -274,8 +274,8 @@ components:
     v3Object:
       type: object
       required:
-        - id
         - type
+        - id
       properties:
         created_at:
           type: string
@@ -290,7 +290,7 @@ components:
           title: object instance etag
         id:
           type: string
-          title: external object identifier (cs-string)
+          title: external object identifier (cs-string, no spaces or tabs)
         properties:
           type: object
           title: property bag

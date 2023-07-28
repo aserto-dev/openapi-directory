@@ -69,13 +69,13 @@
     "v3Object": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "title": "external object identifier (cs-string)"
-        },
         "type": {
           "type": "string",
           "title": "object type name"
+        },
+        "id": {
+          "type": "string",
+          "title": "external object identifier (cs-string, no spaces or tabs)"
         },
         "display_name": {
           "type": "string",
@@ -103,8 +103,8 @@
         }
       },
       "required": [
-        "id",
-        "type"
+        "type",
+        "id"
       ]
     },
     "v3Relation": {

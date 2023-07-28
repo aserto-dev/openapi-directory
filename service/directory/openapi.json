@@ -412,7 +412,7 @@
           "type": "string"
         },
         "id": {
-          "title": "external object identifier (cs-string)",
+          "title": "external object identifier (cs-string, no spaces or tabs)",
           "type": "string"
         },
         "properties": {
@@ -431,8 +431,8 @@
         }
       },
       "required": [
-        "id",
-        "type"
+        "type",
+        "id"
       ],
       "type": "object"
     },

@@ -41,14 +41,14 @@
               }
             },
             "headers": {
-              "X-Created-At": {
+              "Aserto-Created-At": {
                 "description": "manifest creation time",
                 "schema": {
                   "type": "string",
                   "format": "date-time"
                 }
               },
-              "X-Updated-At": {
+              "Aserto-Updated-At": {
                 "description": "Last modified date",
                 "schema": {
                   "type": "string",

@@ -590,42 +590,7 @@ paths:
       security:
         - DirectoryAPIKey: []
           TenantID: []
-  /api/v3/directory/manifest/{name}/{version}:
-    delete:
-      tags:
-        - directory
-      summary: Delete manifest
-      description: Delete manifest.
-      operationId: directory.v3.manifest.delete
-      parameters:
-        - name: name
-          in: path
-          description: manifest name (unique, lc-string)
-          required: true
-          schema:
-            type: string
-        - name: version
-          in: path
-          description: manifest version (semver notation)
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: A successful response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/v3DeleteManifestResponse'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/rpcStatus'
-      security:
-        - DirectoryAPIKey: []
-          TenantID: []
+  /api/v3/directory/manifest/{name}:
     get:
       tags:
         - directory
@@ -640,14 +605,31 @@ paths:
           schema:
             type: string
         - name: version
-          in: path
-          description: manifest version (semver notation)
-          required: true
+          in: query
+          description: manifest version (semver notation), default to latest
           schema:
             type: string
       responses:
         "200":
           description: A successful response.
+          headers:
+            Aserto-Created-At:
+              parameter:
+                description: manifest creation time
+                schema:
+                  type: string
+                  format: date-time
+            Aserto-Updated-At:
+              parameter:
+                description: Last modified date
+                schema:
+                  type: string
+                  format: date-time
+            ETag:
+              parameter:
+                description: ETag
+                schema:
+                  type: string
           content:
             application/yaml:
               schema:
@@ -696,6 +678,42 @@ paths:
             application/yaml:
               schema:
                 $ref: '#/components/schemas/v3SetManifestResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v3/directory/manifest/{name}/{version}:
+    delete:
+      tags:
+        - directory
+      summary: Delete manifest
+      description: Delete manifest.
+      operationId: directory.v3.manifest.delete
+      parameters:
+        - name: name
+          in: path
+          description: manifest name (unique, lc-string)
+          required: true
+          schema:
+            type: string
+        - name: version
+          in: path
+          description: manifest version (semver notation)
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v3DeleteManifestResponse'
         default:
           description: An unexpected error response.
           content:

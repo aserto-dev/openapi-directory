@@ -843,63 +843,7 @@
         ]
       }
     },
-    "/api/v3/directory/manifest/{name}/{version}": {
-      "delete": {
-        "description": "Delete manifest.",
-        "operationId": "directory.v3.manifest.delete",
-        "parameters": [
-          {
-            "description": "manifest name (unique, lc-string)",
-            "in": "path",
-            "name": "name",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "manifest version (semver notation)",
-            "in": "path",
-            "name": "version",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/v3DeleteManifestResponse"
-                }
-              }
-            },
-            "description": "A successful response."
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/rpcStatus"
-                }
-              }
-            },
-            "description": "An unexpected error response."
-          }
-        },
-        "security": [
-          {
-            "DirectoryAPIKey": [],
-            "TenantID": []
-          }
-        ],
-        "summary": "Delete manifest",
-        "tags": [
-          "directory"
-        ]
-      },
+    "/api/v3/directory/manifest/{name}": {
       "get": {
         "description": "Get manifest.",
         "operationId": "directory.v3.manifest.get",
@@ -914,10 +858,9 @@
             }
           },
           {
-            "description": "manifest version (semver notation)",
-            "in": "path",
+            "description": "manifest version (semver notation), default to latest",
+            "in": "query",
             "name": "version",
-            "required": true,
             "schema": {
               "type": "string"
             }
@@ -933,7 +876,29 @@
                 }
               }
             },
-            "description": "A successful response."
+            "description": "A successful response.",
+            "headers": {
+              "Aserto-Created-At": {
+                "description": "manifest creation time",
+                "schema": {
+                  "format": "date-time",
+                  "type": "string"
+                }
+              },
+              "Aserto-Updated-At": {
+                "description": "Last modified date",
+                "schema": {
+                  "format": "date-time",
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "ETag",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "default": {
             "content": {
@@ -1021,6 +986,64 @@
           }
         ],
         "summary": "Set manifest",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
+    "/api/v3/directory/manifest/{name}/{version}": {
+      "delete": {
+        "description": "Delete manifest.",
+        "operationId": "directory.v3.manifest.delete",
+        "parameters": [
+          {
+            "description": "manifest name (unique, lc-string)",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "manifest version (semver notation)",
+            "in": "path",
+            "name": "version",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v3DeleteManifestResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Delete manifest",
         "tags": [
           "directory"
         ]

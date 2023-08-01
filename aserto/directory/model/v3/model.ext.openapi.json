@@ -80,7 +80,9 @@
             "TenantID": []
           }
         ]
-      },
+      }
+    },
+    "/api/v3/directory/manifest/{name}/{version}": {
       "post": {
         "tags": [
           "directory"

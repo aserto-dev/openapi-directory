@@ -139,6 +139,16 @@
         }
       }
     },
+    "v3Body": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string",
+          "format": "byte",
+          "title": "manifest content"
+        }
+      }
+    },
     "v3DeleteManifestResponse": {
       "type": "object",
       "properties": {
@@ -157,8 +167,7 @@
           "title": "Manifest metadata"
         },
         "body": {
-          "type": "string",
-          "format": "byte",
+          "$ref": "#/definitions/v3Body",
           "title": "Manifest content"
         }
       }

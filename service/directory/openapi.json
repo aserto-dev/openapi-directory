@@ -39,6 +39,16 @@
       },
       "type": "object"
     },
+    "v3Body": {
+      "properties": {
+        "data": {
+          "format": "byte",
+          "title": "manifest content",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "v3CheckPermissionRequest": {
       "properties": {
         "object_id": {
@@ -202,9 +212,8 @@
     "v3GetManifestResponse": {
       "properties": {
         "body": {
-          "format": "byte",
-          "title": "Manifest content",
-          "type": "string"
+          "$ref": "#/definitions/v3Body",
+          "title": "Manifest content"
         },
         "metadata": {
           "$ref": "#/definitions/v3Metadata",

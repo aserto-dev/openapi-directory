@@ -33,6 +33,13 @@ components:
             $ref: '#/components/schemas/protobufAny'
         message:
           type: string
+    v3Body:
+      type: object
+      properties:
+        data:
+          type: string
+          title: manifest content
+          format: byte
     v3CheckPermissionRequest:
       type: object
       required:
@@ -146,9 +153,7 @@ components:
       type: object
       properties:
         body:
-          type: string
-          title: Manifest content
-          format: byte
+          $ref: '#/components/schemas/v3Body'
         metadata:
           $ref: '#/components/schemas/v3Metadata'
     v3GetObjectManyResponse:

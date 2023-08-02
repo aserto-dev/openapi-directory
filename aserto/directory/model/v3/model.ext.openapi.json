@@ -80,9 +80,7 @@
             "TenantID": []
           }
         ]
-      }
-    },
-    "/api/v3/directory/manifest/{name}/{version}": {
+      },
       "post": {
         "tags": [
           "directory"
@@ -102,9 +100,9 @@
           },
           {
             "name": "version",
-            "in": "path",
+            "in": "query",
             "description": "manifest version (semver notation)",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string"
             }

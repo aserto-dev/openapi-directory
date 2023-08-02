@@ -372,8 +372,7 @@
           }
         },
         "required": [
-          "name",
-          "version"
+          "name"
         ],
         "type": "object"
       },
@@ -929,6 +928,73 @@
         "tags": [
           "directory"
         ]
+      },
+      "post": {
+        "description": "Set manifest.",
+        "operationId": "directory.v3.manifest.set",
+        "parameters": [
+          {
+            "description": "manifest name (unique, lc-string)",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "manifest version (semver notation)",
+            "in": "query",
+            "name": "version",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/yaml": {
+              "schema": {
+                "format": "binary",
+                "type": "string"
+              }
+            }
+          },
+          "description": "Manifest YAML file",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/v3SetManifestResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Set manifest",
+        "tags": [
+          "directory"
+        ]
       }
     },
     "/api/v3/directory/manifest/{name}/{version}": {
@@ -984,74 +1050,6 @@
           }
         ],
         "summary": "Delete manifest",
-        "tags": [
-          "directory"
-        ]
-      },
-      "post": {
-        "description": "Set manifest.",
-        "operationId": "directory.v3.manifest.set",
-        "parameters": [
-          {
-            "description": "manifest name (unique, lc-string)",
-            "in": "path",
-            "name": "name",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "manifest version (semver notation)",
-            "in": "path",
-            "name": "version",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/yaml": {
-              "schema": {
-                "format": "binary",
-                "type": "string"
-              }
-            }
-          },
-          "description": "Manifest YAML file",
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/yaml": {
-                "schema": {
-                  "$ref": "#/components/schemas/v3SetManifestResponse"
-                }
-              }
-            },
-            "description": "A successful response."
-          },
-          "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/rpcStatus"
-                }
-              }
-            },
-            "description": "An unexpected error response."
-          }
-        },
-        "security": [
-          {
-            "DirectoryAPIKey": [],
-            "TenantID": []
-          }
-        ],
-        "summary": "Set manifest",
         "tags": [
           "directory"
         ]

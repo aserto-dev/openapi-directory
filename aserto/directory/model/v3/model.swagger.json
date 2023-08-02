@@ -218,8 +218,7 @@
         }
       },
       "required": [
-        "name",
-        "version"
+        "name"
       ]
     },
     "v3PaginationRequest": {

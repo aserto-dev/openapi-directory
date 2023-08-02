@@ -255,7 +255,6 @@ components:
       type: object
       required:
         - name
-        - version
       properties:
         created_at:
           type: string
@@ -649,6 +648,48 @@ paths:
       security:
         - DirectoryAPIKey: []
           TenantID: []
+    post:
+      tags:
+        - directory
+      summary: Set manifest
+      description: Set manifest.
+      operationId: directory.v3.manifest.set
+      parameters:
+        - name: name
+          in: path
+          description: manifest name (unique, lc-string)
+          required: true
+          schema:
+            type: string
+        - name: version
+          in: query
+          description: manifest version (semver notation)
+          schema:
+            type: string
+      requestBody:
+        description: Manifest YAML file
+        required: true
+        content:
+          application/yaml:
+            schema:
+              type: string
+              format: binary
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/yaml:
+              schema:
+                $ref: '#/components/schemas/v3SetManifestResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
   /api/v3/directory/manifest/{name}/{version}:
     delete:
       tags:
@@ -676,49 +717,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/v3DeleteManifestResponse'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/rpcStatus'
-      security:
-        - DirectoryAPIKey: []
-          TenantID: []
-    post:
-      tags:
-        - directory
-      summary: Set manifest
-      description: Set manifest.
-      operationId: directory.v3.manifest.set
-      parameters:
-        - name: name
-          in: path
-          description: manifest name (unique, lc-string)
-          required: true
-          schema:
-            type: string
-        - name: version
-          in: path
-          description: manifest version (semver notation)
-          required: true
-          schema:
-            type: string
-      requestBody:
-        description: Manifest YAML file
-        required: true
-        content:
-          application/yaml:
-            schema:
-              type: string
-              format: binary
-      responses:
-        "200":
-          description: A successful response.
-          content:
-            application/yaml:
-              schema:
-                $ref: '#/components/schemas/v3SetManifestResponse'
         default:
           description: An unexpected error response.
           content:

@@ -399,8 +399,7 @@
         }
       },
       "required": [
-        "name",
-        "version"
+        "name"
       ],
       "type": "object"
     },

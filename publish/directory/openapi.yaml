@@ -241,40 +241,17 @@ components:
           $ref: '#/components/schemas/v3ImportCounter'
         relation:
           $ref: '#/components/schemas/v3ImportCounter'
-    v3ListManifestsResponse:
-      type: object
-      properties:
-        manifests:
-          type: array
-          title: manifests metadata
-          items:
-            $ref: '#/components/schemas/v3Metadata'
-        page:
-          $ref: '#/components/schemas/v3PaginationResponse'
     v3Metadata:
       type: object
-      required:
-        - name
       properties:
-        created_at:
-          type: string
-          title: created at timestamp (UTC)
-          format: date-time
-          readOnly: true
         etag:
           type: string
           title: object instance etag
-        name:
-          type: string
-          title: manifest name (unique, lc-string)
         updated_at:
           type: string
           title: last updated timestamp (UTC)
           format: date-time
           readOnly: true
-        version:
-          type: string
-          title: manifest version (semver notation)
     v3Object:
       type: object
       required:
@@ -594,38 +571,48 @@ paths:
       security:
         - DirectoryAPIKey: []
           TenantID: []
-  /api/v3/directory/manifest/{name}:
+  /api/v3/directory/manifest:
+    delete:
+      tags:
+        - directory
+      summary: Delete manifest
+      description: Delete manifest.
+      operationId: directory.v3.manifest.delete
+      parameters:
+        - name: empty
+          in: query
+          description: empty request
+          schema:
+            type: object
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v3DeleteManifestResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
     get:
       tags:
         - directory
       summary: Get manifest
       description: Get manifest.
       operationId: directory.v3.manifest.get
-      parameters:
-        - name: name
-          in: path
-          description: manifest name (unique, lc-string)
-          required: true
-          schema:
-            type: string
-        - name: version
-          in: query
-          description: manifest version (semver notation), default to latest
-          schema:
-            type: string
       responses:
         "200":
           description: A successful response.
           headers:
-            Aserto-Created-At:
-              parameter:
-                description: manifest creation time
-                schema:
-                  type: string
-                  format: date-time
             Aserto-Updated-At:
               parameter:
-                description: Last modified date
+                description: last manifest update time
                 schema:
                   type: string
                   format: date-time
@@ -654,18 +641,6 @@ paths:
       summary: Set manifest
       description: Set manifest.
       operationId: directory.v3.manifest.set
-      parameters:
-        - name: name
-          in: path
-          description: manifest name (unique, lc-string)
-          required: true
-          schema:
-            type: string
-        - name: version
-          in: query
-          description: manifest version (semver notation)
-          schema:
-            type: string
       requestBody:
         description: Manifest YAML file
         required: true
@@ -681,77 +656,6 @@ paths:
             application/yaml:
               schema:
                 $ref: '#/components/schemas/v3SetManifestResponse'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/rpcStatus'
-      security:
-        - DirectoryAPIKey: []
-          TenantID: []
-  /api/v3/directory/manifest/{name}/{version}:
-    delete:
-      tags:
-        - directory
-      summary: Delete manifest
-      description: Delete manifest.
-      operationId: directory.v3.manifest.delete
-      parameters:
-        - name: name
-          in: path
-          description: manifest name (unique, lc-string)
-          required: true
-          schema:
-            type: string
-        - name: version
-          in: path
-          description: manifest version (semver notation)
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: A successful response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/v3DeleteManifestResponse'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/rpcStatus'
-      security:
-        - DirectoryAPIKey: []
-          TenantID: []
-  /api/v3/directory/manifests:
-    get:
-      tags:
-        - directory
-      summary: List manifests
-      description: Returns list of stored manifests.
-      operationId: directory.v3.manifests.list
-      parameters:
-        - name: page.size
-          in: query
-          description: requested page size, valid value between 1-100 rows (default 100)
-          schema:
-            type: integer
-            format: int32
-        - name: page.token
-          in: query
-          description: pagination start token, default ""
-          schema:
-            type: string
-      responses:
-        "200":
-          description: A successful response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/v3ListManifestsResponse'
         default:
           description: An unexpected error response.
           content:

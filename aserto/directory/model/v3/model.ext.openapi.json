@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "paths": {
-    "/api/v3/directory/manifest/{name}": {
+    "/api/v3/directory/manifest": {
       "get": {
         "tags": [
           "directory"
@@ -9,26 +9,6 @@
         "summary": "Get manifest",
         "description": "Get manifest.",
         "operationId": "directory.v3.manifest.get",
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "description": "manifest name (unique, lc-string)",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "version",
-            "in": "query",
-            "description": "manifest version (semver notation), default to latest",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -41,15 +21,8 @@
               }
             },
             "headers": {
-              "Aserto-Created-At": {
-                "description": "manifest creation time",
-                "schema": {
-                  "type": "string",
-                  "format": "date-time"
-                }
-              },
               "Aserto-Updated-At": {
-                "description": "Last modified date",
+                "description": "last manifest update time",
                 "schema": {
                   "type": "string",
                   "format": "date-time"
@@ -88,26 +61,6 @@
         "summary": "Set manifest",
         "description": "Set manifest.",
         "operationId": "directory.v3.manifest.set",
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "description": "manifest name (unique, lc-string)",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "version",
-            "in": "query",
-            "description": "manifest version (semver notation)",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "requestBody": {
           "description": "Manifest YAML file",
           "required": true,

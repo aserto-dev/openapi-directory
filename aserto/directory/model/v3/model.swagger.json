@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/api/v3/directory/manifest/{name}/{version}": {
+    "/api/v3/directory/manifest": {
       "delete": {
         "summary": "Delete manifest",
         "description": "Delete manifest.",
@@ -37,65 +37,11 @@
         },
         "parameters": [
           {
-            "name": "name",
-            "description": "manifest name (unique, lc-string)",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "version",
-            "description": "manifest version (semver notation)",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "directory"
-        ],
-        "security": [
-          {
-            "DirectoryAPIKey": [],
-            "TenantID": []
-          }
-        ]
-      }
-    },
-    "/api/v3/directory/manifests": {
-      "get": {
-        "summary": "List manifests",
-        "description": "Returns list of stored manifests.",
-        "operationId": "directory.v3.manifests.list",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v3ListManifestsResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "page.size",
-            "description": "requested page size, valid value between 1-100 rows (default 100)",
+            "name": "empty",
+            "description": "empty request",
             "in": "query",
             "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "page.token",
-            "description": "pagination start token, default \"\"",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "type": "object"
           }
         ],
         "tags": [
@@ -172,40 +118,9 @@
         }
       }
     },
-    "v3ListManifestsResponse": {
-      "type": "object",
-      "properties": {
-        "manifests": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/v3Metadata"
-          },
-          "title": "manifests metadata"
-        },
-        "page": {
-          "$ref": "#/definitions/v3PaginationResponse",
-          "title": "pagination response"
-        }
-      }
-    },
     "v3Metadata": {
       "type": "object",
       "properties": {
-        "name": {
-          "type": "string",
-          "title": "manifest name (unique, lc-string)"
-        },
-        "version": {
-          "type": "string",
-          "title": "manifest version (semver notation)"
-        },
-        "created_at": {
-          "type": "string",
-          "format": "date-time",
-          "title": "created at timestamp (UTC)",
-          "readOnly": true
-        },
         "updated_at": {
           "type": "string",
           "format": "date-time",
@@ -216,36 +131,7 @@
           "type": "string",
           "title": "object instance etag"
         }
-      },
-      "required": [
-        "name"
-      ]
-    },
-    "v3PaginationRequest": {
-      "type": "object",
-      "properties": {
-        "size": {
-          "type": "integer",
-          "format": "int32",
-          "title": "requested page size, valid value between 1-100 rows (default 100)"
-        },
-        "token": {
-          "type": "string",
-          "title": "pagination start token, default \"\""
-        }
-      },
-      "title": "Pagination request"
-    },
-    "v3PaginationResponse": {
-      "type": "object",
-      "properties": {
-        "next_token": {
-          "type": "string",
-          "title": "next page token, when empty there are no more pages to fetch",
-          "readOnly": true
-        }
-      },
-      "title": "Pagination response"
+      }
     },
     "v3SetManifestResponse": {
       "type": "object",

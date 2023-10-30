@@ -2087,7 +2087,7 @@ info:
     extensionprops: {}
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: v0.21.6
+  version: v0.30.0
 paths: {}
 servers:
   - extensionprops: {}

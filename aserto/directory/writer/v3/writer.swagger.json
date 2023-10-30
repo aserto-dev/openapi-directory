@@ -1,0 +1,433 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "aserto/directory/writer/v3/writer.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Writer"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v3/directory/object": {
+      "post": {
+        "summary": "Set object",
+        "description": "Set object.",
+        "operationId": "directory.v3.object.set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3SetObjectResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v3SetObjectRequest"
+            }
+          }
+        ],
+        "tags": [
+          "directory"
+        ],
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ]
+      }
+    },
+    "/api/v3/directory/object/{object_type}/{object_id}": {
+      "delete": {
+        "summary": "Delete object",
+        "description": "Delete object.",
+        "operationId": "directory.v3.object.delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3DeleteObjectResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "object_type",
+            "description": "object type",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "object_id",
+            "description": "object identifier",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "with_relations",
+            "description": "delete object relations, both object and subject relations.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "tags": [
+          "directory"
+        ],
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ]
+      }
+    },
+    "/api/v3/directory/relation": {
+      "delete": {
+        "summary": "Delete relation",
+        "description": "Delete relation.",
+        "operationId": "directory.v3.relation.delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3DeleteRelationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "object_type",
+            "description": "object type.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "object_id",
+            "description": "object identifier.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "relation",
+            "description": "object relation name.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subject_type",
+            "description": "subject type.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subject_id",
+            "description": "subject identifier.",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subject_relation",
+            "description": "optional subject relation name.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "directory"
+        ],
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Set relation",
+        "description": "Set relation.",
+        "operationId": "directory.v3.relation.set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3SetRelationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v3SetRelationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "directory"
+        ],
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "type_url": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "protobufNullValue": {
+      "type": "string",
+      "enum": [
+        "NULL_VALUE"
+      ],
+      "default": "NULL_VALUE",
+      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\n The JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v3DeleteObjectResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "properties": {},
+          "title": "empty result"
+        }
+      }
+    },
+    "v3DeleteRelationResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "properties": {},
+          "title": "empty result"
+        }
+      }
+    },
+    "v3Object": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "title": "object type name",
+          "required": [
+            "type"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "title": "external object identifier (cs-string, no spaces or tabs)",
+          "required": [
+            "id"
+          ]
+        },
+        "display_name": {
+          "type": "string",
+          "title": "display name object"
+        },
+        "properties": {
+          "type": "object",
+          "title": "property bag"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "created at timestamp (UTC)",
+          "readOnly": true
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "last updated timestamp (UTC)",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "title": "object instance etag"
+        }
+      },
+      "required": [
+        "type",
+        "id"
+      ]
+    },
+    "v3Relation": {
+      "type": "object",
+      "properties": {
+        "object_type": {
+          "type": "string",
+          "title": "object type",
+          "required": [
+            "object_type"
+          ]
+        },
+        "object_id": {
+          "type": "string",
+          "title": "object identifier",
+          "required": [
+            "object_id"
+          ]
+        },
+        "relation": {
+          "type": "string",
+          "title": "object relation name",
+          "required": [
+            "relation"
+          ]
+        },
+        "subject_type": {
+          "type": "string",
+          "title": "subject type",
+          "required": [
+            "subject_type"
+          ]
+        },
+        "subject_id": {
+          "type": "string",
+          "title": "subject identifier",
+          "required": [
+            "subject_id"
+          ]
+        },
+        "subject_relation": {
+          "type": "string",
+          "title": "optional subject relation name"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "created at timestamp (UTC)",
+          "readOnly": true
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "last updated timestamp (UTC)",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "title": "object instance etag"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "relation",
+        "subject_type",
+        "subject_id"
+      ]
+    },
+    "v3SetObjectRequest": {
+      "type": "object",
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/v3Object",
+          "title": "object instance"
+        }
+      }
+    },
+    "v3SetObjectResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v3Object",
+          "title": "object instance"
+        }
+      }
+    },
+    "v3SetRelationRequest": {
+      "type": "object",
+      "properties": {
+        "relation": {
+          "$ref": "#/definitions/v3Relation",
+          "title": "relation instance"
+        }
+      }
+    },
+    "v3SetRelationResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v3Relation",
+          "title": "relation instance"
+        }
+      }
+    }
+  }
+}

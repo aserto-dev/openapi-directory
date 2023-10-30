@@ -1,0 +1,82 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Directory Service",
+    "version": "3.0",
+    "contact": {
+      "name": "Aserto, Inc.",
+      "url": "https://github.com/aserto-dev/pb-directory",
+      "email": "support@aserto.com"
+    },
+    "license": {
+      "name": "Apache 2.0 License",
+      "url": "https://github.com/aserto-dev/pb-directory/blob/main/LICENSE"
+    }
+  },
+  "schemes": [
+    "http",
+    "https",
+    "wss"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "type_url": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "DirectoryAPIKey": {
+      "type": "apiKey",
+      "name": "authorization",
+      "in": "header"
+    },
+    "TenantID": {
+      "type": "apiKey",
+      "name": "aserto-tenant-id",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "DirectoryAPIKey": [],
+      "TenantID": []
+    }
+  ],
+  "externalDocs": {
+    "description": "Aserto API Reference.",
+    "url": "https://docs.aserto.com"
+  }
+}

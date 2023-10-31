@@ -6,7 +6,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
@@ -108,7 +107,7 @@ func gen(bufImage, fileSources, version string) error {
 func getClientFiles(fileSources string) ([]string, error) {
 	var clientFiles []string
 
-	bufExportDir, err := ioutil.TempDir("", "bufimage")
+	bufExportDir, err := os.MkdirTemp("", "bufimage")
 	if err != nil {
 		return clientFiles, err
 	}
@@ -185,9 +184,10 @@ func mergeOpenAPI() error {
 		{
 			outfile: "service/directory/openapi.json",
 			subServices: []string{
-				"aserto/directory/common/v2/common.swagger.json",
-				"aserto/directory/reader/v2/reader.swagger.json",
-				"aserto/directory/writer/v2/writer.swagger.json",
+				"aserto/directory/openapi/v3/openapi.swagger.json",
+				"aserto/directory/common/v3/common.swagger.json",
+				"aserto/directory/reader/v3/reader.swagger.json",
+				"aserto/directory/writer/v3/writer.swagger.json",
 			},
 		},
 	}

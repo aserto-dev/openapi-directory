@@ -74,7 +74,65 @@ components:
             value:
               extensionprops: {}
               type: string
-    v2CheckPermissionResponse:
+    v3CheckPermissionRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        required:
+          - object_type
+          - object_id
+          - permission
+          - subject_type
+          - subject_id
+        properties:
+          object_id:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              title: object identifier
+              required:
+                - object_id
+          object_type:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              title: object type
+              required:
+                - object_type
+          permission:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              title: permission name
+              required:
+                - permission
+          subject_id:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              title: subject identifier
+              required:
+                - subject_id
+          subject_type:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              title: subject type
+              required:
+                - subject_type
+          trace:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: boolean
+              title: collect trace information
+    v3CheckPermissionResponse:
       ref: ""
       value:
         extensionprops: {}
@@ -97,7 +155,65 @@ components:
                 value:
                   extensionprops: {}
                   type: string
-    v2CheckRelationResponse:
+    v3CheckRelationRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        required:
+          - object_type
+          - object_id
+          - relation
+          - subject_type
+          - subject_id
+        properties:
+          object_id:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              title: object identifier
+              required:
+                - object_id
+          object_type:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              title: object type
+              required:
+                - object_type
+          relation:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              title: relation name
+              required:
+                - relation
+          subject_id:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              title: subject identifier
+              required:
+                - subject_id
+          subject_type:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              title: subject type
+              required:
+                - subject_type
+          trace:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: boolean
+              title: collect trace information
+    v3CheckRelationResponse:
       ref: ""
       value:
         extensionprops: {}
@@ -120,7 +236,88 @@ components:
                 value:
                   extensionprops: {}
                   type: string
-    v2DeleteObjectResponse:
+    v3CheckRequest:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        required:
+          - object_type
+          - object_id
+          - relation
+          - subject_type
+          - subject_id
+        properties:
+          object_id:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              title: object identifier
+              required:
+                - object_id
+          object_type:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              title: object type
+              required:
+                - object_type
+          relation:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              title: relation name
+              required:
+                - relation
+          subject_id:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              title: subject identifier
+              required:
+                - subject_id
+          subject_type:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              title: subject type
+              required:
+                - subject_type
+          trace:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: boolean
+              title: collect trace information
+    v3CheckResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          check:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: boolean
+              title: check result
+          trace:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: array
+              title: trace information
+              items:
+                ref: ""
+                value:
+                  extensionprops: {}
+                  type: string
+    v3DeleteObjectResponse:
       ref: ""
       value:
         extensionprops: {}
@@ -131,7 +328,7 @@ components:
             value:
               extensionprops: {}
               title: empty result
-    v2DeleteObjectTypeResponse:
+    v3DeleteRelationResponse:
       ref: ""
       value:
         extensionprops: {}
@@ -142,40 +339,7 @@ components:
             value:
               extensionprops: {}
               title: empty result
-    v2DeletePermissionResponse:
-      ref: ""
-      value:
-        extensionprops: {}
-        type: object
-        properties:
-          result:
-            ref: ""
-            value:
-              extensionprops: {}
-              title: empty result
-    v2DeleteRelationResponse:
-      ref: ""
-      value:
-        extensionprops: {}
-        type: object
-        properties:
-          result:
-            ref: ""
-            value:
-              extensionprops: {}
-              title: empty result
-    v2DeleteRelationTypeResponse:
-      ref: ""
-      value:
-        extensionprops: {}
-        type: object
-        properties:
-          result:
-            ref: ""
-            value:
-              extensionprops: {}
-              title: empty result
-    v2GetGraphResponse:
+    v3GetGraphResponse:
       ref: ""
       value:
         extensionprops: {}
@@ -188,7 +352,7 @@ components:
               type: array
               title: dependency graph
               items:
-                ref: '#/components/schemas/v2ObjectDependency'
+                ref: '#/components/schemas/v3ObjectDependency'
                 value:
                   extensionprops: {}
                   type: object
@@ -200,30 +364,35 @@ components:
                         type: integer
                         title: dependency depth
                         format: int32
+                        readOnly: true
                     is_cycle:
                       ref: ""
                       value:
                         extensionprops: {}
                         type: boolean
                         title: dependency cycle
-                    object_key:
+                        readOnly: true
+                    object_id:
                       ref: ""
                       value:
                         extensionprops: {}
                         type: string
-                        title: object search key of source object
+                        title: object identifier
+                        readOnly: true
                     object_type:
                       ref: ""
                       value:
                         extensionprops: {}
                         type: string
-                        title: object type name of source object
+                        title: object type
+                        readOnly: true
                     path:
                       ref: ""
                       value:
                         extensionprops: {}
                         type: array
                         title: dependency path
+                        readOnly: true
                         items:
                           ref: ""
                           value:
@@ -234,20 +403,30 @@ components:
                       value:
                         extensionprops: {}
                         type: string
-                        title: relation identifier
-                    subject_key:
+                        title: object relation name
+                        readOnly: true
+                    subject_id:
                       ref: ""
                       value:
                         extensionprops: {}
                         type: string
-                        title: object search key of target object
+                        title: subject identifier
+                        readOnly: true
+                    subject_relation:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        title: optional subject relation name
+                        readOnly: true
                     subject_type:
                       ref: ""
                       value:
                         extensionprops: {}
                         type: string
-                        title: object type id of target object
-    v2GetObjectManyResponse:
+                        title: subject type
+                        readOnly: true
+    v3GetObjectManyResponse:
       ref: ""
       value:
         extensionprops: {}
@@ -260,10 +439,13 @@ components:
               type: array
               title: array of object instances
               items:
-                ref: '#/components/schemas/v2Object'
+                ref: '#/components/schemas/v3Object'
                 value:
                   extensionprops: {}
                   type: object
+                  required:
+                    - type
+                    - id
                   properties:
                     created_at:
                       ref: ""
@@ -272,24 +454,27 @@ components:
                         type: string
                         title: created at timestamp (UTC)
                         format: date-time
+                        readOnly: true
                     display_name:
                       ref: ""
                       value:
                         extensionprops: {}
                         type: string
                         title: display name object
-                    hash:
+                    etag:
                       ref: ""
                       value:
                         extensionprops: {}
                         type: string
-                        title: object instance hash
-                    key:
+                        title: object instance etag
+                    id:
                       ref: ""
                       value:
                         extensionprops: {}
                         type: string
-                        title: external object key (cs-string)
+                        title: external object identifier (cs-string, no spaces or tabs)
+                        required:
+                          - id
                     properties:
                       ref: ""
                       value:
@@ -302,6 +487,8 @@ components:
                         extensionprops: {}
                         type: string
                         title: object type name
+                        required:
+                          - type
                     updated_at:
                       ref: ""
                       value:
@@ -309,14 +496,15 @@ components:
                         type: string
                         title: last updated timestamp (UTC)
                         format: date-time
-    v2GetObjectResponse:
+                        readOnly: true
+    v3GetObjectResponse:
       ref: ""
       value:
         extensionprops: {}
         type: object
         properties:
           page:
-            ref: '#/components/schemas/v2PaginationResponse'
+            ref: '#/components/schemas/v3PaginationResponse'
             value:
               extensionprops: {}
               type: object
@@ -328,13 +516,7 @@ components:
                     extensionprops: {}
                     type: string
                     title: next page token, when empty there are no more pages to fetch
-                result_size:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: integer
-                    title: result size of the page returned
-                    format: int32
+                    readOnly: true
           relations:
             ref: ""
             value:
@@ -342,10 +524,16 @@ components:
               type: array
               title: object relations
               items:
-                ref: '#/components/schemas/v2Relation'
+                ref: '#/components/schemas/v3Relation'
                 value:
                   extensionprops: {}
                   type: object
+                  required:
+                    - object_type
+                    - object_id
+                    - relation
+                    - subject_type
+                    - subject_id
                   properties:
                     created_at:
                       ref: ""
@@ -354,56 +542,59 @@ components:
                         type: string
                         title: created at timestamp (UTC)
                         format: date-time
-                    hash:
+                        readOnly: true
+                    etag:
                       ref: ""
                       value:
                         extensionprops: {}
                         type: string
-                        title: object instance hash
-                    object:
-                      ref: '#/components/schemas/v2ObjectIdentifier'
+                        title: object instance etag
+                    object_id:
+                      ref: ""
                       value:
                         extensionprops: {}
-                        type: object
-                        title: Object identifier
-                        properties:
-                          key:
-                            ref: ""
-                            value:
-                              extensionprops: {}
-                              type: string
-                              title: external object key (cs-string)
-                          type:
-                            ref: ""
-                            value:
-                              extensionprops: {}
-                              type: string
-                              title: object type
+                        type: string
+                        title: object identifier
+                        required:
+                          - object_id
+                    object_type:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        title: object type
+                        required:
+                          - object_type
                     relation:
                       ref: ""
                       value:
                         extensionprops: {}
                         type: string
-                        title: relation type name
-                    subject:
-                      ref: '#/components/schemas/v2ObjectIdentifier'
+                        title: object relation name
+                        required:
+                          - relation
+                    subject_id:
+                      ref: ""
                       value:
                         extensionprops: {}
-                        type: object
-                        title: Object identifier
-                        properties:
-                          key:
-                            ref: ""
-                            value:
-                              extensionprops: {}
-                              type: string
-                              title: external object key (cs-string)
-                          type:
-                            ref: ""
-                            value:
-                              extensionprops: {}
-                              type: string
-                              title: object type
+                        type: string
+                        title: subject identifier
+                        required:
+                          - subject_id
+                    subject_relation:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        title: optional subject relation name
+                    subject_type:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        title: subject type
+                        required:
+                          - subject_type
                     updated_at:
                       ref: ""
                       value:
@@ -411,11 +602,15 @@ components:
                         type: string
                         title: last updated timestamp (UTC)
                         format: date-time
+                        readOnly: true
           result:
-            ref: '#/components/schemas/v2Object'
+            ref: '#/components/schemas/v3Object'
             value:
               extensionprops: {}
               type: object
+              required:
+                - type
+                - id
               properties:
                 created_at:
                   ref: ""
@@ -424,24 +619,27 @@ components:
                     type: string
                     title: created at timestamp (UTC)
                     format: date-time
+                    readOnly: true
                 display_name:
                   ref: ""
                   value:
                     extensionprops: {}
                     type: string
                     title: display name object
-                hash:
+                etag:
                   ref: ""
                   value:
                     extensionprops: {}
                     type: string
-                    title: object instance hash
-                key:
+                    title: object instance etag
+                id:
                   ref: ""
                   value:
                     extensionprops: {}
                     type: string
-                    title: external object key (cs-string)
+                    title: external object identifier (cs-string, no spaces or tabs)
+                    required:
+                      - id
                 properties:
                   ref: ""
                   value:
@@ -454,6 +652,8 @@ components:
                     extensionprops: {}
                     type: string
                     title: object type name
+                    required:
+                      - type
                 updated_at:
                   ref: ""
                   value:
@@ -461,84 +661,15 @@ components:
                     type: string
                     title: last updated timestamp (UTC)
                     format: date-time
-    v2GetObjectTypeResponse:
-      ref: ""
-      value:
-        extensionprops: {}
-        type: object
-        properties:
-          result:
-            ref: '#/components/schemas/v2ObjectType'
-            value:
-              extensionprops: {}
-              type: object
-              properties:
-                created_at:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: created at timestamp (UTC)
-                    format: date-time
-                display_name:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: object type display name
-                hash:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: object instance hash
-                is_subject:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: boolean
-                    title: object type is a subject (user|group) (default false)
-                name:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: object type name (unique, lc-string)
-                ordinal:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: integer
-                    title: sort ordinal (default 0)
-                    format: int32
-                schema:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: object
-                    title: object type schema definition (JSON)
-                status:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: integer
-                    title: status flag bitmap (default 0)
-                    format: int64
-                updated_at:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: last updated timestamp (UTC)
-                    format: date-time
-    v2GetObjectTypesResponse:
+                    readOnly: true
+    v3GetObjectsResponse:
       ref: ""
       value:
         extensionprops: {}
         type: object
         properties:
           page:
-            ref: '#/components/schemas/v2PaginationResponse'
+            ref: '#/components/schemas/v3PaginationResponse'
             value:
               extensionprops: {}
               type: object
@@ -550,109 +681,7 @@ components:
                     extensionprops: {}
                     type: string
                     title: next page token, when empty there are no more pages to fetch
-                result_size:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: integer
-                    title: result size of the page returned
-                    format: int32
-          results:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: array
-              title: array of object types
-              items:
-                ref: '#/components/schemas/v2ObjectType'
-                value:
-                  extensionprops: {}
-                  type: object
-                  properties:
-                    created_at:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
-                        title: created at timestamp (UTC)
-                        format: date-time
-                    display_name:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
-                        title: object type display name
-                    hash:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
-                        title: object instance hash
-                    is_subject:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: boolean
-                        title: object type is a subject (user|group) (default false)
-                    name:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
-                        title: object type name (unique, lc-string)
-                    ordinal:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: integer
-                        title: sort ordinal (default 0)
-                        format: int32
-                    schema:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: object
-                        title: object type schema definition (JSON)
-                    status:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: integer
-                        title: status flag bitmap (default 0)
-                        format: int64
-                    updated_at:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
-                        title: last updated timestamp (UTC)
-                        format: date-time
-    v2GetObjectsResponse:
-      ref: ""
-      value:
-        extensionprops: {}
-        type: object
-        properties:
-          page:
-            ref: '#/components/schemas/v2PaginationResponse'
-            value:
-              extensionprops: {}
-              type: object
-              title: Pagination response
-              properties:
-                next_token:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: next page token, when empty there are no more pages to fetch
-                result_size:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: integer
-                    title: result size of the page returned
-                    format: int32
+                    readOnly: true
           results:
             ref: ""
             value:
@@ -660,10 +689,13 @@ components:
               type: array
               title: array of object instances
               items:
-                ref: '#/components/schemas/v2Object'
+                ref: '#/components/schemas/v3Object'
                 value:
                   extensionprops: {}
                   type: object
+                  required:
+                    - type
+                    - id
                   properties:
                     created_at:
                       ref: ""
@@ -672,24 +704,27 @@ components:
                         type: string
                         title: created at timestamp (UTC)
                         format: date-time
+                        readOnly: true
                     display_name:
                       ref: ""
                       value:
                         extensionprops: {}
                         type: string
                         title: display name object
-                    hash:
+                    etag:
                       ref: ""
                       value:
                         extensionprops: {}
                         type: string
-                        title: object instance hash
-                    key:
+                        title: object instance etag
+                    id:
                       ref: ""
                       value:
                         extensionprops: {}
                         type: string
-                        title: external object key (cs-string)
+                        title: external object identifier (cs-string, no spaces or tabs)
+                        required:
+                          - id
                     properties:
                       ref: ""
                       value:
@@ -702,6 +737,8 @@ components:
                         extensionprops: {}
                         type: string
                         title: object type name
+                        required:
+                          - type
                     updated_at:
                       ref: ""
                       value:
@@ -709,121 +746,8 @@ components:
                         type: string
                         title: last updated timestamp (UTC)
                         format: date-time
-    v2GetPermissionResponse:
-      ref: ""
-      value:
-        extensionprops: {}
-        type: object
-        properties:
-          result:
-            ref: '#/components/schemas/v2Permission'
-            value:
-              extensionprops: {}
-              type: object
-              properties:
-                created_at:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: created at timestamp (UTC)
-                    format: date-time
-                display_name:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: permission display name
-                hash:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: object instance hash
-                name:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: permission name (unique, cs-string)
-                updated_at:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: last updated timestamp (UTC)
-                    format: date-time
-    v2GetPermissionsResponse:
-      ref: ""
-      value:
-        extensionprops: {}
-        type: object
-        properties:
-          page:
-            ref: '#/components/schemas/v2PaginationResponse'
-            value:
-              extensionprops: {}
-              type: object
-              title: Pagination response
-              properties:
-                next_token:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: next page token, when empty there are no more pages to fetch
-                result_size:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: integer
-                    title: result size of the page returned
-                    format: int32
-          results:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: array
-              title: array of permissions
-              items:
-                ref: '#/components/schemas/v2Permission'
-                value:
-                  extensionprops: {}
-                  type: object
-                  properties:
-                    created_at:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
-                        title: created at timestamp (UTC)
-                        format: date-time
-                    display_name:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
-                        title: permission display name
-                    hash:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
-                        title: object instance hash
-                    name:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
-                        title: permission name (unique, cs-string)
-                    updated_at:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
-                        title: last updated timestamp (UTC)
-                        format: date-time
-    v2GetRelationResponse:
+                        readOnly: true
+    v3GetRelationResponse:
       ref: ""
       value:
         extensionprops: {}
@@ -835,93 +759,17 @@ components:
               extensionprops: {}
               type: object
               title: map of materialized relation objects
-          results:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: array
-              title: array of relation instances
-              items:
-                ref: '#/components/schemas/v2Relation'
-                value:
-                  extensionprops: {}
-                  type: object
-                  properties:
-                    created_at:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
-                        title: created at timestamp (UTC)
-                        format: date-time
-                    hash:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
-                        title: object instance hash
-                    object:
-                      ref: '#/components/schemas/v2ObjectIdentifier'
-                      value:
-                        extensionprops: {}
-                        type: object
-                        title: Object identifier
-                        properties:
-                          key:
-                            ref: ""
-                            value:
-                              extensionprops: {}
-                              type: string
-                              title: external object key (cs-string)
-                          type:
-                            ref: ""
-                            value:
-                              extensionprops: {}
-                              type: string
-                              title: object type
-                    relation:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
-                        title: relation type name
-                    subject:
-                      ref: '#/components/schemas/v2ObjectIdentifier'
-                      value:
-                        extensionprops: {}
-                        type: object
-                        title: Object identifier
-                        properties:
-                          key:
-                            ref: ""
-                            value:
-                              extensionprops: {}
-                              type: string
-                              title: external object key (cs-string)
-                          type:
-                            ref: ""
-                            value:
-                              extensionprops: {}
-                              type: string
-                              title: object type
-                    updated_at:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
-                        title: last updated timestamp (UTC)
-                        format: date-time
-    v2GetRelationTypeResponse:
-      ref: ""
-      value:
-        extensionprops: {}
-        type: object
-        properties:
           result:
-            ref: '#/components/schemas/v2RelationType'
+            ref: '#/components/schemas/v3Relation'
             value:
               extensionprops: {}
               type: object
+              required:
+                - object_type
+                - object_id
+                - relation
+                - subject_type
+                - subject_id
               properties:
                 created_at:
                   ref: ""
@@ -930,66 +778,59 @@ components:
                     type: string
                     title: created at timestamp (UTC)
                     format: date-time
-                display_name:
+                    readOnly: true
+                etag:
                   ref: ""
                   value:
                     extensionprops: {}
                     type: string
-                    title: relation display name
-                hash:
+                    title: object instance etag
+                object_id:
                   ref: ""
                   value:
                     extensionprops: {}
                     type: string
-                    title: object instance hash
-                name:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: relation type name selector
+                    title: object identifier
+                    required:
+                      - object_id
                 object_type:
                   ref: ""
                   value:
                     extensionprops: {}
                     type: string
-                    title: object type referenced by relation
-                ordinal:
+                    title: object type
+                    required:
+                      - object_type
+                relation:
                   ref: ""
                   value:
                     extensionprops: {}
-                    type: integer
-                    title: sort ordinal (default 0)
-                    format: int32
-                permissions:
+                    type: string
+                    title: object relation name
+                    required:
+                      - relation
+                subject_id:
                   ref: ""
                   value:
                     extensionprops: {}
-                    type: array
-                    title: permissions associated to relation type instance
-                    items:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
-                status:
+                    type: string
+                    title: subject identifier
+                    required:
+                      - subject_id
+                subject_relation:
                   ref: ""
                   value:
                     extensionprops: {}
-                    type: integer
-                    title: status bitmap (default 0)
-                    format: int64
-                unions:
+                    type: string
+                    title: optional subject relation name
+                subject_type:
                   ref: ""
                   value:
                     extensionprops: {}
-                    type: array
-                    title: relations union-ed with relation type instance
-                    items:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
+                    type: string
+                    title: subject type
+                    required:
+                      - subject_type
                 updated_at:
                   ref: ""
                   value:
@@ -997,126 +838,21 @@ components:
                     type: string
                     title: last updated timestamp (UTC)
                     format: date-time
-    v2GetRelationTypesResponse:
+                    readOnly: true
+    v3GetRelationsResponse:
       ref: ""
       value:
         extensionprops: {}
         type: object
         properties:
-          page:
-            ref: '#/components/schemas/v2PaginationResponse'
-            value:
-              extensionprops: {}
-              type: object
-              title: Pagination response
-              properties:
-                next_token:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: next page token, when empty there are no more pages to fetch
-                result_size:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: integer
-                    title: result size of the page returned
-                    format: int32
-          results:
+          objects:
             ref: ""
             value:
               extensionprops: {}
-              type: array
-              title: array of relation types
-              items:
-                ref: '#/components/schemas/v2RelationType'
-                value:
-                  extensionprops: {}
-                  type: object
-                  properties:
-                    created_at:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
-                        title: created at timestamp (UTC)
-                        format: date-time
-                    display_name:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
-                        title: relation display name
-                    hash:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
-                        title: object instance hash
-                    name:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
-                        title: relation type name selector
-                    object_type:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
-                        title: object type referenced by relation
-                    ordinal:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: integer
-                        title: sort ordinal (default 0)
-                        format: int32
-                    permissions:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: array
-                        title: permissions associated to relation type instance
-                        items:
-                          ref: ""
-                          value:
-                            extensionprops: {}
-                            type: string
-                    status:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: integer
-                        title: status bitmap (default 0)
-                        format: int64
-                    unions:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: array
-                        title: relations union-ed with relation type instance
-                        items:
-                          ref: ""
-                          value:
-                            extensionprops: {}
-                            type: string
-                    updated_at:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
-                        title: last updated timestamp (UTC)
-                        format: date-time
-    v2GetRelationsResponse:
-      ref: ""
-      value:
-        extensionprops: {}
-        type: object
-        properties:
+              type: object
+              title: map of materialized relation objects
           page:
-            ref: '#/components/schemas/v2PaginationResponse'
+            ref: '#/components/schemas/v3PaginationResponse'
             value:
               extensionprops: {}
               type: object
@@ -1128,13 +864,7 @@ components:
                     extensionprops: {}
                     type: string
                     title: next page token, when empty there are no more pages to fetch
-                result_size:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: integer
-                    title: result size of the page returned
-                    format: int32
+                    readOnly: true
           results:
             ref: ""
             value:
@@ -1142,10 +872,16 @@ components:
               type: array
               title: array of relation instances
               items:
-                ref: '#/components/schemas/v2Relation'
+                ref: '#/components/schemas/v3Relation'
                 value:
                   extensionprops: {}
                   type: object
+                  required:
+                    - object_type
+                    - object_id
+                    - relation
+                    - subject_type
+                    - subject_id
                   properties:
                     created_at:
                       ref: ""
@@ -1154,56 +890,59 @@ components:
                         type: string
                         title: created at timestamp (UTC)
                         format: date-time
-                    hash:
+                        readOnly: true
+                    etag:
                       ref: ""
                       value:
                         extensionprops: {}
                         type: string
-                        title: object instance hash
-                    object:
-                      ref: '#/components/schemas/v2ObjectIdentifier'
+                        title: object instance etag
+                    object_id:
+                      ref: ""
                       value:
                         extensionprops: {}
-                        type: object
-                        title: Object identifier
-                        properties:
-                          key:
-                            ref: ""
-                            value:
-                              extensionprops: {}
-                              type: string
-                              title: external object key (cs-string)
-                          type:
-                            ref: ""
-                            value:
-                              extensionprops: {}
-                              type: string
-                              title: object type
+                        type: string
+                        title: object identifier
+                        required:
+                          - object_id
+                    object_type:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        title: object type
+                        required:
+                          - object_type
                     relation:
                       ref: ""
                       value:
                         extensionprops: {}
                         type: string
-                        title: relation type name
-                    subject:
-                      ref: '#/components/schemas/v2ObjectIdentifier'
+                        title: object relation name
+                        required:
+                          - relation
+                    subject_id:
+                      ref: ""
                       value:
                         extensionprops: {}
-                        type: object
-                        title: Object identifier
-                        properties:
-                          key:
-                            ref: ""
-                            value:
-                              extensionprops: {}
-                              type: string
-                              title: external object key (cs-string)
-                          type:
-                            ref: ""
-                            value:
-                              extensionprops: {}
-                              type: string
-                              title: object type
+                        type: string
+                        title: subject identifier
+                        required:
+                          - subject_id
+                    subject_relation:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        title: optional subject relation name
+                    subject_type:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        title: subject type
+                        required:
+                          - subject_type
                     updated_at:
                       ref: ""
                       value:
@@ -1211,11 +950,15 @@ components:
                         type: string
                         title: last updated timestamp (UTC)
                         format: date-time
-    v2Object:
+                        readOnly: true
+    v3Object:
       ref: ""
       value:
         extensionprops: {}
         type: object
+        required:
+          - type
+          - id
         properties:
           created_at:
             ref: ""
@@ -1224,24 +967,27 @@ components:
               type: string
               title: created at timestamp (UTC)
               format: date-time
+              readOnly: true
           display_name:
             ref: ""
             value:
               extensionprops: {}
               type: string
               title: display name object
-          hash:
+          etag:
             ref: ""
             value:
               extensionprops: {}
               type: string
-              title: object instance hash
-          key:
+              title: object instance etag
+          id:
             ref: ""
             value:
               extensionprops: {}
               type: string
-              title: external object key (cs-string)
+              title: external object identifier (cs-string, no spaces or tabs)
+              required:
+                - id
           properties:
             ref: ""
             value:
@@ -1254,6 +1000,8 @@ components:
               extensionprops: {}
               type: string
               title: object type name
+              required:
+                - type
           updated_at:
             ref: ""
             value:
@@ -1261,7 +1009,8 @@ components:
               type: string
               title: last updated timestamp (UTC)
               format: date-time
-    v2ObjectDependency:
+              readOnly: true
+    v3ObjectDependency:
       ref: ""
       value:
         extensionprops: {}
@@ -1274,30 +1023,35 @@ components:
               type: integer
               title: dependency depth
               format: int32
+              readOnly: true
           is_cycle:
             ref: ""
             value:
               extensionprops: {}
               type: boolean
               title: dependency cycle
-          object_key:
+              readOnly: true
+          object_id:
             ref: ""
             value:
               extensionprops: {}
               type: string
-              title: object search key of source object
+              title: object identifier
+              readOnly: true
           object_type:
             ref: ""
             value:
               extensionprops: {}
               type: string
-              title: object type name of source object
+              title: object type
+              readOnly: true
           path:
             ref: ""
             value:
               extensionprops: {}
               type: array
               title: dependency path
+              readOnly: true
               items:
                 ref: ""
                 value:
@@ -1308,116 +1062,56 @@ components:
             value:
               extensionprops: {}
               type: string
-              title: relation identifier
-          subject_key:
+              title: object relation name
+              readOnly: true
+          subject_id:
             ref: ""
             value:
               extensionprops: {}
               type: string
-              title: object search key of target object
+              title: subject identifier
+              readOnly: true
+          subject_relation:
+            ref: ""
+            value:
+              extensionprops: {}
+              type: string
+              title: optional subject relation name
+              readOnly: true
           subject_type:
             ref: ""
             value:
               extensionprops: {}
               type: string
-              title: object type id of target object
-    v2ObjectIdentifier:
+              title: subject type
+              readOnly: true
+    v3ObjectIdentifier:
       ref: ""
       value:
         extensionprops: {}
         type: object
         title: Object identifier
+        required:
+          - object_type
+          - object_id
         properties:
-          key:
+          object_id:
             ref: ""
             value:
               extensionprops: {}
               type: string
-              title: external object key (cs-string)
-          type:
+              title: object identifier (cs-string)
+              required:
+                - object_id
+          object_type:
             ref: ""
             value:
               extensionprops: {}
               type: string
-              title: object type
-    v2ObjectType:
-      ref: ""
-      value:
-        extensionprops: {}
-        type: object
-        properties:
-          created_at:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: string
-              title: created at timestamp (UTC)
-              format: date-time
-          display_name:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: string
-              title: object type display name
-          hash:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: string
-              title: object instance hash
-          is_subject:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: boolean
-              title: object type is a subject (user|group) (default false)
-          name:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: string
-              title: object type name (unique, lc-string)
-          ordinal:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: integer
-              title: sort ordinal (default 0)
-              format: int32
-          schema:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: object
-              title: object type schema definition (JSON)
-          status:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: integer
-              title: status flag bitmap (default 0)
-              format: int64
-          updated_at:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: string
-              title: last updated timestamp (UTC)
-              format: date-time
-    v2ObjectTypeIdentifier:
-      ref: ""
-      value:
-        extensionprops: {}
-        type: object
-        title: ObjectType identifier
-        properties:
-          name:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: string
-              title: object type name (unique, lc-string)
-    v2PaginationRequest:
+              title: object type (lc-string)
+              required:
+                - object_type
+    v3PaginationRequest:
       ref: ""
       value:
         extensionprops: {}
@@ -1437,7 +1131,7 @@ components:
               extensionprops: {}
               type: string
               title: pagination start token, default ""
-    v2PaginationResponse:
+    v3PaginationResponse:
       ref: ""
       value:
         extensionprops: {}
@@ -1450,18 +1144,18 @@ components:
               extensionprops: {}
               type: string
               title: next page token, when empty there are no more pages to fetch
-          result_size:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: integer
-              title: result size of the page returned
-              format: int32
-    v2Permission:
+              readOnly: true
+    v3Relation:
       ref: ""
       value:
         extensionprops: {}
         type: object
+        required:
+          - object_type
+          - object_id
+          - relation
+          - subject_type
+          - subject_id
         properties:
           created_at:
             ref: ""
@@ -1470,251 +1164,59 @@ components:
               type: string
               title: created at timestamp (UTC)
               format: date-time
-          display_name:
+              readOnly: true
+          etag:
             ref: ""
             value:
               extensionprops: {}
               type: string
-              title: permission display name
-          hash:
+              title: object instance etag
+          object_id:
             ref: ""
             value:
               extensionprops: {}
               type: string
-              title: object instance hash
-          name:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: string
-              title: permission name (unique, cs-string)
-          updated_at:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: string
-              title: last updated timestamp (UTC)
-              format: date-time
-    v2PermissionIdentifier:
-      ref: ""
-      value:
-        extensionprops: {}
-        type: object
-        title: Permission identifier
-        properties:
-          name:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: string
-              title: permission name (unique, cs-string)
-    v2Relation:
-      ref: ""
-      value:
-        extensionprops: {}
-        type: object
-        properties:
-          created_at:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: string
-              title: created at timestamp (UTC)
-              format: date-time
-          hash:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: string
-              title: object instance hash
-          object:
-            ref: '#/components/schemas/v2ObjectIdentifier'
-            value:
-              extensionprops: {}
-              type: object
-              title: Object identifier
-              properties:
-                key:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: external object key (cs-string)
-                type:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: object type
-          relation:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: string
-              title: relation type name
-          subject:
-            ref: '#/components/schemas/v2ObjectIdentifier'
-            value:
-              extensionprops: {}
-              type: object
-              title: Object identifier
-              properties:
-                key:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: external object key (cs-string)
-                type:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: object type
-          updated_at:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: string
-              title: last updated timestamp (UTC)
-              format: date-time
-    v2RelationIdentifier:
-      ref: ""
-      value:
-        extensionprops: {}
-        type: object
-        title: Relation identifier
-        properties:
-          object:
-            ref: '#/components/schemas/v2ObjectIdentifier'
-            value:
-              extensionprops: {}
-              type: object
-              title: Object identifier
-              properties:
-                key:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: external object key (cs-string)
-                type:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: object type
-          relation:
-            ref: '#/components/schemas/v2RelationTypeIdentifier'
-            value:
-              extensionprops: {}
-              type: object
-              title: RelationType identifier
-              properties:
-                name:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: relation type name selector
-                object_type:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: object type referenced by relation
-          subject:
-            ref: '#/components/schemas/v2ObjectIdentifier'
-            value:
-              extensionprops: {}
-              type: object
-              title: Object identifier
-              properties:
-                key:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: external object key (cs-string)
-                type:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: object type
-    v2RelationType:
-      ref: ""
-      value:
-        extensionprops: {}
-        type: object
-        properties:
-          created_at:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: string
-              title: created at timestamp (UTC)
-              format: date-time
-          display_name:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: string
-              title: relation display name
-          hash:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: string
-              title: object instance hash
-          name:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: string
-              title: relation type name selector
+              title: object identifier
+              required:
+                - object_id
           object_type:
             ref: ""
             value:
               extensionprops: {}
               type: string
-              title: object type referenced by relation
-          ordinal:
+              title: object type
+              required:
+                - object_type
+          relation:
             ref: ""
             value:
               extensionprops: {}
-              type: integer
-              title: sort ordinal (default 0)
-              format: int32
-          permissions:
+              type: string
+              title: object relation name
+              required:
+                - relation
+          subject_id:
             ref: ""
             value:
               extensionprops: {}
-              type: array
-              title: permissions associated to relation type instance
-              items:
-                ref: ""
-                value:
-                  extensionprops: {}
-                  type: string
-          status:
+              type: string
+              title: subject identifier
+              required:
+                - subject_id
+          subject_relation:
             ref: ""
             value:
               extensionprops: {}
-              type: integer
-              title: status bitmap (default 0)
-              format: int64
-          unions:
+              type: string
+              title: optional subject relation name
+          subject_type:
             ref: ""
             value:
               extensionprops: {}
-              type: array
-              title: relations union-ed with relation type instance
-              items:
-                ref: ""
-                value:
-                  extensionprops: {}
-                  type: string
+              type: string
+              title: subject type
+              required:
+                - subject_type
           updated_at:
             ref: ""
             value:
@@ -1722,36 +1224,21 @@ components:
               type: string
               title: last updated timestamp (UTC)
               format: date-time
-    v2RelationTypeIdentifier:
-      ref: ""
-      value:
-        extensionprops: {}
-        type: object
-        title: RelationType identifier
-        properties:
-          name:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: string
-              title: relation type name selector
-          object_type:
-            ref: ""
-            value:
-              extensionprops: {}
-              type: string
-              title: object type referenced by relation
-    v2SetObjectResponse:
+              readOnly: true
+    v3SetObjectRequest:
       ref: ""
       value:
         extensionprops: {}
         type: object
         properties:
-          result:
-            ref: '#/components/schemas/v2Object'
+          object:
+            ref: '#/components/schemas/v3Object'
             value:
               extensionprops: {}
               type: object
+              required:
+                - type
+                - id
               properties:
                 created_at:
                   ref: ""
@@ -1760,24 +1247,27 @@ components:
                     type: string
                     title: created at timestamp (UTC)
                     format: date-time
+                    readOnly: true
                 display_name:
                   ref: ""
                   value:
                     extensionprops: {}
                     type: string
                     title: display name object
-                hash:
+                etag:
                   ref: ""
                   value:
                     extensionprops: {}
                     type: string
-                    title: object instance hash
-                key:
+                    title: object instance etag
+                id:
                   ref: ""
                   value:
                     extensionprops: {}
                     type: string
-                    title: external object key (cs-string)
+                    title: external object identifier (cs-string, no spaces or tabs)
+                    required:
+                      - id
                 properties:
                   ref: ""
                   value:
@@ -1790,6 +1280,8 @@ components:
                     extensionprops: {}
                     type: string
                     title: object type name
+                    required:
+                      - type
                 updated_at:
                   ref: ""
                   value:
@@ -1797,17 +1289,21 @@ components:
                     type: string
                     title: last updated timestamp (UTC)
                     format: date-time
-    v2SetObjectTypeResponse:
+                    readOnly: true
+    v3SetObjectResponse:
       ref: ""
       value:
         extensionprops: {}
         type: object
         properties:
           result:
-            ref: '#/components/schemas/v2ObjectType'
+            ref: '#/components/schemas/v3Object'
             value:
               extensionprops: {}
               type: object
+              required:
+                - type
+                - id
               properties:
                 created_at:
                   ref: ""
@@ -1816,50 +1312,41 @@ components:
                     type: string
                     title: created at timestamp (UTC)
                     format: date-time
+                    readOnly: true
                 display_name:
                   ref: ""
                   value:
                     extensionprops: {}
                     type: string
-                    title: object type display name
-                hash:
+                    title: display name object
+                etag:
                   ref: ""
                   value:
                     extensionprops: {}
                     type: string
-                    title: object instance hash
-                is_subject:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: boolean
-                    title: object type is a subject (user|group) (default false)
-                name:
+                    title: object instance etag
+                id:
                   ref: ""
                   value:
                     extensionprops: {}
                     type: string
-                    title: object type name (unique, lc-string)
-                ordinal:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: integer
-                    title: sort ordinal (default 0)
-                    format: int32
-                schema:
+                    title: external object identifier (cs-string, no spaces or tabs)
+                    required:
+                      - id
+                properties:
                   ref: ""
                   value:
                     extensionprops: {}
                     type: object
-                    title: object type schema definition (JSON)
-                status:
+                    title: property bag
+                type:
                   ref: ""
                   value:
                     extensionprops: {}
-                    type: integer
-                    title: status flag bitmap (default 0)
-                    format: int64
+                    type: string
+                    title: object type name
+                    required:
+                      - type
                 updated_at:
                   ref: ""
                   value:
@@ -1867,17 +1354,24 @@ components:
                     type: string
                     title: last updated timestamp (UTC)
                     format: date-time
-    v2SetPermissionResponse:
+                    readOnly: true
+    v3SetRelationRequest:
       ref: ""
       value:
         extensionprops: {}
         type: object
         properties:
-          result:
-            ref: '#/components/schemas/v2Permission'
+          relation:
+            ref: '#/components/schemas/v3Relation'
             value:
               extensionprops: {}
               type: object
+              required:
+                - object_type
+                - object_id
+                - relation
+                - subject_type
+                - subject_id
               properties:
                 created_at:
                   ref: ""
@@ -1886,186 +1380,59 @@ components:
                     type: string
                     title: created at timestamp (UTC)
                     format: date-time
-                display_name:
+                    readOnly: true
+                etag:
                   ref: ""
                   value:
                     extensionprops: {}
                     type: string
-                    title: permission display name
-                hash:
+                    title: object instance etag
+                object_id:
                   ref: ""
                   value:
                     extensionprops: {}
                     type: string
-                    title: object instance hash
-                name:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: permission name (unique, cs-string)
-                updated_at:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: last updated timestamp (UTC)
-                    format: date-time
-    v2SetRelationResponse:
-      ref: ""
-      value:
-        extensionprops: {}
-        type: object
-        properties:
-          result:
-            ref: '#/components/schemas/v2Relation'
-            value:
-              extensionprops: {}
-              type: object
-              properties:
-                created_at:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: created at timestamp (UTC)
-                    format: date-time
-                hash:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: object instance hash
-                object:
-                  ref: '#/components/schemas/v2ObjectIdentifier'
-                  value:
-                    extensionprops: {}
-                    type: object
-                    title: Object identifier
-                    properties:
-                      key:
-                        ref: ""
-                        value:
-                          extensionprops: {}
-                          type: string
-                          title: external object key (cs-string)
-                      type:
-                        ref: ""
-                        value:
-                          extensionprops: {}
-                          type: string
-                          title: object type
-                relation:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: relation type name
-                subject:
-                  ref: '#/components/schemas/v2ObjectIdentifier'
-                  value:
-                    extensionprops: {}
-                    type: object
-                    title: Object identifier
-                    properties:
-                      key:
-                        ref: ""
-                        value:
-                          extensionprops: {}
-                          type: string
-                          title: external object key (cs-string)
-                      type:
-                        ref: ""
-                        value:
-                          extensionprops: {}
-                          type: string
-                          title: object type
-                updated_at:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: last updated timestamp (UTC)
-                    format: date-time
-    v2SetRelationTypeResponse:
-      ref: ""
-      value:
-        extensionprops: {}
-        type: object
-        properties:
-          result:
-            ref: '#/components/schemas/v2RelationType'
-            value:
-              extensionprops: {}
-              type: object
-              properties:
-                created_at:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: created at timestamp (UTC)
-                    format: date-time
-                display_name:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: relation display name
-                hash:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: object instance hash
-                name:
-                  ref: ""
-                  value:
-                    extensionprops: {}
-                    type: string
-                    title: relation type name selector
+                    title: object identifier
+                    required:
+                      - object_id
                 object_type:
                   ref: ""
                   value:
                     extensionprops: {}
                     type: string
-                    title: object type referenced by relation
-                ordinal:
+                    title: object type
+                    required:
+                      - object_type
+                relation:
                   ref: ""
                   value:
                     extensionprops: {}
-                    type: integer
-                    title: sort ordinal (default 0)
-                    format: int32
-                permissions:
+                    type: string
+                    title: object relation name
+                    required:
+                      - relation
+                subject_id:
                   ref: ""
                   value:
                     extensionprops: {}
-                    type: array
-                    title: permissions associated to relation type instance
-                    items:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
-                status:
+                    type: string
+                    title: subject identifier
+                    required:
+                      - subject_id
+                subject_relation:
                   ref: ""
                   value:
                     extensionprops: {}
-                    type: integer
-                    title: status bitmap (default 0)
-                    format: int64
-                unions:
+                    type: string
+                    title: optional subject relation name
+                subject_type:
                   ref: ""
                   value:
                     extensionprops: {}
-                    type: array
-                    title: relations union-ed with relation type instance
-                    items:
-                      ref: ""
-                      value:
-                        extensionprops: {}
-                        type: string
+                    type: string
+                    title: subject type
+                    required:
+                      - subject_type
                 updated_at:
                   ref: ""
                   value:
@@ -2073,6 +1440,109 @@ components:
                     type: string
                     title: last updated timestamp (UTC)
                     format: date-time
+                    readOnly: true
+    v3SetRelationResponse:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: object
+        properties:
+          result:
+            ref: '#/components/schemas/v3Relation'
+            value:
+              extensionprops: {}
+              type: object
+              required:
+                - object_type
+                - object_id
+                - relation
+                - subject_type
+                - subject_id
+              properties:
+                created_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    title: created at timestamp (UTC)
+                    format: date-time
+                    readOnly: true
+                etag:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    title: object instance etag
+                object_id:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    title: object identifier
+                    required:
+                      - object_id
+                object_type:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    title: object type
+                    required:
+                      - object_type
+                relation:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    title: object relation name
+                    required:
+                      - relation
+                subject_id:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    title: subject identifier
+                    required:
+                      - subject_id
+                subject_relation:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    title: optional subject relation name
+                subject_type:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    title: subject type
+                    required:
+                      - subject_type
+                updated_at:
+                  ref: ""
+                  value:
+                    extensionprops: {}
+                    type: string
+                    title: last updated timestamp (UTC)
+                    format: date-time
+                    readOnly: true
+  securitySchemes:
+    DirectoryAPIKey:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: apiKey
+        name: authorization
+        in: header
+    TenantID:
+      ref: ""
+      value:
+        extensionprops: {}
+        type: apiKey
+        description: Aserto Tenant ID
+        name: aserto-tenant-id
+        in: header
 info:
   extensionprops: {}
   title: Directory
@@ -2088,7 +1558,2445 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   version: v0.30.0
-paths: {}
+paths:
+  /api/v3/directory/check:
+    extensionprops: {}
+    post:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Check
+      description: Returns check outcome.
+      operationId: directory.v3.check
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v3CheckRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  required:
+                    - object_type
+                    - object_id
+                    - relation
+                    - subject_type
+                    - subject_id
+                  properties:
+                    object_id:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        title: object identifier
+                        required:
+                          - object_id
+                    object_type:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        title: object type
+                        required:
+                          - object_type
+                    relation:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        title: relation name
+                        required:
+                          - relation
+                    subject_id:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        title: subject identifier
+                        required:
+                          - subject_id
+                    subject_type:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        title: subject type
+                        required:
+                          - subject_type
+                    trace:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: boolean
+                        title: collect trace information
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v3CheckResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      check:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: boolean
+                          title: check result
+                      trace:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          title: trace information
+                          items:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v3/directory/check/permission:
+    extensionprops: {}
+    post:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Check permission
+      description: Returns check permission outcome.
+      operationId: directory.v3.check.permission
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v3CheckPermissionRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  required:
+                    - object_type
+                    - object_id
+                    - permission
+                    - subject_type
+                    - subject_id
+                  properties:
+                    object_id:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        title: object identifier
+                        required:
+                          - object_id
+                    object_type:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        title: object type
+                        required:
+                          - object_type
+                    permission:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        title: permission name
+                        required:
+                          - permission
+                    subject_id:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        title: subject identifier
+                        required:
+                          - subject_id
+                    subject_type:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        title: subject type
+                        required:
+                          - subject_type
+                    trace:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: boolean
+                        title: collect trace information
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v3CheckPermissionResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      check:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: boolean
+                          title: check result
+                      trace:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          title: trace information
+                          items:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v3/directory/check/relation:
+    extensionprops: {}
+    post:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Check relation
+      description: Returns check relation outcome.
+      operationId: directory.v3.check.relation
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v3CheckRelationRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  required:
+                    - object_type
+                    - object_id
+                    - relation
+                    - subject_type
+                    - subject_id
+                  properties:
+                    object_id:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        title: object identifier
+                        required:
+                          - object_id
+                    object_type:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        title: object type
+                        required:
+                          - object_type
+                    relation:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        title: relation name
+                        required:
+                          - relation
+                    subject_id:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        title: subject identifier
+                        required:
+                          - subject_id
+                    subject_type:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: string
+                        title: subject type
+                        required:
+                          - subject_type
+                    trace:
+                      ref: ""
+                      value:
+                        extensionprops: {}
+                        type: boolean
+                        title: collect trace information
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v3CheckRelationResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      check:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: boolean
+                          title: check result
+                      trace:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          title: trace information
+                          items:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v3/directory/graph/{anchor_type}/{anchor_id}:
+    extensionprops: {}
+    get:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Get graph
+      description: Returns object graph from anchor to subject or object.
+      operationId: directory.v3.graph
+      parameters:
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: anchor_type
+            in: path
+            description: anchor type
+            required: true
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: anchor_id
+            in: path
+            description: anchor identifier
+            required: true
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: object_type
+            in: query
+            description: object type.
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: object_id
+            in: query
+            description: object identifier.
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: relation
+            in: query
+            description: relation name.
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: subject_type
+            in: query
+            description: subject type.
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: subject_id
+            in: query
+            description: subject identifier.
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: subject_relation
+            in: query
+            description: subject relation.
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v3GetGraphResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      results:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          title: dependency graph
+                          items:
+                            ref: '#/components/schemas/v3ObjectDependency'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                depth:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: integer
+                                    title: dependency depth
+                                    format: int32
+                                    readOnly: true
+                                is_cycle:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: boolean
+                                    title: dependency cycle
+                                    readOnly: true
+                                object_id:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: object identifier
+                                    readOnly: true
+                                object_type:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: object type
+                                    readOnly: true
+                                path:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: array
+                                    title: dependency path
+                                    readOnly: true
+                                    items:
+                                      ref: ""
+                                      value:
+                                        extensionprops: {}
+                                        type: string
+                                relation:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: object relation name
+                                    readOnly: true
+                                subject_id:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: subject identifier
+                                    readOnly: true
+                                subject_relation:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: optional subject relation name
+                                    readOnly: true
+                                subject_type:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: subject type
+                                    readOnly: true
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v3/directory/object:
+    extensionprops: {}
+    post:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Set object
+      description: Set object.
+      operationId: directory.v3.object.set
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v3SetObjectRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    object:
+                      ref: '#/components/schemas/v3Object'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        required:
+                          - type
+                          - id
+                        properties:
+                          created_at:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                              title: created at timestamp (UTC)
+                              format: date-time
+                              readOnly: true
+                          display_name:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                              title: display name object
+                          etag:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                              title: object instance etag
+                          id:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                              title: external object identifier (cs-string, no spaces or tabs)
+                              required:
+                                - id
+                          properties:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: object
+                              title: property bag
+                          type:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                              title: object type name
+                              required:
+                                - type
+                          updated_at:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                              title: last updated timestamp (UTC)
+                              format: date-time
+                              readOnly: true
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v3SetObjectResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      result:
+                        ref: '#/components/schemas/v3Object'
+                        value:
+                          extensionprops: {}
+                          type: object
+                          required:
+                            - type
+                            - id
+                          properties:
+                            created_at:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: created at timestamp (UTC)
+                                format: date-time
+                                readOnly: true
+                            display_name:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: display name object
+                            etag:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: object instance etag
+                            id:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: external object identifier (cs-string, no spaces or tabs)
+                                required:
+                                  - id
+                            properties:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: object
+                                title: property bag
+                            type:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: object type name
+                                required:
+                                  - type
+                            updated_at:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: last updated timestamp (UTC)
+                                format: date-time
+                                readOnly: true
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v3/directory/object/{object_type}/{object_id}:
+    extensionprops: {}
+    delete:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Delete object
+      description: Delete object.
+      operationId: directory.v3.object.delete
+      parameters:
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: object_type
+            in: path
+            description: object type
+            required: true
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: object_id
+            in: path
+            description: object identifier
+            required: true
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: with_relations
+            in: query
+            description: delete object relations, both object and subject relations.
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: boolean
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v3DeleteObjectResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      result:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          title: empty result
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+    get:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Get object instance
+      description: Returns single object instance, optionally with relations.
+      operationId: directory.v3.object.get
+      parameters:
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: object_type
+            in: path
+            description: object type name (lc-string)
+            required: true
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: object_id
+            in: path
+            description: object identifier (cs-string)
+            required: true
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: with_relations
+            in: query
+            description: materialize the object relations objects.
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: boolean
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: page.size
+            in: query
+            description: requested page size, valid value between 1-100 rows (default 100).
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: integer
+                format: int32
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: page.token
+            in: query
+            description: pagination start token, default "".
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v3GetObjectResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      page:
+                        ref: '#/components/schemas/v3PaginationResponse'
+                        value:
+                          extensionprops: {}
+                          type: object
+                          title: Pagination response
+                          properties:
+                            next_token:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: next page token, when empty there are no more pages to fetch
+                                readOnly: true
+                      relations:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          title: object relations
+                          items:
+                            ref: '#/components/schemas/v3Relation'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              required:
+                                - object_type
+                                - object_id
+                                - relation
+                                - subject_type
+                                - subject_id
+                              properties:
+                                created_at:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: created at timestamp (UTC)
+                                    format: date-time
+                                    readOnly: true
+                                etag:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: object instance etag
+                                object_id:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: object identifier
+                                    required:
+                                      - object_id
+                                object_type:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: object type
+                                    required:
+                                      - object_type
+                                relation:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: object relation name
+                                    required:
+                                      - relation
+                                subject_id:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: subject identifier
+                                    required:
+                                      - subject_id
+                                subject_relation:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: optional subject relation name
+                                subject_type:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: subject type
+                                    required:
+                                      - subject_type
+                                updated_at:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: last updated timestamp (UTC)
+                                    format: date-time
+                                    readOnly: true
+                      result:
+                        ref: '#/components/schemas/v3Object'
+                        value:
+                          extensionprops: {}
+                          type: object
+                          required:
+                            - type
+                            - id
+                          properties:
+                            created_at:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: created at timestamp (UTC)
+                                format: date-time
+                                readOnly: true
+                            display_name:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: display name object
+                            etag:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: object instance etag
+                            id:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: external object identifier (cs-string, no spaces or tabs)
+                                required:
+                                  - id
+                            properties:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: object
+                                title: property bag
+                            type:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: object type name
+                                required:
+                                  - type
+                            updated_at:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: last updated timestamp (UTC)
+                                format: date-time
+                                readOnly: true
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v3/directory/objects:
+    extensionprops: {}
+    get:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: List object instances
+      description: Returns list of object instances.
+      operationId: directory.v3.objects.list
+      parameters:
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: object_type
+            in: query
+            description: object type name (lc-string).
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: page.size
+            in: query
+            description: requested page size, valid value between 1-100 rows (default 100).
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: integer
+                format: int32
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: page.token
+            in: query
+            description: pagination start token, default "".
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v3GetObjectsResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      page:
+                        ref: '#/components/schemas/v3PaginationResponse'
+                        value:
+                          extensionprops: {}
+                          type: object
+                          title: Pagination response
+                          properties:
+                            next_token:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: next page token, when empty there are no more pages to fetch
+                                readOnly: true
+                      results:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          title: array of object instances
+                          items:
+                            ref: '#/components/schemas/v3Object'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              required:
+                                - type
+                                - id
+                              properties:
+                                created_at:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: created at timestamp (UTC)
+                                    format: date-time
+                                    readOnly: true
+                                display_name:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: display name object
+                                etag:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: object instance etag
+                                id:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: external object identifier (cs-string, no spaces or tabs)
+                                    required:
+                                      - id
+                                properties:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: object
+                                    title: property bag
+                                type:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: object type name
+                                    required:
+                                      - type
+                                updated_at:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: last updated timestamp (UTC)
+                                    format: date-time
+                                    readOnly: true
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v3/directory/relation:
+    extensionprops: {}
+    delete:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Delete relation
+      description: Delete relation.
+      operationId: directory.v3.relation.delete
+      parameters:
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: object_type
+            in: query
+            description: object type.
+            required: true
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: object_id
+            in: query
+            description: object identifier.
+            required: true
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: relation
+            in: query
+            description: object relation name.
+            required: true
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: subject_type
+            in: query
+            description: subject type.
+            required: true
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: subject_id
+            in: query
+            description: subject identifier.
+            required: true
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: subject_relation
+            in: query
+            description: optional subject relation name.
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v3DeleteRelationResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      result:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          title: empty result
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+    get:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Get relation instance
+      description: Returns single relation instance, optionally with objects.
+      operationId: directory.v3.relation.get
+      parameters:
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: object_type
+            in: query
+            description: object type.
+            required: true
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: object_id
+            in: query
+            description: object identifier.
+            required: true
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: relation
+            in: query
+            description: relation name.
+            required: true
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: subject_type
+            in: query
+            description: subject type.
+            required: true
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: subject_id
+            in: query
+            description: subject identifier.
+            required: true
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: subject_relation
+            in: query
+            description: optional subject relation name.
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: with_objects
+            in: query
+            description: materialize relation objects.
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: boolean
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v3GetRelationResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      objects:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: object
+                          title: map of materialized relation objects
+                      result:
+                        ref: '#/components/schemas/v3Relation'
+                        value:
+                          extensionprops: {}
+                          type: object
+                          required:
+                            - object_type
+                            - object_id
+                            - relation
+                            - subject_type
+                            - subject_id
+                          properties:
+                            created_at:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: created at timestamp (UTC)
+                                format: date-time
+                                readOnly: true
+                            etag:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: object instance etag
+                            object_id:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: object identifier
+                                required:
+                                  - object_id
+                            object_type:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: object type
+                                required:
+                                  - object_type
+                            relation:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: object relation name
+                                required:
+                                  - relation
+                            subject_id:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: subject identifier
+                                required:
+                                  - subject_id
+                            subject_relation:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: optional subject relation name
+                            subject_type:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: subject type
+                                required:
+                                  - subject_type
+                            updated_at:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: last updated timestamp (UTC)
+                                format: date-time
+                                readOnly: true
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+    post:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: Set relation
+      description: Set relation.
+      operationId: directory.v3.relation.set
+      requestBody:
+        ref: ""
+        value:
+          extensionprops: {}
+          required: true
+          content:
+            application/json:
+              extensionprops: {}
+              schema:
+                ref: '#/components/schemas/v3SetRelationRequest'
+                value:
+                  extensionprops: {}
+                  type: object
+                  properties:
+                    relation:
+                      ref: '#/components/schemas/v3Relation'
+                      value:
+                        extensionprops: {}
+                        type: object
+                        required:
+                          - object_type
+                          - object_id
+                          - relation
+                          - subject_type
+                          - subject_id
+                        properties:
+                          created_at:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                              title: created at timestamp (UTC)
+                              format: date-time
+                              readOnly: true
+                          etag:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                              title: object instance etag
+                          object_id:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                              title: object identifier
+                              required:
+                                - object_id
+                          object_type:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                              title: object type
+                              required:
+                                - object_type
+                          relation:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                              title: object relation name
+                              required:
+                                - relation
+                          subject_id:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                              title: subject identifier
+                              required:
+                                - subject_id
+                          subject_relation:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                              title: optional subject relation name
+                          subject_type:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                              title: subject type
+                              required:
+                                - subject_type
+                          updated_at:
+                            ref: ""
+                            value:
+                              extensionprops: {}
+                              type: string
+                              title: last updated timestamp (UTC)
+                              format: date-time
+                              readOnly: true
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v3SetRelationResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      result:
+                        ref: '#/components/schemas/v3Relation'
+                        value:
+                          extensionprops: {}
+                          type: object
+                          required:
+                            - object_type
+                            - object_id
+                            - relation
+                            - subject_type
+                            - subject_id
+                          properties:
+                            created_at:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: created at timestamp (UTC)
+                                format: date-time
+                                readOnly: true
+                            etag:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: object instance etag
+                            object_id:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: object identifier
+                                required:
+                                  - object_id
+                            object_type:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: object type
+                                required:
+                                  - object_type
+                            relation:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: object relation name
+                                required:
+                                  - relation
+                            subject_id:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: subject identifier
+                                required:
+                                  - subject_id
+                            subject_relation:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: optional subject relation name
+                            subject_type:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: subject type
+                                required:
+                                  - subject_type
+                            updated_at:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: last updated timestamp (UTC)
+                                format: date-time
+                                readOnly: true
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v3/directory/relations:
+    extensionprops: {}
+    get:
+      extensionprops: {}
+      tags:
+        - directory
+      summary: List relations instances
+      description: Returns list of relation instances.
+      operationId: directory.v3.relations.list
+      parameters:
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: object_type
+            in: query
+            description: object type.
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: object_id
+            in: query
+            description: object identifier.
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: relation
+            in: query
+            description: relation name.
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: subject_type
+            in: query
+            description: subject type.
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: subject_id
+            in: query
+            description: subject identifier.
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: subject_relation
+            in: query
+            description: optional subject relation name.
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: with_objects
+            in: query
+            description: materialize relation objects.
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: boolean
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: page.size
+            in: query
+            description: requested page size, valid value between 1-100 rows (default 100).
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: integer
+                format: int32
+        - ref: ""
+          value:
+            extensionprops: {}
+            name: page.token
+            in: query
+            description: pagination start token, default "".
+            schema:
+              ref: ""
+              value:
+                extensionprops: {}
+                type: string
+      responses:
+        "200":
+          ref: ""
+          value:
+            extensionprops: {}
+            description: A successful response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/v3GetRelationsResponse'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      objects:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: object
+                          title: map of materialized relation objects
+                      page:
+                        ref: '#/components/schemas/v3PaginationResponse'
+                        value:
+                          extensionprops: {}
+                          type: object
+                          title: Pagination response
+                          properties:
+                            next_token:
+                              ref: ""
+                              value:
+                                extensionprops: {}
+                                type: string
+                                title: next page token, when empty there are no more pages to fetch
+                                readOnly: true
+                      results:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          title: array of relation instances
+                          items:
+                            ref: '#/components/schemas/v3Relation'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              required:
+                                - object_type
+                                - object_id
+                                - relation
+                                - subject_type
+                                - subject_id
+                              properties:
+                                created_at:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: created at timestamp (UTC)
+                                    format: date-time
+                                    readOnly: true
+                                etag:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: object instance etag
+                                object_id:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: object identifier
+                                    required:
+                                      - object_id
+                                object_type:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: object type
+                                    required:
+                                      - object_type
+                                relation:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: object relation name
+                                    required:
+                                      - relation
+                                subject_id:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: subject identifier
+                                    required:
+                                      - subject_id
+                                subject_relation:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: optional subject relation name
+                                subject_type:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: subject type
+                                    required:
+                                      - subject_type
+                                updated_at:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    title: last updated timestamp (UTC)
+                                    format: date-time
+                                    readOnly: true
+        default:
+          ref: ""
+          value:
+            extensionprops: {}
+            description: An unexpected error response.
+            content:
+              application/json:
+                extensionprops: {}
+                schema:
+                  ref: '#/components/schemas/rpcStatus'
+                  value:
+                    extensionprops: {}
+                    type: object
+                    properties:
+                      code:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: integer
+                          format: int32
+                      details:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: array
+                          items:
+                            ref: '#/components/schemas/protobufAny'
+                            value:
+                              extensionprops: {}
+                              type: object
+                              properties:
+                                type_url:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                value:
+                                  ref: ""
+                                  value:
+                                    extensionprops: {}
+                                    type: string
+                                    format: byte
+                      message:
+                        ref: ""
+                        value:
+                          extensionprops: {}
+                          type: string
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+security:
+  - DirectoryAPIKey: []
+    TenantID: []
 servers:
   - extensionprops: {}
     url: https://directory.prod.aserto.com

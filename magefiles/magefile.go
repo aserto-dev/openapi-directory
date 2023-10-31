@@ -184,9 +184,10 @@ func mergeOpenAPI() error {
 		{
 			outfile: "service/directory/openapi.json",
 			subServices: []string{
-				"aserto/directory/common/v2/common.swagger.json",
-				"aserto/directory/reader/v2/reader.swagger.json",
-				"aserto/directory/writer/v2/writer.swagger.json",
+				"aserto/directory/openapi/v3/openapi.swagger.json",
+				"aserto/directory/common/v3/common.swagger.json",
+				"aserto/directory/reader/v3/reader.swagger.json",
+				"aserto/directory/writer/v3/writer.swagger.json",
 			},
 		},
 	}

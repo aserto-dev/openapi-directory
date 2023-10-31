@@ -6,7 +6,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
@@ -108,7 +107,7 @@ func gen(bufImage, fileSources, version string) error {
 func getClientFiles(fileSources string) ([]string, error) {
 	var clientFiles []string
 
-	bufExportDir, err := ioutil.TempDir("", "bufimage")
+	bufExportDir, err := os.MkdirTemp("", "bufimage")
 	if err != nil {
 		return clientFiles, err
 	}

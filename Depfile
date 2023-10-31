@@ -5,13 +5,13 @@ go:
     version: "v2.5.0"
   svu:
     importPath: "github.com/caarlos0/svu"
-    version: "latest"
+    version: "v1.11.0"
   buf:
     importPath: "github.com/bufbuild/buf/cmd/buf"
-    version: "v1.17.0"
+    version: "v1.26.1"
   sver:
     importPath: "github.com/aserto-dev/sver/cmd/sver"
-    version: "v1.3.11"
+    version: "v1.3.13"
 bin:
   vault:
     url: "https://releases.hashicorp.com/vault/{{.Version}}/vault_{{.Version}}_{{.OS}}_{{.Arch}}.zip"

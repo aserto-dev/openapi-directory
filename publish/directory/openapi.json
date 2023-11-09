@@ -632,7 +632,7 @@
     },
     "termsOfService": "https://aserto.com/terms/",
     "title": "Directory",
-    "version": "v0.30.0"
+    "version": "v0.30.1"
   },
   "openapi": "3.0.3",
   "paths": {

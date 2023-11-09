@@ -1557,7 +1557,7 @@ info:
     extensionprops: {}
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: v0.30.0
+  version: v0.30.1
 paths:
   /api/v3/directory/check:
     extensionprops: {}

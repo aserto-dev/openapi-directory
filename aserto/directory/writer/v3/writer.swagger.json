@@ -131,42 +131,42 @@
         "parameters": [
           {
             "name": "object_type",
-            "description": "object type",
+            "description": "object type.",
             "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "object_id",
-            "description": "object identifier",
+            "description": "object identifier.",
             "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "relation",
-            "description": "object relation name",
+            "description": "object relation name.",
             "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "subject_type",
-            "description": "subject type",
+            "description": "subject type.",
             "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "subject_id",
-            "description": "subject identifier",
+            "description": "subject identifier.",
             "in": "query",
             "required": true,
             "type": "string"
           },
           {
             "name": "subject_relation",
-            "description": "optional subject relation name",
+            "description": "optional subject relation name.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -226,11 +226,14 @@
     "protobufAny": {
       "type": "object",
       "properties": {
-        "@type": {
+        "type_url": {
           "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
         }
-      },
-      "additionalProperties": {}
+      }
     },
     "protobufNullValue": {
       "type": "string",
@@ -253,7 +256,6 @@
         "details": {
           "type": "array",
           "items": {
-            "type": "object",
             "$ref": "#/definitions/protobufAny"
           }
         }
@@ -263,7 +265,6 @@
       "type": "object",
       "properties": {
         "result": {
-          "type": "object",
           "properties": {},
           "title": "empty result"
         }
@@ -273,7 +274,6 @@
       "type": "object",
       "properties": {
         "result": {
-          "type": "object",
           "properties": {},
           "title": "empty result"
         }
@@ -284,11 +284,17 @@
       "properties": {
         "type": {
           "type": "string",
-          "title": "object type name"
+          "title": "object type name",
+          "required": [
+            "type"
+          ]
         },
         "id": {
           "type": "string",
-          "title": "external object identifier (cs-string, no spaces or tabs)"
+          "title": "external object identifier (cs-string, no spaces or tabs)",
+          "required": [
+            "id"
+          ]
         },
         "display_name": {
           "type": "string",
@@ -325,23 +331,38 @@
       "properties": {
         "object_type": {
           "type": "string",
-          "title": "object type"
+          "title": "object type",
+          "required": [
+            "object_type"
+          ]
         },
         "object_id": {
           "type": "string",
-          "title": "object identifier"
+          "title": "object identifier",
+          "required": [
+            "object_id"
+          ]
         },
         "relation": {
           "type": "string",
-          "title": "object relation name"
+          "title": "object relation name",
+          "required": [
+            "relation"
+          ]
         },
         "subject_type": {
           "type": "string",
-          "title": "subject type"
+          "title": "subject type",
+          "required": [
+            "subject_type"
+          ]
         },
         "subject_id": {
           "type": "string",
-          "title": "subject identifier"
+          "title": "subject identifier",
+          "required": [
+            "subject_id"
+          ]
         },
         "subject_relation": {
           "type": "string",
@@ -379,10 +400,7 @@
           "$ref": "#/definitions/v3Object",
           "title": "object instance"
         }
-      },
-      "required": [
-        "object"
-      ]
+      }
     },
     "v3SetObjectResponse": {
       "type": "object",
@@ -400,10 +418,7 @@
           "$ref": "#/definitions/v3Relation",
           "title": "relation instance"
         }
-      },
-      "required": [
-        "relation"
-      ]
+      }
     },
     "v3SetRelationResponse": {
       "type": "object",

@@ -4,11 +4,11 @@ components:
     protobufAny:
       type: object
       properties:
-        type_url:
+        '@type':
           type: string
-        value:
-          type: string
-          format: byte
+      additionalProperties:
+        has: null
+        schema: {}
     protobufNullValue:
       type: string
       description: |-
@@ -52,28 +52,18 @@ components:
         object_id:
           type: string
           title: object identifier
-          required:
-            - object_id
         object_type:
           type: string
           title: object type
-          required:
-            - object_type
         permission:
           type: string
           title: permission name
-          required:
-            - permission
         subject_id:
           type: string
           title: subject identifier
-          required:
-            - subject_id
         subject_type:
           type: string
           title: subject type
-          required:
-            - subject_type
         trace:
           type: boolean
           title: collect trace information
@@ -100,28 +90,18 @@ components:
         object_id:
           type: string
           title: object identifier
-          required:
-            - object_id
         object_type:
           type: string
           title: object type
-          required:
-            - object_type
         relation:
           type: string
           title: relation name
-          required:
-            - relation
         subject_id:
           type: string
           title: subject identifier
-          required:
-            - subject_id
         subject_type:
           type: string
           title: subject type
-          required:
-            - subject_type
         trace:
           type: boolean
           title: collect trace information
@@ -148,28 +128,18 @@ components:
         object_id:
           type: string
           title: object identifier
-          required:
-            - object_id
         object_type:
           type: string
           title: object type
-          required:
-            - object_type
         relation:
           type: string
           title: relation name
-          required:
-            - relation
         subject_id:
           type: string
           title: subject identifier
-          required:
-            - subject_id
         subject_type:
           type: string
           title: subject type
-          required:
-            - subject_type
         trace:
           type: boolean
           title: collect trace information
@@ -188,16 +158,19 @@ components:
       type: object
       properties:
         result:
+          type: object
           title: empty result
     v3DeleteObjectResponse:
       type: object
       properties:
         result:
+          type: object
           title: empty result
     v3DeleteRelationResponse:
       type: object
       properties:
         result:
+          type: object
           title: empty result
     v3ExportResponse:
       type: object
@@ -340,16 +313,12 @@ components:
         id:
           type: string
           title: external object identifier (cs-string, no spaces or tabs)
-          required:
-            - id
         properties:
           type: object
           title: property bag
         type:
           type: string
           title: object type name
-          required:
-            - type
         updated_at:
           type: string
           title: last updated timestamp (UTC)
@@ -407,13 +376,9 @@ components:
         object_id:
           type: string
           title: object identifier (cs-string)
-          required:
-            - object_id
         object_type:
           type: string
           title: object type (lc-string)
-          required:
-            - object_type
     v3Opcode:
       type: string
       enum:
@@ -460,31 +425,21 @@ components:
         object_id:
           type: string
           title: object identifier
-          required:
-            - object_id
         object_type:
           type: string
           title: object type
-          required:
-            - object_type
         relation:
           type: string
           title: object relation name
-          required:
-            - relation
         subject_id:
           type: string
           title: subject identifier
-          required:
-            - subject_id
         subject_relation:
           type: string
           title: optional subject relation name
         subject_type:
           type: string
           title: subject type
-          required:
-            - subject_type
         updated_at:
           type: string
           title: last updated timestamp (UTC)
@@ -494,9 +449,12 @@ components:
       type: object
       properties:
         result:
+          type: object
           title: empty result
     v3SetObjectRequest:
       type: object
+      required:
+        - object
       properties:
         object:
           $ref: '#/components/schemas/v3Object'
@@ -507,6 +465,8 @@ components:
           $ref: '#/components/schemas/v3Object'
     v3SetRelationRequest:
       type: object
+      required:
+        - relation
       properties:
         relation:
           $ref: '#/components/schemas/v3Relation'
@@ -637,32 +597,32 @@ paths:
             type: string
         - name: object_type
           in: query
-          description: object type.
+          description: object type
           schema:
             type: string
         - name: object_id
           in: query
-          description: object identifier.
+          description: object identifier
           schema:
             type: string
         - name: relation
           in: query
-          description: relation name.
+          description: relation name
           schema:
             type: string
         - name: subject_type
           in: query
-          description: subject type.
+          description: subject type
           schema:
             type: string
         - name: subject_id
           in: query
-          description: subject identifier.
+          description: subject identifier
           schema:
             type: string
         - name: subject_relation
           in: query
-          description: subject relation.
+          description: subject relation
           schema:
             type: string
       responses:
@@ -688,6 +648,12 @@ paths:
       summary: Delete manifest
       description: Delete manifest.
       operationId: directory.v3.manifest.delete
+      parameters:
+        - name: empty
+          in: query
+          description: empty request
+          schema:
+            type: object
       responses:
         "200":
           description: A successful response.
@@ -860,18 +826,18 @@ paths:
             type: string
         - name: with_relations
           in: query
-          description: materialize the object relations objects.
+          description: materialize the object relations objects
           schema:
             type: boolean
         - name: page.size
           in: query
-          description: requested page size, valid value between 1-100 rows (default 100).
+          description: requested page size, valid value between 1-100 rows (default 100)
           schema:
             type: integer
             format: int32
         - name: page.token
           in: query
-          description: pagination start token, default "".
+          description: pagination start token, default ""
           schema:
             type: string
       responses:
@@ -900,18 +866,18 @@ paths:
       parameters:
         - name: object_type
           in: query
-          description: object type name (lc-string).
+          description: object type name (lc-string)
           schema:
             type: string
         - name: page.size
           in: query
-          description: requested page size, valid value between 1-100 rows (default 100).
+          description: requested page size, valid value between 1-100 rows (default 100)
           schema:
             type: integer
             format: int32
         - name: page.token
           in: query
-          description: pagination start token, default "".
+          description: pagination start token, default ""
           schema:
             type: string
       responses:
@@ -940,37 +906,37 @@ paths:
       parameters:
         - name: object_type
           in: query
-          description: object type.
+          description: object type
           required: true
           schema:
             type: string
         - name: object_id
           in: query
-          description: object identifier.
+          description: object identifier
           required: true
           schema:
             type: string
         - name: relation
           in: query
-          description: object relation name.
+          description: object relation name
           required: true
           schema:
             type: string
         - name: subject_type
           in: query
-          description: subject type.
+          description: subject type
           required: true
           schema:
             type: string
         - name: subject_id
           in: query
-          description: subject identifier.
+          description: subject identifier
           required: true
           schema:
             type: string
         - name: subject_relation
           in: query
-          description: optional subject relation name.
+          description: optional subject relation name
           schema:
             type: string
       responses:
@@ -998,42 +964,42 @@ paths:
       parameters:
         - name: object_type
           in: query
-          description: object type.
+          description: object type
           required: true
           schema:
             type: string
         - name: object_id
           in: query
-          description: object identifier.
+          description: object identifier
           required: true
           schema:
             type: string
         - name: relation
           in: query
-          description: relation name.
+          description: relation name
           required: true
           schema:
             type: string
         - name: subject_type
           in: query
-          description: subject type.
+          description: subject type
           required: true
           schema:
             type: string
         - name: subject_id
           in: query
-          description: subject identifier.
+          description: subject identifier
           required: true
           schema:
             type: string
         - name: subject_relation
           in: query
-          description: optional subject relation name.
+          description: optional subject relation name
           schema:
             type: string
         - name: with_objects
           in: query
-          description: materialize relation objects.
+          description: materialize relation objects
           schema:
             type: boolean
       responses:
@@ -1090,48 +1056,48 @@ paths:
       parameters:
         - name: object_type
           in: query
-          description: object type.
+          description: object type
           schema:
             type: string
         - name: object_id
           in: query
-          description: object identifier.
+          description: object identifier
           schema:
             type: string
         - name: relation
           in: query
-          description: relation name.
+          description: relation name
           schema:
             type: string
         - name: subject_type
           in: query
-          description: subject type.
+          description: subject type
           schema:
             type: string
         - name: subject_id
           in: query
-          description: subject identifier.
+          description: subject identifier
           schema:
             type: string
         - name: subject_relation
           in: query
-          description: optional subject relation name.
+          description: optional subject relation name
           schema:
             type: string
         - name: with_objects
           in: query
-          description: materialize relation objects.
+          description: materialize relation objects
           schema:
             type: boolean
         - name: page.size
           in: query
-          description: requested page size, valid value between 1-100 rows (default 100).
+          description: requested page size, valid value between 1-100 rows (default 100)
           schema:
             type: integer
             format: int32
         - name: page.token
           in: query
-          description: pagination start token, default "".
+          description: pagination start token, default ""
           schema:
             type: string
       responses:

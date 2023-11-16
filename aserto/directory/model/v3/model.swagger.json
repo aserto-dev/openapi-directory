@@ -35,6 +35,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "empty",
+            "description": "empty request",
+            "in": "query",
+            "required": false,
+            "type": "object"
+          }
+        ],
         "tags": [
           "directory"
         ],
@@ -51,14 +60,11 @@
     "protobufAny": {
       "type": "object",
       "properties": {
-        "type_url": {
+        "@type": {
           "type": "string"
-        },
-        "value": {
-          "type": "string",
-          "format": "byte"
         }
-      }
+      },
+      "additionalProperties": {}
     },
     "protobufNullValue": {
       "type": "string",
@@ -81,6 +87,7 @@
         "details": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/protobufAny"
           }
         }
@@ -100,6 +107,7 @@
       "type": "object",
       "properties": {
         "result": {
+          "type": "object",
           "properties": {},
           "title": "empty result"
         }
@@ -141,6 +149,7 @@
       "type": "object",
       "properties": {
         "result": {
+          "type": "object",
           "properties": {},
           "title": "empty result"
         }

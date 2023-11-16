@@ -150,6 +150,58 @@
         },
         "type": "object"
       },
+      "v3CheckRequest": {
+        "properties": {
+          "object_id": {
+            "title": "object identifier",
+            "type": "string"
+          },
+          "object_type": {
+            "title": "object type",
+            "type": "string"
+          },
+          "relation": {
+            "title": "relation name",
+            "type": "string"
+          },
+          "subject_id": {
+            "title": "subject identifier",
+            "type": "string"
+          },
+          "subject_type": {
+            "title": "subject type",
+            "type": "string"
+          },
+          "trace": {
+            "title": "collect trace information",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "object_type",
+          "object_id",
+          "relation",
+          "subject_type",
+          "subject_id"
+        ],
+        "type": "object"
+      },
+      "v3CheckResponse": {
+        "properties": {
+          "check": {
+            "title": "check result",
+            "type": "boolean"
+          },
+          "trace": {
+            "items": {
+              "type": "string"
+            },
+            "title": "trace information",
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
       "v3DeleteManifestResponse": {
         "properties": {
           "result": {
@@ -207,6 +259,10 @@
           },
           "metadata": {
             "$ref": "#/components/schemas/v3Metadata"
+          },
+          "model": {
+            "title": "Model",
+            "type": "object"
           }
         },
         "type": "object"
@@ -614,6 +670,55 @@
   },
   "openapi": "3.0.3",
   "paths": {
+    "/api/v3/directory/check": {
+      "post": {
+        "description": "Returns check outcome.",
+        "operationId": "directory.v3.check",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v3CheckRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v3CheckResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Check",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
     "/api/v3/directory/check/permission": {
       "post": {
         "description": "Returns check permission outcome.",

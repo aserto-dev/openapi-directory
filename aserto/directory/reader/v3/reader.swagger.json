@@ -16,6 +16,46 @@
     "application/json"
   ],
   "paths": {
+    "/api/v3/directory/check": {
+      "post": {
+        "summary": "Check",
+        "description": "Returns check outcome.",
+        "operationId": "directory.v3.check",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3CheckResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v3CheckRequest"
+            }
+          }
+        ],
+        "tags": [
+          "directory"
+        ],
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ]
+      }
+    },
     "/api/v3/directory/check/permission": {
       "post": {
         "summary": "Check permission",
@@ -610,6 +650,58 @@
       ]
     },
     "v3CheckRelationResponse": {
+      "type": "object",
+      "properties": {
+        "check": {
+          "type": "boolean",
+          "title": "check result"
+        },
+        "trace": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "trace information"
+        }
+      }
+    },
+    "v3CheckRequest": {
+      "type": "object",
+      "properties": {
+        "object_type": {
+          "type": "string",
+          "title": "object type"
+        },
+        "object_id": {
+          "type": "string",
+          "title": "object identifier"
+        },
+        "relation": {
+          "type": "string",
+          "title": "relation name"
+        },
+        "subject_type": {
+          "type": "string",
+          "title": "subject type"
+        },
+        "subject_id": {
+          "type": "string",
+          "title": "subject identifier"
+        },
+        "trace": {
+          "type": "boolean",
+          "title": "collect trace information"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "relation",
+        "subject_type",
+        "subject_id"
+      ]
+    },
+    "v3CheckResponse": {
       "type": "object",
       "properties": {
         "check": {

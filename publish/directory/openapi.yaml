@@ -116,6 +116,44 @@ components:
           title: trace information
           items:
             type: string
+    v3CheckRequest:
+      type: object
+      required:
+        - object_type
+        - object_id
+        - relation
+        - subject_type
+        - subject_id
+      properties:
+        object_id:
+          type: string
+          title: object identifier
+        object_type:
+          type: string
+          title: object type
+        relation:
+          type: string
+          title: relation name
+        subject_id:
+          type: string
+          title: subject identifier
+        subject_type:
+          type: string
+          title: subject type
+        trace:
+          type: boolean
+          title: collect trace information
+    v3CheckResponse:
+      type: object
+      properties:
+        check:
+          type: boolean
+          title: check result
+        trace:
+          type: array
+          title: trace information
+          items:
+            type: string
     v3DeleteManifestResponse:
       type: object
       properties:
@@ -156,6 +194,9 @@ components:
           $ref: '#/components/schemas/v3Body'
         metadata:
           $ref: '#/components/schemas/v3Metadata'
+        model:
+          type: object
+          title: Model
     v3GetObjectManyResponse:
       type: object
       properties:
@@ -447,6 +488,35 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   version: x.y.z
 paths:
+  /api/v3/directory/check:
+    post:
+      tags:
+        - directory
+      summary: Check
+      description: Returns check outcome.
+      operationId: directory.v3.check
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v3CheckRequest'
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v3CheckResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
   /api/v3/directory/check/permission:
     post:
       tags:

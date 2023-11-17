@@ -973,6 +973,26 @@
       "get": {
         "description": "Get manifest.",
         "operationId": "directory.v3.manifest.get",
+        "parameters": [
+          {
+            "description": "When If-None-Match is set, and includes the currnet manifest etag, the response is 304 Not Modified.",
+            "in": "header",
+            "name": "If-None-Match",
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              ]
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
@@ -984,6 +1004,24 @@
               }
             },
             "description": "A successful response.",
+            "headers": {
+              "Aserto-Updated-At": {
+                "description": "last manifest update time",
+                "schema": {
+                  "format": "date-time",
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "ETag",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified",
             "headers": {
               "Aserto-Updated-At": {
                 "description": "last manifest update time",
@@ -1022,9 +1060,63 @@
           "directory"
         ]
       },
+      "head": {
+        "description": "Get manifest metadata.",
+        "operationId": "directory.v3.manifest.get_metadata",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "headers": {
+              "Aserto-Updated-At": {
+                "description": "last manifest update time",
+                "schema": {
+                  "format": "date-time",
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "ETag",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Get manifest metadata",
+        "tags": [
+          "directory"
+        ]
+      },
       "post": {
         "description": "Set manifest.",
         "operationId": "directory.v3.manifest.set",
+        "parameters": [
+          {
+            "description": "When If-Match is set, and different from the current manifest etag, the response is 412 Precondition Failed.",
+            "in": "header",
+            "name": "If-Match",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/yaml": {
@@ -1047,6 +1139,9 @@
               }
             },
             "description": "A successful response."
+          },
+          "412": {
+            "description": "Precondition Failed. The current manifest etag is different from the If-Match header."
           },
           "default": {
             "content": {

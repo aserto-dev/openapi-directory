@@ -676,6 +676,16 @@ paths:
       summary: Get manifest
       description: Get manifest.
       operationId: directory.v3.manifest.get
+      parameters:
+        - name: If-None-Match
+          in: header
+          description: When If-None-Match is set, and includes the currnet manifest etag, the response is 304 Not Modified.
+          schema:
+            oneOf:
+              - type: string
+              - type: array
+                items:
+                  type: string
       responses:
         "200":
           description: A successful response.
@@ -696,6 +706,50 @@ paths:
               schema:
                 type: string
                 format: binary
+        "304":
+          description: Not Modified
+          headers:
+            Aserto-Updated-At:
+              parameter:
+                description: last manifest update time
+                schema:
+                  type: string
+                  format: date-time
+            ETag:
+              parameter:
+                description: ETag
+                schema:
+                  type: string
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+    head:
+      tags:
+        - directory
+      summary: Get manifest metadata
+      description: Get manifest metadata.
+      operationId: directory.v3.manifest.get_metadata
+      responses:
+        "200":
+          description: A successful response.
+          headers:
+            Aserto-Updated-At:
+              parameter:
+                description: last manifest update time
+                schema:
+                  type: string
+                  format: date-time
+            ETag:
+              parameter:
+                description: ETag
+                schema:
+                  type: string
         default:
           description: An unexpected error response.
           content:
@@ -711,6 +765,12 @@ paths:
       summary: Set manifest
       description: Set manifest.
       operationId: directory.v3.manifest.set
+      parameters:
+        - name: If-Match
+          in: header
+          description: When If-Match is set, and different from the current manifest etag, the response is 412 Precondition Failed.
+          schema:
+            type: string
       requestBody:
         description: Manifest YAML file
         required: true
@@ -726,6 +786,8 @@ paths:
             application/yaml:
               schema:
                 $ref: '#/components/schemas/v3SetManifestResponse'
+        "412":
+          description: Precondition Failed. The current manifest etag is different from the If-Match header.
         default:
           description: An unexpected error response.
           content:

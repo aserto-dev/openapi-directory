@@ -677,11 +677,6 @@ paths:
       description: Get manifest.
       operationId: directory.v3.manifest.get
       parameters:
-        - name: Aserto-Metadata-Only
-          in: header
-          description: If 'true', only headers are returned, without a response body.
-          schema:
-            type: string
         - name: If-None-Match
           in: header
           description: When If-None-Match is set, and includes the currnet manifest etag, the response is 304 Not Modified.

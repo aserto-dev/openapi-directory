@@ -2,12 +2,9 @@
   "components": {
     "schemas": {
       "protobufAny": {
+        "additionalProperties": {},
         "properties": {
-          "type_url": {
-            "type": "string"
-          },
-          "value": {
-            "format": "byte",
+          "@type": {
             "type": "string"
           }
         },
@@ -39,40 +36,35 @@
         },
         "type": "object"
       },
+      "v3Body": {
+        "properties": {
+          "data": {
+            "format": "byte",
+            "title": "manifest content",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "v3CheckPermissionRequest": {
         "properties": {
           "object_id": {
-            "required": [
-              "object_id"
-            ],
             "title": "object identifier",
             "type": "string"
           },
           "object_type": {
-            "required": [
-              "object_type"
-            ],
             "title": "object type",
             "type": "string"
           },
           "permission": {
-            "required": [
-              "permission"
-            ],
             "title": "permission name",
             "type": "string"
           },
           "subject_id": {
-            "required": [
-              "subject_id"
-            ],
             "title": "subject identifier",
             "type": "string"
           },
           "subject_type": {
-            "required": [
-              "subject_type"
-            ],
             "title": "subject type",
             "type": "string"
           },
@@ -109,37 +101,22 @@
       "v3CheckRelationRequest": {
         "properties": {
           "object_id": {
-            "required": [
-              "object_id"
-            ],
             "title": "object identifier",
             "type": "string"
           },
           "object_type": {
-            "required": [
-              "object_type"
-            ],
             "title": "object type",
             "type": "string"
           },
           "relation": {
-            "required": [
-              "relation"
-            ],
             "title": "relation name",
             "type": "string"
           },
           "subject_id": {
-            "required": [
-              "subject_id"
-            ],
             "title": "subject identifier",
             "type": "string"
           },
           "subject_type": {
-            "required": [
-              "subject_type"
-            ],
             "title": "subject type",
             "type": "string"
           },
@@ -176,37 +153,22 @@
       "v3CheckRequest": {
         "properties": {
           "object_id": {
-            "required": [
-              "object_id"
-            ],
             "title": "object identifier",
             "type": "string"
           },
           "object_type": {
-            "required": [
-              "object_type"
-            ],
             "title": "object type",
             "type": "string"
           },
           "relation": {
-            "required": [
-              "relation"
-            ],
             "title": "relation name",
             "type": "string"
           },
           "subject_id": {
-            "required": [
-              "subject_id"
-            ],
             "title": "subject identifier",
             "type": "string"
           },
           "subject_type": {
-            "required": [
-              "subject_type"
-            ],
             "title": "subject type",
             "type": "string"
           },
@@ -240,10 +202,20 @@
         },
         "type": "object"
       },
+      "v3DeleteManifestResponse": {
+        "properties": {
+          "result": {
+            "title": "empty result",
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
       "v3DeleteObjectResponse": {
         "properties": {
           "result": {
-            "title": "empty result"
+            "title": "empty result",
+            "type": "object"
           }
         },
         "type": "object"
@@ -251,7 +223,19 @@
       "v3DeleteRelationResponse": {
         "properties": {
           "result": {
-            "title": "empty result"
+            "title": "empty result",
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "v3ExportResponse": {
+        "properties": {
+          "object": {
+            "$ref": "#/components/schemas/v3Object"
+          },
+          "relation": {
+            "$ref": "#/components/schemas/v3Relation"
           }
         },
         "type": "object"
@@ -264,6 +248,21 @@
             },
             "title": "dependency graph",
             "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "v3GetManifestResponse": {
+        "properties": {
+          "body": {
+            "$ref": "#/components/schemas/v3Body"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/v3Metadata"
+          },
+          "model": {
+            "title": "Model",
+            "type": "object"
           }
         },
         "type": "object"
@@ -350,6 +349,57 @@
         },
         "type": "object"
       },
+      "v3ImportCounter": {
+        "properties": {
+          "delete": {
+            "format": "uint64",
+            "title": "number of messages with OPCODE_DELETE",
+            "type": "string"
+          },
+          "error": {
+            "format": "uint64",
+            "title": "number of messages resulting in error",
+            "type": "string"
+          },
+          "recv": {
+            "format": "uint64",
+            "title": "number of messages received",
+            "type": "string"
+          },
+          "set": {
+            "format": "uint64",
+            "title": "number of messages with OPCODE_SET",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "v3ImportResponse": {
+        "properties": {
+          "object": {
+            "$ref": "#/components/schemas/v3ImportCounter"
+          },
+          "relation": {
+            "$ref": "#/components/schemas/v3ImportCounter"
+          }
+        },
+        "type": "object"
+      },
+      "v3Metadata": {
+        "properties": {
+          "etag": {
+            "title": "object instance etag",
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "readOnly": true,
+            "title": "last updated timestamp (UTC)",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "v3Object": {
         "properties": {
           "created_at": {
@@ -367,9 +417,6 @@
             "type": "string"
           },
           "id": {
-            "required": [
-              "id"
-            ],
             "title": "external object identifier (cs-string, no spaces or tabs)",
             "type": "string"
           },
@@ -378,9 +425,6 @@
             "type": "object"
           },
           "type": {
-            "required": [
-              "type"
-            ],
             "title": "object type name",
             "type": "string"
           },
@@ -454,16 +498,10 @@
       "v3ObjectIdentifier": {
         "properties": {
           "object_id": {
-            "required": [
-              "object_id"
-            ],
             "title": "object identifier (cs-string)",
             "type": "string"
           },
           "object_type": {
-            "required": [
-              "object_type"
-            ],
             "title": "object type (lc-string)",
             "type": "string"
           }
@@ -474,6 +512,15 @@
         ],
         "title": "Object identifier",
         "type": "object"
+      },
+      "v3Opcode": {
+        "default": "OPCODE_UNKNOWN",
+        "enum": [
+          "OPCODE_UNKNOWN",
+          "OPCODE_SET",
+          "OPCODE_DELETE"
+        ],
+        "type": "string"
       },
       "v3PaginationRequest": {
         "properties": {
@@ -514,30 +561,18 @@
             "type": "string"
           },
           "object_id": {
-            "required": [
-              "object_id"
-            ],
             "title": "object identifier",
             "type": "string"
           },
           "object_type": {
-            "required": [
-              "object_type"
-            ],
             "title": "object type",
             "type": "string"
           },
           "relation": {
-            "required": [
-              "relation"
-            ],
             "title": "object relation name",
             "type": "string"
           },
           "subject_id": {
-            "required": [
-              "subject_id"
-            ],
             "title": "subject identifier",
             "type": "string"
           },
@@ -546,9 +581,6 @@
             "type": "string"
           },
           "subject_type": {
-            "required": [
-              "subject_type"
-            ],
             "title": "subject type",
             "type": "string"
           },
@@ -568,12 +600,24 @@
         ],
         "type": "object"
       },
+      "v3SetManifestResponse": {
+        "properties": {
+          "result": {
+            "title": "empty result",
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
       "v3SetObjectRequest": {
         "properties": {
           "object": {
             "$ref": "#/components/schemas/v3Object"
           }
         },
+        "required": [
+          "object"
+        ],
         "type": "object"
       },
       "v3SetObjectResponse": {
@@ -590,6 +634,9 @@
             "$ref": "#/components/schemas/v3Relation"
           }
         },
+        "required": [
+          "relation"
+        ],
         "type": "object"
       },
       "v3SetRelationResponse": {
@@ -599,19 +646,6 @@
           }
         },
         "type": "object"
-      }
-    },
-    "securitySchemes": {
-      "DirectoryAPIKey": {
-        "in": "header",
-        "name": "authorization",
-        "type": "apiKey"
-      },
-      "TenantID": {
-        "description": "Aserto Tenant ID",
-        "in": "header",
-        "name": "aserto-tenant-id",
-        "type": "apiKey"
       }
     }
   },
@@ -632,7 +666,7 @@
     },
     "termsOfService": "https://aserto.com/terms/",
     "title": "Directory",
-    "version": "v0.30.1"
+    "version": "x.y.z"
   },
   "openapi": "3.0.3",
   "paths": {
@@ -807,7 +841,7 @@
             }
           },
           {
-            "description": "object type.",
+            "description": "object type",
             "in": "query",
             "name": "object_type",
             "schema": {
@@ -815,7 +849,7 @@
             }
           },
           {
-            "description": "object identifier.",
+            "description": "object identifier",
             "in": "query",
             "name": "object_id",
             "schema": {
@@ -823,7 +857,7 @@
             }
           },
           {
-            "description": "relation name.",
+            "description": "relation name",
             "in": "query",
             "name": "relation",
             "schema": {
@@ -831,7 +865,7 @@
             }
           },
           {
-            "description": "subject type.",
+            "description": "subject type",
             "in": "query",
             "name": "subject_type",
             "schema": {
@@ -839,7 +873,7 @@
             }
           },
           {
-            "description": "subject identifier.",
+            "description": "subject identifier",
             "in": "query",
             "name": "subject_id",
             "schema": {
@@ -847,7 +881,7 @@
             }
           },
           {
-            "description": "subject relation.",
+            "description": "subject relation",
             "in": "query",
             "name": "subject_relation",
             "schema": {
@@ -884,6 +918,154 @@
           }
         ],
         "summary": "Get graph",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
+    "/api/v3/directory/manifest": {
+      "delete": {
+        "description": "Delete manifest.",
+        "operationId": "directory.v3.manifest.delete",
+        "parameters": [
+          {
+            "description": "empty request",
+            "in": "query",
+            "name": "empty",
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v3DeleteManifestResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Delete manifest",
+        "tags": [
+          "directory"
+        ]
+      },
+      "get": {
+        "description": "Get manifest.",
+        "operationId": "directory.v3.manifest.get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/yaml": {
+                "schema": {
+                  "format": "binary",
+                  "type": "string"
+                }
+              }
+            },
+            "description": "A successful response.",
+            "headers": {
+              "Aserto-Updated-At": {
+                "description": "last manifest update time",
+                "schema": {
+                  "format": "date-time",
+                  "type": "string"
+                }
+              },
+              "ETag": {
+                "description": "ETag",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Get manifest",
+        "tags": [
+          "directory"
+        ]
+      },
+      "post": {
+        "description": "Set manifest.",
+        "operationId": "directory.v3.manifest.set",
+        "requestBody": {
+          "content": {
+            "application/yaml": {
+              "schema": {
+                "format": "binary",
+                "type": "string"
+              }
+            }
+          },
+          "description": "Manifest YAML file",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/v3SetManifestResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Set manifest",
         "tags": [
           "directory"
         ]
@@ -1026,7 +1208,7 @@
             }
           },
           {
-            "description": "materialize the object relations objects.",
+            "description": "materialize the object relations objects",
             "in": "query",
             "name": "with_relations",
             "schema": {
@@ -1034,7 +1216,7 @@
             }
           },
           {
-            "description": "requested page size, valid value between 1-100 rows (default 100).",
+            "description": "requested page size, valid value between 1-100 rows (default 100)",
             "in": "query",
             "name": "page.size",
             "schema": {
@@ -1043,7 +1225,7 @@
             }
           },
           {
-            "description": "pagination start token, default \"\".",
+            "description": "pagination start token, default \"\"",
             "in": "query",
             "name": "page.token",
             "schema": {
@@ -1091,7 +1273,7 @@
         "operationId": "directory.v3.objects.list",
         "parameters": [
           {
-            "description": "object type name (lc-string).",
+            "description": "object type name (lc-string)",
             "in": "query",
             "name": "object_type",
             "schema": {
@@ -1099,7 +1281,7 @@
             }
           },
           {
-            "description": "requested page size, valid value between 1-100 rows (default 100).",
+            "description": "requested page size, valid value between 1-100 rows (default 100)",
             "in": "query",
             "name": "page.size",
             "schema": {
@@ -1108,7 +1290,7 @@
             }
           },
           {
-            "description": "pagination start token, default \"\".",
+            "description": "pagination start token, default \"\"",
             "in": "query",
             "name": "page.token",
             "schema": {
@@ -1156,7 +1338,7 @@
         "operationId": "directory.v3.relation.delete",
         "parameters": [
           {
-            "description": "object type.",
+            "description": "object type",
             "in": "query",
             "name": "object_type",
             "required": true,
@@ -1165,7 +1347,7 @@
             }
           },
           {
-            "description": "object identifier.",
+            "description": "object identifier",
             "in": "query",
             "name": "object_id",
             "required": true,
@@ -1174,7 +1356,7 @@
             }
           },
           {
-            "description": "object relation name.",
+            "description": "object relation name",
             "in": "query",
             "name": "relation",
             "required": true,
@@ -1183,7 +1365,7 @@
             }
           },
           {
-            "description": "subject type.",
+            "description": "subject type",
             "in": "query",
             "name": "subject_type",
             "required": true,
@@ -1192,7 +1374,7 @@
             }
           },
           {
-            "description": "subject identifier.",
+            "description": "subject identifier",
             "in": "query",
             "name": "subject_id",
             "required": true,
@@ -1201,7 +1383,7 @@
             }
           },
           {
-            "description": "optional subject relation name.",
+            "description": "optional subject relation name",
             "in": "query",
             "name": "subject_relation",
             "schema": {
@@ -1247,7 +1429,7 @@
         "operationId": "directory.v3.relation.get",
         "parameters": [
           {
-            "description": "object type.",
+            "description": "object type",
             "in": "query",
             "name": "object_type",
             "required": true,
@@ -1256,7 +1438,7 @@
             }
           },
           {
-            "description": "object identifier.",
+            "description": "object identifier",
             "in": "query",
             "name": "object_id",
             "required": true,
@@ -1265,7 +1447,7 @@
             }
           },
           {
-            "description": "relation name.",
+            "description": "relation name",
             "in": "query",
             "name": "relation",
             "required": true,
@@ -1274,7 +1456,7 @@
             }
           },
           {
-            "description": "subject type.",
+            "description": "subject type",
             "in": "query",
             "name": "subject_type",
             "required": true,
@@ -1283,7 +1465,7 @@
             }
           },
           {
-            "description": "subject identifier.",
+            "description": "subject identifier",
             "in": "query",
             "name": "subject_id",
             "required": true,
@@ -1292,7 +1474,7 @@
             }
           },
           {
-            "description": "optional subject relation name.",
+            "description": "optional subject relation name",
             "in": "query",
             "name": "subject_relation",
             "schema": {
@@ -1300,7 +1482,7 @@
             }
           },
           {
-            "description": "materialize relation objects.",
+            "description": "materialize relation objects",
             "in": "query",
             "name": "with_objects",
             "schema": {
@@ -1395,7 +1577,7 @@
         "operationId": "directory.v3.relations.list",
         "parameters": [
           {
-            "description": "object type.",
+            "description": "object type",
             "in": "query",
             "name": "object_type",
             "schema": {
@@ -1403,7 +1585,7 @@
             }
           },
           {
-            "description": "object identifier.",
+            "description": "object identifier",
             "in": "query",
             "name": "object_id",
             "schema": {
@@ -1411,7 +1593,7 @@
             }
           },
           {
-            "description": "relation name.",
+            "description": "relation name",
             "in": "query",
             "name": "relation",
             "schema": {
@@ -1419,7 +1601,7 @@
             }
           },
           {
-            "description": "subject type.",
+            "description": "subject type",
             "in": "query",
             "name": "subject_type",
             "schema": {
@@ -1427,7 +1609,7 @@
             }
           },
           {
-            "description": "subject identifier.",
+            "description": "subject identifier",
             "in": "query",
             "name": "subject_id",
             "schema": {
@@ -1435,7 +1617,7 @@
             }
           },
           {
-            "description": "optional subject relation name.",
+            "description": "optional subject relation name",
             "in": "query",
             "name": "subject_relation",
             "schema": {
@@ -1443,7 +1625,7 @@
             }
           },
           {
-            "description": "materialize relation objects.",
+            "description": "materialize relation objects",
             "in": "query",
             "name": "with_objects",
             "schema": {
@@ -1451,7 +1633,7 @@
             }
           },
           {
-            "description": "requested page size, valid value between 1-100 rows (default 100).",
+            "description": "requested page size, valid value between 1-100 rows (default 100)",
             "in": "query",
             "name": "page.size",
             "schema": {
@@ -1460,7 +1642,7 @@
             }
           },
           {
-            "description": "pagination start token, default \"\".",
+            "description": "pagination start token, default \"\"",
             "in": "query",
             "name": "page.token",
             "schema": {
@@ -1503,12 +1685,6 @@
       }
     }
   },
-  "security": [
-    {
-      "DirectoryAPIKey": [],
-      "TenantID": []
-    }
-  ],
   "servers": [
     {
       "description": "Aserto Directory service",
@@ -1521,6 +1697,7 @@
         "port": {
           "default": "9393",
           "enum": [
+            "8383",
             "9393"
           ]
         }
@@ -1529,7 +1706,7 @@
   ],
   "tags": [
     {
-      "name": "Reader"
+      "name": "Exporter"
     }
   ]
 }

@@ -1,0 +1,108 @@
+{
+  "openapi": "3.0.3",
+  "paths": {
+    "/api/v3/directory/manifest": {
+      "get": {
+        "tags": [
+          "directory"
+        ],
+        "summary": "Get manifest",
+        "description": "Get manifest.",
+        "operationId": "directory.v3.manifest.get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/yaml": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            },
+            "headers": {
+              "Aserto-Updated-At": {
+                "description": "last manifest update time",
+                "schema": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              },
+              "ETag": {
+                "description": "ETag",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "directory"
+        ],
+        "summary": "Set manifest",
+        "description": "Set manifest.",
+        "operationId": "directory.v3.manifest.set",
+        "requestBody": {
+          "description": "Manifest YAML file",
+          "required": true,
+          "content": {
+            "application/yaml": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/yaml": {
+                "schema": {
+                  "$ref": "#/components/schemas/v3SetManifestResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ]
+      }
+    }
+  }
+}
+

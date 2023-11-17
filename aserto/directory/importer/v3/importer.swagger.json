@@ -20,14 +20,11 @@
     "protobufAny": {
       "type": "object",
       "properties": {
-        "type_url": {
+        "@type": {
           "type": "string"
-        },
-        "value": {
-          "type": "string",
-          "format": "byte"
         }
-      }
+      },
+      "additionalProperties": {}
     },
     "protobufNullValue": {
       "type": "string",
@@ -50,6 +47,7 @@
         "details": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/protobufAny"
           }
         }
@@ -98,17 +96,11 @@
       "properties": {
         "type": {
           "type": "string",
-          "title": "object type name",
-          "required": [
-            "type"
-          ]
+          "title": "object type name"
         },
         "id": {
           "type": "string",
-          "title": "external object identifier (cs-string, no spaces or tabs)",
-          "required": [
-            "id"
-          ]
+          "title": "external object identifier (cs-string, no spaces or tabs)"
         },
         "display_name": {
           "type": "string",
@@ -154,38 +146,23 @@
       "properties": {
         "object_type": {
           "type": "string",
-          "title": "object type",
-          "required": [
-            "object_type"
-          ]
+          "title": "object type"
         },
         "object_id": {
           "type": "string",
-          "title": "object identifier",
-          "required": [
-            "object_id"
-          ]
+          "title": "object identifier"
         },
         "relation": {
           "type": "string",
-          "title": "object relation name",
-          "required": [
-            "relation"
-          ]
+          "title": "object relation name"
         },
         "subject_type": {
           "type": "string",
-          "title": "subject type",
-          "required": [
-            "subject_type"
-          ]
+          "title": "subject type"
         },
         "subject_id": {
           "type": "string",
-          "title": "subject identifier",
-          "required": [
-            "subject_id"
-          ]
+          "title": "subject identifier"
         },
         "subject_relation": {
           "type": "string",

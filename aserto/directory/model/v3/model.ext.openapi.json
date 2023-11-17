@@ -13,7 +13,7 @@
           {
             "name": "Aserto-Metadata-Only",
             "in": "header",
-            "description": "If non-empty, response body is not included. Only headers are returned.",
+            "description": "If 'true', only headers are returned, without a response body.",
             "required": false,
             "schema": {
               "type": "string"

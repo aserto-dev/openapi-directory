@@ -975,7 +975,7 @@
         "operationId": "directory.v3.manifest.get",
         "parameters": [
           {
-            "description": "If non-empty, response body is not included. Only headers are returned.",
+            "description": "If 'true', only headers are returned, without a response body.",
             "in": "header",
             "name": "Aserto-Metadata-Only",
             "schema": {

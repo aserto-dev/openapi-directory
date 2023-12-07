@@ -63,6 +63,10 @@
         "relation": {
           "$ref": "#/definitions/v3Relation",
           "title": "relation instance (data)"
+        },
+        "stats": {
+          "type": "object",
+          "title": "object and/or relation stats (no data)"
         }
       }
     },

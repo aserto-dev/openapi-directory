@@ -236,6 +236,10 @@
           },
           "relation": {
             "$ref": "#/components/schemas/v3Relation"
+          },
+          "stats": {
+            "title": "object and/or relation stats (no data)",
+            "type": "object"
           }
         },
         "type": "object"

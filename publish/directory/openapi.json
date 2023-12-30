@@ -651,6 +651,19 @@
         },
         "type": "object"
       }
+    },
+    "securitySchemes": {
+      "DirectoryAPIKey": {
+        "in": "header",
+        "name": "authorization",
+        "type": "apiKey"
+      },
+      "TenantID": {
+        "description": "Aserto Tenant ID",
+        "in": "header",
+        "name": "aserto-tenant-id",
+        "type": "apiKey"
+      }
     }
   },
   "externalDocs": {
@@ -1784,6 +1797,12 @@
       }
     }
   },
+  "security": [
+    {
+      "DirectoryAPIKey": [],
+      "TenantID": []
+    }
+  ],
   "servers": [
     {
       "description": "Aserto Directory service",

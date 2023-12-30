@@ -478,6 +478,16 @@ components:
       properties:
         result:
           $ref: '#/components/schemas/v3Relation'
+  securitySchemes:
+    DirectoryAPIKey:
+      type: apiKey
+      name: authorization
+      in: header
+    TenantID:
+      type: apiKey
+      description: Aserto Tenant ID
+      name: aserto-tenant-id
+      in: header
 info:
   title: Directory
   description: Directory service
@@ -1181,6 +1191,9 @@ paths:
       security:
         - DirectoryAPIKey: []
           TenantID: []
+security:
+  - DirectoryAPIKey: []
+    TenantID: []
 servers:
   - url: https://directory.prod.aserto.com
     description: Aserto Directory service

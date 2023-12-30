@@ -682,7 +682,20 @@
       "type": "object"
     }
   },
+  "externalDocs": {
+    "description": "Aserto API Reference.",
+    "url": "https://docs.aserto.com"
+  },
   "info": {
+    "contact": {
+      "email": "support@aserto.com",
+      "name": "Aserto, Inc.",
+      "url": "https://github.com/aserto-dev/pb-directory"
+    },
+    "license": {
+      "name": "Apache 2.0 License",
+      "url": "https://github.com/aserto-dev/pb-directory/blob/main/LICENSE"
+    },
     "title": "aserto/directory/common/v3/common.proto",
     "version": "version not set"
   },
@@ -1438,6 +1451,29 @@
   "produces": [
     "application/json"
   ],
+  "schemes": [
+    "http",
+    "https",
+    "wss"
+  ],
+  "security": [
+    {
+      "DirectoryAPIKey": [],
+      "TenantID": []
+    }
+  ],
+  "securityDefinitions": {
+    "DirectoryAPIKey": {
+      "in": "header",
+      "name": "authorization",
+      "type": "apiKey"
+    },
+    "TenantID": {
+      "in": "header",
+      "name": "aserto-tenant-id",
+      "type": "apiKey"
+    }
+  },
   "swagger": "2.0",
   "tags": [
     {

@@ -1745,6 +1745,14 @@
             }
           },
           {
+            "description": "only return relations that do not have a subject relation.",
+            "in": "query",
+            "name": "with_empty_subject_relation",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "description": "requested page size, valid value between 1-100 rows (default 100)",
             "in": "query",
             "name": "page.size",

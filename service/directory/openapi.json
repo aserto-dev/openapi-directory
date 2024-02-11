@@ -1087,6 +1087,10 @@
               "$ref": "#/definitions/v3GetObjectResponse"
             }
           },
+          "304": {
+            "description": "Object not modified.",
+            "schema": {}
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1293,6 +1297,10 @@
             "schema": {
               "$ref": "#/definitions/v3GetRelationResponse"
             }
+          },
+          "304": {
+            "description": "Relation not modified.",
+            "schema": {}
           },
           "default": {
             "description": "An unexpected error response.",

@@ -922,6 +922,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/v3GetObjectResponse'
+        "304":
+          description: Object not modified.
+          content:
+            application/json:
+              schema: {}
         default:
           description: An unexpected error response.
           content:
@@ -1084,6 +1089,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/v3GetRelationResponse'
+        "304":
+          description: Relation not modified.
+          content:
+            application/json:
+              schema: {}
         default:
           description: An unexpected error response.
           content:

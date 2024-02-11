@@ -1356,6 +1356,14 @@
             },
             "description": "A successful response."
           },
+          "304": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Object not modified."
+          },
           "default": {
             "content": {
               "application/json": {
@@ -1612,6 +1620,14 @@
               }
             },
             "description": "A successful response."
+          },
+          "304": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Relation not modified."
           },
           "default": {
             "content": {

@@ -16,6 +16,83 @@
     "application/json"
   ],
   "paths": {
+    "/api/v3/directory/assertion": {
+      "delete": {
+        "summary": "Delete assertion",
+        "description": "Delete assertion.",
+        "operationId": "directory.v3.assertion.delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3DeleteAssertionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "assertion_id",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "directory"
+        ],
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Set assertion",
+        "description": "Set assertion.",
+        "operationId": "directory.v3.assertion.set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3SetAssertionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v3SetAssertionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "directory"
+        ],
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ]
+      }
+    },
     "/api/v3/directory/object": {
       "post": {
         "summary": "Set object",
@@ -259,6 +336,66 @@
         }
       }
     },
+    "v3Assertion": {
+      "type": "object",
+      "properties": {
+        "assertion_id": {
+          "type": "string",
+          "format": "uint64",
+          "readOnly": true
+        },
+        "expect": {
+          "type": "boolean"
+        },
+        "check_condition": {
+          "$ref": "#/definitions/v3CheckCondition"
+        }
+      },
+      "required": [
+        "expect"
+      ]
+    },
+    "v3CheckCondition": {
+      "type": "object",
+      "properties": {
+        "object_type": {
+          "type": "string"
+        },
+        "object_id": {
+          "type": "string",
+          "title": "object identifier"
+        },
+        "relation": {
+          "type": "string",
+          "title": "relation name"
+        },
+        "subject_type": {
+          "type": "string",
+          "title": "subject type"
+        },
+        "subject_id": {
+          "type": "string",
+          "title": "subject identifier"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "relation",
+        "subject_type",
+        "subject_id"
+      ]
+    },
+    "v3DeleteAssertionResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "object",
+          "properties": {},
+          "title": "empty result"
+        }
+      }
+    },
     "v3DeleteObjectResponse": {
       "type": "object",
       "properties": {
@@ -371,6 +508,25 @@
         "subject_type",
         "subject_id"
       ]
+    },
+    "v3SetAssertionRequest": {
+      "type": "object",
+      "properties": {
+        "assertion": {
+          "$ref": "#/definitions/v3Assertion"
+        }
+      },
+      "required": [
+        "assertion"
+      ]
+    },
+    "v3SetAssertionResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v3Assertion"
+        }
+      }
     },
     "v3SetObjectRequest": {
       "type": "object",

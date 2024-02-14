@@ -16,6 +16,92 @@
     "application/json"
   ],
   "paths": {
+    "/api/v3/directory/assertion": {
+      "get": {
+        "summary": "Get assertion instance",
+        "description": "Returns single assertion instance.",
+        "operationId": "directory.v3.assertion.get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3GetAssertionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "assertion_id",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "directory"
+        ],
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ]
+      }
+    },
+    "/api/v3/directory/assertions": {
+      "get": {
+        "summary": "List assertions",
+        "description": "Returns list of assertion instances.",
+        "operationId": "directory.v3.assertions.list",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3ListAssertionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page.size",
+            "description": "requested page size, valid value between 1-100 rows (default 100)",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "page.token",
+            "description": "pagination start token, default \"\"",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "directory"
+        ],
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ]
+      }
+    },
     "/api/v3/directory/check": {
       "post": {
         "summary": "Check",
@@ -576,6 +662,56 @@
         }
       }
     },
+    "v3Assertion": {
+      "type": "object",
+      "properties": {
+        "assertion_id": {
+          "type": "string",
+          "format": "uint64",
+          "readOnly": true
+        },
+        "expect": {
+          "type": "boolean"
+        },
+        "check_condition": {
+          "$ref": "#/definitions/v3CheckCondition"
+        }
+      },
+      "required": [
+        "expect"
+      ]
+    },
+    "v3CheckCondition": {
+      "type": "object",
+      "properties": {
+        "object_type": {
+          "type": "string"
+        },
+        "object_id": {
+          "type": "string",
+          "title": "object identifier"
+        },
+        "relation": {
+          "type": "string",
+          "title": "relation name"
+        },
+        "subject_type": {
+          "type": "string",
+          "title": "subject type"
+        },
+        "subject_id": {
+          "type": "string",
+          "title": "subject identifier"
+        }
+      },
+      "required": [
+        "object_type",
+        "object_id",
+        "relation",
+        "subject_type",
+        "subject_id"
+      ]
+    },
     "v3CheckPermissionRequest": {
       "type": "object",
       "properties": {
@@ -732,6 +868,14 @@
         }
       }
     },
+    "v3GetAssertionResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v3Assertion"
+        }
+      }
+    },
     "v3GetGraphResponse": {
       "type": "object",
       "properties": {
@@ -835,6 +979,22 @@
         "page": {
           "$ref": "#/definitions/v3PaginationResponse",
           "title": "pagination response",
+          "readOnly": true
+        }
+      }
+    },
+    "v3ListAssertionsResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v3Assertion"
+          }
+        },
+        "page": {
+          "$ref": "#/definitions/v3PaginationResponse",
           "readOnly": true
         }
       }

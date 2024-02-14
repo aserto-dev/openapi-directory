@@ -33,6 +33,19 @@ components:
             $ref: '#/components/schemas/protobufAny'
         message:
           type: string
+    v3Assertion:
+      type: object
+      required:
+        - expect
+      properties:
+        assertion_id:
+          type: string
+          format: uint64
+          readOnly: true
+        check_condition:
+          $ref: '#/components/schemas/v3CheckCondition'
+        expect:
+          type: boolean
     v3Body:
       type: object
       properties:
@@ -40,6 +53,29 @@ components:
           type: string
           title: manifest content
           format: byte
+    v3CheckCondition:
+      type: object
+      required:
+        - object_type
+        - object_id
+        - relation
+        - subject_type
+        - subject_id
+      properties:
+        object_id:
+          type: string
+          title: object identifier
+        object_type:
+          type: string
+        relation:
+          type: string
+          title: relation name
+        subject_id:
+          type: string
+          title: subject identifier
+        subject_type:
+          type: string
+          title: subject type
     v3CheckPermissionRequest:
       type: object
       required:
@@ -154,6 +190,12 @@ components:
           title: trace information
           items:
             type: string
+    v3DeleteAssertionResponse:
+      type: object
+      properties:
+        result:
+          type: object
+          title: empty result
     v3DeleteManifestResponse:
       type: object
       properties:
@@ -182,6 +224,11 @@ components:
         stats:
           type: object
           title: object and/or relation stats (no data)
+    v3GetAssertionResponse:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/v3Assertion'
     v3GetGraphResponse:
       type: object
       properties:
@@ -285,6 +332,15 @@ components:
           $ref: '#/components/schemas/v3ImportCounter'
         relation:
           $ref: '#/components/schemas/v3ImportCounter'
+    v3ListAssertionsResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/v3PaginationResponse'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/v3Assertion'
     v3Metadata:
       type: object
       properties:
@@ -448,6 +504,18 @@ components:
           title: last updated timestamp (UTC)
           format: date-time
           readOnly: true
+    v3SetAssertionRequest:
+      type: object
+      required:
+        - assertion
+      properties:
+        assertion:
+          $ref: '#/components/schemas/v3Assertion'
+    v3SetAssertionResponse:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/v3Assertion'
     v3SetManifestResponse:
       type: object
       properties:
@@ -501,6 +569,127 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   version: x.y.z
 paths:
+  /api/v3/directory/assertion:
+    delete:
+      tags:
+        - directory
+      summary: Delete assertion
+      description: Delete assertion.
+      operationId: directory.v3.assertion.delete
+      parameters:
+        - name: assertion_id
+          in: query
+          schema:
+            type: string
+            format: uint64
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v3DeleteAssertionResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+    get:
+      tags:
+        - directory
+      summary: Get assertion instance
+      description: Returns single assertion instance.
+      operationId: directory.v3.assertion.get
+      parameters:
+        - name: assertion_id
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uint64
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v3GetAssertionResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+    post:
+      tags:
+        - directory
+      summary: Set assertion
+      description: Set assertion.
+      operationId: directory.v3.assertion.set
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v3SetAssertionRequest'
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v3SetAssertionResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v3/directory/assertions:
+    get:
+      tags:
+        - directory
+      summary: List assertions
+      description: Returns list of assertion instances.
+      operationId: directory.v3.assertions.list
+      parameters:
+        - name: page.size
+          in: query
+          description: requested page size, valid value between 1-100 rows (default 100)
+          schema:
+            type: integer
+            format: int32
+        - name: page.token
+          in: query
+          description: pagination start token, default ""
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v3ListAssertionsResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
   /api/v3/directory/check:
     post:
       tags:

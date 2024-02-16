@@ -185,11 +185,19 @@ components:
     v3GetGraphResponse:
       type: object
       properties:
+        explanation:
+          type: object
+          title: explanation of results
         results:
           type: array
-          title: dependency graph
+          title: matching object identifiers
           items:
-            $ref: '#/components/schemas/v3ObjectDependency'
+            $ref: '#/components/schemas/v3ObjectIdentifier'
+        trace:
+          type: array
+          title: trace information
+          items:
+            type: string
     v3GetManifestResponse:
       type: object
       properties:
@@ -326,48 +334,6 @@ components:
           type: string
           title: last updated timestamp (UTC)
           format: date-time
-          readOnly: true
-    v3ObjectDependency:
-      type: object
-      properties:
-        depth:
-          type: integer
-          title: dependency depth
-          format: int32
-          readOnly: true
-        is_cycle:
-          type: boolean
-          title: dependency cycle
-          readOnly: true
-        object_id:
-          type: string
-          title: object identifier
-          readOnly: true
-        object_type:
-          type: string
-          title: object type
-          readOnly: true
-        path:
-          type: array
-          title: dependency path
-          readOnly: true
-          items:
-            type: string
-        relation:
-          type: string
-          title: object relation name
-          readOnly: true
-        subject_id:
-          type: string
-          title: subject identifier
-          readOnly: true
-        subject_relation:
-          type: string
-          title: optional subject relation name
-          readOnly: true
-        subject_type:
-          type: string
-          title: subject type
           readOnly: true
     v3ObjectIdentifier:
       type: object
@@ -588,7 +554,7 @@ paths:
       security:
         - DirectoryAPIKey: []
           TenantID: []
-  /api/v3/directory/graph/{anchor_type}/{anchor_id}:
+  /api/v3/directory/graph/{object_type}/{relation}/{subject_type}:
     get:
       tags:
         - directory
@@ -596,36 +562,27 @@ paths:
       description: Returns object graph from anchor to subject or object.
       operationId: directory.v3.graph
       parameters:
-        - name: anchor_type
-          in: path
-          description: anchor type
-          required: true
-          schema:
-            type: string
-        - name: anchor_id
-          in: path
-          description: anchor identifier
-          required: true
-          schema:
-            type: string
         - name: object_type
-          in: query
+          in: path
           description: object type
+          required: true
+          schema:
+            type: string
+        - name: relation
+          in: path
+          description: relation name
+          required: true
+          schema:
+            type: string
+        - name: subject_type
+          in: path
+          description: subject type
+          required: true
           schema:
             type: string
         - name: object_id
           in: query
           description: object identifier
-          schema:
-            type: string
-        - name: relation
-          in: query
-          description: relation name
-          schema:
-            type: string
-        - name: subject_type
-          in: query
-          description: subject type
           schema:
             type: string
         - name: subject_id
@@ -638,6 +595,16 @@ paths:
           description: subject relation
           schema:
             type: string
+        - name: explain
+          in: query
+          description: return graph paths for each result
+          schema:
+            type: boolean
+        - name: trace
+          in: query
+          description: collect trace information
+          schema:
+            type: boolean
       responses:
         "200":
           description: A successful response.

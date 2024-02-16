@@ -136,7 +136,7 @@
         ]
       }
     },
-    "/api/v3/directory/graph/{anchor_type}/{anchor_id}": {
+    "/api/v3/directory/graph/{object_type}/{relation}/{subject_type}": {
       "get": {
         "summary": "Get graph",
         "description": "Returns object graph from anchor to subject or object.",
@@ -157,43 +157,29 @@
         },
         "parameters": [
           {
-            "name": "anchor_type",
-            "description": "anchor type",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "anchor_id",
-            "description": "anchor identifier",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "object_type",
             "description": "object type",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "object_id",
-            "description": "object identifier",
-            "in": "query",
-            "required": false,
+            "in": "path",
+            "required": true,
             "type": "string"
           },
           {
             "name": "relation",
             "description": "relation name",
-            "in": "query",
-            "required": false,
+            "in": "path",
+            "required": true,
             "type": "string"
           },
           {
             "name": "subject_type",
             "description": "subject type",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "object_id",
+            "description": "object identifier",
             "in": "query",
             "required": false,
             "type": "string"
@@ -211,6 +197,20 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "explain",
+            "description": "return graph paths for each result",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "trace",
+            "description": "collect trace information",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -739,9 +739,20 @@
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v3ObjectDependency"
+            "$ref": "#/definitions/v3ObjectIdentifier"
           },
-          "title": "dependency graph"
+          "title": "matching object identifiers"
+        },
+        "explanation": {
+          "type": "object",
+          "title": "explanation of results"
+        },
+        "trace": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "trace information"
         }
       }
     },
@@ -879,60 +890,6 @@
         "type",
         "id"
       ]
-    },
-    "v3ObjectDependency": {
-      "type": "object",
-      "properties": {
-        "object_type": {
-          "type": "string",
-          "title": "object type",
-          "readOnly": true
-        },
-        "object_id": {
-          "type": "string",
-          "title": "object identifier",
-          "readOnly": true
-        },
-        "relation": {
-          "type": "string",
-          "title": "object relation name",
-          "readOnly": true
-        },
-        "subject_type": {
-          "type": "string",
-          "title": "subject type",
-          "readOnly": true
-        },
-        "subject_id": {
-          "type": "string",
-          "title": "subject identifier",
-          "readOnly": true
-        },
-        "subject_relation": {
-          "type": "string",
-          "title": "optional subject relation name",
-          "readOnly": true
-        },
-        "depth": {
-          "type": "integer",
-          "format": "int32",
-          "title": "dependency depth",
-          "readOnly": true
-        },
-        "is_cycle": {
-          "type": "boolean",
-          "title": "dependency cycle",
-          "readOnly": true
-        },
-        "path": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "title": "dependency path",
-          "readOnly": true
-        }
-      }
     },
     "v3ObjectIdentifier": {
       "type": "object",

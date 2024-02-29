@@ -17,6 +17,46 @@
   ],
   "paths": {
     "/api/v3/directory/assertion": {
+      "post": {
+        "summary": "Set assertion",
+        "description": "Set assertion.",
+        "operationId": "directory.v3.assertion.set",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3SetAssertionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v3SetAssertionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "directory"
+        ],
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ]
+      }
+    },
+    "/api/v3/directory/assertion/{id}": {
       "get": {
         "summary": "Get assertion instance",
         "description": "Returns single assertion instance.",
@@ -39,7 +79,7 @@
           {
             "name": "id",
             "description": "assertion identifier",
-            "in": "query",
+            "in": "path",
             "required": true,
             "type": "integer",
             "format": "int64"
@@ -75,50 +115,12 @@
         },
         "parameters": [
           {
-            "name": "assertion_id",
+            "name": "id",
             "description": "assertion identifier",
-            "in": "query",
-            "required": false,
+            "in": "path",
+            "required": true,
             "type": "integer",
             "format": "int64"
-          }
-        ],
-        "tags": [
-          "directory"
-        ],
-        "security": [
-          {
-            "DirectoryAPIKey": [],
-            "TenantID": []
-          }
-        ]
-      },
-      "post": {
-        "summary": "Set assertion",
-        "description": "Set assertion.",
-        "operationId": "directory.v3.assertion.set",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v3SetAssertionResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v3SetAssertionRequest"
-            }
           }
         ],
         "tags": [

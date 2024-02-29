@@ -518,6 +518,35 @@ info:
   version: x.y.z
 paths:
   /api/v3/directory/assertion:
+    post:
+      tags:
+        - directory
+      summary: Set assertion
+      description: Set assertion.
+      operationId: directory.v3.assertion.set
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v3SetAssertionRequest'
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v3SetAssertionResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
+  /api/v3/directory/assertion/{id}:
     delete:
       tags:
         - directory
@@ -525,9 +554,10 @@ paths:
       description: Delete assertion.
       operationId: directory.v3.assertion.delete
       parameters:
-        - name: assertion_id
-          in: query
+        - name: id
+          in: path
           description: assertion identifier
+          required: true
           schema:
             type: integer
             format: int64
@@ -555,7 +585,7 @@ paths:
       operationId: directory.v3.assertion.get
       parameters:
         - name: id
-          in: query
+          in: path
           description: assertion identifier
           required: true
           schema:
@@ -568,34 +598,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/v3GetAssertionResponse'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/rpcStatus'
-      security:
-        - DirectoryAPIKey: []
-          TenantID: []
-    post:
-      tags:
-        - directory
-      summary: Set assertion
-      description: Set assertion.
-      operationId: directory.v3.assertion.set
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/v3SetAssertionRequest'
-      responses:
-        "200":
-          description: A successful response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/v3SetAssertionResponse'
         default:
           description: An unexpected error response.
           content:

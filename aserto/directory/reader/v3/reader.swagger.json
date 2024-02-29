@@ -786,8 +786,7 @@
         },
         "page": {
           "$ref": "#/definitions/v3PaginationResponse",
-          "title": "pagination response",
-          "readOnly": true
+          "title": "pagination response"
         }
       }
     },
@@ -804,8 +803,7 @@
         },
         "page": {
           "$ref": "#/definitions/v3PaginationResponse",
-          "title": "pagination response",
-          "readOnly": true
+          "title": "pagination response"
         }
       }
     },
@@ -845,8 +843,7 @@
         },
         "page": {
           "$ref": "#/definitions/v3PaginationResponse",
-          "title": "pagination response",
-          "readOnly": true
+          "title": "pagination response"
         }
       }
     },

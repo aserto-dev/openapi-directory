@@ -190,6 +190,7 @@ func mergeOpenAPI() error {
 				"aserto/directory/writer/v3/writer.swagger.json",
 				"aserto/directory/importer/v3/importer.swagger.json",
 				"aserto/directory/exporter/v3/exporter.swagger.json",
+				"aserto/directory/assertion/v3/assertion.swagger.json",
 				"aserto/directory/openapi/v3/openapi.swagger.json",
 			},
 		},

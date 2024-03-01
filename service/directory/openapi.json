@@ -310,7 +310,6 @@
       "properties": {
         "page": {
           "$ref": "#/definitions/v3PaginationResponse",
-          "readOnly": true,
           "title": "pagination response"
         },
         "relations": {
@@ -332,7 +331,6 @@
       "properties": {
         "page": {
           "$ref": "#/definitions/v3PaginationResponse",
-          "readOnly": true,
           "title": "pagination response"
         },
         "results": {
@@ -373,7 +371,6 @@
         },
         "page": {
           "$ref": "#/definitions/v3PaginationResponse",
-          "readOnly": true,
           "title": "pagination response"
         },
         "results": {

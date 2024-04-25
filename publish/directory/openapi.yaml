@@ -465,7 +465,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: x.y.z
+  version: v0.31.2
 paths:
   /api/v3/directory/check:
     post:

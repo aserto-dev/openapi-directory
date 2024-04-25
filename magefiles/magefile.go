@@ -91,6 +91,7 @@ func gen(bufImage, fileSources, version string) error {
 		return err
 	}
 
+	fmt.Println("Publishing OpenAPI:", version)
 	err = publishOpenAPIv3(version)
 	if err != nil {
 		return err
@@ -254,11 +255,11 @@ func publishOpenAPIv3Service(service Service, version string) error {
 		return errors.Wrapf(err, "convert input OpenAPI to v3")
 	}
 
-	spec3.Info.Version = version
-
 	if err := applyConfigToSpec(spec3, service.config); err != nil {
 		return errors.Wrapf(err, "apply config [%s] to spec", service.config)
 	}
+
+	spec3.Info.Version = version
 
 	populateAsertoSecuritySchemes(spec3.Components.SecuritySchemes)
 

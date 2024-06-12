@@ -479,7 +479,8 @@
         "enum": [
           "OPCODE_UNKNOWN",
           "OPCODE_SET",
-          "OPCODE_DELETE"
+          "OPCODE_DELETE",
+          "OPCODE_DELETE_WITH_RELATIONS"
         ],
         "type": "string"
       },
@@ -640,7 +641,7 @@
     },
     "termsOfService": "https://aserto.com/terms/",
     "title": "Directory",
-    "version": "v0.31.2"
+    "version": "v0.31.3"
   },
   "openapi": "3.0.3",
   "paths": {

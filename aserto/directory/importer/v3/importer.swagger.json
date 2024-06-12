@@ -137,7 +137,8 @@
       "enum": [
         "OPCODE_UNKNOWN",
         "OPCODE_SET",
-        "OPCODE_DELETE"
+        "OPCODE_DELETE",
+        "OPCODE_DELETE_WITH_RELATIONS"
       ],
       "default": "OPCODE_UNKNOWN"
     },

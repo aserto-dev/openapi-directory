@@ -39,6 +39,32 @@
       },
       "type": "object"
     },
+    "v3Assert": {
+      "properties": {
+        "check": {
+          "$ref": "#/definitions/v3CheckRequest"
+        },
+        "check_permission": {
+          "$ref": "#/definitions/v3CheckPermissionRequest"
+        },
+        "check_relation": {
+          "$ref": "#/definitions/v3CheckRelationRequest"
+        },
+        "expected": {
+          "title": "expected outcome of assertion",
+          "type": "boolean"
+        },
+        "id": {
+          "format": "int64",
+          "title": "assertion identifier",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "expected"
+      ],
+      "type": "object"
+    },
     "v3Body": {
       "properties": {
         "data": {
@@ -205,6 +231,16 @@
       },
       "type": "object"
     },
+    "v3DeleteAssertionResponse": {
+      "properties": {
+        "result": {
+          "properties": {},
+          "title": "empty result",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
     "v3DeleteManifestResponse": {
       "properties": {
         "result": {
@@ -248,6 +284,14 @@
         "stats": {
           "title": "object and/or relation stats (no data)",
           "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "v3GetAssertionResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v3Assert"
         }
       },
       "type": "object"
@@ -422,6 +466,21 @@
       },
       "type": "object"
     },
+    "v3ListAssertionsResponse": {
+      "properties": {
+        "page": {
+          "$ref": "#/definitions/v3PaginationResponse"
+        },
+        "results": {
+          "items": {
+            "$ref": "#/definitions/v3Assert",
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "v3Metadata": {
       "properties": {
         "etag": {
@@ -584,6 +643,25 @@
       ],
       "type": "object"
     },
+    "v3SetAssertionRequest": {
+      "properties": {
+        "assert": {
+          "$ref": "#/definitions/v3Assert"
+        }
+      },
+      "required": [
+        "assert"
+      ],
+      "type": "object"
+    },
+    "v3SetAssertionResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v3Assert"
+        }
+      },
+      "type": "object"
+    },
     "v3SetManifestResponse": {
       "properties": {
         "result": {
@@ -651,10 +729,175 @@
       "name": "Apache 2.0 License",
       "url": "https://github.com/aserto-dev/pb-directory/blob/main/LICENSE"
     },
-    "title": "aserto/directory/common/v3/common.proto",
+    "title": "aserto/directory/assertion/v3/assertion.proto",
     "version": "version not set"
   },
   "paths": {
+    "/api/v3/directory/assertion": {
+      "post": {
+        "description": "Set assertion.",
+        "operationId": "directory.v3.assertion.set",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v3SetAssertionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3SetAssertionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Set assertion",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
+    "/api/v3/directory/assertion/{id}": {
+      "delete": {
+        "description": "Delete assertion.",
+        "operationId": "directory.v3.assertion.delete",
+        "parameters": [
+          {
+            "description": "assertion identifier",
+            "format": "int64",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3DeleteAssertionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Delete assertion",
+        "tags": [
+          "directory"
+        ]
+      },
+      "get": {
+        "description": "Returns single assertion instance.",
+        "operationId": "directory.v3.assertion.get",
+        "parameters": [
+          {
+            "description": "assertion identifier",
+            "format": "int64",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3GetAssertionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Get assertion instance",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
+    "/api/v3/directory/assertions": {
+      "get": {
+        "description": "Returns list of assertion instances.",
+        "operationId": "directory.v3.assertions.list",
+        "parameters": [
+          {
+            "description": "requested page size, valid value between 1-100 rows (default 100)",
+            "format": "int32",
+            "in": "query",
+            "name": "page.size",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "pagination start token, default \"\"",
+            "in": "query",
+            "name": "page.token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3ListAssertionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "List assertions",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
     "/api/v3/directory/check": {
       "post": {
         "description": "Returns check outcome.",
@@ -1447,7 +1690,7 @@
   "swagger": "2.0",
   "tags": [
     {
-      "name": "Exporter"
+      "name": "Assertion"
     }
   ]
 }

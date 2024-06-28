@@ -36,6 +36,32 @@
         },
         "type": "object"
       },
+      "v3Assert": {
+        "properties": {
+          "check": {
+            "$ref": "#/components/schemas/v3CheckRequest"
+          },
+          "check_permission": {
+            "$ref": "#/components/schemas/v3CheckPermissionRequest"
+          },
+          "check_relation": {
+            "$ref": "#/components/schemas/v3CheckRelationRequest"
+          },
+          "expected": {
+            "title": "expected outcome of assertion",
+            "type": "boolean"
+          },
+          "id": {
+            "format": "int64",
+            "title": "assertion identifier",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "expected"
+        ],
+        "type": "object"
+      },
       "v3Body": {
         "properties": {
           "data": {
@@ -202,6 +228,15 @@
         },
         "type": "object"
       },
+      "v3DeleteAssertionResponse": {
+        "properties": {
+          "result": {
+            "title": "empty result",
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
       "v3DeleteManifestResponse": {
         "properties": {
           "result": {
@@ -240,6 +275,14 @@
           "stats": {
             "title": "object and/or relation stats (no data)",
             "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "v3GetAssertionResponse": {
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/v3Assert"
           }
         },
         "type": "object"
@@ -396,6 +439,20 @@
           },
           "relation": {
             "$ref": "#/components/schemas/v3ImportCounter"
+          }
+        },
+        "type": "object"
+      },
+      "v3ListAssertionsResponse": {
+        "properties": {
+          "page": {
+            "$ref": "#/components/schemas/v3PaginationResponse"
+          },
+          "results": {
+            "items": {
+              "$ref": "#/components/schemas/v3Assert"
+            },
+            "type": "array"
           }
         },
         "type": "object"
@@ -562,6 +619,25 @@
         ],
         "type": "object"
       },
+      "v3SetAssertionRequest": {
+        "properties": {
+          "assert": {
+            "$ref": "#/components/schemas/v3Assert"
+          }
+        },
+        "required": [
+          "assert"
+        ],
+        "type": "object"
+      },
+      "v3SetAssertionResponse": {
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/v3Assert"
+          }
+        },
+        "type": "object"
+      },
       "v3SetManifestResponse": {
         "properties": {
           "result": {
@@ -645,6 +721,210 @@
   },
   "openapi": "3.0.3",
   "paths": {
+    "/api/v3/directory/assertion": {
+      "post": {
+        "description": "Set assertion.",
+        "operationId": "directory.v3.assertion.set",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v3SetAssertionRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v3SetAssertionResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Set assertion",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
+    "/api/v3/directory/assertion/{id}": {
+      "delete": {
+        "description": "Delete assertion.",
+        "operationId": "directory.v3.assertion.delete",
+        "parameters": [
+          {
+            "description": "assertion identifier",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v3DeleteAssertionResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Delete assertion",
+        "tags": [
+          "directory"
+        ]
+      },
+      "get": {
+        "description": "Returns single assertion instance.",
+        "operationId": "directory.v3.assertion.get",
+        "parameters": [
+          {
+            "description": "assertion identifier",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v3GetAssertionResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Get assertion instance",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
+    "/api/v3/directory/assertions": {
+      "get": {
+        "description": "Returns list of assertion instances.",
+        "operationId": "directory.v3.assertions.list",
+        "parameters": [
+          {
+            "description": "requested page size, valid value between 1-100 rows (default 100)",
+            "in": "query",
+            "name": "page.size",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "pagination start token, default \"\"",
+            "in": "query",
+            "name": "page.token",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v3ListAssertionsResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "List assertions",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
     "/api/v3/directory/check": {
       "post": {
         "description": "Returns check outcome.",
@@ -1807,7 +2087,7 @@
   ],
   "tags": [
     {
-      "name": "Exporter"
+      "name": "Assertion"
     }
   ]
 }

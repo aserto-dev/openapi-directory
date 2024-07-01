@@ -14,7 +14,7 @@
     },
     "protobufNullValue": {
       "default": "NULL_VALUE",
-      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\n The JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value.",
+      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\nThe JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value.",
       "enum": [
         "NULL_VALUE"
       ],
@@ -1009,6 +1009,7 @@
             "description": "object identifier (cs-string)",
             "in": "path",
             "name": "object_id",
+            "pattern": ".+",
             "required": true,
             "type": "string"
           },

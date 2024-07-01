@@ -15,7 +15,7 @@ components:
         `NullValue` is a singleton enumeration to represent the null value for the
         `Value` type union.
 
-         The JSON representation for `NullValue` is JSON `null`.
+        The JSON representation for `NullValue` is JSON `null`.
 
          - NULL_VALUE: Null value.
       enum:
@@ -466,7 +466,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: v0.31.3
+  version: 0.31.2-20240612175254.1.gd756733d
 paths:
   /api/v3/directory/check:
     post:
@@ -867,6 +867,7 @@ paths:
           required: true
           schema:
             type: string
+            pattern: .+
         - name: with_relations
           in: query
           description: materialize the object relations objects

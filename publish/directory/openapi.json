@@ -12,7 +12,7 @@
       },
       "protobufNullValue": {
         "default": "NULL_VALUE",
-        "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\n The JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value.",
+        "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\nThe JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value.",
         "enum": [
           "NULL_VALUE"
         ],
@@ -641,7 +641,7 @@
     },
     "termsOfService": "https://aserto.com/terms/",
     "title": "Directory",
-    "version": "v0.31.3"
+    "version": "0.31.2-20240612175254.1.gd756733d"
   },
   "openapi": "3.0.3",
   "paths": {
@@ -1275,6 +1275,7 @@
             "name": "object_id",
             "required": true,
             "schema": {
+              "pattern": ".+",
               "type": "string"
             }
           },

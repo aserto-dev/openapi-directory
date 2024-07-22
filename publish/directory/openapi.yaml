@@ -516,7 +516,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: v0.31.3
+  version: v0.31.4
 paths:
   /api/v3/directory/assertion:
     post:

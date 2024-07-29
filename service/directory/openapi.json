@@ -462,6 +462,32 @@
         "relation": {
           "$ref": "#/definitions/v3ImportCounter",
           "title": "relation import counter"
+        },
+        "status": {
+          "$ref": "#/definitions/v3ImportStatus",
+          "title": "import status"
+        }
+      },
+      "type": "object"
+    },
+    "v3ImportStatus": {
+      "properties": {
+        "code": {
+          "format": "int64",
+          "title": "gRPC status code (google.golang.org/grpc/codes)",
+          "type": "integer"
+        },
+        "msg": {
+          "title": "gRPC status message (google.golang.org/grpc/status)",
+          "type": "string"
+        },
+        "object": {
+          "$ref": "#/definitions/v3Object",
+          "title": "failed object import message"
+        },
+        "relation": {
+          "$ref": "#/definitions/v3Relation",
+          "title": "failed relation import message"
         }
       },
       "type": "object"

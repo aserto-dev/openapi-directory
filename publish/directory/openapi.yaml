@@ -322,6 +322,22 @@ components:
           $ref: '#/components/schemas/v3ImportCounter'
         relation:
           $ref: '#/components/schemas/v3ImportCounter'
+        status:
+          $ref: '#/components/schemas/v3ImportStatus'
+    v3ImportStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+          title: gRPC status code (google.golang.org/grpc/codes)
+          format: int64
+        msg:
+          type: string
+          title: gRPC status message (google.golang.org/grpc/status)
+        object:
+          $ref: '#/components/schemas/v3Object'
+        relation:
+          $ref: '#/components/schemas/v3Relation'
     v3ListAssertionsResponse:
       type: object
       properties:
@@ -516,7 +532,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: v0.31.4
+  version: v0.31.5
 paths:
   /api/v3/directory/assertion:
     post:

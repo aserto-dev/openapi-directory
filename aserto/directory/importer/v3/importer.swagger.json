@@ -75,6 +75,27 @@
           "type": "string",
           "format": "uint64",
           "title": "number of messages resulting in error"
+        },
+        "type": {
+          "type": "string",
+          "title": "counter of type (object|relation)"
+        }
+      }
+    },
+    "v3ImportRequest": {
+      "type": "object",
+      "properties": {
+        "op_code": {
+          "$ref": "#/definitions/v3Opcode",
+          "title": "operation Opcode enum value"
+        },
+        "object": {
+          "$ref": "#/definitions/v3Object",
+          "title": "object import message"
+        },
+        "relation": {
+          "$ref": "#/definitions/v3Relation",
+          "title": "relation import message"
         }
       }
     },
@@ -91,7 +112,11 @@
         },
         "status": {
           "$ref": "#/definitions/v3ImportStatus",
-          "title": "import status"
+          "title": "import status message"
+        },
+        "counter": {
+          "$ref": "#/definitions/v3ImportCounter",
+          "title": "import counter per type"
         }
       }
     },
@@ -107,13 +132,9 @@
           "type": "string",
           "title": "gRPC status message (google.golang.org/grpc/status)"
         },
-        "object": {
-          "$ref": "#/definitions/v3Object",
-          "title": "failed object import message"
-        },
-        "relation": {
-          "$ref": "#/definitions/v3Relation",
-          "title": "failed relation import message"
+        "req": {
+          "$ref": "#/definitions/v3ImportRequest",
+          "title": "req contains the original import request message"
         }
       }
     },

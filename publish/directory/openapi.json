@@ -428,12 +428,33 @@
             "format": "uint64",
             "title": "number of messages with OPCODE_SET",
             "type": "string"
+          },
+          "type": {
+            "title": "counter of type (object|relation)",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "v3ImportRequest": {
+        "properties": {
+          "object": {
+            "$ref": "#/components/schemas/v3Object"
+          },
+          "op_code": {
+            "$ref": "#/components/schemas/v3Opcode"
+          },
+          "relation": {
+            "$ref": "#/components/schemas/v3Relation"
           }
         },
         "type": "object"
       },
       "v3ImportResponse": {
         "properties": {
+          "counter": {
+            "$ref": "#/components/schemas/v3ImportCounter"
+          },
           "object": {
             "$ref": "#/components/schemas/v3ImportCounter"
           },
@@ -457,11 +478,8 @@
             "title": "gRPC status message (google.golang.org/grpc/status)",
             "type": "string"
           },
-          "object": {
-            "$ref": "#/components/schemas/v3Object"
-          },
-          "relation": {
-            "$ref": "#/components/schemas/v3Relation"
+          "req": {
+            "$ref": "#/components/schemas/v3ImportRequest"
           }
         },
         "type": "object"
@@ -740,7 +758,7 @@
     },
     "termsOfService": "https://aserto.com/terms/",
     "title": "Directory",
-    "version": "v0.31.5"
+    "version": "v0.31.6"
   },
   "openapi": "3.0.3",
   "paths": {

@@ -44,6 +44,9 @@ components:
           $ref: '#/components/schemas/v3CheckPermissionRequest'
         check_relation:
           $ref: '#/components/schemas/v3CheckRelationRequest'
+        description:
+          type: string
+          title: description
         expected:
           type: boolean
           title: expected outcome of assertion
@@ -167,6 +170,9 @@ components:
         check:
           type: boolean
           title: check result
+        context:
+          type: object
+          title: context
         trace:
           type: array
           title: trace information
@@ -544,7 +550,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: v0.31.6
+  version: v0.31.7
 paths:
   /api/v3/directory/assertion:
     post:

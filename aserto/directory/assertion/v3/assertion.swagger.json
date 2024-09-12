@@ -231,6 +231,10 @@
         },
         "check_permission": {
           "$ref": "#/definitions/v3CheckPermissionRequest"
+        },
+        "description": {
+          "type": "string",
+          "title": "description"
         }
       },
       "required": [

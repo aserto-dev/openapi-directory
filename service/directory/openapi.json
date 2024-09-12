@@ -50,6 +50,10 @@
         "check_relation": {
           "$ref": "#/definitions/v3CheckRelationRequest"
         },
+        "description": {
+          "title": "description",
+          "type": "string"
+        },
         "expected": {
           "title": "expected outcome of assertion",
           "type": "boolean"
@@ -220,6 +224,10 @@
         "check": {
           "title": "check result",
           "type": "boolean"
+        },
+        "context": {
+          "title": "context",
+          "type": "object"
         },
         "trace": {
           "items": {

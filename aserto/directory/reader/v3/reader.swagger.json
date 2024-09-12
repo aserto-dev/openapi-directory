@@ -729,6 +729,10 @@
             "type": "string"
           },
           "title": "trace information"
+        },
+        "context": {
+          "type": "object",
+          "title": "context"
         }
       }
     },

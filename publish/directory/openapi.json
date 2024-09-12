@@ -47,6 +47,10 @@
           "check_relation": {
             "$ref": "#/components/schemas/v3CheckRelationRequest"
           },
+          "description": {
+            "title": "description",
+            "type": "string"
+          },
           "expected": {
             "title": "expected outcome of assertion",
             "type": "boolean"
@@ -217,6 +221,10 @@
           "check": {
             "title": "check result",
             "type": "boolean"
+          },
+          "context": {
+            "title": "context",
+            "type": "object"
           },
           "trace": {
             "items": {
@@ -758,7 +766,7 @@
     },
     "termsOfService": "https://aserto.com/terms/",
     "title": "Directory",
-    "version": "v0.31.6"
+    "version": "v0.31.7"
   },
   "openapi": "3.0.3",
   "paths": {

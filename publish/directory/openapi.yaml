@@ -550,7 +550,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: v0.31.7
+  version: v0.33.0
 paths:
   /api/v3/directory/assertion:
     post:

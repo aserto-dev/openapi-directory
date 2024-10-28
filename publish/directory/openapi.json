@@ -766,7 +766,7 @@
     },
     "termsOfService": "https://aserto.com/terms/",
     "title": "Directory",
-    "version": "v0.31.7"
+    "version": "v0.33.0"
   },
   "openapi": "3.0.3",
   "paths": {

@@ -7,6 +7,11 @@ import (
 	"text/template"
 )
 
+type Server struct {
+	Scheme string
+	Host   string
+}
+
 //go:embed openapi.json
 var staticAssets embed.FS
 
@@ -57,11 +62,6 @@ func staticString() (string, error) {
 		return "", err
 	}
 	return string(data), nil
-}
-
-type Server struct {
-	Scheme string
-	Host   string
 }
 
 func buildTemplate() (*template.Template, error) {

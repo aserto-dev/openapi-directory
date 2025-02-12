@@ -1387,16 +1387,8 @@ security:
   - DirectoryAPIKey: []
     TenantID: []
 servers:
-  - url: https://directory.prod.aserto.com
+  - url: '{{.Scheme}}://{{.Host}}'
     description: Aserto Directory service
-  - url: https://localhost:{port}
-    description: Local directory service using Topaz
-    variables:
-      port:
-        enum:
-          - "8383"
-          - "9393"
-        default: "9393"
 tags:
   - name: Assertion
 externalDocs:

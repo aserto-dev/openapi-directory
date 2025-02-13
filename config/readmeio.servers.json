@@ -1,0 +1,19 @@
+[
+  {
+    "description": "Aserto Directory service",
+    "url": "https://directory.prod.aserto.com"
+  },
+  {
+    "description": "Local directory service using Topaz",
+    "url": "https://localhost:{port}",
+    "variables": {
+      "port": {
+        "default": "9393",
+        "enum": [
+          "8383",
+          "9393"
+        ]
+      }
+    }
+  }
+]

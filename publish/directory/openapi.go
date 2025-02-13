@@ -1,10 +1,12 @@
 package openapi
 
 import (
-	"embed"
+	_ "embed"
 	"net/http"
 	"sync"
 	"text/template"
+
+	"github.com/rs/zerolog"
 )
 
 type Server struct {
@@ -13,11 +15,15 @@ type Server struct {
 }
 
 //go:embed openapi.json
-var staticAssets embed.FS
+var staticString string
 
-// Static embedded FS service openapi.json file.
-func Static() embed.FS {
-	return staticAssets
+var buildTemplate = sync.OnceValues(func() (*template.Template, error) {
+	return template.New("openapi.json").Parse(staticString)
+})
+
+// Static string value of the openapi.json file.
+func Static() string {
+	return staticString
 }
 
 // Handler to serve the OpenAPI specification file.
@@ -26,6 +32,7 @@ func OpenApiHandler(w http.ResponseWriter, r *http.Request) {
 
 	template, err := buildTemplate()
 	if err != nil {
+		zerolog.Ctx(r.Context()).Err(err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
@@ -37,14 +44,14 @@ func OpenApiHandler(w http.ResponseWriter, r *http.Request) {
 
 	err = template.Execute(w, server)
 	if err != nil {
+		zerolog.Ctx(r.Context()).Err(err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
 }
 
 func scheme(r *http.Request) string {
-	var scheme string
-	scheme = r.Header.Get("X-Forwarded-Proto")
+	scheme := r.Header.Get("X-Forwarded-Proto")
 	if scheme == "" {
 		if r.TLS == nil {
 			scheme = "http"
@@ -54,23 +61,4 @@ func scheme(r *http.Request) string {
 	}
 
 	return scheme
-}
-
-func staticString() (string, error) {
-	data, err := staticAssets.ReadFile("openapi.json")
-	if err != nil {
-		return "", err
-	}
-	return string(data), nil
-}
-
-func buildTemplate() (*template.Template, error) {
-	once := sync.OnceValues(func() (*template.Template, error) {
-		data, err := staticString()
-		if err != nil {
-			return nil, err
-		}
-		return template.New("openapi.json").Parse(data)
-	})
-	return once()
 }

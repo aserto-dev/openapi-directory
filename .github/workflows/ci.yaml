@@ -99,7 +99,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Create openapi.readmeio.json
+        run: |
+            cat publish/directory/openapi.json  | jq ".servers=$(cat config/readmeio.servers.json)" > openapi.readmeio.json
+
       - name: Publish to readme.io
         uses: readmeio/rdme@v8
         with:
-          rdme: openapi ./publish/directory/openapi.json --key=${{ steps.vault.outputs.README_OAS_DIRECTORY_KEY }} --id ${{ steps.vault.outputs.DIRECTORY_API_DEFINITION_ID }}
+          rdme: openapi ./openapi.readmeio.json --key=${{ steps.vault.outputs.README_OAS_DIRECTORY_KEY }} --id ${{ steps.vault.outputs.DIRECTORY_API_DEFINITION_ID }}

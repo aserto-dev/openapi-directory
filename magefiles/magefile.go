@@ -10,7 +10,6 @@ import (
 	"path"
 	"path/filepath"
 	"strings"
-	"text/template"
 	"unicode"
 	"unicode/utf8"
 
@@ -91,17 +90,7 @@ func gen(bufImage, fileSources, version string) error {
 	}
 
 	fmt.Println("Publishing OpenAPI:", version)
-	err = publishOpenAPIv3(version)
-	if err != nil {
-		return err
-	}
-
-	err = generateEmbedCode()
-	if err != nil {
-		return err
-	}
-
-	return nil
+	return publishOpenAPIv3(version)
 }
 
 func getClientFiles(fileSources string) ([]string, error) {
@@ -419,29 +408,6 @@ func createFileAndDir(path string) (*os.File, error) {
 	return os.Create(path)
 }
 
-func generateEmbedCode() error {
-	t, err := template.New("embed").Parse(embedTemplate)
-	if err != nil {
-		return err
-	}
-
-	targets := []string{
-		"publish/directory/openapi.go",
-	}
-	for _, target := range targets {
-		w, err := os.Create(target)
-		if err != nil {
-			return err
-		}
-
-		err = t.Execute(w, nil)
-		if err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
 func fileExists(filepath string) bool {
 	info, err := os.Stat(filepath)
 	if os.IsNotExist(err) {
@@ -475,16 +441,3 @@ func Clean() error {
 	}
 	return os.RemoveAll("publish")
 }
-
-const embedTemplate string = `package openapi
-
-import "embed"
-
-//go:embed openapi.json
-var staticAssets embed.FS
-
-// Static embedded FS service openapi.json file.
-func Static() embed.FS {
-	return staticAssets
-}
-`

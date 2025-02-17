@@ -435,9 +435,23 @@ func toLowerFirst(s string) string {
 
 // Removes generated files
 func Clean() error {
-	err := os.RemoveAll("service")
-	if err != nil {
+	if err := os.RemoveAll("service"); err != nil {
 		return err
 	}
-	return os.RemoveAll("publish")
+
+	if err := cleanFile("publish/directory/openapi.json"); err != nil {
+		return err
+	}
+
+	return cleanFile("publish/directory/openapi.yaml")
+}
+
+func cleanFile(path string) error {
+	if err := os.Remove(path); err != nil {
+		if _, ok := err.(*os.PathError); !ok {
+			return err
+		}
+	}
+
+	return nil
 }

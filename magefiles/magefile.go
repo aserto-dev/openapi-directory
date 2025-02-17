@@ -370,35 +370,37 @@ func applyExtensionToSpec(spec *openapi3.T, extPath string) error {
 		ext.Info = spec.Info
 	}
 
-	for path, def := range ext.Paths {
-		if _, ok := spec.Paths[path]; !ok {
+	for path, def := range ext.Paths.Map() {
+		item := spec.Paths.Value(path)
+
+		if item == nil {
 			// The path doesn't exist in the spec, so just add it.
-			spec.Paths[path] = def
+			spec.Paths.Set(path, def)
 			continue
 		}
 
 		// The path exists in the spec, so merge the operations.
 		for opKey, op := range def.Operations() {
-			if _, ok := spec.Paths[path].Operations()[opKey]; ok {
+			if _, ok := item.Operations()[opKey]; ok {
 				return errors.Errorf("operation [%s] already exists in path [%s]", opKey, path)
 			}
 
-			spec.Paths[path].SetOperation(opKey, op)
+			item.SetOperation(opKey, op)
 		}
 	}
 
 	return nil
 }
 
-func stripPathsWithTag(paths openapi3.Paths, tag string) {
-	for path, def := range paths {
+func stripPathsWithTag(paths *openapi3.Paths, tag string) {
+	for path, def := range paths.Map() {
 		for opKey, op := range def.Operations() {
 			if contains(op.Tags, tag) {
 				def.SetOperation(opKey, nil)
 			}
 		}
 		if len(def.Operations()) == 0 {
-			delete(paths, path)
+			paths.Delete(path)
 		}
 	}
 }

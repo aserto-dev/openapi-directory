@@ -7,9 +7,7 @@ import (
 	"sync"
 	"text/template"
 
-	"github.com/hashicorp/go-multierror"
-	openapi "github.com/pb33f/libopenapi"
-	v3 "github.com/pb33f/libopenapi/datamodel/high/v3"
+	"github.com/getkin/kin-openapi/openapi3"
 	"github.com/pkg/errors"
 	"github.com/rs/zerolog"
 	"github.com/samber/lo"
@@ -21,16 +19,21 @@ type Server struct {
 }
 
 //go:embed openapi.json
-var staticString string
+var static []byte
 
-// Static string value of the openapi.json file.
-func Static() string {
-	return staticString
+// Byte alice with the openapi.json file.
+func Static() []byte {
+	return static
 }
 
 var once = sync.Once{}
 
 // Handler to serve the OpenAPI specification file.
+//
+// NOTE:
+// The set of exposed services is determined and cached the first time
+// this function is called. Calling it a second time with different arguments
+// will have no effect.
 func OpenApiHandler(svc ...string) func(w http.ResponseWriter, r *http.Request) {
 	var (
 		tmpl *template.Template
@@ -63,65 +66,54 @@ func OpenApiHandler(svc ...string) func(w http.ResponseWriter, r *http.Request) 
 }
 
 func buildTemplate(svc ...string) (*template.Template, error) {
-	content := staticString
+	content := static
 
 	if len(svc) > 0 {
 		// filter the OpenAPI spec to only keep the specified services.
 		if c, err := filter(content, svc...); err != nil {
 			return nil, err
 		} else {
-			content = string(c)
+			content = c
 		}
 	}
 
-	return template.New("openapi.json").Parse(content)
+	return template.New("openapi.json").Parse(string(content))
 }
 
-func filter(body string, svc ...string) ([]byte, error) {
+func filter(body []byte, svc ...string) ([]byte, error) {
 	svc = lo.Map(svc, func(s string, _ int) string { return "directory." + s + "." })
 
-	spec, err := parseSpec([]byte(body))
+	spec, err := parseSpec(body)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to parse openapi spec")
 	}
 
-	paths := spec.Model.Paths.PathItems
 	emptyPaths := []string{}
 
-	for pair := paths.First(); pair != nil; pair = pair.Next() {
-		item := pair.Value()
-		ops := []**v3.Operation{&item.Get, &item.Put, &item.Post, &item.Delete, &item.Options, &item.Head, &item.Patch, &item.Trace}
+	for path, item := range spec.Paths.Map() {
+		ops := []**openapi3.Operation{&item.Get, &item.Put, &item.Post, &item.Delete, &item.Options, &item.Head, &item.Patch, &item.Trace}
 		for _, op := range ops {
-			if *op != nil && !hasAnyPrefix((*op).OperationId, svc...) {
+			if *op != nil && !hasAnyPrefix((*op).OperationID, svc...) {
 				*op = nil
 			}
 		}
 
 		if lo.Count(ops, nil) == len(ops) {
 			// all operations are nil, mark for removal.
-			emptyPaths = append(emptyPaths, pair.Key())
+			emptyPaths = append(emptyPaths, path)
 		}
 	}
 
 	for _, path := range emptyPaths {
-		paths.Delete(path)
+		spec.Paths.Delete(path)
 	}
 
-	return spec.Model.RenderJSON("  ")
+	return spec.MarshalJSON()
 }
 
-func parseSpec(body []byte) (*openapi.DocumentModel[v3.Document], error) {
-	doc, err := openapi.NewDocument(body)
-	if err != nil {
-		return nil, err
-	}
-
-	model, errs := doc.BuildV3Model()
-	if len(errs) > 0 {
-		return nil, multierror.Append(err, errs...)
-	}
-
-	return model, nil
+func parseSpec(body []byte) (*openapi3.T, error) {
+	loader := openapi3.NewLoader()
+	return loader.LoadFromData(body)
 }
 
 func hasAnyPrefix(opID string, prefix ...string) bool {

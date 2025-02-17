@@ -88,8 +88,6 @@ func filter(body []byte, svc ...string) ([]byte, error) {
 		return nil, errors.Wrap(err, "failed to parse openapi spec")
 	}
 
-	emptyPaths := []string{}
-
 	for path, item := range spec.Paths.Map() {
 		ops := []**openapi3.Operation{&item.Get, &item.Put, &item.Post, &item.Delete, &item.Options, &item.Head, &item.Patch, &item.Trace}
 		for _, op := range ops {
@@ -99,13 +97,9 @@ func filter(body []byte, svc ...string) ([]byte, error) {
 		}
 
 		if lo.Count(ops, nil) == len(ops) {
-			// all operations are nil, mark for removal.
-			emptyPaths = append(emptyPaths, path)
+			// all operations are nil. Delete the path.
+			spec.Paths.Delete(path)
 		}
-	}
-
-	for _, path := range emptyPaths {
-		spec.Paths.Delete(path)
 	}
 
 	return spec.MarshalJSON()

@@ -178,6 +178,24 @@ components:
           title: trace information
           items:
             type: string
+    v3ChecksRequest:
+      type: object
+      title: EXPERIMENTAL
+      properties:
+        checks:
+          type: array
+          items:
+            $ref: '#/components/schemas/v3CheckRequest'
+        default:
+          $ref: '#/components/schemas/v3CheckRequest'
+    v3ChecksResponse:
+      type: object
+      title: EXPERIMENTAL
+      properties:
+        checks:
+          type: array
+          items:
+            $ref: '#/components/schemas/v3CheckResponse'
     v3DeleteAssertionResponse:
       type: object
       properties:
@@ -550,7 +568,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: v0.33.0
+  version: v0.33.2
 paths:
   /api/v3/directory/assertion:
     post:
@@ -558,7 +576,7 @@ paths:
         - directory
       summary: Set assertion
       description: Set assertion.
-      operationId: directory.v3.assertion.set
+      operationId: directory.assertion.v3.assertion.set
       requestBody:
         required: true
         content:
@@ -587,7 +605,7 @@ paths:
         - directory
       summary: Delete assertion
       description: Delete assertion.
-      operationId: directory.v3.assertion.delete
+      operationId: directory.assertion.v3.assertion.delete
       parameters:
         - name: id
           in: path
@@ -617,7 +635,7 @@ paths:
         - directory
       summary: Get assertion instance
       description: Returns single assertion instance.
-      operationId: directory.v3.assertion.get
+      operationId: directory.assertion.v3.assertion.get
       parameters:
         - name: id
           in: path
@@ -648,7 +666,7 @@ paths:
         - directory
       summary: List assertions
       description: Returns list of assertion instances.
-      operationId: directory.v3.assertions.list
+      operationId: directory.assertion.v3.assertions.list
       parameters:
         - name: page.size
           in: query
@@ -683,7 +701,7 @@ paths:
         - directory
       summary: Check
       description: Returns check outcome.
-      operationId: directory.v3.check
+      operationId: directory.reader.v3.check
       requestBody:
         required: true
         content:
@@ -712,7 +730,7 @@ paths:
         - directory
       summary: Check permission
       description: Returns check permission outcome.
-      operationId: directory.v3.check.permission
+      operationId: directory.reader.v3.check.permission
       requestBody:
         required: true
         content:
@@ -741,7 +759,7 @@ paths:
         - directory
       summary: Check relation
       description: Returns check relation outcome.
-      operationId: directory.v3.check.relation
+      operationId: directory.reader.v3.check.relation
       requestBody:
         required: true
         content:
@@ -764,13 +782,42 @@ paths:
       security:
         - DirectoryAPIKey: []
           TenantID: []
+  /api/v3/directory/checks:
+    post:
+      tags:
+        - directory
+      summary: Checks
+      description: Returns multiple check outcomes.
+      operationId: directory.reader.v3.checks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v3ChecksRequest'
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v3ChecksResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      security:
+        - DirectoryAPIKey: []
+          TenantID: []
   /api/v3/directory/graph/{object_type}/{relation}/{subject_type}:
     get:
       tags:
         - directory
       summary: Get graph
       description: Returns object graph from anchor to subject or object.
-      operationId: directory.v3.graph
+      operationId: directory.reader.v3.graph
       parameters:
         - name: object_type
           in: path
@@ -837,7 +884,7 @@ paths:
         - directory
       summary: Delete manifest
       description: Delete manifest.
-      operationId: directory.v3.manifest.delete
+      operationId: directory.model.v3.manifest.delete
       parameters:
         - name: empty
           in: query
@@ -993,7 +1040,7 @@ paths:
         - directory
       summary: Set object
       description: Set object.
-      operationId: directory.v3.object.set
+      operationId: directory.writer.v3.object.set
       requestBody:
         required: true
         content:
@@ -1022,7 +1069,7 @@ paths:
         - directory
       summary: Delete object
       description: Delete object.
-      operationId: directory.v3.object.delete
+      operationId: directory.writer.v3.object.delete
       parameters:
         - name: object_type
           in: path
@@ -1062,7 +1109,7 @@ paths:
         - directory
       summary: Get object instance
       description: Returns single object instance, optionally with relations.
-      operationId: directory.v3.object.get
+      operationId: directory.reader.v3.object.get
       parameters:
         - name: object_type
           in: path
@@ -1119,7 +1166,7 @@ paths:
         - directory
       summary: List object instances
       description: Returns list of object instances.
-      operationId: directory.v3.objects.list
+      operationId: directory.reader.v3.objects.list
       parameters:
         - name: object_type
           in: query
@@ -1159,7 +1206,7 @@ paths:
         - directory
       summary: Delete relation
       description: Delete relation.
-      operationId: directory.v3.relation.delete
+      operationId: directory.writer.v3.relation.delete
       parameters:
         - name: object_type
           in: query
@@ -1217,7 +1264,7 @@ paths:
         - directory
       summary: Get relation instance
       description: Returns single relation instance, optionally with objects.
-      operationId: directory.v3.relation.get
+      operationId: directory.reader.v3.relation.get
       parameters:
         - name: object_type
           in: query
@@ -1285,7 +1332,7 @@ paths:
         - directory
       summary: Set relation
       description: Set relation.
-      operationId: directory.v3.relation.set
+      operationId: directory.writer.v3.relation.set
       requestBody:
         required: true
         content:
@@ -1314,7 +1361,7 @@ paths:
         - directory
       summary: List relations instances
       description: Returns list of relation instances.
-      operationId: directory.v3.relations.list
+      operationId: directory.reader.v3.relations.list
       parameters:
         - name: object_type
           in: query

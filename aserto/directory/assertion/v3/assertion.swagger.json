@@ -20,7 +20,7 @@
       "post": {
         "summary": "Set assertion",
         "description": "Set assertion.",
-        "operationId": "directory.v3.assertion.set",
+        "operationId": "directory.assertion.v3.assertion.set",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -60,7 +60,7 @@
       "get": {
         "summary": "Get assertion instance",
         "description": "Returns single assertion instance.",
-        "operationId": "directory.v3.assertion.get",
+        "operationId": "directory.assertion.v3.assertion.get",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -98,7 +98,7 @@
       "delete": {
         "summary": "Delete assertion",
         "description": "Delete assertion.",
-        "operationId": "directory.v3.assertion.delete",
+        "operationId": "directory.assertion.v3.assertion.delete",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -138,7 +138,7 @@
       "get": {
         "summary": "List assertions",
         "description": "Returns list of assertion instances.",
-        "operationId": "directory.v3.assertions.list",
+        "operationId": "directory.assertion.v3.assertions.list",
         "responses": {
           "200": {
             "description": "A successful response.",

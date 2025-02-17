@@ -20,7 +20,7 @@
       "post": {
         "summary": "Set object",
         "description": "Set object.",
-        "operationId": "directory.v3.object.set",
+        "operationId": "directory.writer.v3.object.set",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -60,7 +60,7 @@
       "delete": {
         "summary": "Delete object",
         "description": "Delete object.",
-        "operationId": "directory.v3.object.delete",
+        "operationId": "directory.writer.v3.object.delete",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -113,7 +113,7 @@
       "delete": {
         "summary": "Delete relation",
         "description": "Delete relation.",
-        "operationId": "directory.v3.relation.delete",
+        "operationId": "directory.writer.v3.relation.delete",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -185,7 +185,7 @@
       "post": {
         "summary": "Set relation",
         "description": "Set relation.",
-        "operationId": "directory.v3.relation.set",
+        "operationId": "directory.writer.v3.relation.set",
         "responses": {
           "200": {
             "description": "A successful response.",

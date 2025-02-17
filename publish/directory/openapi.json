@@ -236,6 +236,33 @@
         },
         "type": "object"
       },
+      "v3ChecksRequest": {
+        "properties": {
+          "checks": {
+            "items": {
+              "$ref": "#/components/schemas/v3CheckRequest"
+            },
+            "type": "array"
+          },
+          "default": {
+            "$ref": "#/components/schemas/v3CheckRequest"
+          }
+        },
+        "title": "EXPERIMENTAL",
+        "type": "object"
+      },
+      "v3ChecksResponse": {
+        "properties": {
+          "checks": {
+            "items": {
+              "$ref": "#/components/schemas/v3CheckResponse"
+            },
+            "type": "array"
+          }
+        },
+        "title": "EXPERIMENTAL",
+        "type": "object"
+      },
       "v3DeleteAssertionResponse": {
         "properties": {
           "result": {
@@ -766,14 +793,14 @@
     },
     "termsOfService": "https://aserto.com/terms/",
     "title": "Directory",
-    "version": "v0.33.0"
+    "version": "v0.33.2"
   },
   "openapi": "3.0.3",
   "paths": {
     "/api/v3/directory/assertion": {
       "post": {
         "description": "Set assertion.",
-        "operationId": "directory.v3.assertion.set",
+        "operationId": "directory.assertion.v3.assertion.set",
         "requestBody": {
           "content": {
             "application/json": {
@@ -822,7 +849,7 @@
     "/api/v3/directory/assertion/{id}": {
       "delete": {
         "description": "Delete assertion.",
-        "operationId": "directory.v3.assertion.delete",
+        "operationId": "directory.assertion.v3.assertion.delete",
         "parameters": [
           {
             "description": "assertion identifier",
@@ -870,7 +897,7 @@
       },
       "get": {
         "description": "Returns single assertion instance.",
-        "operationId": "directory.v3.assertion.get",
+        "operationId": "directory.assertion.v3.assertion.get",
         "parameters": [
           {
             "description": "assertion identifier",
@@ -920,7 +947,7 @@
     "/api/v3/directory/assertions": {
       "get": {
         "description": "Returns list of assertion instances.",
-        "operationId": "directory.v3.assertions.list",
+        "operationId": "directory.assertion.v3.assertions.list",
         "parameters": [
           {
             "description": "requested page size, valid value between 1-100 rows (default 100)",
@@ -977,7 +1004,7 @@
     "/api/v3/directory/check": {
       "post": {
         "description": "Returns check outcome.",
-        "operationId": "directory.v3.check",
+        "operationId": "directory.reader.v3.check",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1026,7 +1053,7 @@
     "/api/v3/directory/check/permission": {
       "post": {
         "description": "Returns check permission outcome.",
-        "operationId": "directory.v3.check.permission",
+        "operationId": "directory.reader.v3.check.permission",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1075,7 +1102,7 @@
     "/api/v3/directory/check/relation": {
       "post": {
         "description": "Returns check relation outcome.",
-        "operationId": "directory.v3.check.relation",
+        "operationId": "directory.reader.v3.check.relation",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1121,10 +1148,59 @@
         ]
       }
     },
+    "/api/v3/directory/checks": {
+      "post": {
+        "description": "Returns multiple check outcomes.",
+        "operationId": "directory.reader.v3.checks",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v3ChecksRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v3ChecksResponse"
+                }
+              }
+            },
+            "description": "A successful response."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            },
+            "description": "An unexpected error response."
+          }
+        },
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ],
+        "summary": "Checks",
+        "tags": [
+          "directory"
+        ]
+      }
+    },
     "/api/v3/directory/graph/{object_type}/{relation}/{subject_type}": {
       "get": {
         "description": "Returns object graph from anchor to subject or object.",
-        "operationId": "directory.v3.graph",
+        "operationId": "directory.reader.v3.graph",
         "parameters": [
           {
             "description": "object type",
@@ -1231,7 +1307,7 @@
     "/api/v3/directory/manifest": {
       "delete": {
         "description": "Delete manifest.",
-        "operationId": "directory.v3.manifest.delete",
+        "operationId": "directory.model.v3.manifest.delete",
         "parameters": [
           {
             "description": "empty request",
@@ -1474,7 +1550,7 @@
     "/api/v3/directory/object": {
       "post": {
         "description": "Set object.",
-        "operationId": "directory.v3.object.set",
+        "operationId": "directory.writer.v3.object.set",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1523,7 +1599,7 @@
     "/api/v3/directory/object/{object_type}/{object_id}": {
       "delete": {
         "description": "Delete object.",
-        "operationId": "directory.v3.object.delete",
+        "operationId": "directory.writer.v3.object.delete",
         "parameters": [
           {
             "description": "object type",
@@ -1587,7 +1663,7 @@
       },
       "get": {
         "description": "Returns single object instance, optionally with relations.",
-        "operationId": "directory.v3.object.get",
+        "operationId": "directory.reader.v3.object.get",
         "parameters": [
           {
             "description": "object type name (lc-string)",
@@ -1678,7 +1754,7 @@
     "/api/v3/directory/objects": {
       "get": {
         "description": "Returns list of object instances.",
-        "operationId": "directory.v3.objects.list",
+        "operationId": "directory.reader.v3.objects.list",
         "parameters": [
           {
             "description": "object type name (lc-string)",
@@ -1743,7 +1819,7 @@
     "/api/v3/directory/relation": {
       "delete": {
         "description": "Delete relation.",
-        "operationId": "directory.v3.relation.delete",
+        "operationId": "directory.writer.v3.relation.delete",
         "parameters": [
           {
             "description": "object type",
@@ -1834,7 +1910,7 @@
       },
       "get": {
         "description": "Returns single relation instance, optionally with objects.",
-        "operationId": "directory.v3.relation.get",
+        "operationId": "directory.reader.v3.relation.get",
         "parameters": [
           {
             "description": "object type",
@@ -1941,7 +2017,7 @@
       },
       "post": {
         "description": "Set relation.",
-        "operationId": "directory.v3.relation.set",
+        "operationId": "directory.writer.v3.relation.set",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1990,7 +2066,7 @@
     "/api/v3/directory/relations": {
       "get": {
         "description": "Returns list of relation instances.",
-        "operationId": "directory.v3.relations.list",
+        "operationId": "directory.reader.v3.relations.list",
         "parameters": [
           {
             "description": "object type",

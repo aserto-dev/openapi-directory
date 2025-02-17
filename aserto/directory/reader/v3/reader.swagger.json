@@ -20,7 +20,7 @@
       "post": {
         "summary": "Check",
         "description": "Returns check outcome.",
-        "operationId": "directory.v3.check",
+        "operationId": "directory.reader.v3.check",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -60,7 +60,7 @@
       "post": {
         "summary": "Check permission",
         "description": "Returns check permission outcome.",
-        "operationId": "directory.v3.check.permission",
+        "operationId": "directory.reader.v3.check.permission",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -100,7 +100,7 @@
       "post": {
         "summary": "Check relation",
         "description": "Returns check relation outcome.",
-        "operationId": "directory.v3.check.relation",
+        "operationId": "directory.reader.v3.check.relation",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -136,11 +136,51 @@
         ]
       }
     },
+    "/api/v3/directory/checks": {
+      "post": {
+        "summary": "Checks",
+        "description": "Returns multiple check outcomes.",
+        "operationId": "directory.reader.v3.checks",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v3ChecksResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v3ChecksRequest"
+            }
+          }
+        ],
+        "tags": [
+          "directory"
+        ],
+        "security": [
+          {
+            "DirectoryAPIKey": [],
+            "TenantID": []
+          }
+        ]
+      }
+    },
     "/api/v3/directory/graph/{object_type}/{relation}/{subject_type}": {
       "get": {
         "summary": "Get graph",
         "description": "Returns object graph from anchor to subject or object.",
-        "operationId": "directory.v3.graph",
+        "operationId": "directory.reader.v3.graph",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -228,7 +268,7 @@
       "get": {
         "summary": "Get object instance",
         "description": "Returns single object instance, optionally with relations.",
-        "operationId": "directory.v3.object.get",
+        "operationId": "directory.reader.v3.object.get",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -300,7 +340,7 @@
       "get": {
         "summary": "List object instances",
         "description": "Returns list of object instances.",
-        "operationId": "directory.v3.objects.list",
+        "operationId": "directory.reader.v3.objects.list",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -354,7 +394,7 @@
       "get": {
         "summary": "Get relation instance",
         "description": "Returns single relation instance, optionally with objects.",
-        "operationId": "directory.v3.relation.get",
+        "operationId": "directory.reader.v3.relation.get",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -439,7 +479,7 @@
       "get": {
         "summary": "List relations instances",
         "description": "Returns list of relation instances.",
-        "operationId": "directory.v3.relations.list",
+        "operationId": "directory.reader.v3.relations.list",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -735,6 +775,35 @@
           "title": "context"
         }
       }
+    },
+    "v3ChecksRequest": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "$ref": "#/definitions/v3CheckRequest"
+        },
+        "checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v3CheckRequest"
+          }
+        }
+      },
+      "title": "EXPERIMENTAL"
+    },
+    "v3ChecksResponse": {
+      "type": "object",
+      "properties": {
+        "checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v3CheckResponse"
+          }
+        }
+      },
+      "title": "EXPERIMENTAL"
     },
     "v3GetGraphResponse": {
       "type": "object",

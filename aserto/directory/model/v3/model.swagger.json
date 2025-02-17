@@ -20,7 +20,7 @@
       "delete": {
         "summary": "Delete manifest",
         "description": "Delete manifest.",
-        "operationId": "directory.v3.manifest.delete",
+        "operationId": "directory.model.v3.manifest.delete",
         "responses": {
           "200": {
             "description": "A successful response.",

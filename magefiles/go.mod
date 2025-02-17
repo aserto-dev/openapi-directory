@@ -3,7 +3,7 @@ module github.com/aserto-dev/openapi-authorizer/magefiles
 go 1.22.12
 
 require (
-	github.com/aserto-dev/mage-loot v0.8.17
+	github.com/aserto-dev/mage-loot v0.8.18-0.20250217221652-0d5d30182447
 	github.com/getkin/kin-openapi v0.129.0
 	github.com/pkg/errors v0.9.1
 	gopkg.in/yaml.v3 v3.0.1

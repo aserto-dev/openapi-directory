@@ -6,6 +6,9 @@ go:
   buf:
     importPath: "github.com/bufbuild/buf/cmd/buf"
     version: "v1.46.0"
+  gotestsum:
+    importPath: "gotest.tools/gotestsum"
+    version: "v1.11.0"
 bin:
   vault:
     url: "https://releases.hashicorp.com/vault/{{.Version}}/vault_{{.Version}}_{{.OS}}_{{.Arch}}.zip"

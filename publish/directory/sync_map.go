@@ -1,3 +1,4 @@
+//nolint:forcetypeassert,nonamedreturns
 package openapi
 
 import "sync"

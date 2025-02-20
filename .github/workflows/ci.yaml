@@ -20,21 +20,13 @@ on:
 env:
   VAULT_ADDR: https://vault.eng.aserto.com/
   GO_VERSION: "1.23"
+  GO_LANGCI_LINT_VERSION: "v1.61.0"
+  GO_TESTSUM_VERSION: "1.11.0"
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Read Configuration
-        uses: hashicorp/vault-action@v3
-        id: vault
-        with:
-          url: ${{ env.VAULT_ADDR }}
-          token: ${{ secrets.VAULT_TOKEN }}
-          secrets: |
-            kv/data/github  "SSH_PRIVATE_KEY"     | SSH_PRIVATE_KEY;
-            kv/data/github  "READ_WRITE_TOKEN"    | READ_WRITE_TOKEN;
       -
         uses: actions/create-github-app-token@v1
         id: app-token
@@ -62,6 +54,26 @@ jobs:
       -
         name: Generate
         run: go run mage.go generate
+      -
+        name: Lint
+        uses: golangci/golangci-lint-action@v4
+        with:
+          version: ${{ env.GO_LANGCI_LINT_VERSION }}
+      -
+        name: Test Setup
+        uses: gertd/action-gotestsum@v3.0.0
+        with:
+          gotestsum_version: ${{ env.GO_TESTSUM_VERSION }}
+      -
+        name: Test
+        run: |
+          gotestsum --format short-verbose -- -count=1 -v -timeout=240s -coverprofile=cover.out -coverpkg=./... ./...
+      -
+        name: Upload code coverage
+        uses: shogo82148/actions-goveralls@v1
+        continue-on-error: true
+        with:
+          path-to-profile: cover.out
       -
         name: Commit changes
         id: commit_changes
@@ -95,4 +107,7 @@ jobs:
       - name: Publish to readme.io
         uses: readmeio/rdme@v8
         with:
-          rdme: openapi ./openapi.readmeio.json --key=${{ steps.vault.outputs.README_OAS_DIRECTORY_KEY }} --id ${{ steps.vault.outputs.DIRECTORY_API_DEFINITION_ID }}
+          rdme: >
+            openapi ./openapi.readmeio.json
+            --key=${{ steps.vault.outputs.README_OAS_DIRECTORY_KEY }}
+            --id ${{ steps.vault.outputs.DIRECTORY_API_DEFINITION_ID }}

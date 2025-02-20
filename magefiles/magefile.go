@@ -7,7 +7,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"path"
 	"path/filepath"
 	"strings"
 	"unicode"
@@ -17,7 +16,6 @@ import (
 	"github.com/aserto-dev/mage-loot/common"
 	"github.com/aserto-dev/mage-loot/deps"
 	"github.com/aserto-dev/mage-loot/fsutil"
-	"github.com/aserto-dev/mage-loot/mage"
 	"github.com/getkin/kin-openapi/openapi2"
 	"github.com/getkin/kin-openapi/openapi2conv"
 	"github.com/getkin/kin-openapi/openapi3"
@@ -129,11 +127,6 @@ func getClientFiles(fileSources string) ([]string, error) {
 
 // Generates from a dev build.
 func GenerateDev() error {
-	// err := BuildDev()
-	// if err != nil {
-	//     return err
-	// }
-
 	bufImage := filepath.Join(getProtoRepo(), "bin", "directory.bin#format=bin")
 	fileSources := filepath.Join(getProtoRepo(), "proto#format=dir")
 
@@ -151,11 +144,6 @@ func getProtoRepo() string {
 		protoRepo = "../pb-directory"
 	}
 	return protoRepo
-}
-
-// Builds the aserto proto image
-func BuildDev() error {
-	return mage.RunDirs(path.Join(getProtoRepo(), "magefiles"), getProtoRepo(), mage.AddArg("build"))
 }
 
 // join openapi.json specs from subservices into a single openapi.json file for the service.

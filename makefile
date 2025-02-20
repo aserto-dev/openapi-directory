@@ -8,8 +8,6 @@ ATTN_COLOR 		:= \033[33;01m
 
 GOOS			    := $(shell go env GOOS)
 GOARCH        := $(shell go env GOARCH)
-GOPRIVATE     := "github.com/aserto-dev"
-DOCKER_BUILDKIT	:= 1
 
 EXT_DIR			  := ./.ext
 EXT_BIN_DIR		:= ${EXT_DIR}/bin
@@ -22,16 +20,11 @@ BUF_VERSION 	:= 1.46.0
 
 RELEASE_TAG		:= $$(svu)
 
-.DEFAULT_GOAL := build
+.DEFAULT_GOAL := test
 
 .PHONY: deps
 deps: info install-svu install-golangci-lint install-gotestsum
 	@echo -e "$(ATTN_COLOR)==> $@ $(NO_COLOR)"
-
-.PHONY: generate
-generate:
-	@echo -e "$(ATTN_COLOR)==> $@ $(NO_COLOR)"
-	@GOBIN=${PWD}/${EXT_BIN_DIR} go generate ./...
 
 .PHONY: lint
 lint:
@@ -42,11 +35,6 @@ lint:
 test:
 	@echo -e "$(ATTN_COLOR)==> $@ $(NO_COLOR)"
 	@${EXT_BIN_DIR}/gotestsum --format short-verbose -- -count=1 -coverprofile=cover.out -coverpkg=./... ./...;
-
-.PHONY: write-version
-write-version:
-	@echo -e "$(ATTN_COLOR)==> $@ $(NO_COLOR)"
-	@git describe --tags > ./VERSION.txt
 
 .PHONY: info
 info:

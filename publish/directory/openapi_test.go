@@ -1,6 +1,9 @@
 package openapi_test
 
 import (
+	"io"
+	"net/http"
+	"net/http/httptest"
 	"strings"
 	"testing"
 
@@ -43,9 +46,33 @@ func TestFilter(t *testing.T) {
 			// Each of the expected services must match at least one operation ID.
 			for _, svc := range expected {
 				require.True(hasPrefixMatches(svc, opIDs...))
-
 			}
 		})
+	}
+}
+
+func TestHandler(t *testing.T) {
+	server := httptest.NewServer(http.HandlerFunc(openapi.OpenAPIHandler(3030, "reader")))
+	t.Cleanup(server.Close)
+
+	require := req.New(t)
+
+	resp, err := http.Get(server.URL) //nolint:noctx
+	require.NoError(err)
+	t.Cleanup(func() { resp.Body.Close() })
+
+	body, err := io.ReadAll(resp.Body)
+	require.NoError(err)
+
+	t.Logf("Response: %s", body)
+
+	opIDs := lo.Map(gjson.GetBytes(body, "paths.@dig:operationId").Array(),
+		func(v gjson.Result, _ int) string { return v.String() },
+	)
+	require.NotEmpty(opIDs)
+
+	for _, opID := range opIDs {
+		require.True(openapi.HasAnyPrefix(opID, "directory.reader"))
 	}
 }
 

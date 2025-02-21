@@ -7,7 +7,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"path"
 	"path/filepath"
 	"strings"
 	"unicode"
@@ -17,7 +16,6 @@ import (
 	"github.com/aserto-dev/mage-loot/common"
 	"github.com/aserto-dev/mage-loot/deps"
 	"github.com/aserto-dev/mage-loot/fsutil"
-	"github.com/aserto-dev/mage-loot/mage"
 	"github.com/getkin/kin-openapi/openapi2"
 	"github.com/getkin/kin-openapi/openapi2conv"
 	"github.com/getkin/kin-openapi/openapi3"
@@ -129,11 +127,6 @@ func getClientFiles(fileSources string) ([]string, error) {
 
 // Generates from a dev build.
 func GenerateDev() error {
-	// err := BuildDev()
-	// if err != nil {
-	//     return err
-	// }
-
 	bufImage := filepath.Join(getProtoRepo(), "bin", "directory.bin#format=bin")
 	fileSources := filepath.Join(getProtoRepo(), "proto#format=dir")
 
@@ -151,11 +144,6 @@ func getProtoRepo() string {
 		protoRepo = "../pb-directory"
 	}
 	return protoRepo
-}
-
-// Builds the aserto proto image
-func BuildDev() error {
-	return mage.RunDirs(path.Join(getProtoRepo(), "magefiles"), getProtoRepo(), mage.AddArg("build"))
 }
 
 // join openapi.json specs from subservices into a single openapi.json file for the service.
@@ -370,35 +358,37 @@ func applyExtensionToSpec(spec *openapi3.T, extPath string) error {
 		ext.Info = spec.Info
 	}
 
-	for path, def := range ext.Paths {
-		if _, ok := spec.Paths[path]; !ok {
+	for path, def := range ext.Paths.Map() {
+		item := spec.Paths.Value(path)
+
+		if item == nil {
 			// The path doesn't exist in the spec, so just add it.
-			spec.Paths[path] = def
+			spec.Paths.Set(path, def)
 			continue
 		}
 
 		// The path exists in the spec, so merge the operations.
 		for opKey, op := range def.Operations() {
-			if _, ok := spec.Paths[path].Operations()[opKey]; ok {
+			if _, ok := item.Operations()[opKey]; ok {
 				return errors.Errorf("operation [%s] already exists in path [%s]", opKey, path)
 			}
 
-			spec.Paths[path].SetOperation(opKey, op)
+			item.SetOperation(opKey, op)
 		}
 	}
 
 	return nil
 }
 
-func stripPathsWithTag(paths openapi3.Paths, tag string) {
-	for path, def := range paths {
+func stripPathsWithTag(paths *openapi3.Paths, tag string) {
+	for path, def := range paths.Map() {
 		for opKey, op := range def.Operations() {
 			if contains(op.Tags, tag) {
 				def.SetOperation(opKey, nil)
 			}
 		}
 		if len(def.Operations()) == 0 {
-			delete(paths, path)
+			paths.Delete(path)
 		}
 	}
 }
@@ -435,9 +425,23 @@ func toLowerFirst(s string) string {
 
 // Removes generated files
 func Clean() error {
-	err := os.RemoveAll("service")
-	if err != nil {
+	if err := os.RemoveAll("service"); err != nil {
 		return err
 	}
-	return os.RemoveAll("publish")
+
+	if err := cleanFile("publish/directory/openapi.json"); err != nil {
+		return err
+	}
+
+	return cleanFile("publish/directory/openapi.yaml")
+}
+
+func cleanFile(path string) error {
+	if err := os.Remove(path); err != nil {
+		if _, ok := err.(*os.PathError); !ok {
+			return err
+		}
+	}
+
+	return nil
 }

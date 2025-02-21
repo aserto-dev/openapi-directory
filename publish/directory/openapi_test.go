@@ -52,7 +52,7 @@ func TestFilter(t *testing.T) {
 }
 
 func TestHandler(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(openapi.OpenAPIHandler(3030, "reader")))
+	server := httptest.NewServer(http.HandlerFunc(openapi.OpenAPIHandler("3030", "reader")))
 	t.Cleanup(server.Close)
 
 	require := req.New(t)

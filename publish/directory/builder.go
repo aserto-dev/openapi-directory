@@ -26,7 +26,7 @@ func newTemplateBuilder() *templateBuilder {
 	}
 }
 
-func (t *templateBuilder) Build(port int, svc ...string) {
+func (t *templateBuilder) Build(port string, svc ...string) {
 	var err error
 	content := static
 

@@ -20,10 +20,10 @@ func Static() []byte {
 	return static
 }
 
-var cache syncMap[int, *templateBuilder]
+var cache syncMap[string, *templateBuilder]
 
 // Handler to serve the OpenAPI specification file.
-func OpenAPIHandler(port int, svc ...string) func(w http.ResponseWriter, r *http.Request) {
+func OpenAPIHandler(port string, svc ...string) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Add("Content-Type", "application/json")
 

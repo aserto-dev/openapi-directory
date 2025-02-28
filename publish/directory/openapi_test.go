@@ -18,7 +18,7 @@ func TestFilter(t *testing.T) {
 		{"reader"},
 		{"writer"},
 		{"model"},
-		{"assertion"},
+		{"access"},
 		{"reader", "writer"},
 		{"model", "writer"},
 		{"reader", "writer", "model", "assertion"},
@@ -29,10 +29,6 @@ func TestFilter(t *testing.T) {
 			b, err := openapi.Filter(openapi.Static(), services...)
 			require.NoError(err)
 
-			expected := lo.Map(services,
-				func(s string, _ int) string { return "directory." + s + "." },
-			)
-
 			opIDs := lo.Map(gjson.GetBytes(b, "paths.@dig:operationId").Array(),
 				func(v gjson.Result, _ int) string { return v.String() },
 			)
@@ -40,12 +36,12 @@ func TestFilter(t *testing.T) {
 
 			// Each remaining operation ID must match one of the expected services.
 			for _, opID := range opIDs {
-				require.True(openapi.HasAnyPrefix(opID, expected...))
+				require.True(openapi.MatchAny(opID, services...))
 			}
 
 			// Each of the expected services must match at least one operation ID.
-			for _, svc := range expected {
-				require.True(hasPrefixMatches(svc, opIDs...))
+			for _, svc := range services {
+				require.True(hasServiceMatch(svc, opIDs...))
 			}
 		})
 	}
@@ -72,13 +68,13 @@ func TestHandler(t *testing.T) {
 	require.NotEmpty(opIDs)
 
 	for _, opID := range opIDs {
-		require.True(openapi.HasAnyPrefix(opID, "directory.reader"))
+		require.True(openapi.MatchAny(opID, "reader"))
 	}
 }
 
-func hasPrefixMatches(prefix string, vals ...string) bool {
+func hasServiceMatch(svc string, vals ...string) bool {
 	for _, val := range vals {
-		if strings.HasPrefix(val, prefix) {
+		if openapi.MatchAny(val, svc) {
 			return true
 		}
 	}

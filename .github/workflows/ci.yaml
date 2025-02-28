@@ -111,3 +111,25 @@ jobs:
             openapi ./openapi.readmeio.json
             --key=${{ steps.vault.outputs.README_OAS_DIRECTORY_KEY }}
             --id ${{ steps.vault.outputs.DIRECTORY_API_DEFINITION_ID }}
+
+  dispatch-console-common-generate:
+    needs: release
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Read Configuration
+        uses: hashicorp/vault-action@v3
+        id: vault
+        with:
+          url: https://vault.eng.aserto.com/
+          token: ${{ secrets.VAULT_TOKEN }}
+          secrets: |
+            kv/data/github    "USERNAME"          | GH_USERNAME;
+            kv/data/github    "READ_WRITE_TOKEN"  | GH_TOKEN;
+      -
+        name: Trigger dispatch
+        run: |
+          curl -XPOST -u "${GH_USERNAME}:${GH_TOKEN}" \
+          -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" \
+          https://api.github.com/repos/aserto-dev/console-common/actions/workflows/generate.yml/dispatches --data '{"ref": "main", "inputs": {"openapi_directory_version": "${{ github.ref_name }}" }}'

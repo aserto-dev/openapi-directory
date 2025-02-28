@@ -8,7 +8,6 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"strings"
 	"unicode"
 	"unicode/utf8"
 
@@ -23,7 +22,10 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-var bufImage = "buf.build/aserto-dev/directory"
+var (
+	bufDirectory = "buf.build/aserto-dev/directory"
+	bufAccess    = "buf.build/authzen/access"
+)
 
 func All() error {
 	Deps()
@@ -48,94 +50,53 @@ func Deps() {
 
 // Generate the code
 func Generate() error {
-	tag, err := buf.GetLatestTag(bufImage)
+	tag, err := buf.GetLatestTag(bufDirectory)
 	if err != nil {
 		fmt.Println("Could not retrieve tags, using latest")
 	} else {
-		bufImage = fmt.Sprintf("%s:%s", bufImage, tag.Name)
+		bufDirectory = fmt.Sprintf("%s:%s", bufDirectory, tag.Name)
 	}
 
-	return gen(bufImage, bufImage, tag.Name)
-}
-
-func gen(bufImage, fileSources, version string) error {
-	files, err := getClientFiles(fileSources)
-	if err != nil {
-		return err
-	}
-
-	pathSeparator := string(os.PathListSeparator)
-	path := os.Getenv("PATH") +
-		pathSeparator +
-		filepath.Dir(deps.GoBinPath("protoc-gen-openapiv2"))
-
-	err = buf.RunWithEnv(map[string]string{
-		"PATH": path,
-	},
-		buf.AddArg("generate"),
-		buf.AddArg("--template"),
-		buf.AddArg(filepath.Join("buf", "buf.gen.yaml")),
-		buf.AddArg(bufImage),
-		buf.AddPaths(files),
-	)
-	if err != nil {
-		return err
-	}
-
-	err = mergeOpenAPI()
-	if err != nil {
-		return err
-	}
-
-	fmt.Println("Publishing OpenAPI:", version)
-	return publishOpenAPIv3(version)
-}
-
-func getClientFiles(fileSources string) ([]string, error) {
-	var clientFiles []string
-
-	bufExportDir, err := os.MkdirTemp("", "bufimage")
-	if err != nil {
-		return clientFiles, err
-	}
-	bufExportDir = filepath.Join(bufExportDir, "")
-
-	defer os.RemoveAll(bufExportDir)
-	err = buf.Run(
-		buf.AddArg("export"),
-		buf.AddArg(fileSources),
-		buf.AddArg("--exclude-imports"),
-		buf.AddArg("-o"),
-		buf.AddArg(bufExportDir),
-	)
-	if err != nil {
-		return clientFiles, err
-	}
-	excludePattern := ""
-
-	protoFiles, err := fsutil.Glob(filepath.Join(bufExportDir, "aserto", "**", "*.proto"), excludePattern)
-	if err != nil {
-		return clientFiles, err
-	}
-
-	for _, protoFile := range protoFiles {
-		clientFiles = append(clientFiles, strings.TrimPrefix(protoFile, bufExportDir+string(filepath.Separator)))
-	}
-
-	return clientFiles, nil
+	return gen(tag.Name, bufDirectory, bufAccess)
 }
 
 // Generates from a dev build.
 func GenerateDev() error {
 	bufImage := filepath.Join(getProtoRepo(), "bin", "directory.bin#format=bin")
-	fileSources := filepath.Join(getProtoRepo(), "proto#format=dir")
 
 	currentVersion, err := common.Version()
 	if err != nil {
 		return err
 	}
 
-	return gen(bufImage, fileSources, currentVersion)
+	return gen(currentVersion, bufImage, bufAccess)
+}
+
+func gen(version string, bufImage ...string) error {
+	pathSeparator := string(os.PathListSeparator)
+	path := os.Getenv("PATH") +
+		pathSeparator +
+		filepath.Dir(deps.GoBinPath("protoc-gen-openapiv2"))
+
+	for _, image := range bufImage {
+		if err := buf.RunWithEnv(map[string]string{
+			"PATH": path,
+		},
+			buf.AddArg("generate"),
+			buf.AddArg("--template"),
+			buf.AddArg(filepath.Join("buf", "buf.gen.yaml")),
+			buf.AddArg(image),
+		); err != nil {
+			return err
+		}
+	}
+
+	if err := mergeOpenAPI(); err != nil {
+		return err
+	}
+
+	fmt.Println("Publishing OpenAPI:", version)
+	return publishOpenAPIv3(version)
 }
 
 func getProtoRepo() string {
@@ -169,6 +130,7 @@ func mergeOpenAPI() error {
 				"aserto/directory/exporter/v3/exporter.swagger.json",
 				"aserto/directory/assertion/v3/assertion.swagger.json",
 				"aserto/directory/openapi/v3/openapi.swagger.json",
+				"access/v1/access.swagger.json",
 			},
 		},
 	}

@@ -30,6 +30,157 @@ components:
         message:
           type: string
       type: object
+    v1Action:
+      properties:
+        name:
+          type: string
+        properties:
+          type: object
+      title: https://openid.github.io/authzen/#name-action
+      type: object
+    v1ActionSearchRequest:
+      properties:
+        action:
+          $ref: '#/components/schemas/v1Action'
+        context:
+          type: object
+        page:
+          $ref: '#/components/schemas/v1Page'
+        resource:
+          $ref: '#/components/schemas/v1Resource'
+        subject:
+          $ref: '#/components/schemas/v1Subject'
+      title: https://openid.github.io/authzen/#name-the-action-search-api-reque
+      type: object
+    v1ActionSearchResponse:
+      properties:
+        page:
+          $ref: '#/components/schemas/v1Page'
+        results:
+          items:
+            $ref: '#/components/schemas/v1Action'
+          type: array
+      title: https://openid.github.io/authzen/#name-the-action-search-api-respo
+      type: object
+    v1EvaluationRequest:
+      properties:
+        action:
+          $ref: '#/components/schemas/v1Action'
+        context:
+          type: object
+        resource:
+          $ref: '#/components/schemas/v1Resource'
+        subject:
+          $ref: '#/components/schemas/v1Subject'
+      title: https://openid.github.io/authzen/#name-the-access-evaluation-api-r
+      type: object
+    v1EvaluationResponse:
+      properties:
+        context:
+          type: object
+        decision:
+          type: boolean
+      title: https://openid.github.io/authzen/#name-the-access-evaluation-api-re
+      type: object
+    v1EvaluationsRequest:
+      properties:
+        action:
+          $ref: '#/components/schemas/v1Action'
+        context:
+          type: object
+        evaluations:
+          items:
+            $ref: '#/components/schemas/v1EvaluationRequest'
+          type: array
+        options:
+          type: object
+        resource:
+          $ref: '#/components/schemas/v1Resource'
+        subject:
+          $ref: '#/components/schemas/v1Subject'
+      title: https://openid.github.io/authzen/#name-the-access-evaluations-api-
+      type: object
+    v1EvaluationsResponse:
+      properties:
+        decisions:
+          items:
+            $ref: '#/components/schemas/v1EvaluationResponse'
+          type: array
+      title: https://openid.github.io/authzen/#name-access-evaluations-api-resp
+      type: object
+    v1Page:
+      properties:
+        next_token:
+          type: string
+      type: object
+    v1Resource:
+      properties:
+        id:
+          type: string
+        properties:
+          type: object
+        type:
+          type: string
+      title: https://openid.github.io/authzen/#name-resource
+      type: object
+    v1ResourceSearchRequest:
+      properties:
+        action:
+          $ref: '#/components/schemas/v1Action'
+        context:
+          type: object
+        page:
+          $ref: '#/components/schemas/v1Page'
+        resource:
+          $ref: '#/components/schemas/v1Resource'
+        subject:
+          $ref: '#/components/schemas/v1Subject'
+      title: https://openid.github.io/authzen/#name-the-resource-search-api-req
+      type: object
+    v1ResourceSearchResponse:
+      properties:
+        page:
+          $ref: '#/components/schemas/v1Page'
+        results:
+          items:
+            $ref: '#/components/schemas/v1Resource'
+          type: array
+      title: https://openid.github.io/authzen/#name-the-resource-search-api-res
+      type: object
+    v1Subject:
+      properties:
+        id:
+          type: string
+        properties:
+          type: object
+        type:
+          type: string
+      title: https://openid.github.io/authzen/#name-subject
+      type: object
+    v1SubjectSearchRequest:
+      properties:
+        action:
+          $ref: '#/components/schemas/v1Action'
+        context:
+          type: object
+        page:
+          $ref: '#/components/schemas/v1Page'
+        resource:
+          $ref: '#/components/schemas/v1Resource'
+        subject:
+          $ref: '#/components/schemas/v1Subject'
+      title: https://openid.github.io/authzen/#name-the-subject-search-api-requ
+      type: object
+    v1SubjectSearchResponse:
+      properties:
+        page:
+          $ref: '#/components/schemas/v1Page'
+        results:
+          items:
+            $ref: '#/components/schemas/v1Subject'
+          type: array
+      title: https://openid.github.io/authzen/#name-the-subject-search-api-resp
+      type: object
     v3Assert:
       properties:
         check:
@@ -567,6 +718,241 @@ info:
   version: v0.33.3
 openapi: 3.0.3
 paths:
+  /access/v1/evaluation:
+    post:
+      description: TBD
+      operationId: openid.authzen.access.v1.evaluation.post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1EvaluationRequest'
+        required: true
+        x-originalParamName: body
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1EvaluationResponse'
+          description: A successful response.
+        "400":
+          content:
+            application/json:
+              schema: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema: {}
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema: {}
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema: {}
+          description: Internal error
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Access Evaluation API
+      tags:
+        - authzen
+  /access/v1/evaluations:
+    post:
+      description: TBD.
+      operationId: openid.authzen.access.v1.evaluations.post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1EvaluationsRequest'
+        required: true
+        x-originalParamName: body
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1EvaluationsResponse'
+          description: A successful response.
+        "400":
+          content:
+            application/json:
+              schema: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema: {}
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema: {}
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema: {}
+          description: Internal error
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Access Evaluations API
+      tags:
+        - authzen
+  /access/v1/search/action:
+    post:
+      description: TBD.
+      operationId: openid.authzen.access.v1.search.action.post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1ActionSearchRequest'
+        required: true
+        x-originalParamName: body
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ActionSearchResponse'
+          description: A successful response.
+        "400":
+          content:
+            application/json:
+              schema: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema: {}
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema: {}
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema: {}
+          description: Internal error
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Action Search API
+      tags:
+        - authzen
+  /access/v1/search/resource:
+    post:
+      description: TBD.
+      operationId: openid.authzen.access.v1.search.post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1ResourceSearchRequest'
+        required: true
+        x-originalParamName: body
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ResourceSearchResponse'
+          description: A successful response.
+        "400":
+          content:
+            application/json:
+              schema: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema: {}
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema: {}
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema: {}
+          description: Internal error
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Resource Search API
+      tags:
+        - authzen
+  /access/v1/search/subject:
+    post:
+      description: TBD.
+      operationId: openid.authzen.access.v1.search.subject.post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1SubjectSearchRequest'
+        required: true
+        x-originalParamName: body
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1SubjectSearchResponse'
+          description: A successful response.
+        "400":
+          content:
+            application/json:
+              schema: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema: {}
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema: {}
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema: {}
+          description: Internal error
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Subject Search API
+      tags:
+        - authzen
   /api/v3/directory/assertion:
     post:
       description: Set assertion.
@@ -1437,4 +1823,4 @@ servers:
   - description: Aserto Directory service
     url: '{{.Scheme}}://{{.Host}}'
 tags:
-  - name: Assertion
+  - name: Access

@@ -9,6 +9,9 @@ go:
   gotestsum:
     importPath: "gotest.tools/gotestsum"
     version: "v1.11.0"
+  sver:
+    importPath: "github.com/aserto-dev/sver/cmd/sver"
+    version: "v1.3.13"
 bin:
   vault:
     url: "https://releases.hashicorp.com/vault/{{.Version}}/vault_{{.Version}}_{{.OS}}_{{.Arch}}.zip"

@@ -1052,6 +1052,7 @@
     },
     "/api/v3/directory/check/permission": {
       "post": {
+        "deprecated": true,
         "description": "Returns check permission outcome.",
         "operationId": "directory.reader.v3.check.permission",
         "requestBody": {
@@ -1101,6 +1102,7 @@
     },
     "/api/v3/directory/check/relation": {
       "post": {
+        "deprecated": true,
         "description": "Returns check relation outcome.",
         "operationId": "directory.reader.v3.check.relation",
         "requestBody": {

@@ -88,6 +88,7 @@
         "tags": [
           "directory"
         ],
+        "deprecated": true,
         "security": [
           {
             "DirectoryAPIKey": [],
@@ -128,6 +129,7 @@
         "tags": [
           "directory"
         ],
+        "deprecated": true,
         "security": [
           {
             "DirectoryAPIKey": [],

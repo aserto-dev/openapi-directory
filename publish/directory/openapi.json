@@ -793,7 +793,7 @@
     },
     "termsOfService": "https://aserto.com/terms/",
     "title": "Directory",
-    "version": "v0.33.2"
+    "version": "v0.33.3"
   },
   "openapi": "3.0.3",
   "paths": {
@@ -1052,6 +1052,7 @@
     },
     "/api/v3/directory/check/permission": {
       "post": {
+        "deprecated": true,
         "description": "Returns check permission outcome.",
         "operationId": "directory.reader.v3.check.permission",
         "requestBody": {
@@ -1101,6 +1102,7 @@
     },
     "/api/v3/directory/check/relation": {
       "post": {
+        "deprecated": true,
         "description": "Returns check relation outcome.",
         "operationId": "directory.reader.v3.check.relation",
         "requestBody": {
@@ -1353,7 +1355,7 @@
       },
       "get": {
         "description": "Get manifest.",
-        "operationId": "directory.v3.manifest.get",
+        "operationId": "directory.model.v3.manifest.get",
         "parameters": [
           {
             "description": "When If-None-Match is set, and includes the currnet manifest etag, the response is 304 Not Modified.",
@@ -1443,7 +1445,7 @@
       },
       "head": {
         "description": "Get manifest metadata.",
-        "operationId": "directory.v3.manifest.get_metadata",
+        "operationId": "directory.model.v3.manifest.get_metadata",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -1487,7 +1489,7 @@
       },
       "post": {
         "description": "Set manifest.",
-        "operationId": "directory.v3.manifest.set",
+        "operationId": "directory.model.v3.manifest.set",
         "parameters": [
           {
             "description": "When If-Match is set, and different from the current manifest etag, the response is 412 Precondition Failed.",

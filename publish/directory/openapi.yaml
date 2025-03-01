@@ -715,7 +715,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://aserto.com/terms/
   title: Directory
-  version: v0.33.3
+  version: v0.33.4
 openapi: 3.0.3
 paths:
   /access/v1/evaluation:

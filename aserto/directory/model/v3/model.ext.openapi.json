@@ -8,7 +8,7 @@
         ],
         "summary": "Get manifest",
         "description": "Get manifest.",
-        "operationId": "directory.v3.manifest.get",
+        "operationId": "directory.model.v3.manifest.get",
         "parameters": [
           {
             "name": "If-None-Match",
@@ -22,7 +22,9 @@
                 },
                 {
                   "type": "array",
-                  "items": {"type": "string"}
+                  "items": {
+                    "type": "string"
+                  }
                 }
               ]
             }
@@ -97,7 +99,7 @@
         ],
         "summary": "Get manifest metadata",
         "description": "Get manifest metadata.",
-        "operationId": "directory.v3.manifest.get_metadata",
+        "operationId": "directory.model.v3.manifest.get_metadata",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -141,7 +143,7 @@
         ],
         "summary": "Set manifest",
         "description": "Set manifest.",
-        "operationId": "directory.v3.manifest.set",
+        "operationId": "directory.model.v3.manifest.set",
         "requestBody": {
           "description": "Manifest YAML file",
           "required": true,
@@ -200,4 +202,3 @@
     }
   }
 }
-

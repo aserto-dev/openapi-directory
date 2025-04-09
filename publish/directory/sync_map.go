@@ -15,6 +15,7 @@ func (m *syncMap[K, V]) Load(key K) (value V, ok bool) {
 	if !ok {
 		return value, ok
 	}
+
 	return v.(V), ok
 }
 
@@ -23,6 +24,7 @@ func (m *syncMap[K, V]) LoadAndDelete(key K) (value V, loaded bool) {
 	if !loaded {
 		return value, loaded
 	}
+
 	return v.(V), loaded
 }
 

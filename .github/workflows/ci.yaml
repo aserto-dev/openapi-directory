@@ -10,7 +10,6 @@ on:
   push:
     branches:
       - main
-      - v*
     # Publish `v1.2.3` tags as releases.
     tags:
       - v*
@@ -19,9 +18,9 @@ on:
 
 env:
   VAULT_ADDR: https://vault.eng.aserto.com/
-  GO_VERSION: "1.23"
-  GO_LANGCI_LINT_VERSION: "v1.61.0"
-  GO_TESTSUM_VERSION: "1.11.0"
+  GO_VERSION: 1.24
+  GO_LANGCI_LINT_VERSION: v2.0.2
+  GO_TESTSUM_VERSION: 1.12.1
 
 jobs:
   build:
@@ -56,7 +55,7 @@ jobs:
         run: go run mage.go generate
       -
         name: Lint
-        uses: golangci/golangci-lint-action@v4
+        uses: golangci/golangci-lint-action@v7
         with:
           version: ${{ env.GO_LANGCI_LINT_VERSION }}
       -
@@ -87,7 +86,8 @@ jobs:
     needs: build
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
     steps:
-      - name: Read Configuration
+      -
+        name: Read Configuration
         uses: hashicorp/vault-action@v3
         id: vault
         with:
@@ -96,15 +96,15 @@ jobs:
           secrets: |
             kv/data/readme  "README_OAS_DIRECTORY_KEY"     | README_OAS_DIRECTORY_KEY;
             kv/data/readme  "DIRECTORY_API_DEFINITION_ID"  | DIRECTORY_API_DEFINITION_ID;
-
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v4
-
-      - name: Create openapi.readmeio.json
+      -
+        name: Create openapi.readmeio.json
         run: |
             cat publish/directory/openapi.json  | jq ".servers=$(cat config/readmeio.servers.json)" > openapi.readmeio.json
-
-      - name: Publish to readme.io
+      -
+        name: Publish to readme.io
         uses: readmeio/rdme@v8
         with:
           rdme: >
@@ -129,7 +129,8 @@ jobs:
             kv/data/github    "READ_WRITE_TOKEN"  | GH_TOKEN;
       -
         name: Trigger dispatch
-        run: |
-          curl -XPOST -u "${GH_USERNAME}:${GH_TOKEN}" \
-          -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" \
-          https://api.github.com/repos/aserto-dev/console-common/actions/workflows/generate.yml/dispatches --data '{"ref": "main", "inputs": {"openapi_directory_version": "${{ github.ref_name }}" }}'
+        run: >
+          curl -XPOST -u "${GH_USERNAME}:${GH_TOKEN}"
+          -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json"
+          https://api.github.com/repos/aserto-dev/console-common/actions/workflows/generate.yml/dispatches
+          --data '{"ref": "main", "inputs": {"openapi_directory_version": "${{ github.ref_name }}" }}'

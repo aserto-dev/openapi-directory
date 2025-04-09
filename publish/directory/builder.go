@@ -29,6 +29,7 @@ func newTemplateBuilder() *templateBuilder {
 
 func (t *templateBuilder) Build(port string, svc ...string) {
 	var err error
+
 	content := static
 
 	if len(svc) > 0 {
@@ -86,5 +87,6 @@ func matchAny(opID string, svc ...string) bool {
 			return true
 		}
 	}
+
 	return false
 }

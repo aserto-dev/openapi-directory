@@ -1,8 +1,8 @@
 module github.com/aserto-dev/openapi-directory
 
-go 1.22.12
+go 1.23.0
 
-toolchain go1.23.6
+toolchain go1.24.2
 
 require (
 	github.com/getkin/kin-openapi v0.129.0

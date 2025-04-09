@@ -55,7 +55,7 @@ func TestHandler(t *testing.T) {
 
 	resp, err := http.Get(server.URL) //nolint:noctx
 	require.NoError(err)
-	t.Cleanup(func() { resp.Body.Close() })
+	t.Cleanup(func() { _ = resp.Body.Close() })
 
 	body, err := io.ReadAll(resp.Body)
 	require.NoError(err)
@@ -78,5 +78,6 @@ func hasServiceMatch(svc string, vals ...string) bool {
 			return true
 		}
 	}
+
 	return false
 }

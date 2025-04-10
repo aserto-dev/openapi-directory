@@ -38,6 +38,7 @@ func OpenAPIHandler(port string, svc ...string) func(w http.ResponseWriter, r *h
 		if err != nil {
 			zerolog.Ctx(r.Context()).Err(err).Msg("failed to build template")
 			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+
 			return
 		}
 
@@ -49,6 +50,7 @@ func OpenAPIHandler(port string, svc ...string) func(w http.ResponseWriter, r *h
 		if err := tmpl.Execute(w, server); err != nil {
 			zerolog.Ctx(r.Context()).Err(err).Msg("failed to execute template")
 			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+
 			return
 		}
 	}

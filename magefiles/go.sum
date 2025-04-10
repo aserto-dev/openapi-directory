@@ -8,8 +8,8 @@ github.com/allegro/bigcache/v3 v3.1.0 h1:H2Vp8VOvxcrB91o86fUSVJFqeuz8kpyyB02eH3b
 github.com/allegro/bigcache/v3 v3.1.0/go.mod h1:aPyh7jEvrog9zAwx5N7+JUQX5dZTSGpxF1LAR4dr35I=
 github.com/aserto-dev/clui v0.8.3 h1:foEJuVpMFVP4La3SxUcinxRLOZx/TyS2BRuahbywYFg=
 github.com/aserto-dev/clui v0.8.3/go.mod h1:KsL/g2x5LAbkEE4ofW/ZoA4FDOIdAyLes/5ullvzUt8=
-github.com/aserto-dev/mage-loot v0.8.18 h1:Pr1zI1Kdz21ixIX+v8oaLxNtcxIktvs/2bXVgVBvN4I=
-github.com/aserto-dev/mage-loot v0.8.18/go.mod h1:rj1XTV811xLmcjWduqNlDtkF7WMZjm/5FJ4Xue/B+Eo=
+github.com/aserto-dev/mage-loot v0.8.19 h1:935yYj1DB+cblZEk4NcM4O3FuOOIJntdNtNL61ZRyvc=
+github.com/aserto-dev/mage-loot v0.8.19/go.mod h1:rj1XTV811xLmcjWduqNlDtkF7WMZjm/5FJ4Xue/B+Eo=
 github.com/aymanbagabas/go-osc52/v2 v2.0.1 h1:HwpRHbFMcZLEVr42D4p7XBqjyuxQH5SMiErDT4WkJ2k=
 github.com/aymanbagabas/go-osc52/v2 v2.0.1/go.mod h1:uYgXzlJ7ZpABp8OJ+exZzJJhRNQ2ASbcXHWsFqH8hp8=
 github.com/charmbracelet/lipgloss v1.0.0 h1:O7VkGDvqEdGi93X+DeqsQ7PKHDgtQfF8j8/O2qFMQNg=

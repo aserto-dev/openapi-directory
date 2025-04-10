@@ -73,15 +73,8 @@ func GenerateDev() error {
 }
 
 func gen(version string, bufImage ...string) error {
-	pathSeparator := string(os.PathListSeparator)
-	path := os.Getenv("PATH") +
-		pathSeparator +
-		filepath.Dir(deps.GoBinPath("protoc-gen-openapiv2"))
-
 	for _, image := range bufImage {
-		if err := buf.RunWithEnv(map[string]string{
-			"PATH": path,
-		},
+		if err := buf.Run(
 			buf.AddArg("generate"),
 			buf.AddArg("--template"),
 			buf.AddArg(filepath.Join("buf", "buf.gen.yaml")),
